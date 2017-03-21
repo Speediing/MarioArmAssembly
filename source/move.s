@@ -101,7 +101,7 @@ moveLeft:
         mov     pc, lr
 
 .globl jump
-jump:
+jump:                                               //loop that makes mario jump three squares
         push    {r3-r7, lr}
 
 
