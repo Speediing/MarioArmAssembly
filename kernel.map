@@ -129,14 +129,14 @@ OUTPUT(build/output.elf elf32-littlearm)
  .ARM.attributes
                 0x00000148       0x29 build/SNESControl.o
 
-.debug_line     0x00000000      0x39c
+.debug_line     0x00000000      0x39a
  .debug_line    0x00000000       0x3f build/menus.o
  .debug_line    0x0000003f       0x67 build/framebuffer.o
  .debug_line    0x000000a6       0x9d build/move.o
  .debug_line    0x00000143       0xb0 build/draw.o
  .debug_line    0x000001f3       0x57 build/main.o
  .debug_line    0x0000024a       0x61 build/jtag.o
- .debug_line    0x000002ab       0xf1 build/SNESControl.o
+ .debug_line    0x000002ab       0xef build/SNESControl.o
 
 .debug_info     0x00000000      0x36f
  .debug_info    0x00000000       0x7d build/menus.o

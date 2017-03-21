@@ -124,13 +124,6 @@ endRead:
         mov     pc, lr
 
 
-.globl  wait
-  ///////	/////////////
-	//WAIT
-	//Function that waits for a certain time
-
-
-
 	//parameter r3 = time to wait
 	//returns nothing
 	///////////////

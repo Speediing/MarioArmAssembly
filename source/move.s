@@ -116,7 +116,7 @@ jump:                                               //loop that makes mario jump
 
         mov     r6, r1
         mov     r7, r2
-        mov     r3, #0
+        mov     r4, #0
 jumploop:
         mov     r2, #0                               //restore background sky
         mov     r0, r6
@@ -133,8 +133,8 @@ jumploop:
         bl      drawCell
         ldr     r3, =0x1388
         bl      Wait				//wait for a second
-        add     r3, #1
-        cmp     r3, #3
+        add     r4, #1
+        cmp     r4, #3
         ble     jumploop
 
 

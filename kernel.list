@@ -136,7 +136,7 @@ Disassembly of section .text:
     ddd0:	e5c04000 	strb	r4, [r0]
     ddd4:	e1a06001 	mov	r6, r1
     ddd8:	e1a07002 	mov	r7, r2
-    dddc:	e3a03000 	mov	r3, #0
+    dddc:	e3a04000 	mov	r4, #0
 
 0000dde0 <jumploop>:
     dde0:	e3a02000 	mov	r2, #0
@@ -152,8 +152,8 @@ Disassembly of section .text:
     de08:	eb000040 	bl	df10 <drawCell>
     de0c:	e59f3020 	ldr	r3, [pc, #32]	; de34 <fall+0xc>
     de10:	eb0000ef 	bl	e1d4 <Wait>
-    de14:	e2833001 	add	r3, r3, #1
-    de18:	e3530003 	cmp	r3, #3
+    de14:	e2844001 	add	r4, r4, #1
+    de18:	e3540003 	cmp	r4, #3
     de1c:	daffffef 	ble	dde0 <jumploop>
     de20:	e8bd40f8 	pop	{r3, r4, r5, r6, r7, lr}
     de24:	e1a0f00e 	mov	pc, lr
