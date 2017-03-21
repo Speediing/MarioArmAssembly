@@ -29,6 +29,7 @@ continueReadMario:
         bl      continueReadMario
 
 returnMario:
+
         mov     r0, r4                  //address of Mario
         mov     r1, r6                  //return x coordinate of Mario
         mov     r2, r7                  //return y coordinate of Mario
@@ -43,6 +44,9 @@ moveRight:
         push    {r3-r10, lr}
 
         bl      readMario
+        bl      readMario
+        cmp     r1, #24                             //TODO: Make this make a new screen
+        beq     endRight
 
          //update the gamestate
         mov     r3, #0
@@ -66,6 +70,7 @@ moveRight:
 
         bl      drawCell
 
+endRight:
         pop     {r3-r10,lr}
         mov     pc, lr
 
@@ -74,6 +79,8 @@ moveLeft:
         push    {r3-r7, lr}
 
         bl      readMario
+        cmp     r1, #0
+        beq     endLeft
 
          //update the gamestate
         mov     r3, #0
@@ -97,6 +104,7 @@ moveLeft:
         mov     r1, r7                               //YPos
 
         bl      drawCell
+endLeft:
         pop     {r3-r7,lr}
         mov     pc, lr
 
