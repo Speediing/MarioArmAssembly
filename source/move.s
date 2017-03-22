@@ -119,56 +119,98 @@ jump:                                               //loop that makes mario jump
 
         //update the gamestate
         mov     r5, r0                               //address of Mario
-        mov  r8, r0
-        mov     r6, r1
-        mov     r7, r2
+        mov     r8, r0                               //address of Mario
+        mov     r6, r1                               //XPos Mario
+        mov     r7, r2                               //YPos Mario
         mov     r4, #0
 jumploop:
-        ldrb    r2,  [r8, #-25]
-tst:    cmp     r2,  #0
-        bne     endJump
+        ldrb    r2,  [r8, #-25]                      //load the cell above
+tst:    cmp     r2,  #0                              //check if the cell above is a sky cell
+        bne     endJump                              //if not sky(question box or brick), Mario comes down 
+        
         mov     r2, #0                               //restore background sky
         mov     r0, r6
         mov     r1, r7
+        bl      drawCell                              //draw sky
 
-        bl      drawCell
         ldr     r3, =0x1388
-        bl      Wait				//wait for a second
+        bl      Wait			        	//wait for a second
 
-        mov     r2, #3                               //#3 stands for Mario
+        mov     r2, #3                                //#3 stands for Mario
         mov     r0, r6                                //XPos
         sub     r1, r7, #1                            //YPos
         mov     r7, r1
-        bl      drawCell
+        bl      drawCell                                //draw Mario
+
         mov     r3, #0
         mov     r5, #3
-
-        strb    r3, [r8], #-25
-        strb    r5, [r8]
+        strb    r3, [r8], #-25                  //update game state
+        strb    r5, [r8]                        //update game state
         ldr     r3, =0xffff
         bl      Wait				//wait for a second
         add     r4, #1
         cmp     r4, #4
         ble     jumploop
+
 endJump:
-    bl      gravity
+                push    {lr}
+                bl      gravity
+                cmp     r2, #4                  //check if Mario hit a brick
+                beq     hitBrick
+                cmp     r2, #5                  //check if Mario hit a question booooox
+                beq     hitQBox
+                pop     {lr}
+           //     mov     pc, lr
+
+                        
+doneJump:       pop     {r2-r8,lr}
+                mov     pc, lr
 
 
-        pop     {r2-r8,lr}
-        mov     pc, lr
+hitBrick:       push    {r5, lr}
+                mov     r5,  #0  
+                strb    r5,  [r8, #-25]
+                mov     r2,  #0
+                sub     r7,  #1
+                mov     r0,  r6
+                mov     r1,  r7
+                bl      drawCell
+                pop     {r5, lr}
+                mov     pc, lr
+                
+
+hitQBox:
+                push    {r5, lr}
+
+                mov     r5,  #0
+                strb    r5,  [r8, #-25]         //QBox is in fact sky although not re-drawn on the screen, in order to prevent multiple coins
+                mov     r5,  #8  
+                strb    r5,  [r8, #-50]
+                mov     r2,  #8
+                sub     r7,  #2
+                mov     r0,  r6
+                mov     r1,  r7
+                bl      drawCell
+                
+                pop     {r5, lr}
+                
+                mov     pc, lr
+
+
+
 .globl runJump
 runJump:                                               //loop that makes mario jump three squares
                 push    {r3-r7, lr}
 
-
                 bl      readMario
 
                 //update the gamestate
-                mov     r3, #0
-                mov     r4, #3
-                mov     r5, r0
-                cmp  r8, #1
-                bne     rjum                        //address of Mario
+                mov     r3, #0                          //sky
+                mov     r4, #3                          //Mario
+                mov     r5, r0                          //address of Mario
+
+                cmp     r8, #1
+                bne     rjum                                  
                 strb    r3, [r0], #-130
                 b       con
 rjum:           strb    r3, [r0], #-120
@@ -177,6 +219,17 @@ con:            strb    r4, [r0]
                 mov     r6, r1
                 mov     r7, r2
                 mov     r4, #0
+
+//start of tst of endJump
+
+                ldrb    r2,  [r8, #-25]                      //load the cell above
+                cmp     r2,  #0                              //check if the cell above is a sky cell
+                bne     endJump                              //if not sky(question box or brick), Mario comes down 
+
+//end tst
+
+
+
 rjumploop:
                 mov     r2, #0                               //restore background sky
                 mov     r0, r6
@@ -184,22 +237,34 @@ rjumploop:
 
                 bl      drawCell
                 ldr     r3, =0x1388
-                bl      Wait				//wait for a second
+                bl      Wait				    //wait for a second
 
                 mov     r2, #3                               //#3 stands for Mario
-                cmp  r8, #1
-                bne  righJump
-                sub  r6, #1
-                b    cont
-righJump:       add  r6, #1
-cont:           sub  r7, #1
+                cmp     r8, #1
+                bne     righJump
+                sub     r6, #1
+                b       cont
+ 
+righJump:       add     r6, #1
+
+cont:           sub     r7, #1
                 mov     r0, r6
-                                               //XPos
-                mov     r1, r7                            //YPos
+                                                              
+                mov     r1, r7                            
                 mov     r7, r1
+
+//start of tst of endJump 
+
+                ldrb    r2,  [r8, #-25]                      //load the cell above
+                cmp     r2,  #0                              //check if the cell above is a sky cell
+                bne     endJump                              //if not sky(question box or brick), Mario comes down 
+
+//end tst
+                mov     r2, #3  //delete later
+
                 bl      drawCell
                 ldr     r3, =0xffff
-                bl      Wait				//wait for a second
+                bl      Wait				    //wait for a second
                 add     r4, #1
                 cmp     r4, #4
                 ble     rjumploop
@@ -209,7 +274,7 @@ cont:           sub  r7, #1
                 pop     {r3-r7,lr}
                 mov     pc, lr
 gravity:
-        push    {r2-r7, lr}
+                push    {r2-r7, lr}
 
 checkUnder:
         bl      readMario                       //r1- x r2- y
@@ -227,8 +292,8 @@ checkUnder:
         mov     r3, #0
         mov     r4, #3
         mov     r5, r0                               //address of Mario
-        strb    r3, [r0], #25
-        strb    r4, [r0]
+        strb    r3, [r0], #25                        //post-increment to erase Mario with sky
+        strb    r4, [r0]                             //update Mario's position
         mov     r6, r1
         mov     r7, r2
 fall:
@@ -238,10 +303,10 @@ fall:
 
         bl      drawCell
         ldr     r3, =0xffff
-        bl      Wait				//wait for a second
+        bl      Wait				        //wait for a second
 
-        mov     r2, #3                               //#3 stands for Mario
-        mov     r0, r6                                //XPos
+        mov     r2, #3                                 //#3 stands for Mario
+        mov     r0, r6                                 //XPos
         sub     r1, r7, #-1                            //YPos
         mov     r7, r1
         bl      drawCell

@@ -120,6 +120,8 @@ drawCell:
         beq     DrawQBox
         cmp     r2,     #6
         beq     DrawCloud
+        cmp     r2,     #8
+        beq     DrawCoin
 	ldr	r6,	=Sky  		        //Address of the picture
         b       drawCellLoop
 
@@ -144,7 +146,11 @@ DrawBrick:
         b       drawCellLoop
 
 DrawQBox:
-        ldr     r6,     =qBox   
+        ldr     r6,     =qBox
+        b       drawCellLoop   
+
+DrawCoin:
+        ldr     r6,     =coin
   
 drawCellLoop:
         mov     r10,    #34                     //restate width

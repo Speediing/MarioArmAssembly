@@ -14,11 +14,11 @@ main:
 	mov	sp, #0x8000
 	bl	EnableJTAG
 	bl	InitFrameBuffer	        // Initialize the frame buffer for drawing
-  bl  initGPIO                // Intializes GPIO
-	bl	clearScreen
-  bl  draw
+        bl      initGPIO                // Intializes GPIO
+      	bl	clearScreen
+        bl      draw
 read:
-  bl  readButtons
+        bl      readButtons
 
 /*
 	ldr		r0, =0x0000
