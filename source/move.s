@@ -44,7 +44,6 @@ moveRight:
         push    {r3-r10, lr}
 
         bl      readMario
-        bl      readMario
         cmp     r1, #24                             //TODO: Make this make a new screen
         beq     endRight
 
@@ -71,6 +70,7 @@ moveRight:
         bl      drawCell
 
 endRight:
+        bl      gravity
         pop     {r3-r10,lr}
         mov     pc, lr
 
@@ -105,6 +105,7 @@ moveLeft:
 
         bl      drawCell
 endLeft:
+        bl       gravity
         pop     {r3-r7,lr}
         mov     pc, lr
 
@@ -119,7 +120,7 @@ jump:                                               //loop that makes mario jump
         mov     r3, #0
         mov     r4, #3
         mov     r5, r0                               //address of Mario
-        strb    r3, [r0], #-100
+        strb    r3, [r0], #-125
         strb    r4, [r0]
 
         mov     r6, r1
@@ -142,14 +143,56 @@ jumploop:
         ldr     r3, =0x1388
         bl      Wait				//wait for a second
         add     r4, #1
-        cmp     r4, #3
+        cmp     r4, #4
         ble     jumploop
+        bl      gravity
 
 
         pop     {r3-r7,lr}
         mov     pc, lr
 
-fall:
+gravity:
         push    {r3-r7, lr}
 
+checkUnder:
+        bl      readMario                       //r1- x r2- y
+        ldr     r4, =GameMap
+        mov  r5, #25
+        mul     r2, r5
+        add     r1, r1, r2
+        add     r4, r4,  r1
+        add  r4, #25
+        ldrb    r4, [r4]
+jklol:        cmp     r4, #0
+        bne     endGravity
         bl      readMario
+        //update the gamestate
+        mov     r3, #0
+        mov     r4, #3
+        mov     r5, r0                               //address of Mario
+        strb    r3, [r0], #25
+        strb    r4, [r0]
+        mov     r6, r1
+        mov     r7, r2
+fall:
+        mov     r2, #0                               //restore background sky
+        mov     r0, r6
+        mov     r1, r7
+
+        bl      drawCell
+        ldr     r3, =0xffff
+        bl      Wait				//wait for a second
+
+        mov     r2, #3                               //#3 stands for Mario
+        mov     r0, r6                                //XPos
+        sub     r1, r7, #-1                            //YPos
+        mov     r7, r1
+        bl      drawCell
+        ldr     r3, =0xffff
+        bl      Wait				//wait for a second
+        b       checkUnder
+
+
+endGravity:
+        pop     {r3-r7, lr}
+        mov  pc, lr
