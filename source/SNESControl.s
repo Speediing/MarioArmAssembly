@@ -1,3 +1,4 @@
+
 // SNES control of the game
 
 .section .text
@@ -54,7 +55,7 @@ readButtons:
         bl      Read_SNES			//run the snes routine
         cmp     r5, r9
         beq     next
-        mov     r5, r9
+        mov     r5, #0
 
 checkSt:
         mov     r7, r9
@@ -87,9 +88,10 @@ checkL:
         ldr     r1, =0x1388
         bl      Wait				//wait for a second
         bl      moveLeft
+        mov  r5, #1
         ldr     r1, =0x1388
         bl      Wait				//wait for a second
-        b       next
+        b       checkA
 checkR:
         mov     r7, r9
         lsr     r7, #7
@@ -99,10 +101,11 @@ checkR:
         ldr     r3, =0xffff
         //bl      Wait				//wait for a second
         bl      moveRight
+        mov  r5, #2
         ldr     r3, =0xffff
         //bl      Wait				//wait for a second
 
-        b       next
+        b       checkA
 
 checkA:
         mov     r7, r9
@@ -112,7 +115,12 @@ checkA:
         bne     next
         ldr     r1, =0x1388
         bl      Wait				//wait for a second
-        bl      jump
+        cmp  r5, #0
+        mov  r8, r5
+        beq     regJump
+        bl      runJump
+        b       next
+regJump:        bl      jump
         ldr     r1, =0x1388
         bl      Wait				//wait for a second
 

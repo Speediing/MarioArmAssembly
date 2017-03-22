@@ -151,20 +151,71 @@ jumploop:
 
         pop     {r3-r7,lr}
         mov     pc, lr
+.globl runJump
+runJump:                                               //loop that makes mario jump three squares
+                push    {r3-r7, lr}
 
+
+                bl      readMario
+
+                //update the gamestate
+                mov     r3, #0
+                mov     r4, #3
+                mov     r5, r0
+                cmp  r8, #1
+                bne     rjum                        //address of Mario
+                strb    r3, [r0], #-130
+                b       con
+rjum:           strb    r3, [r0], #-120
+con:            strb    r4, [r0]
+
+                mov     r6, r1
+                mov     r7, r2
+                mov     r4, #0
+rjumploop:
+                mov     r2, #0                               //restore background sky
+                mov     r0, r6
+                mov     r1, r7
+
+                bl      drawCell
+                ldr     r3, =0x1388
+                bl      Wait				//wait for a second
+
+                mov     r2, #3                               //#3 stands for Mario
+                cmp  r8, #1
+                bne  righJump
+                sub  r6, #1
+                b    cont
+righJump:       add  r6, #1
+cont:           sub  r7, #1
+                mov     r0, r6
+                                               //XPos
+                mov     r1, r7                            //YPos
+                mov     r7, r1
+                bl      drawCell
+                ldr     r3, =0xffff
+                bl      Wait				//wait for a second
+                add     r4, #1
+                cmp     r4, #4
+                ble     rjumploop
+                bl      gravity
+
+
+                pop     {r3-r7,lr}
+                mov     pc, lr
 gravity:
         push    {r3-r7, lr}
 
 checkUnder:
         bl      readMario                       //r1- x r2- y
         ldr     r4, =GameMap
-        mov  r5, #25
+        mov     r5, #25
         mul     r2, r5
         add     r1, r1, r2
         add     r4, r4,  r1
         add  r4, #25
         ldrb    r4, [r4]
-jklol:        cmp     r4, #0
+        cmp     r4, #0
         bne     endGravity
         bl      readMario
         //update the gamestate
