@@ -112,22 +112,21 @@ endLeft:
 
 .globl jump
 jump:                                               //loop that makes mario jump three squares
-        push    {r3-r7, lr}
+        push    {r2-r8, lr}
 
 
         bl      readMario
 
         //update the gamestate
-        mov     r3, #0
-        mov     r4, #3
         mov     r5, r0                               //address of Mario
-        strb    r3, [r0], #-125
-        strb    r4, [r0]
-
+        mov  r8, r0
         mov     r6, r1
         mov     r7, r2
         mov     r4, #0
 jumploop:
+        ldrb    r2,  [r8, #-25]
+tst:    cmp     r2,  #0
+        bne     endJump
         mov     r2, #0                               //restore background sky
         mov     r0, r6
         mov     r1, r7
@@ -141,15 +140,21 @@ jumploop:
         sub     r1, r7, #1                            //YPos
         mov     r7, r1
         bl      drawCell
-        ldr     r3, =0x1388
+        mov     r3, #0
+        mov     r5, #3
+
+        strb    r3, [r8], #-25
+        strb    r5, [r8]
+        ldr     r3, =0xffff
         bl      Wait				//wait for a second
         add     r4, #1
         cmp     r4, #4
         ble     jumploop
-        bl      gravity
+endJump:
+    bl      gravity
 
 
-        pop     {r3-r7,lr}
+        pop     {r2-r8,lr}
         mov     pc, lr
 .globl runJump
 runJump:                                               //loop that makes mario jump three squares
@@ -204,7 +209,7 @@ cont:           sub  r7, #1
                 pop     {r3-r7,lr}
                 mov     pc, lr
 gravity:
-        push    {r3-r7, lr}
+        push    {r2-r7, lr}
 
 checkUnder:
         bl      readMario                       //r1- x r2- y
@@ -213,7 +218,7 @@ checkUnder:
         mul     r2, r5
         add     r1, r1, r2
         add     r4, r4,  r1
-        add  r4, #25
+        add     r4, #25
         ldrb    r4, [r4]
         cmp     r4, #0
         bne     endGravity
@@ -246,5 +251,5 @@ fall:
 
 
 endGravity:
-        pop     {r3-r7, lr}
+        pop     {r2-r7, lr}
         mov  pc, lr
