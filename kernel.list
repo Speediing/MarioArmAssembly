@@ -5,7 +5,7 @@ build/output.elf:     file format elf32-littlearm
 Disassembly of section .init:
 
 00008000 <_start>:
-    8000:	ea00201b 	b	10074 <main>
+    8000:	ea002023 	b	10094 <main>
 
 Disassembly of section .text:
 
@@ -94,7 +94,7 @@ Disassembly of section .text:
     fb48:	e92d40f0 	push	{r4, r5, r6, r7, lr}
     fb4c:	e3a06000 	mov	r6, #0
     fb50:	e3a07007 	mov	r7, #7
-    fb54:	e59f4328 	ldr	r4, [pc, #808]	; fe84 <endGravity+0x8>
+    fb54:	e59f4354 	ldr	r4, [pc, #852]	; feb0 <doneCheckEdge+0x8>
     fb58:	e28440af 	add	r4, r4, #175	; 0xaf
 
 0000fb5c <continueReadMario>:
@@ -120,7 +120,7 @@ Disassembly of section .text:
     fb98:	e92d47f8 	push	{r3, r4, r5, r6, r7, r8, r9, sl, lr}
     fb9c:	ebffffe9 	bl	fb48 <readMario>
     fba0:	e3510018 	cmp	r1, #24
-    fba4:	0a00000e 	beq	fbe4 <endRight>
+    fba4:	0a00000f 	beq	fbe8 <endRight>
     fba8:	e3a03000 	mov	r3, #0
     fbac:	e3a04003 	mov	r4, #3
     fbb0:	e1a05000 	mov	r5, r0
@@ -131,598 +131,612 @@ Disassembly of section .text:
     fbc4:	e1a00006 	mov	r0, r6
     fbc8:	e1a01007 	mov	r1, r7
     fbcc:	e3a02000 	mov	r2, #0
-    fbd0:	eb0000e4 	bl	ff68 <drawCell>
+    fbd0:	eb0000ee 	bl	ff90 <drawCell>
     fbd4:	e3a02003 	mov	r2, #3
     fbd8:	e2860001 	add	r0, r6, #1
     fbdc:	e1a01007 	mov	r1, r7
-    fbe0:	eb0000e0 	bl	ff68 <drawCell>
+    fbe0:	eb0000ea 	bl	ff90 <drawCell>
+    fbe4:	eb0000a7 	bl	fe88 <checkEdge>
 
-0000fbe4 <endRight>:
-    fbe4:	eb000083 	bl	fdf8 <gravity>
-    fbe8:	e8bd47f8 	pop	{r3, r4, r5, r6, r7, r8, r9, sl, lr}
-    fbec:	e1a0f00e 	mov	pc, lr
+0000fbe8 <endRight>:
+    fbe8:	eb000083 	bl	fdfc <gravity>
+    fbec:	e8bd47f8 	pop	{r3, r4, r5, r6, r7, r8, r9, sl, lr}
+    fbf0:	e1a0f00e 	mov	pc, lr
 
-0000fbf0 <moveLeft>:
-    fbf0:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
-    fbf4:	ebffffd3 	bl	fb48 <readMario>
-    fbf8:	e3510000 	cmp	r1, #0
-    fbfc:	0a00000f 	beq	fc40 <endLeft>
-    fc00:	e3a03000 	mov	r3, #0
-    fc04:	e3a04003 	mov	r4, #3
-    fc08:	e1a05000 	mov	r5, r0
-    fc0c:	e4403001 	strb	r3, [r0], #-1
-    fc10:	e5c04000 	strb	r4, [r0]
-    fc14:	e1a06001 	mov	r6, r1
-    fc18:	e1a07002 	mov	r7, r2
-    fc1c:	e1a00006 	mov	r0, r6
-    fc20:	e1a01007 	mov	r1, r7
-    fc24:	e3a02000 	mov	r2, #0
-    fc28:	eb0000ce 	bl	ff68 <drawCell>
-    fc2c:	e3a02003 	mov	r2, #3
-    fc30:	e2466001 	sub	r6, r6, #1
-    fc34:	e1a00006 	mov	r0, r6
-    fc38:	e1a01007 	mov	r1, r7
-    fc3c:	eb0000c9 	bl	ff68 <drawCell>
+0000fbf4 <moveLeft>:
+    fbf4:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
+    fbf8:	ebffffd2 	bl	fb48 <readMario>
+    fbfc:	e3510000 	cmp	r1, #0
+    fc00:	0a00000f 	beq	fc44 <endLeft>
+    fc04:	e3a03000 	mov	r3, #0
+    fc08:	e3a04003 	mov	r4, #3
+    fc0c:	e1a05000 	mov	r5, r0
+    fc10:	e4403001 	strb	r3, [r0], #-1
+    fc14:	e5c04000 	strb	r4, [r0]
+    fc18:	e1a06001 	mov	r6, r1
+    fc1c:	e1a07002 	mov	r7, r2
+    fc20:	e1a00006 	mov	r0, r6
+    fc24:	e1a01007 	mov	r1, r7
+    fc28:	e3a02000 	mov	r2, #0
+    fc2c:	eb0000d7 	bl	ff90 <drawCell>
+    fc30:	e3a02003 	mov	r2, #3
+    fc34:	e2466001 	sub	r6, r6, #1
+    fc38:	e1a00006 	mov	r0, r6
+    fc3c:	e1a01007 	mov	r1, r7
+    fc40:	eb0000d2 	bl	ff90 <drawCell>
 
-0000fc40 <endLeft>:
-    fc40:	eb00006c 	bl	fdf8 <gravity>
-    fc44:	e8bd40f8 	pop	{r3, r4, r5, r6, r7, lr}
-    fc48:	e1a0f00e 	mov	pc, lr
+0000fc44 <endLeft>:
+    fc44:	eb00006c 	bl	fdfc <gravity>
+    fc48:	e8bd40f8 	pop	{r3, r4, r5, r6, r7, lr}
+    fc4c:	e1a0f00e 	mov	pc, lr
 
-0000fc4c <jump>:
-    fc4c:	e92d41fc 	push	{r2, r3, r4, r5, r6, r7, r8, lr}
-    fc50:	ebffffbc 	bl	fb48 <readMario>
-    fc54:	e1a05000 	mov	r5, r0
-    fc58:	e1a08000 	mov	r8, r0
-    fc5c:	e1a06001 	mov	r6, r1
-    fc60:	e1a07002 	mov	r7, r2
-    fc64:	e3a04000 	mov	r4, #0
+0000fc50 <jump>:
+    fc50:	e92d41fc 	push	{r2, r3, r4, r5, r6, r7, r8, lr}
+    fc54:	ebffffbb 	bl	fb48 <readMario>
+    fc58:	e1a05000 	mov	r5, r0
+    fc5c:	e1a08000 	mov	r8, r0
+    fc60:	e1a06001 	mov	r6, r1
+    fc64:	e1a07002 	mov	r7, r2
+    fc68:	e3a04000 	mov	r4, #0
 
-0000fc68 <jumploop>:
-    fc68:	e5582019 	ldrb	r2, [r8, #-25]
+0000fc6c <jumploop>:
+    fc6c:	e5582019 	ldrb	r2, [r8, #-25]
 
-0000fc6c <tst>:
-    fc6c:	e3520000 	cmp	r2, #0
-    fc70:	1a000013 	bne	fcc4 <endJump>
-    fc74:	e3a02000 	mov	r2, #0
-    fc78:	e1a00006 	mov	r0, r6
-    fc7c:	e1a01007 	mov	r1, r7
-    fc80:	eb0000b8 	bl	ff68 <drawCell>
-    fc84:	e59f31fc 	ldr	r3, [pc, #508]	; fe88 <endGravity+0xc>
-    fc88:	eb000159 	bl	101f4 <Wait>
-    fc8c:	e3a02003 	mov	r2, #3
-    fc90:	e1a00006 	mov	r0, r6
-    fc94:	e2471001 	sub	r1, r7, #1
-    fc98:	e1a07001 	mov	r7, r1
-    fc9c:	eb0000b1 	bl	ff68 <drawCell>
-    fca0:	e3a03000 	mov	r3, #0
-    fca4:	e3a05003 	mov	r5, #3
-    fca8:	e4483019 	strb	r3, [r8], #-25
-    fcac:	e5c85000 	strb	r5, [r8]
-    fcb0:	e59f31d4 	ldr	r3, [pc, #468]	; fe8c <endGravity+0x10>
-    fcb4:	eb00014e 	bl	101f4 <Wait>
-    fcb8:	e2844001 	add	r4, r4, #1
-    fcbc:	e3540004 	cmp	r4, #4
-    fcc0:	daffffe8 	ble	fc68 <jumploop>
+0000fc70 <tst>:
+    fc70:	e3520000 	cmp	r2, #0
+    fc74:	1a000013 	bne	fcc8 <endJump>
+    fc78:	e3a02000 	mov	r2, #0
+    fc7c:	e1a00006 	mov	r0, r6
+    fc80:	e1a01007 	mov	r1, r7
+    fc84:	eb0000c1 	bl	ff90 <drawCell>
+    fc88:	e59f3224 	ldr	r3, [pc, #548]	; feb4 <doneCheckEdge+0xc>
+    fc8c:	eb000164 	bl	10224 <Wait>
+    fc90:	e3a02003 	mov	r2, #3
+    fc94:	e1a00006 	mov	r0, r6
+    fc98:	e2471001 	sub	r1, r7, #1
+    fc9c:	e1a07001 	mov	r7, r1
+    fca0:	eb0000ba 	bl	ff90 <drawCell>
+    fca4:	e3a03000 	mov	r3, #0
+    fca8:	e3a05003 	mov	r5, #3
+    fcac:	e4483019 	strb	r3, [r8], #-25
+    fcb0:	e5c85000 	strb	r5, [r8]
+    fcb4:	e59f31fc 	ldr	r3, [pc, #508]	; feb8 <doneCheckEdge+0x10>
+    fcb8:	eb000159 	bl	10224 <Wait>
+    fcbc:	e2844001 	add	r4, r4, #1
+    fcc0:	e3540004 	cmp	r4, #4
+    fcc4:	daffffe8 	ble	fc6c <jumploop>
 
-0000fcc4 <endJump>:
-    fcc4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-    fcc8:	eb00004a 	bl	fdf8 <gravity>
-    fccc:	e3520004 	cmp	r2, #4
-    fcd0:	0a000004 	beq	fce8 <hitBrick>
-    fcd4:	e3520005 	cmp	r2, #5
-    fcd8:	0a00000c 	beq	fd10 <hitQBox>
-    fcdc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+0000fcc8 <endJump>:
+    fcc8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+    fccc:	eb00004a 	bl	fdfc <gravity>
+    fcd0:	e3520004 	cmp	r2, #4
+    fcd4:	0a000004 	beq	fcec <hitBrick>
+    fcd8:	e3520005 	cmp	r2, #5
+    fcdc:	0a00000c 	beq	fd14 <hitQBox>
+    fce0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 
-0000fce0 <doneJump>:
-    fce0:	e8bd41fc 	pop	{r2, r3, r4, r5, r6, r7, r8, lr}
-    fce4:	e1a0f00e 	mov	pc, lr
+0000fce4 <doneJump>:
+    fce4:	e8bd41fc 	pop	{r2, r3, r4, r5, r6, r7, r8, lr}
+    fce8:	e1a0f00e 	mov	pc, lr
 
-0000fce8 <hitBrick>:
-    fce8:	e92d4020 	push	{r5, lr}
-    fcec:	e3a05000 	mov	r5, #0
-    fcf0:	e5485019 	strb	r5, [r8, #-25]
-    fcf4:	e3a02000 	mov	r2, #0
-    fcf8:	e2477001 	sub	r7, r7, #1
-    fcfc:	e1a00006 	mov	r0, r6
-    fd00:	e1a01007 	mov	r1, r7
-    fd04:	eb000097 	bl	ff68 <drawCell>
-    fd08:	e8bd4020 	pop	{r5, lr}
-    fd0c:	e1a0f00e 	mov	pc, lr
+0000fcec <hitBrick>:
+    fcec:	e92d4020 	push	{r5, lr}
+    fcf0:	e3a05000 	mov	r5, #0
+    fcf4:	e5485019 	strb	r5, [r8, #-25]
+    fcf8:	e3a02000 	mov	r2, #0
+    fcfc:	e2477001 	sub	r7, r7, #1
+    fd00:	e1a00006 	mov	r0, r6
+    fd04:	e1a01007 	mov	r1, r7
+    fd08:	eb0000a0 	bl	ff90 <drawCell>
+    fd0c:	e8bd4020 	pop	{r5, lr}
+    fd10:	e1a0f00e 	mov	pc, lr
 
-0000fd10 <hitQBox>:
-    fd10:	e92d4020 	push	{r5, lr}
-    fd14:	e3a05000 	mov	r5, #0
-    fd18:	e5485019 	strb	r5, [r8, #-25]
-    fd1c:	e3a05008 	mov	r5, #8
-    fd20:	e5485032 	strb	r5, [r8, #-50]	; 0x32
-    fd24:	e3a02008 	mov	r2, #8
-    fd28:	e2477002 	sub	r7, r7, #2
-    fd2c:	e1a00006 	mov	r0, r6
-    fd30:	e1a01007 	mov	r1, r7
-    fd34:	eb00008b 	bl	ff68 <drawCell>
-    fd38:	e8bd4020 	pop	{r5, lr}
-    fd3c:	e1a0f00e 	mov	pc, lr
+0000fd14 <hitQBox>:
+    fd14:	e92d4020 	push	{r5, lr}
+    fd18:	e3a05000 	mov	r5, #0
+    fd1c:	e5485019 	strb	r5, [r8, #-25]
+    fd20:	e3a05008 	mov	r5, #8
+    fd24:	e5485032 	strb	r5, [r8, #-50]	; 0x32
+    fd28:	e3a02008 	mov	r2, #8
+    fd2c:	e2477002 	sub	r7, r7, #2
+    fd30:	e1a00006 	mov	r0, r6
+    fd34:	e1a01007 	mov	r1, r7
+    fd38:	eb000094 	bl	ff90 <drawCell>
+    fd3c:	e8bd4020 	pop	{r5, lr}
+    fd40:	e1a0f00e 	mov	pc, lr
 
-0000fd40 <runJump>:
-    fd40:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
-    fd44:	ebffff7f 	bl	fb48 <readMario>
-    fd48:	e3a03000 	mov	r3, #0
-    fd4c:	e3a04003 	mov	r4, #3
-    fd50:	e1a05000 	mov	r5, r0
-    fd54:	e3580001 	cmp	r8, #1
-    fd58:	1a000001 	bne	fd64 <rjum>
-    fd5c:	e4403082 	strb	r3, [r0], #-130	; 0x82
-    fd60:	ea000000 	b	fd68 <con>
+0000fd44 <runJump>:
+    fd44:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
+    fd48:	ebffff7e 	bl	fb48 <readMario>
+    fd4c:	e3a03000 	mov	r3, #0
+    fd50:	e3a04003 	mov	r4, #3
+    fd54:	e1a05000 	mov	r5, r0
+    fd58:	e3580001 	cmp	r8, #1
+    fd5c:	1a000001 	bne	fd68 <rjum>
+    fd60:	e4403082 	strb	r3, [r0], #-130	; 0x82
+    fd64:	ea000000 	b	fd6c <con>
 
-0000fd64 <rjum>:
-    fd64:	e4403078 	strb	r3, [r0], #-120	; 0x78
+0000fd68 <rjum>:
+    fd68:	e4403078 	strb	r3, [r0], #-120	; 0x78
 
-0000fd68 <con>:
-    fd68:	e5c04000 	strb	r4, [r0]
-    fd6c:	e1a06001 	mov	r6, r1
-    fd70:	e1a07002 	mov	r7, r2
-    fd74:	e3a04000 	mov	r4, #0
-    fd78:	e5582019 	ldrb	r2, [r8, #-25]
-    fd7c:	e3520000 	cmp	r2, #0
-    fd80:	1affffcf 	bne	fcc4 <endJump>
+0000fd6c <con>:
+    fd6c:	e5c04000 	strb	r4, [r0]
+    fd70:	e1a06001 	mov	r6, r1
+    fd74:	e1a07002 	mov	r7, r2
+    fd78:	e3a04000 	mov	r4, #0
+    fd7c:	e5582019 	ldrb	r2, [r8, #-25]
+    fd80:	e3520000 	cmp	r2, #0
+    fd84:	1affffcf 	bne	fcc8 <endJump>
 
-0000fd84 <rjumploop>:
-    fd84:	e3a02000 	mov	r2, #0
-    fd88:	e1a00006 	mov	r0, r6
-    fd8c:	e1a01007 	mov	r1, r7
-    fd90:	eb000074 	bl	ff68 <drawCell>
-    fd94:	e59f30ec 	ldr	r3, [pc, #236]	; fe88 <endGravity+0xc>
-    fd98:	eb000115 	bl	101f4 <Wait>
-    fd9c:	e3a02003 	mov	r2, #3
-    fda0:	e3580001 	cmp	r8, #1
-    fda4:	1a000001 	bne	fdb0 <righJump>
-    fda8:	e2466001 	sub	r6, r6, #1
-    fdac:	ea000000 	b	fdb4 <cont>
+0000fd88 <rjumploop>:
+    fd88:	e3a02000 	mov	r2, #0
+    fd8c:	e1a00006 	mov	r0, r6
+    fd90:	e1a01007 	mov	r1, r7
+    fd94:	eb00007d 	bl	ff90 <drawCell>
+    fd98:	e59f3114 	ldr	r3, [pc, #276]	; feb4 <doneCheckEdge+0xc>
+    fd9c:	eb000120 	bl	10224 <Wait>
+    fda0:	e3a02003 	mov	r2, #3
+    fda4:	e3580001 	cmp	r8, #1
+    fda8:	1a000001 	bne	fdb4 <righJump>
+    fdac:	e2466001 	sub	r6, r6, #1
+    fdb0:	ea000000 	b	fdb8 <cont>
 
-0000fdb0 <righJump>:
-    fdb0:	e2866001 	add	r6, r6, #1
+0000fdb4 <righJump>:
+    fdb4:	e2866001 	add	r6, r6, #1
 
-0000fdb4 <cont>:
-    fdb4:	e2477001 	sub	r7, r7, #1
-    fdb8:	e1a00006 	mov	r0, r6
-    fdbc:	e1a01007 	mov	r1, r7
-    fdc0:	e1a07001 	mov	r7, r1
-    fdc4:	e5582019 	ldrb	r2, [r8, #-25]
-    fdc8:	e3520000 	cmp	r2, #0
-    fdcc:	1affffbc 	bne	fcc4 <endJump>
-    fdd0:	e3a02003 	mov	r2, #3
-    fdd4:	eb000063 	bl	ff68 <drawCell>
-    fdd8:	e59f30ac 	ldr	r3, [pc, #172]	; fe8c <endGravity+0x10>
-    fddc:	eb000104 	bl	101f4 <Wait>
-    fde0:	e2844001 	add	r4, r4, #1
-    fde4:	e3540004 	cmp	r4, #4
-    fde8:	daffffe5 	ble	fd84 <rjumploop>
-    fdec:	eb000001 	bl	fdf8 <gravity>
-    fdf0:	e8bd40f8 	pop	{r3, r4, r5, r6, r7, lr}
-    fdf4:	e1a0f00e 	mov	pc, lr
+0000fdb8 <cont>:
+    fdb8:	e2477001 	sub	r7, r7, #1
+    fdbc:	e1a00006 	mov	r0, r6
+    fdc0:	e1a01007 	mov	r1, r7
+    fdc4:	e1a07001 	mov	r7, r1
+    fdc8:	e5582019 	ldrb	r2, [r8, #-25]
+    fdcc:	e3520000 	cmp	r2, #0
+    fdd0:	1affffbc 	bne	fcc8 <endJump>
+    fdd4:	e3a02003 	mov	r2, #3
+    fdd8:	eb00006c 	bl	ff90 <drawCell>
+    fddc:	e59f30d4 	ldr	r3, [pc, #212]	; feb8 <doneCheckEdge+0x10>
+    fde0:	eb00010f 	bl	10224 <Wait>
+    fde4:	e2844001 	add	r4, r4, #1
+    fde8:	e3540004 	cmp	r4, #4
+    fdec:	daffffe5 	ble	fd88 <rjumploop>
+    fdf0:	eb000001 	bl	fdfc <gravity>
+    fdf4:	e8bd40f8 	pop	{r3, r4, r5, r6, r7, lr}
+    fdf8:	e1a0f00e 	mov	pc, lr
 
-0000fdf8 <gravity>:
-    fdf8:	e92d40fc 	push	{r2, r3, r4, r5, r6, r7, lr}
+0000fdfc <gravity>:
+    fdfc:	e92d40fc 	push	{r2, r3, r4, r5, r6, r7, lr}
 
-0000fdfc <checkUnder>:
-    fdfc:	ebffff51 	bl	fb48 <readMario>
-    fe00:	e59f407c 	ldr	r4, [pc, #124]	; fe84 <endGravity+0x8>
-    fe04:	e3a05019 	mov	r5, #25
-    fe08:	e0020295 	mul	r2, r5, r2
-    fe0c:	e0811002 	add	r1, r1, r2
-    fe10:	e0844001 	add	r4, r4, r1
-    fe14:	e2844019 	add	r4, r4, #25
-    fe18:	e5d44000 	ldrb	r4, [r4]
-    fe1c:	e3540000 	cmp	r4, #0
-    fe20:	1a000015 	bne	fe7c <endGravity>
-    fe24:	ebffff47 	bl	fb48 <readMario>
-    fe28:	e3a03000 	mov	r3, #0
-    fe2c:	e3a04003 	mov	r4, #3
-    fe30:	e1a05000 	mov	r5, r0
-    fe34:	e4c03019 	strb	r3, [r0], #25
-    fe38:	e5c04000 	strb	r4, [r0]
-    fe3c:	e1a06001 	mov	r6, r1
-    fe40:	e1a07002 	mov	r7, r2
+0000fe00 <checkUnder>:
+    fe00:	ebffff50 	bl	fb48 <readMario>
+    fe04:	e59f40a4 	ldr	r4, [pc, #164]	; feb0 <doneCheckEdge+0x8>
+    fe08:	e3a05019 	mov	r5, #25
+    fe0c:	e0020295 	mul	r2, r5, r2
+    fe10:	e0811002 	add	r1, r1, r2
+    fe14:	e0844001 	add	r4, r4, r1
+    fe18:	e2844019 	add	r4, r4, #25
+    fe1c:	e5d44000 	ldrb	r4, [r4]
+    fe20:	e3540000 	cmp	r4, #0
+    fe24:	1a000015 	bne	fe80 <endGravity>
+    fe28:	ebffff46 	bl	fb48 <readMario>
+    fe2c:	e3a03000 	mov	r3, #0
+    fe30:	e3a04003 	mov	r4, #3
+    fe34:	e1a05000 	mov	r5, r0
+    fe38:	e4c03019 	strb	r3, [r0], #25
+    fe3c:	e5c04000 	strb	r4, [r0]
+    fe40:	e1a06001 	mov	r6, r1
+    fe44:	e1a07002 	mov	r7, r2
 
-0000fe44 <fall>:
-    fe44:	e3a02000 	mov	r2, #0
-    fe48:	e1a00006 	mov	r0, r6
-    fe4c:	e1a01007 	mov	r1, r7
-    fe50:	eb000044 	bl	ff68 <drawCell>
-    fe54:	e59f3030 	ldr	r3, [pc, #48]	; fe8c <endGravity+0x10>
-    fe58:	eb0000e5 	bl	101f4 <Wait>
-    fe5c:	e3a02003 	mov	r2, #3
-    fe60:	e1a00006 	mov	r0, r6
-    fe64:	e2871001 	add	r1, r7, #1
-    fe68:	e1a07001 	mov	r7, r1
-    fe6c:	eb00003d 	bl	ff68 <drawCell>
-    fe70:	e59f3014 	ldr	r3, [pc, #20]	; fe8c <endGravity+0x10>
-    fe74:	eb0000de 	bl	101f4 <Wait>
-    fe78:	eaffffdf 	b	fdfc <checkUnder>
+0000fe48 <fall>:
+    fe48:	e3a02000 	mov	r2, #0
+    fe4c:	e1a00006 	mov	r0, r6
+    fe50:	e1a01007 	mov	r1, r7
+    fe54:	eb00004d 	bl	ff90 <drawCell>
+    fe58:	e59f3058 	ldr	r3, [pc, #88]	; feb8 <doneCheckEdge+0x10>
+    fe5c:	eb0000f0 	bl	10224 <Wait>
+    fe60:	e3a02003 	mov	r2, #3
+    fe64:	e1a00006 	mov	r0, r6
+    fe68:	e2871001 	add	r1, r7, #1
+    fe6c:	e1a07001 	mov	r7, r1
+    fe70:	eb000046 	bl	ff90 <drawCell>
+    fe74:	e59f303c 	ldr	r3, [pc, #60]	; feb8 <doneCheckEdge+0x10>
+    fe78:	eb0000e9 	bl	10224 <Wait>
+    fe7c:	eaffffdf 	b	fe00 <checkUnder>
 
-0000fe7c <endGravity>:
-    fe7c:	e8bd40fc 	pop	{r2, r3, r4, r5, r6, r7, lr}
-    fe80:	e1a0f00e 	mov	pc, lr
-    fe84:	0000f460 	.word	0x0000f460
-    fe88:	00001388 	.word	0x00001388
-    fe8c:	0000ffff 	.word	0x0000ffff
+0000fe80 <endGravity>:
+    fe80:	e8bd40fc 	pop	{r2, r3, r4, r5, r6, r7, lr}
+    fe84:	e1a0f00e 	mov	pc, lr
 
-0000fe90 <draw>:
-    fe90:	e92d4780 	push	{r7, r8, r9, sl, lr}
-    fe94:	e3a09000 	mov	r9, #0
-    fe98:	e3a0b000 	mov	fp, #0
-    fe9c:	e3a0a022 	mov	sl, #34	; 0x22
-    fea0:	e3a0c022 	mov	ip, #34	; 0x22
-    fea4:	eb00001e 	bl	ff24 <DrawTop>
-    fea8:	e8bd4780 	pop	{r7, r8, r9, sl, lr}
+0000fe88 <checkEdge>:
+    fe88:	e92d47ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+    fe8c:	ebffff2d 	bl	fb48 <readMario>
+    fe90:	e3510018 	cmp	r1, #24
+    fe94:	1a000003 	bne	fea8 <doneCheckEdge>
+    fe98:	e59f001c 	ldr	r0, [pc, #28]	; febc <doneCheckEdge+0x14>
+    fe9c:	e59f101c 	ldr	r1, [pc, #28]	; fec0 <doneCheckEdge+0x18>
+    fea0:	eb000024 	bl	ff38 <drawMap>
+    fea4:	eb0000a4 	bl	1013c <readButtons>
+
+0000fea8 <doneCheckEdge>:
+    fea8:	e8bd47ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
     feac:	e1a0f00e 	mov	pc, lr
+    feb0:	0000f460 	.word	0x0000f460
+    feb4:	00001388 	.word	0x00001388
+    feb8:	0000ffff 	.word	0x0000ffff
+    febc:	0000f654 	.word	0x0000f654
+    fec0:	0000f848 	.word	0x0000f848
 
-0000feb0 <clearScreen>:
-    feb0:	e92d5fff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
-    feb4:	e3a04000 	mov	r4, #0
-    feb8:	e3a05000 	mov	r5, #0
-    febc:	e3a06000 	mov	r6, #0
-    fec0:	e59f7168 	ldr	r7, [pc, #360]	; 10030 <next+0x34>
-    fec4:	e59f8168 	ldr	r8, [pc, #360]	; 10034 <next+0x38>
+0000fec4 <clearScreen>:
+    fec4:	e92d5fff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
+    fec8:	e3a04000 	mov	r4, #0
+    fecc:	e3a05000 	mov	r5, #0
+    fed0:	e3a06000 	mov	r6, #0
+    fed4:	e59f717c 	ldr	r7, [pc, #380]	; 10058 <next+0x34>
+    fed8:	e59f817c 	ldr	r8, [pc, #380]	; 1005c <next+0x38>
 
-0000fec8 <Looping>:
-    fec8:	e1a00004 	mov	r0, r4
-    fecc:	e1a01005 	mov	r1, r5
-    fed0:	e1a02006 	mov	r2, r6
-    fed4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-    fed8:	eb000009 	bl	ff04 <DrawPixel>
-    fedc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-    fee0:	e2844001 	add	r4, r4, #1
-    fee4:	e1540007 	cmp	r4, r7
-    fee8:	bafffff6 	blt	fec8 <Looping>
-    feec:	e3a04000 	mov	r4, #0
-    fef0:	e2855001 	add	r5, r5, #1
-    fef4:	e1550008 	cmp	r5, r8
-    fef8:	bafffff2 	blt	fec8 <Looping>
-    fefc:	e8bd5fff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
-    ff00:	e1a0f00e 	mov	pc, lr
+0000fedc <Looping>:
+    fedc:	e1a00004 	mov	r0, r4
+    fee0:	e1a01005 	mov	r1, r5
+    fee4:	e1a02006 	mov	r2, r6
+    fee8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+    feec:	eb000009 	bl	ff18 <DrawPixel>
+    fef0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+    fef4:	e2844001 	add	r4, r4, #1
+    fef8:	e1540007 	cmp	r4, r7
+    fefc:	bafffff6 	blt	fedc <Looping>
+    ff00:	e3a04000 	mov	r4, #0
+    ff04:	e2855001 	add	r5, r5, #1
+    ff08:	e1550008 	cmp	r5, r8
+    ff0c:	bafffff2 	blt	fedc <Looping>
+    ff10:	e8bd5fff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
+    ff14:	e1a0f00e 	mov	pc, lr
 
-0000ff04 <DrawPixel>:
-    ff04:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
-    ff08:	e0804501 	add	r4, r0, r1, lsl #10
-    ff0c:	e1a04084 	lsl	r4, r4, #1
-    ff10:	e59f0120 	ldr	r0, [pc, #288]	; 10038 <next+0x3c>
-    ff14:	e5900000 	ldr	r0, [r0]
-    ff18:	e18020b4 	strh	r2, [r0, r4]
-    ff1c:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
-    ff20:	e1a0f00e 	mov	pc, lr
+0000ff18 <DrawPixel>:
+    ff18:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+    ff1c:	e0804501 	add	r4, r0, r1, lsl #10
+    ff20:	e1a04084 	lsl	r4, r4, #1
+    ff24:	e59f0134 	ldr	r0, [pc, #308]	; 10060 <next+0x3c>
+    ff28:	e5900000 	ldr	r0, [r0]
+    ff2c:	e18020b4 	strh	r2, [r0, r4]
+    ff30:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+    ff34:	e1a0f00e 	mov	pc, lr
 
-0000ff24 <DrawTop>:
-    ff24:	e92d4180 	push	{r7, r8, lr}
-    ff28:	e59f710c 	ldr	r7, [pc, #268]	; 1003c <next+0x40>
-    ff2c:	e59f810c 	ldr	r8, [pc, #268]	; 10040 <next+0x44>
+0000ff38 <drawMap>:
+    ff38:	e92d4780 	push	{r7, r8, r9, sl, lr}
+    ff3c:	e3a09000 	mov	r9, #0
+    ff40:	e3a0b000 	mov	fp, #0
+    ff44:	e3a0a022 	mov	sl, #34	; 0x22
+    ff48:	e3a0c022 	mov	ip, #34	; 0x22
+    ff4c:	e1a07000 	mov	r7, r0
+    ff50:	e1a08001 	mov	r8, r1
+    ff54:	ebffffff 	bl	ff58 <DrawMapLoop>
 
-0000ff30 <DrawTopLoop>:
-    ff30:	e4d72001 	ldrb	r2, [r7], #1
-    ff34:	e1a00009 	mov	r0, r9
-    ff38:	e1a0100b 	mov	r1, fp
-    ff3c:	eb000009 	bl	ff68 <drawCell>
-    ff40:	e1580007 	cmp	r8, r7
-    ff44:	0a000005 	beq	ff60 <ExitDraw>
-    ff48:	e2899001 	add	r9, r9, #1
-    ff4c:	e3590018 	cmp	r9, #24
-    ff50:	dafffff6 	ble	ff30 <DrawTopLoop>
-    ff54:	e3a09000 	mov	r9, #0
-    ff58:	e28bb001 	add	fp, fp, #1
-    ff5c:	eafffff3 	b	ff30 <DrawTopLoop>
+0000ff58 <DrawMapLoop>:
+    ff58:	e4d72001 	ldrb	r2, [r7], #1
+    ff5c:	e1a00009 	mov	r0, r9
+    ff60:	e1a0100b 	mov	r1, fp
+    ff64:	eb000009 	bl	ff90 <drawCell>
+    ff68:	e1580007 	cmp	r8, r7
+    ff6c:	0a000005 	beq	ff88 <ExitDraw>
+    ff70:	e2899001 	add	r9, r9, #1
+    ff74:	e3590018 	cmp	r9, #24
+    ff78:	dafffff6 	ble	ff58 <DrawMapLoop>
+    ff7c:	e3a09000 	mov	r9, #0
+    ff80:	e28bb001 	add	fp, fp, #1
+    ff84:	eafffff3 	b	ff58 <DrawMapLoop>
 
-0000ff60 <ExitDraw>:
-    ff60:	e8bd4180 	pop	{r7, r8, lr}
-    ff64:	e1a0f00e 	mov	pc, lr
+0000ff88 <ExitDraw>:
+    ff88:	e8bd4780 	pop	{r7, r8, r9, sl, lr}
+    ff8c:	e1a0f00e 	mov	pc, lr
 
-0000ff68 <drawCell>:
-    ff68:	e92d41f8 	push	{r3, r4, r5, r6, r7, r8, lr}
-    ff6c:	e3520001 	cmp	r2, #1
-    ff70:	0a00000f 	beq	ffb4 <DrawGround>
-    ff74:	e3520002 	cmp	r2, #2
-    ff78:	0a00000f 	beq	ffbc <DrawPipe>
-    ff7c:	e3520003 	cmp	r2, #3
-    ff80:	0a00000f 	beq	ffc4 <DrawMario>
-    ff84:	e3520004 	cmp	r2, #4
-    ff88:	0a00000f 	beq	ffcc <DrawBrick>
-    ff8c:	e3520005 	cmp	r2, #5
-    ff90:	0a00000f 	beq	ffd4 <DrawQBox>
-    ff94:	e3520006 	cmp	r2, #6
-    ff98:	0a000003 	beq	ffac <DrawCloud>
-    ff9c:	e3520008 	cmp	r2, #8
-    ffa0:	0a00000d 	beq	ffdc <DrawCoin>
-    ffa4:	e59f6098 	ldr	r6, [pc, #152]	; 10044 <next+0x48>
-    ffa8:	ea00000c 	b	ffe0 <drawCellLoop>
+0000ff90 <drawCell>:
+    ff90:	e92d41f8 	push	{r3, r4, r5, r6, r7, r8, lr}
+    ff94:	e3520001 	cmp	r2, #1
+    ff98:	0a00000f 	beq	ffdc <DrawGround>
+    ff9c:	e3520002 	cmp	r2, #2
+    ffa0:	0a00000f 	beq	ffe4 <DrawPipe>
+    ffa4:	e3520003 	cmp	r2, #3
+    ffa8:	0a00000f 	beq	ffec <DrawMario>
+    ffac:	e3520004 	cmp	r2, #4
+    ffb0:	0a00000f 	beq	fff4 <DrawBrick>
+    ffb4:	e3520005 	cmp	r2, #5
+    ffb8:	0a00000f 	beq	fffc <DrawQBox>
+    ffbc:	e3520006 	cmp	r2, #6
+    ffc0:	0a000003 	beq	ffd4 <DrawCloud>
+    ffc4:	e3520008 	cmp	r2, #8
+    ffc8:	0a00000d 	beq	10004 <DrawCoin>
+    ffcc:	e59f6090 	ldr	r6, [pc, #144]	; 10064 <next+0x40>
+    ffd0:	ea00000c 	b	10008 <drawCellLoop>
 
-0000ffac <DrawCloud>:
-    ffac:	e59f6094 	ldr	r6, [pc, #148]	; 10048 <next+0x4c>
-    ffb0:	ea00000a 	b	ffe0 <drawCellLoop>
+0000ffd4 <DrawCloud>:
+    ffd4:	e59f608c 	ldr	r6, [pc, #140]	; 10068 <next+0x44>
+    ffd8:	ea00000a 	b	10008 <drawCellLoop>
 
-0000ffb4 <DrawGround>:
-    ffb4:	e59f6090 	ldr	r6, [pc, #144]	; 1004c <next+0x50>
-    ffb8:	ea000008 	b	ffe0 <drawCellLoop>
+0000ffdc <DrawGround>:
+    ffdc:	e59f6088 	ldr	r6, [pc, #136]	; 1006c <next+0x48>
+    ffe0:	ea000008 	b	10008 <drawCellLoop>
 
-0000ffbc <DrawPipe>:
-    ffbc:	e59f608c 	ldr	r6, [pc, #140]	; 10050 <next+0x54>
-    ffc0:	ea000006 	b	ffe0 <drawCellLoop>
+0000ffe4 <DrawPipe>:
+    ffe4:	e59f6084 	ldr	r6, [pc, #132]	; 10070 <next+0x4c>
+    ffe8:	ea000006 	b	10008 <drawCellLoop>
 
-0000ffc4 <DrawMario>:
-    ffc4:	e59f6088 	ldr	r6, [pc, #136]	; 10054 <next+0x58>
-    ffc8:	ea000004 	b	ffe0 <drawCellLoop>
+0000ffec <DrawMario>:
+    ffec:	e59f6080 	ldr	r6, [pc, #128]	; 10074 <next+0x50>
+    fff0:	ea000004 	b	10008 <drawCellLoop>
 
-0000ffcc <DrawBrick>:
-    ffcc:	e59f6084 	ldr	r6, [pc, #132]	; 10058 <next+0x5c>
-    ffd0:	ea000002 	b	ffe0 <drawCellLoop>
+0000fff4 <DrawBrick>:
+    fff4:	e59f607c 	ldr	r6, [pc, #124]	; 10078 <next+0x54>
+    fff8:	ea000002 	b	10008 <drawCellLoop>
 
-0000ffd4 <DrawQBox>:
-    ffd4:	e59f6080 	ldr	r6, [pc, #128]	; 1005c <next+0x60>
-    ffd8:	ea000000 	b	ffe0 <drawCellLoop>
+0000fffc <DrawQBox>:
+    fffc:	e59f6078 	ldr	r6, [pc, #120]	; 1007c <next+0x58>
+   10000:	ea000000 	b	10008 <drawCellLoop>
 
-0000ffdc <DrawCoin>:
-    ffdc:	e59f607c 	ldr	r6, [pc, #124]	; 10060 <next+0x64>
+00010004 <DrawCoin>:
+   10004:	e59f6074 	ldr	r6, [pc, #116]	; 10080 <next+0x5c>
 
-0000ffe0 <drawCellLoop>:
-    ffe0:	e3a0a022 	mov	sl, #34	; 0x22
-    ffe4:	e3a0c022 	mov	ip, #34	; 0x22
-    ffe8:	e0040a90 	mul	r4, r0, sl
-    ffec:	e1a03004 	mov	r3, r4
-    fff0:	e0050c91 	mul	r5, r1, ip
-    fff4:	e084700a 	add	r7, r4, sl
-    fff8:	e085800c 	add	r8, r5, ip
+00010008 <drawCellLoop>:
+   10008:	e3a0a022 	mov	sl, #34	; 0x22
+   1000c:	e3a0c022 	mov	ip, #34	; 0x22
+   10010:	e0040a90 	mul	r4, r0, sl
+   10014:	e1a03004 	mov	r3, r4
+   10018:	e0050c91 	mul	r5, r1, ip
+   1001c:	e084700a 	add	r7, r4, sl
+   10020:	e085800c 	add	r8, r5, ip
 
-0000fffc <next>:
-    fffc:	e1a00004 	mov	r0, r4
-   10000:	e1a01005 	mov	r1, r5
-   10004:	e0d620b2 	ldrh	r2, [r6], #2
-   10008:	ebffffbd 	bl	ff04 <DrawPixel>
-   1000c:	e2844001 	add	r4, r4, #1
-   10010:	e1540007 	cmp	r4, r7
-   10014:	bafffff8 	blt	fffc <next>
-   10018:	e1a04003 	mov	r4, r3
-   1001c:	e2855001 	add	r5, r5, #1
-   10020:	e1550008 	cmp	r5, r8
-   10024:	bafffff4 	blt	fffc <next>
-   10028:	e8bd41f8 	pop	{r3, r4, r5, r6, r7, r8, lr}
-   1002c:	e1a0f00e 	mov	pc, lr
-   10030:	000003ff 	.word	0x000003ff
-   10034:	000002ff 	.word	0x000002ff
-   10038:	000090e0 	.word	0x000090e0
-   1003c:	0000f460 	.word	0x0000f460
-   10040:	0000f654 	.word	0x0000f654
-   10044:	000090f0 	.word	0x000090f0
-   10048:	0000b730 	.word	0x0000b730
-   1004c:	000099f8 	.word	0x000099f8
-   10050:	0000a278 	.word	0x0000a278
-   10054:	0000ab80 	.word	0x0000ab80
-   10058:	0000c038 	.word	0x0000c038
-   1005c:	0000c940 	.word	0x0000c940
-   10060:	0000d248 	.word	0x0000d248
+00010024 <next>:
+   10024:	e1a00004 	mov	r0, r4
+   10028:	e1a01005 	mov	r1, r5
+   1002c:	e0d620b2 	ldrh	r2, [r6], #2
+   10030:	ebffffb8 	bl	ff18 <DrawPixel>
+   10034:	e2844001 	add	r4, r4, #1
+   10038:	e1540007 	cmp	r4, r7
+   1003c:	bafffff8 	blt	10024 <next>
+   10040:	e1a04003 	mov	r4, r3
+   10044:	e2855001 	add	r5, r5, #1
+   10048:	e1550008 	cmp	r5, r8
+   1004c:	bafffff4 	blt	10024 <next>
+   10050:	e8bd41f8 	pop	{r3, r4, r5, r6, r7, r8, lr}
+   10054:	e1a0f00e 	mov	pc, lr
+   10058:	000003ff 	.word	0x000003ff
+   1005c:	000002ff 	.word	0x000002ff
+   10060:	000090e0 	.word	0x000090e0
+   10064:	000090f0 	.word	0x000090f0
+   10068:	0000b730 	.word	0x0000b730
+   1006c:	000099f8 	.word	0x000099f8
+   10070:	0000a278 	.word	0x0000a278
+   10074:	0000ab80 	.word	0x0000ab80
+   10078:	0000c038 	.word	0x0000c038
+   1007c:	0000c940 	.word	0x0000c940
+   10080:	0000d248 	.word	0x0000d248
 
-00010064 <printMenuStart>:
-   10064:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
-   10068:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
-   1006c:	e1a0f00e 	mov	pc, lr
+00010084 <printMenuStart>:
+   10084:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+   10088:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+   1008c:	e1a0f00e 	mov	pc, lr
 
-00010070 <mainMenu>:
-   10070:	e92d4010 	push	{r4, lr}
+00010090 <mainMenu>:
+   10090:	e92d4010 	push	{r4, lr}
 
-00010074 <main>:
-   10074:	e3a0d902 	mov	sp, #32768	; 0x8000
-   10078:	ebfffe6f 	bl	fa3c <EnableJTAG>
-   1007c:	ebfffe91 	bl	fac8 <InitFrameBuffer>
-   10080:	eb000005 	bl	1009c <initGPIO>
-   10084:	ebffff89 	bl	feb0 <clearScreen>
-   10088:	ebffff80 	bl	fe90 <draw>
+00010094 <main>:
+   10094:	e3a0d902 	mov	sp, #32768	; 0x8000
+   10098:	ebfffe67 	bl	fa3c <EnableJTAG>
+   1009c:	ebfffe89 	bl	fac8 <InitFrameBuffer>
+   100a0:	eb000009 	bl	100cc <initGPIO>
+   100a4:	ebffff86 	bl	fec4 <clearScreen>
+   100a8:	e59f0014 	ldr	r0, [pc, #20]	; 100c4 <haltLoop$+0x4>
+   100ac:	e59f1014 	ldr	r1, [pc, #20]	; 100c8 <haltLoop$+0x8>
+   100b0:	ebffffa0 	bl	ff38 <drawMap>
 
-0001008c <read>:
-   1008c:	eb00001e 	bl	1010c <readButtons>
-   10090:	ebfffffd 	bl	1008c <read>
+000100b4 <read>:
+   100b4:	eb000020 	bl	1013c <readButtons>
+   100b8:	ebfffffd 	bl	100b4 <read>
 
-00010094 <Restart_Game>:
-   10094:	eafffffc 	b	1008c <read>
+000100bc <Restart_Game>:
+   100bc:	eafffffc 	b	100b4 <read>
 
-00010098 <haltLoop$>:
-   10098:	eafffffe 	b	10098 <haltLoop$>
+000100c0 <haltLoop$>:
+   100c0:	eafffffe 	b	100c0 <haltLoop$>
+   100c4:	0000f460 	.word	0x0000f460
+   100c8:	0000f654 	.word	0x0000f654
 
-0001009c <initGPIO>:
-   1009c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-   100a0:	e59f0264 	ldr	r0, [pc, #612]	; 1030c <haltLoop$+0x4>
-   100a4:	e5901000 	ldr	r1, [r0]
-   100a8:	e3a02007 	mov	r2, #7
-   100ac:	e1a02d82 	lsl	r2, r2, #27
-   100b0:	e1c11002 	bic	r1, r1, r2
-   100b4:	e3a03001 	mov	r3, #1
-   100b8:	e1a03d83 	lsl	r3, r3, #27
-   100bc:	e1811003 	orr	r1, r1, r3
-   100c0:	e5801000 	str	r1, [r0]
-   100c4:	e59f0244 	ldr	r0, [pc, #580]	; 10310 <haltLoop$+0x8>
-   100c8:	e5901000 	ldr	r1, [r0]
-   100cc:	e3a02007 	mov	r2, #7
-   100d0:	e1c11002 	bic	r1, r1, r2
-   100d4:	e3a03000 	mov	r3, #0
-   100d8:	e1811003 	orr	r1, r1, r3
-   100dc:	e5801000 	str	r1, [r0]
-   100e0:	e59f0228 	ldr	r0, [pc, #552]	; 10310 <haltLoop$+0x8>
-   100e4:	e5901000 	ldr	r1, [r0]
-   100e8:	e3a02007 	mov	r2, #7
-   100ec:	e1a02182 	lsl	r2, r2, #3
-   100f0:	e1c11002 	bic	r1, r1, r2
-   100f4:	e3a03001 	mov	r3, #1
-   100f8:	e1a03183 	lsl	r3, r3, #3
-   100fc:	e1811003 	orr	r1, r1, r3
-   10100:	e5801000 	str	r1, [r0]
-   10104:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-   10108:	e1a0f00e 	mov	pc, lr
+000100cc <initGPIO>:
+   100cc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+   100d0:	e59f0264 	ldr	r0, [pc, #612]	; 1033c <haltLoop$+0x4>
+   100d4:	e5901000 	ldr	r1, [r0]
+   100d8:	e3a02007 	mov	r2, #7
+   100dc:	e1a02d82 	lsl	r2, r2, #27
+   100e0:	e1c11002 	bic	r1, r1, r2
+   100e4:	e3a03001 	mov	r3, #1
+   100e8:	e1a03d83 	lsl	r3, r3, #27
+   100ec:	e1811003 	orr	r1, r1, r3
+   100f0:	e5801000 	str	r1, [r0]
+   100f4:	e59f0244 	ldr	r0, [pc, #580]	; 10340 <haltLoop$+0x8>
+   100f8:	e5901000 	ldr	r1, [r0]
+   100fc:	e3a02007 	mov	r2, #7
+   10100:	e1c11002 	bic	r1, r1, r2
+   10104:	e3a03000 	mov	r3, #0
+   10108:	e1811003 	orr	r1, r1, r3
+   1010c:	e5801000 	str	r1, [r0]
+   10110:	e59f0228 	ldr	r0, [pc, #552]	; 10340 <haltLoop$+0x8>
+   10114:	e5901000 	ldr	r1, [r0]
+   10118:	e3a02007 	mov	r2, #7
+   1011c:	e1a02182 	lsl	r2, r2, #3
+   10120:	e1c11002 	bic	r1, r1, r2
+   10124:	e3a03001 	mov	r3, #1
+   10128:	e1a03183 	lsl	r3, r3, #3
+   1012c:	e1811003 	orr	r1, r1, r3
+   10130:	e5801000 	str	r1, [r0]
+   10134:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+   10138:	e1a0f00e 	mov	pc, lr
 
-0001010c <readButtons>:
-   1010c:	e92d4280 	push	{r7, r9, lr}
-   10110:	e1a09000 	mov	r9, r0
-   10114:	e59f11f8 	ldr	r1, [pc, #504]	; 10314 <haltLoop$+0xc>
-   10118:	eb00003e 	bl	10218 <Read_SNES>
-   1011c:	e1550009 	cmp	r5, r9
-   10120:	0a000030 	beq	101e8 <next>
-   10124:	e3a05000 	mov	r5, #0
+0001013c <readButtons>:
+   1013c:	e92d4280 	push	{r7, r9, lr}
+   10140:	e1a09000 	mov	r9, r0
+   10144:	e59f11f8 	ldr	r1, [pc, #504]	; 10344 <haltLoop$+0xc>
+   10148:	eb00003e 	bl	10248 <Read_SNES>
+   1014c:	e1550009 	cmp	r5, r9
+   10150:	0a000030 	beq	10218 <next>
+   10154:	e3a05000 	mov	r5, #0
 
-00010128 <checkSt>:
-   10128:	e1a07009 	mov	r7, r9
-   1012c:	e1a071a7 	lsr	r7, r7, #3
-   10130:	e2077001 	and	r7, r7, #1
-   10134:	e3570000 	cmp	r7, #0
-   10138:	1affffff 	bne	1013c <checkUp>
+00010158 <checkSt>:
+   10158:	e1a07009 	mov	r7, r9
+   1015c:	e1a071a7 	lsr	r7, r7, #3
+   10160:	e2077001 	and	r7, r7, #1
+   10164:	e3570000 	cmp	r7, #0
+   10168:	1affffff 	bne	1016c <checkUp>
 
-0001013c <checkUp>:
-   1013c:	e1a07009 	mov	r7, r9
-   10140:	e1a07227 	lsr	r7, r7, #4
-   10144:	e2077001 	and	r7, r7, #1
+0001016c <checkUp>:
+   1016c:	e1a07009 	mov	r7, r9
+   10170:	e1a07227 	lsr	r7, r7, #4
+   10174:	e2077001 	and	r7, r7, #1
 
-00010148 <d>:
-   10148:	e3570000 	cmp	r7, #0
-   1014c:	1a000000 	bne	10154 <checkL>
-   10150:	ea000024 	b	101e8 <next>
+00010178 <d>:
+   10178:	e3570000 	cmp	r7, #0
+   1017c:	1a000000 	bne	10184 <checkL>
+   10180:	ea000024 	b	10218 <next>
 
-00010154 <checkL>:
-   10154:	e1a07009 	mov	r7, r9
-   10158:	e1a07327 	lsr	r7, r7, #6
-   1015c:	e2077001 	and	r7, r7, #1
-   10160:	e3570000 	cmp	r7, #0
-   10164:	1a000006 	bne	10184 <checkR>
-   10168:	e59f11a8 	ldr	r1, [pc, #424]	; 10318 <haltLoop$+0x10>
-   1016c:	eb000020 	bl	101f4 <Wait>
-   10170:	ebfffe9e 	bl	fbf0 <moveLeft>
-   10174:	e3a05001 	mov	r5, #1
-   10178:	e59f1198 	ldr	r1, [pc, #408]	; 10318 <haltLoop$+0x10>
-   1017c:	eb00001c 	bl	101f4 <Wait>
-   10180:	ea000009 	b	101ac <checkA>
-
-00010184 <checkR>:
+00010184 <checkL>:
    10184:	e1a07009 	mov	r7, r9
-   10188:	e1a073a7 	lsr	r7, r7, #7
+   10188:	e1a07327 	lsr	r7, r7, #6
    1018c:	e2077001 	and	r7, r7, #1
    10190:	e3570000 	cmp	r7, #0
-   10194:	1a000004 	bne	101ac <checkA>
-   10198:	e59f317c 	ldr	r3, [pc, #380]	; 1031c <haltLoop$+0x14>
-   1019c:	ebfffe7d 	bl	fb98 <moveRight>
-   101a0:	e3a05002 	mov	r5, #2
-   101a4:	e59f3170 	ldr	r3, [pc, #368]	; 1031c <haltLoop$+0x14>
-   101a8:	eaffffff 	b	101ac <checkA>
+   10194:	1a000006 	bne	101b4 <checkR>
+   10198:	e59f11a8 	ldr	r1, [pc, #424]	; 10348 <haltLoop$+0x10>
+   1019c:	eb000020 	bl	10224 <Wait>
+   101a0:	ebfffe93 	bl	fbf4 <moveLeft>
+   101a4:	e3a05001 	mov	r5, #1
+   101a8:	e59f1198 	ldr	r1, [pc, #408]	; 10348 <haltLoop$+0x10>
+   101ac:	eb00001c 	bl	10224 <Wait>
+   101b0:	ea000009 	b	101dc <checkA>
 
-000101ac <checkA>:
-   101ac:	e1a07009 	mov	r7, r9
-   101b0:	e1a07427 	lsr	r7, r7, #8
-   101b4:	e2077001 	and	r7, r7, #1
-   101b8:	e3570000 	cmp	r7, #0
-   101bc:	1a000009 	bne	101e8 <next>
-   101c0:	e59f1150 	ldr	r1, [pc, #336]	; 10318 <haltLoop$+0x10>
-   101c4:	eb00000a 	bl	101f4 <Wait>
-   101c8:	e3550000 	cmp	r5, #0
-   101cc:	e1a08005 	mov	r8, r5
-   101d0:	0a000001 	beq	101dc <regJump>
-   101d4:	ebfffed9 	bl	fd40 <runJump>
-   101d8:	ea000002 	b	101e8 <next>
+000101b4 <checkR>:
+   101b4:	e1a07009 	mov	r7, r9
+   101b8:	e1a073a7 	lsr	r7, r7, #7
+   101bc:	e2077001 	and	r7, r7, #1
+   101c0:	e3570000 	cmp	r7, #0
+   101c4:	1a000004 	bne	101dc <checkA>
+   101c8:	e59f317c 	ldr	r3, [pc, #380]	; 1034c <haltLoop$+0x14>
+   101cc:	ebfffe71 	bl	fb98 <moveRight>
+   101d0:	e3a05002 	mov	r5, #2
+   101d4:	e59f3170 	ldr	r3, [pc, #368]	; 1034c <haltLoop$+0x14>
+   101d8:	eaffffff 	b	101dc <checkA>
 
-000101dc <regJump>:
-   101dc:	ebfffe9a 	bl	fc4c <jump>
-   101e0:	e59f1130 	ldr	r1, [pc, #304]	; 10318 <haltLoop$+0x10>
-   101e4:	eb000002 	bl	101f4 <Wait>
+000101dc <checkA>:
+   101dc:	e1a07009 	mov	r7, r9
+   101e0:	e1a07427 	lsr	r7, r7, #8
+   101e4:	e2077001 	and	r7, r7, #1
+   101e8:	e3570000 	cmp	r7, #0
+   101ec:	1a000009 	bne	10218 <next>
+   101f0:	e59f1150 	ldr	r1, [pc, #336]	; 10348 <haltLoop$+0x10>
+   101f4:	eb00000a 	bl	10224 <Wait>
+   101f8:	e3550000 	cmp	r5, #0
+   101fc:	e1a08005 	mov	r8, r5
+   10200:	0a000001 	beq	1020c <regJump>
+   10204:	ebfffece 	bl	fd44 <runJump>
+   10208:	ea000002 	b	10218 <next>
 
-000101e8 <next>:
-   101e8:	eaffffc7 	b	1010c <readButtons>
+0001020c <regJump>:
+   1020c:	ebfffe8f 	bl	fc50 <jump>
+   10210:	e59f1130 	ldr	r1, [pc, #304]	; 10348 <haltLoop$+0x10>
+   10214:	eb000002 	bl	10224 <Wait>
 
-000101ec <endRead>:
-   101ec:	e8bd4280 	pop	{r7, r9, lr}
-   101f0:	e1a0f00e 	mov	pc, lr
+00010218 <next>:
+   10218:	eaffffc7 	b	1013c <readButtons>
 
-000101f4 <Wait>:
-   101f4:	e92d4006 	push	{r1, r2, lr}
-   101f8:	e59f0120 	ldr	r0, [pc, #288]	; 10320 <haltLoop$+0x18>
-   101fc:	e5901000 	ldr	r1, [r0]
-   10200:	e0811003 	add	r1, r1, r3
+0001021c <endRead>:
+   1021c:	e8bd4280 	pop	{r7, r9, lr}
+   10220:	e1a0f00e 	mov	pc, lr
 
-00010204 <WaitLoop>:
-   10204:	e5902000 	ldr	r2, [r0]
-   10208:	e1510002 	cmp	r1, r2
-   1020c:	8afffffc 	bhi	10204 <WaitLoop>
-   10210:	e8bd4006 	pop	{r1, r2, lr}
-   10214:	e1a0f00e 	mov	pc, lr
+00010224 <Wait>:
+   10224:	e92d4006 	push	{r1, r2, lr}
+   10228:	e59f0120 	ldr	r0, [pc, #288]	; 10350 <haltLoop$+0x18>
+   1022c:	e5901000 	ldr	r1, [r0]
+   10230:	e0811003 	add	r1, r1, r3
 
-00010218 <Read_SNES>:
-   10218:	e92d4310 	push	{r4, r8, r9, lr}
-   1021c:	e3a09000 	mov	r9, #0
-   10220:	e3a01001 	mov	r1, #1
-   10224:	eb000016 	bl	10284 <WriteClock>
-   10228:	eb00001f 	bl	102ac <WriteLatch>
-   1022c:	e3a0100c 	mov	r1, #12
-   10230:	ebffffef 	bl	101f4 <Wait>
-   10234:	e3a01000 	mov	r1, #0
-   10238:	eb00001b 	bl	102ac <WriteLatch>
-   1023c:	e3a08000 	mov	r8, #0
+00010234 <WaitLoop>:
+   10234:	e5902000 	ldr	r2, [r0]
+   10238:	e1510002 	cmp	r1, r2
+   1023c:	8afffffc 	bhi	10234 <WaitLoop>
+   10240:	e8bd4006 	pop	{r1, r2, lr}
+   10244:	e1a0f00e 	mov	pc, lr
 
-00010240 <bitLoop>:
-   10240:	e3a01006 	mov	r1, #6
-   10244:	ebffffea 	bl	101f4 <Wait>
-   10248:	e3a01000 	mov	r1, #0
-   1024c:	eb00000c 	bl	10284 <WriteClock>
-   10250:	e3a01006 	mov	r1, #6
-   10254:	ebffffe6 	bl	101f4 <Wait>
-   10258:	eb00001d 	bl	102d4 <ReadData>
-   1025c:	e1a04814 	lsl	r4, r4, r8
-   10260:	e1899004 	orr	r9, r9, r4
-   10264:	e3a01001 	mov	r1, #1
-   10268:	eb000005 	bl	10284 <WriteClock>
-   1026c:	e2888001 	add	r8, r8, #1
-   10270:	e3580010 	cmp	r8, #16
-   10274:	bafffff1 	blt	10240 <bitLoop>
-   10278:	e1a00009 	mov	r0, r9
-   1027c:	e8bd4310 	pop	{r4, r8, r9, lr}
-   10280:	e1a0f00e 	mov	pc, lr
+00010248 <Read_SNES>:
+   10248:	e92d4310 	push	{r4, r8, r9, lr}
+   1024c:	e3a09000 	mov	r9, #0
+   10250:	e3a01001 	mov	r1, #1
+   10254:	eb000016 	bl	102b4 <WriteClock>
+   10258:	eb00001f 	bl	102dc <WriteLatch>
+   1025c:	e3a0100c 	mov	r1, #12
+   10260:	ebffffef 	bl	10224 <Wait>
+   10264:	e3a01000 	mov	r1, #0
+   10268:	eb00001b 	bl	102dc <WriteLatch>
+   1026c:	e3a08000 	mov	r8, #0
 
-00010284 <WriteClock>:
-   10284:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-   10288:	e3a0000b 	mov	r0, #11
-   1028c:	e59f2078 	ldr	r2, [pc, #120]	; 1030c <haltLoop$+0x4>
-   10290:	e3a03001 	mov	r3, #1
-   10294:	e1a03013 	lsl	r3, r3, r0
-   10298:	e3310000 	teq	r1, #0
-   1029c:	05823028 	streq	r3, [r2, #40]	; 0x28
-   102a0:	1582301c 	strne	r3, [r2, #28]
-   102a4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-   102a8:	e1a0f00e 	mov	pc, lr
+00010270 <bitLoop>:
+   10270:	e3a01006 	mov	r1, #6
+   10274:	ebffffea 	bl	10224 <Wait>
+   10278:	e3a01000 	mov	r1, #0
+   1027c:	eb00000c 	bl	102b4 <WriteClock>
+   10280:	e3a01006 	mov	r1, #6
+   10284:	ebffffe6 	bl	10224 <Wait>
+   10288:	eb00001d 	bl	10304 <ReadData>
+   1028c:	e1a04814 	lsl	r4, r4, r8
+   10290:	e1899004 	orr	r9, r9, r4
+   10294:	e3a01001 	mov	r1, #1
+   10298:	eb000005 	bl	102b4 <WriteClock>
+   1029c:	e2888001 	add	r8, r8, #1
+   102a0:	e3580010 	cmp	r8, #16
+   102a4:	bafffff1 	blt	10270 <bitLoop>
+   102a8:	e1a00009 	mov	r0, r9
+   102ac:	e8bd4310 	pop	{r4, r8, r9, lr}
+   102b0:	e1a0f00e 	mov	pc, lr
 
-000102ac <WriteLatch>:
-   102ac:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-   102b0:	e3a00009 	mov	r0, #9
-   102b4:	e59f2050 	ldr	r2, [pc, #80]	; 1030c <haltLoop$+0x4>
-   102b8:	e3a03001 	mov	r3, #1
-   102bc:	e1a03013 	lsl	r3, r3, r0
-   102c0:	e3310000 	teq	r1, #0
-   102c4:	05823028 	streq	r3, [r2, #40]	; 0x28
-   102c8:	1582301c 	strne	r3, [r2, #28]
-   102cc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-   102d0:	e1a0f00e 	mov	pc, lr
+000102b4 <WriteClock>:
+   102b4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+   102b8:	e3a0000b 	mov	r0, #11
+   102bc:	e59f2078 	ldr	r2, [pc, #120]	; 1033c <haltLoop$+0x4>
+   102c0:	e3a03001 	mov	r3, #1
+   102c4:	e1a03013 	lsl	r3, r3, r0
+   102c8:	e3310000 	teq	r1, #0
+   102cc:	05823028 	streq	r3, [r2, #40]	; 0x28
+   102d0:	1582301c 	strne	r3, [r2, #28]
+   102d4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+   102d8:	e1a0f00e 	mov	pc, lr
 
-000102d4 <ReadData>:
-   102d4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-   102d8:	e3a0000a 	mov	r0, #10
-   102dc:	e59f2028 	ldr	r2, [pc, #40]	; 1030c <haltLoop$+0x4>
-   102e0:	e5921034 	ldr	r1, [r2, #52]	; 0x34
-   102e4:	e3a03001 	mov	r3, #1
-   102e8:	e1a03013 	lsl	r3, r3, r0
-   102ec:	e0011003 	and	r1, r1, r3
+000102dc <WriteLatch>:
+   102dc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+   102e0:	e3a00009 	mov	r0, #9
+   102e4:	e59f2050 	ldr	r2, [pc, #80]	; 1033c <haltLoop$+0x4>
+   102e8:	e3a03001 	mov	r3, #1
+   102ec:	e1a03013 	lsl	r3, r3, r0
    102f0:	e3310000 	teq	r1, #0
-   102f4:	03a04000 	moveq	r4, #0
-   102f8:	13a04001 	movne	r4, #1
+   102f4:	05823028 	streq	r3, [r2, #40]	; 0x28
+   102f8:	1582301c 	strne	r3, [r2, #28]
    102fc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
    10300:	e1a0f00e 	mov	pc, lr
 
-00010304 <stop>:
-   10304:	eafffffe 	b	10304 <stop>
+00010304 <ReadData>:
+   10304:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+   10308:	e3a0000a 	mov	r0, #10
+   1030c:	e59f2028 	ldr	r2, [pc, #40]	; 1033c <haltLoop$+0x4>
+   10310:	e5921034 	ldr	r1, [r2, #52]	; 0x34
+   10314:	e3a03001 	mov	r3, #1
+   10318:	e1a03013 	lsl	r3, r3, r0
+   1031c:	e0011003 	and	r1, r1, r3
+   10320:	e3310000 	teq	r1, #0
+   10324:	03a04000 	moveq	r4, #0
+   10328:	13a04001 	movne	r4, #1
+   1032c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+   10330:	e1a0f00e 	mov	pc, lr
 
-00010308 <haltLoop$>:
-   10308:	eafffffe 	b	10308 <haltLoop$>
-   1030c:	3f200000 	.word	0x3f200000
-   10310:	3f200004 	.word	0x3f200004
-   10314:	000f1240 	.word	0x000f1240
-   10318:	00001388 	.word	0x00001388
-   1031c:	0000ffff 	.word	0x0000ffff
-   10320:	3f003004 	.word	0x3f003004
+00010334 <stop>:
+   10334:	eafffffe 	b	10334 <stop>
+
+00010338 <haltLoop$>:
+   10338:	eafffffe 	b	10338 <haltLoop$>
+   1033c:	3f200000 	.word	0x3f200000
+   10340:	3f200004 	.word	0x3f200004
+   10344:	000f1240 	.word	0x000f1240
+   10348:	00001388 	.word	0x00001388
+   1034c:	0000ffff 	.word	0x0000ffff
+   10350:	3f003004 	.word	0x3f003004

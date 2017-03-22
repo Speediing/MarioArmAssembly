@@ -69,9 +69,11 @@ moveRight:
         mov     r1, r7                               //YPos
 
         bl      drawCell
+        bl      checkEdge
 
 endRight:
         bl      gravity
+
         pop     {r3-r10,lr}
         mov     pc, lr
 
@@ -160,7 +162,6 @@ endJump:
                 cmp     r2, #5                  //check if Mario hit a question booooox
                 beq     hitQBox
                 pop     {lr}
-           //     mov     pc, lr
 
                         
 doneJump:       pop     {r2-r8,lr}
@@ -270,51 +271,77 @@ cont:           sub     r7, #1
                 ble     rjumploop
                 bl      gravity
 
-
                 pop     {r3-r7,lr}
                 mov     pc, lr
 gravity:
                 push    {r2-r7, lr}
 
 checkUnder:
-        bl      readMario                       //r1- x r2- y
-        ldr     r4, =GameMap
-        mov     r5, #25
-        mul     r2, r5
-        add     r1, r1, r2
-        add     r4, r4,  r1
-        add     r4, #25
-        ldrb    r4, [r4]
-        cmp     r4, #0
-        bne     endGravity
-        bl      readMario
-        //update the gamestate
-        mov     r3, #0
-        mov     r4, #3
-        mov     r5, r0                               //address of Mario
-        strb    r3, [r0], #25                        //post-increment to erase Mario with sky
-        strb    r4, [r0]                             //update Mario's position
-        mov     r6, r1
-        mov     r7, r2
+                bl      readMario                       //r1- x r2- y
+                ldr     r4, =GameMap
+                mov     r5, #25
+                mul     r2, r5
+                add     r1, r1, r2
+                add     r4, r4,  r1
+                add     r4, #25
+                ldrb    r4, [r4]
+                cmp     r4, #0
+                bne     endGravity
+                bl      readMario
+
+                //update the gamestate
+                mov     r3, #0
+                mov     r4, #3
+                mov     r5, r0                               //address of Mario
+                strb    r3, [r0], #25                        //post-increment to erase Mario with sky
+                strb    r4, [r0]                             //update Mario's position
+
+                mov     r6, r1
+                mov     r7, r2
 fall:
-        mov     r2, #0                               //restore background sky
-        mov     r0, r6
-        mov     r1, r7
+                mov     r2, #0                               //restore background sky
+                mov     r0, r6
+                mov     r1, r7
 
-        bl      drawCell
-        ldr     r3, =0xffff
-        bl      Wait				        //wait for a second
+                bl      drawCell
+                ldr     r3, =0xffff
+                bl      Wait				        //wait for a second
 
-        mov     r2, #3                                 //#3 stands for Mario
-        mov     r0, r6                                 //XPos
-        sub     r1, r7, #-1                            //YPos
-        mov     r7, r1
-        bl      drawCell
-        ldr     r3, =0xffff
-        bl      Wait				//wait for a second
-        b       checkUnder
+                mov     r2, #3                                 //#3 stands for Mario
+                mov     r0, r6                                 //XPos
+                sub     r1, r7, #-1                            //YPos
+                mov     r7, r1
+                bl      drawCell
+                ldr     r3, =0xffff
+                bl      Wait				//wait for a second
+                b       checkUnder
 
 
 endGravity:
-        pop     {r2-r7, lr}
-        mov  pc, lr
+                pop     {r2-r7, lr}
+                mov     pc, lr
+
+
+checkEdge:      push    {r0-r10, lr}     
+                //right edge of the map
+                bl      readMario            //r0-adr, r1-x, r2-y
+                cmp     r1,   #24
+                bne     doneCheckEdge
+
+        //        bl      switchMap  //future function: detect map?
+
+                ldr     r0,  =GameMap2
+                ldr     r1,  =EndMap2
+                bl      drawMap
+                bl      readButtons
+
+
+doneCheckEdge:  pop     {r0-r10,lr}
+                mov     pc, lr                
+
+
+
+
+
+
+

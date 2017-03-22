@@ -16,7 +16,12 @@ main:
 	bl	InitFrameBuffer	        // Initialize the frame buffer for drawing
         bl      initGPIO                // Intializes GPIO
       	bl	clearScreen
-        bl      draw
+
+
+
+        ldr     r0,        =GameMap       // load initial map
+        ldr     r1,        =EndMap        // load initial map
+        bl      drawMap                   // draw initial map
 read:
         bl      readButtons
 
