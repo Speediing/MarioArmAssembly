@@ -10,14 +10,14 @@ draw:
         YPos    .req    r11
         Height  .req    r12
         mov     XPos,   #0   // in terms of grid, not screen pixels
-        mov     YPos,   #0
+        mov     YPos,   #0 
         mov     Width,  #34
         mov     Height, #34
 
-        bl      DrawTop
+        bl      DrawTop 
 
         pop     {r7-r10, lr}
-        mov     pc, lr
+        mov     pc, lr        
 
 // ************** CLEAR SCREEN FUNCTION *********************
 .globl clearScreen
@@ -29,9 +29,9 @@ clearScreen:
 	mov	r6,	#0			//black color
 	ldr	r7,	=1023			//Width of screen
 	ldr	r8,	=767			//Height of the screen
-
+	
 Looping:
-	mov	r0,	r4			//Setting x
+	mov	r0,	r4			//Setting x 
 	mov	r1,	r5			//Setting y
 	mov	r2,	r6			//setting pixel color
 	push    {lr}
@@ -75,22 +75,22 @@ DrawPixel:
 
 //******************************* MAP DRAWING ****************************
 DrawTop:
-        push   {r7, r8, lr}
+        push   {r7, r8, lr}        
         ldr     r7,        =GameMap        // read GameMap array, array pointer
-        ldr     r8,        =EndMap         // if not at end of array, then
+        ldr     r8,        =EndMap         // if not at end of array, then        
 
 
-DrawTopLoop:
-        ldrb    r2, [r7],  #1        // load indexed number from array, and increment pointer after
+DrawTopLoop:        
+        ldrb    r2, [r7],  #1        // load indexed number from array, and increment pointer after 
 
         mov	r0,	  XPos       // Start X position of your picture
-	mov	r1,	  YPos       // Start Y Position
-        bl      drawCell
+	mov	r1,	  YPos       // Start Y Position         
+        bl      drawCell             
 
-        cmp     r8, r7               // check if reached end of array
-        beq     ExitDraw             // if reach the end of the map stop drawing
-
-        add     XPos,     #1         // increment x postion
+        cmp     r8, r7               // check if reached end of array    
+        beq     ExitDraw             // if reach the end of the map stop drawing        
+     
+        add     XPos,     #1         // increment x postion                
         cmp     XPos,     #24        // width of game map
 
         ble     DrawTopLoop          // loop
@@ -98,9 +98,9 @@ DrawTopLoop:
         add     YPos,     #1         // incrementy YPos
         b       DrawTopLoop
 
-ExitDraw:
+ExitDraw: 
         pop     {r7, r8, lr}
-        mov     pc, lr
+        mov     pc, lr       
 
 //-------------------------------------------------------------------------------------
 // Parameters: r0: XPos, r1: YPos, r2: element to draw
@@ -108,7 +108,7 @@ ExitDraw:
 drawCell:
         // in order to draw past (0, 0) we need to increase r4 and r7 by the same amount
         push    {r3-r8, lr}
-        cmp     r2,     #1
+        cmp     r2,     #1                      
         beq     DrawGround
         cmp     r2,     #2
         beq     DrawPipe
@@ -118,7 +118,13 @@ drawCell:
         beq     DrawBrick
         cmp     r2,     #5
         beq     DrawQBox
+        cmp     r2,     #6
+        beq     DrawCloud
 	ldr	r6,	=Sky  		        //Address of the picture
+        b       drawCellLoop
+
+DrawCloud:
+        ldr     r6,     =cloud
         b       drawCellLoop
 
 DrawGround:
@@ -138,32 +144,38 @@ DrawBrick:
         b       drawCellLoop
 
 DrawQBox:
-        ldr     r6,     =qBox
-
+        ldr     r6,     =qBox   
+  
 drawCellLoop:
         mov     r10,    #34                     //restate width
         mov     r12,    #34                     //restate height
-        mul	    r4,	    r0,     Width           // Start X position of your picture (x coordinate * 34)
+        mul	r4,	r0,     Width           // Start X position of your picture (x coordinate * 34)
         mov     r3,     r4
-	      mul	    r5,	    r1,     Height          // Start Y Position                 (y coordinate * 34)
-
+	mul	r5,	r1,     Height          // Start Y Position                 (y coordinate * 34)
+  
         add     r7,     r4,    Width
         add     r8,     r5,    Height
 next:
-	      mov	r0,	r4			//passing x for r0 which is used by the Draw pixel function
-	      mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula
-
-	      ldrh	r2,	[r6],  #2	        //setting pixel color by loading it from the data section. We load half word
-	      bl	DrawPixel
+	mov	r0,	r4			//passing x for r0 which is used by the Draw pixel function 
+	mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula 
+	
+	ldrh	r2,	[r6],  #2	        //setting pixel color by loading it from the data section. We load half word
+	bl	DrawPixel
 
         add	r4,	#1			//increment x position
-	      cmp	r4,	r7			//compare with image width
+	cmp	r4,	r7			//compare with image width
 
-        blt     next
+        blt     next	
         mov	r4,	r3			//reset x
-	      add	r5,	#1			//increment Y
-	      cmp	r5,	r8			//compare y with image height
-        blt     next
+	add	r5,	#1			//increment Y
+	cmp	r5,	r8			//compare y with image height
+        blt     next	
 
         pop     {r3-r8, lr}
-	      mov	pc,	lr			//return
+	mov	pc,	lr			//return
+
+
+
+
+
+

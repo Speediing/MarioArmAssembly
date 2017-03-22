@@ -151,6 +151,7 @@ endRead:
 	//returns the pressed buttons (r0)
 	/////////////////
 Read_SNES:
+
         push    {r4, r8, r9,lr}
         mov     r9, #0       		//init r9 for output
         mov     r1, #1
@@ -192,6 +193,7 @@ bitLoop:
 
 
 WriteClock:
+	push	{lr}
         mov   r0, #11
         ldr   r2, =0x3f200000		//gpio base register
         mov   r3, #1
@@ -199,6 +201,7 @@ WriteClock:
         teq   r1, #0			//test if the parameter is for write or clear
         streq r3, [r2, #40]		//gpio clear0
         strne r3, [r2, #28]		//gpio set0
+        pop   {lr}
         mov   pc, lr
 
 
@@ -233,6 +236,7 @@ WriteLatch:
 	/////////////////
 
 ReadData:
+	push	{lr}
         mov r0, #10
         ldr r2, =0x3f200000		//gpio base register
         ldr r1, [r2, #52]		//gplev0
@@ -242,6 +246,7 @@ ReadData:
         teq r1, #0			//test if bit is 0 or not
         moveq r4, #0
         movne r4, #1
+	pop	{lr}
         mov     pc, lr
 
 stop:

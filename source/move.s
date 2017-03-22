@@ -9,6 +9,7 @@ Parameters:
 */
 
 //-------------------------------------------------------------------------------------
+.globl readMario
 readMario:
         push    {r4, r5, r6, r7, lr}
         mov     r6, #0                  //x coordinate of Mario
