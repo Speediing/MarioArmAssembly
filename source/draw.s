@@ -55,6 +55,40 @@ DrawPixel:
 	mov             pc, lr
 //************************DRAW PIXEL FUNCTION ****************************
 
+
+//************************DRAW MENU TITLE SCREEN ******************************
+.globl DrawMenuScreen
+DrawMenuScreen:
+        push {r4,r5,r6,r7,r8,lr}
+        mov     r4,     #0
+        mov     r5,     #1
+        ldr     r6,     =MenuTitleScreen
+        mov     r7,     #850    // Width of MenuTitleScreen
+        mov     r8,     #680    // Height of MenuTitleScreen
+       
+drawMenuLoop:
+	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function 
+	mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula 
+	
+	ldrh	r2,	[r6],#2			//setting pixel color by loading it from the data section. We load hald word
+	bl	DrawPixel
+	add	r4,	#1			//increment x position
+	cmp	r4,	r7			//compare with image with
+	blt	drawMenuLoop
+	mov	r4,	#0			//reset x
+	add	r5,	#1			//increment Y
+	cmp	r5,	r8			//compare y with image height
+	blt	drawMenuLoop
+	pop     {r4,r5,r6,r7,r8,lr}
+	mov	pc,	lr			//return
+
+
+
+
+//************************DRAW MENU TITLE SCREEN ******************************
+
+
+
 //******************************* MAP DRAWING ****************************
 
 
