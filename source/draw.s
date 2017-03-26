@@ -61,9 +61,9 @@ DrawPixel:
 DrawMenuScreen:
         push {r4,r5,r6,r7,r8,lr}
         mov     r4,     #0
-        mov     r5,     #1
+        mov     r5,     #0
         ldr     r6,     =MenuTitleScreen
-        mov     r7,     #850    // Width of MenuTitleScreen
+        mov     r7,     #840    // Width of MenuTitleScreen
         mov     r8,     #680    // Height of MenuTitleScreen
        
 drawMenuLoop:
@@ -79,13 +79,54 @@ drawMenuLoop:
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawMenuLoop
-	pop     {r4,r5,r6,r7,r8,lr}
+	
+        pop     {r4,r5,r6,r7,r8,lr}
 	mov	pc,	lr			//return
 
-
-
-
 //************************DRAW MENU TITLE SCREEN ******************************
+
+
+//************************DRAW MENU MUSHROOM*******************************
+.globl DrawMenuMushroom
+DrawMenuMushroom:
+        push {r3,r4,r5,r6,r7,r8,lr}
+        mov     r3,     #225
+        mov     r4,     #225                    // x        
+        ldr     r5,     =425                          // y 
+        ldr     r6,     =MenuMushroom
+        mov     r7,     #255         // Selection Menu dimensions, Width
+        ldr     r8,     =455                     // HEIGHT
+        b       DrawMenuMushroomLoop
+
+.globl  DrawMenuMushroom2
+DrawMenuMushroom2:
+        push {r3,r4,r5,r6,r7,r8,lr}
+        mov     r3,     #225
+        mov     r4,     #225
+        ldr     r5,     =500
+        ldr     r6,     =MenuMushroom
+        mov     r7,     #255         // Selection Menu dimensions, Width
+        ldr     r8,     =530                     // HEIGHT
+
+       
+
+DrawMenuMushroomLoop:
+	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function 
+	mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula 
+	
+	ldrh	r2,	[r6],#2			//setting pixel color by loading it from the data section. We load hald word
+	bl	DrawPixel
+	add	r4,	#1			//increment x position
+	cmp	r4,	r7			//compare with image with
+	blt	DrawMenuMushroomLoop
+	mov	r4,	r3			//reset x
+	add	r5,	#1			//increment Y
+	cmp	r5,	r8			//compare y with image height
+	blt	DrawMenuMushroomLoop
+	
+        pop     {r3,r4,r5,r6,r7,r8,lr}
+	mov	pc,	lr
+//************************DRAW MENU MUSHROOM*******************************
 
 
 

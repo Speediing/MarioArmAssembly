@@ -1,3 +1,4 @@
+//
 
 // SNES control of the game
 
@@ -45,6 +46,70 @@ initGPIO:
 	      mov	pc, lr
 
 
+
+// ************ Menus Read Function ****************
+
+// read up, if  
+.globl readMenuButtons
+
+readMenuButtons:
+        push    {r7, r9, lr}
+        mov     r9, r0
+        ldr     r1, =0xf1240
+        //bl      Wait				//wait for a second
+        bl      Read_SNES			//run the snes routine
+        cmp     r5, r9
+        beq     MenuNext
+        mov     r5, #0
+
+b checkMenuA
+
+checkMenuUp:
+        mov     r7, r9
+        lsr     r7, #4
+        and     r7, #1
+        cmp     r7, #0
+        bne     checkMenuDown        
+        bl      MenuMoveUp
+checkMenuDown: 
+        mov     r7, r9
+        lsr     r7, #5
+        and     r7, #1
+        cmp     r7, #0
+        bne     checkMenuA
+        bl      MenuMoveDown
+checkMenuA:
+        mov     r7, r9
+        lsr     r7, #8
+        and     r7, #1
+        cmp     r7, #0
+        bne     MenuNext
+        bl       MenuSelectA
+
+MenuMoveUp:
+        bl      DrawMenuScreen
+        bl      DrawMenuMushroom
+        b       MenuNext      
+
+MenuMoveDown: 
+        bl      DrawMenuScreen
+        bl      DrawMenuMushroom2
+        b       MenuNext
+
+MenuSelectA:
+        b       endMenuRead
+
+MenuNext: 
+        b       readMenuButtons
+
+endMenuRead:
+        pop     {r7, r9, lr}
+        mov     pc, lr
+
+// ************ Menus Read Function ****************
+
+
+
 .globl  readButtons
 
 readButtons:
@@ -68,7 +133,7 @@ checkUp:
         mov     r7, r9
         lsr     r7, #4
         and     r7, #1
-d:        cmp     r7, #0
+d:      cmp     r7, #0
         bne     checkL
         b       next
 
@@ -115,8 +180,8 @@ checkA:
         bne     next
         ldr     r1, =0x1388
         bl      Wait				//wait for a second
-        cmp  r5, #0
-        mov  r8, r5
+        cmp     r5, #0
+        mov     r8, r5
         beq     regJump
         bl      runJump
         b       next
