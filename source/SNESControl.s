@@ -53,7 +53,7 @@ initGPIO:
 .globl readMenuButtons
 
 readMenuButtons:
-        push    {r7, r9, lr}
+        push    {r5,r7, r9, lr}
         mov     r9, r0
         ldr     r1, =0xf1240
         //bl      Wait				//wait for a second
@@ -62,7 +62,6 @@ readMenuButtons:
         beq     MenuNext
         mov     r5, #0
 
-b checkMenuA
 
 checkMenuUp:
         mov     r7, r9
@@ -97,14 +96,15 @@ MenuMoveDown:
         b       MenuNext
 
 MenuSelectA:
-        b       endMenuRead
+        b      endMenuRead
 
 MenuNext: 
-        b       readMenuButtons
+        //b       readMenuButtons
 
 endMenuRead:
-        pop     {r7, r9, lr}
-        mov     pc, lr
+        pop     {r5,r7, r9, lr}
+        bl      ExitMenu
+//        mov     pc, lr
 
 // ************ Menus Read Function ****************
 

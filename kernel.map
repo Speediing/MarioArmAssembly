@@ -58,7 +58,7 @@ LOAD build/SNESControl.o
 .igot.plt       0x00126fcc        0x0
  .igot.plt      0x00000000        0x0 build/jtag.o
 
-.text           0x00126fcc      0xa88
+.text           0x00126fcc      0xa84
  *.c.o(.text)
  *(.text)
  .text          0x00126fcc       0x8c build/jtag.o
@@ -82,49 +82,50 @@ LOAD build/SNESControl.o
                 0x001276f0                mainMenu
                 0x001276f4                pauseMidGame
  .text          0x001276f4        0x0 build/detector.o
- .text          0x001276f4       0x48 build/main.o
+ .text          0x001276f4       0x4c build/main.o
                 0x001276f4                main
-                0x0012772c                Restart_Game
-                0x0012772c                endGame
-                0x00127730                haltLoop$
- .text          0x0012773c        0x0 build/asset.o
- .text          0x0012773c        0x0 build/gameState.o
- .text          0x0012773c      0x318 build/SNESControl.o
-                0x0012773c                initGPIO
-                0x001277ac                readMenuButtons
-                0x0012783c                readButtons
-                0x00127924                Wait
+                0x00127718                ExitMenu
+                0x00127730                Restart_Game
+                0x00127730                endGame
+                0x00127734                haltLoop$
+ .text          0x00127740        0x0 build/asset.o
+ .text          0x00127740        0x0 build/gameState.o
+ .text          0x00127740      0x310 build/SNESControl.o
+                0x00127740                initGPIO
+                0x001277b0                readMenuButtons
+                0x00127838                readButtons
+                0x00127920                Wait
 OUTPUT(build/output.elf elf32-littlearm)
 
-.glue_7         0x00127a54        0x0
+.glue_7         0x00127a50        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x00127a54        0x0
+.glue_7t        0x00127a50        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x00127a54        0x0
+.vfp11_veneer   0x00127a50        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x00127a54        0x0
+.v4_bx          0x00127a50        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x00127a54        0x0
+.iplt           0x00127a50        0x0
  .iplt          0x00000000        0x0 build/jtag.o
 
-.rel.dyn        0x00127a54        0x0
+.rel.dyn        0x00127a50        0x0
  .rel.iplt      0x00000000        0x0 build/jtag.o
 
-.bss            0x00127a54        0x0
- .bss           0x00127a54        0x0 build/jtag.o
- .bss           0x00127a54        0x0 build/framebuffer.o
- .bss           0x00127a54        0x0 build/move.o
- .bss           0x00127a54        0x0 build/draw.o
- .bss           0x00127a54        0x0 build/menus.o
- .bss           0x00127a54        0x0 build/detector.o
- .bss           0x00127a54        0x0 build/main.o
- .bss           0x00127a54        0x0 build/asset.o
- .bss           0x00127a54        0x0 build/gameState.o
- .bss           0x00127a54        0x0 build/SNESControl.o
+.bss            0x00127a50        0x0
+ .bss           0x00127a50        0x0 build/jtag.o
+ .bss           0x00127a50        0x0 build/framebuffer.o
+ .bss           0x00127a50        0x0 build/move.o
+ .bss           0x00127a50        0x0 build/draw.o
+ .bss           0x00127a50        0x0 build/menus.o
+ .bss           0x00127a50        0x0 build/detector.o
+ .bss           0x00127a50        0x0 build/main.o
+ .bss           0x00127a50        0x0 build/asset.o
+ .bss           0x00127a50        0x0 build/gameState.o
+ .bss           0x00127a50        0x0 build/SNESControl.o
 
 .ARM.attributes
                 0x00000000       0x29
@@ -149,14 +150,14 @@ OUTPUT(build/output.elf elf32-littlearm)
  .ARM.attributes
                 0x00000171       0x29 build/SNESControl.o
 
-.debug_line     0x00000000      0x4a3
+.debug_line     0x00000000      0x4a2
  .debug_line    0x00000000       0x61 build/jtag.o
  .debug_line    0x00000061       0x67 build/framebuffer.o
  .debug_line    0x000000c8      0x126 build/move.o
  .debug_line    0x000001ee       0xf0 build/draw.o
  .debug_line    0x000002de       0x3f build/menus.o
- .debug_line    0x0000031d       0x61 build/main.o
- .debug_line    0x0000037e      0x125 build/SNESControl.o
+ .debug_line    0x0000031d       0x62 build/main.o
+ .debug_line    0x0000037f      0x123 build/SNESControl.o
 
 .debug_info     0x00000000      0x314
  .debug_info    0x00000000       0x6f build/jtag.o

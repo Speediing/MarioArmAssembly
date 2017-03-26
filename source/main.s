@@ -19,11 +19,14 @@ main:
 
         bl      DrawMenuScreen  
         bl      DrawMenuMushroom    
-        bl      DrawMenuMushroom2  
+ //       bl      DrawMenuMushroom2  
 
-//ReadMenu:        
-//        bl      readMenuButtons 
-//        b       ReadMenu
+ReadMenu:        
+        bl      readMenuButtons 
+        b       ReadMenu
+        
+.globl ExitMenu
+ExitMenu:
         bl      clearScreen
         
 //        bl      clearScreen
