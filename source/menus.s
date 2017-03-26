@@ -4,66 +4,77 @@
 
 
 //------------------------------------------------------------------------------------
-printMenuStart:
-        push {r4-r10,lr}
+//printMenuStart:
+  //      push {r4-r10,lr}
 							
 //	bl      DrawStartGameSelected
   //      bl      DrawQuitGame        
 
 		
-	pop		{r4-r10,lr}
-	mov		pc, lr
+//	pop		{r4-r10,lr}
+//	mov		pc, lr
 //------------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------------
 .globl mainMenu
 mainMenu:
-        push {r4,lr}
-        //initalize gpio 
-        //print the start and quit with the start selected so far
-    //    bl printMenuStart
+        push    {r5, lr}
+        bl      DrawMainMenuScreen   //print the main menu
+        bl      DrawMenuMushroom     //print selection indictor (a mushroom)
+        mov     r5, #0                   //initialize state to 0 (start selected) 
+    //    bl      DrawMenuMushroom2  
 
-        //go into game wait method
+//ReadMenu:        
+        //bl      readMenuButtons 
+        //b       ReadMenu
 
-        //this is the state, 0 for start selected 1 for quit selected
-      //  mov r4, #0
-menuWaitLoop:
-       // bl ReadButtons
+readMenuLoop: //FSM: state 0(start) and 1(quit)
+        bl      readMenuButtons
+        
+        cmp r0 ,#1              //up button pressed
+        beq     upPressed
 
-        //cmp r0 ,#4
-        //beq       upPressed
-        //r0 = 5 means down
-        //cmp r0 ,#5
-        //beq       downPressed
-        //r0 = 8 means A
-        //cmp r0 ,#8
-       // beq       aPressed
+        cmp r0 ,#2              //down button pressed
+        beq     downPressed
+
+        cmp r0 ,#3
+        beq     aPressed        //A button pressed
+        b       readMenuLoop
+
+/*MenuMoveUp:
+        bl      DrawMenuScreen
+        bl      DrawMenuMushroom
+        b       MenuNext      
+MenuMoveDown: 
+        bl      DrawMenuScreen
+        bl      DrawMenuMushroom2
+        b       MenuNext
+MenuSelectA:
+        b       endMenuRead*/
+
 
 upPressed:
-        //cmp r4, #0
-       // beq     menuWaitLoop
+        cmp     r5, #0          //if is state 0
+        beq     readMenuLoop    //keep reading buttons (do nothing)
    
-  //      bl      DrawStartGameSelected
-    //    bl      DrawQuitGame       
-        
-        //changes state to 0
-      //  mov r4, #0
+        bl      DrawMenuMushroom2 //if is state 1, switch to and draw state 0 
+        mov     r5, #0
 
-        //b       menuWaitLoop
+        b       readMenuLoop      //keep reading menu buttons
 downPressed:
-        //cmp r4,#1
-        //beq     menuWaitLoop
+        cmp     r5,#1            //if is state 1
+        beq     readMenuLoop     //keep reading buttons (do nothing)
 
-        //bl      DrawStartGame
-        //bl      DrawQuitGameSelected  
+        bl      DrawMenuMushroom //if is state 0, switch to and draw state 1
 
-        //mov r4, #1
-        //b               menuWaitLoop
+        mov     r5, #1
+        b       readMenuLoop
 aPressed:
-   //     cmp r4, #0
-   //     beq endMainMenu
-   //     cmp r4, #1
-    //    beq quitMain
+        cmp     r5, #0           //if state 0 (start) is selected
+        beq     ExitMainMenu      //start game
+        cmp     r5, #1           //if state 1 (quit) is selected
+        beq     exitGame         //exit game
+
 quitMain:
         
 //	mov		r0, #500
@@ -73,24 +84,24 @@ quitMain:
 //	bl		Draw_String
 	
 //	ldr		r0, =0x0000
-//	bl		FillScreen
-  //      mov             r0 ,r4                
+//	bl		clearScreen
+ //       mov             r0 ,r4                
    //     b               quitEndMenu
         
 endMainMenu:
 
-     //   bl clearScreen
-
-quitEndMenu:        
-   //     pop {r4,lr}
-     //   mov     pc,lr
+      //  bl clearScreen
+        b       exitGame
+//quitEndMenu:         
+        pop    {r4,lr}
+        mov     pc,lr
 //------------------------------------------------------------------------------------
 
 
 
 //------------------------------------------------------------------------------------
-.globl pauseMidGame
-pauseMidGame:
+.globl pauseMenu
+pauseMenu:
        // push {lr}
 PauseGame:
 	//bl	DrawPauseFrame		//Draw the background of the pause menu

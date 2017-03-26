@@ -5,7 +5,7 @@ build/output.elf:     file format elf32-littlearm
 Disassembly of section .init:
 
 00008000 <_start>:
-    8000:	ea047dbb 	b	1276f4 <main>
+    8000:	ea047dd4 	b	127758 <main>
 
 Disassembly of section .text:
 
@@ -190,7 +190,7 @@ Disassembly of section .text:
   127210:	e1a01007 	mov	r1, r7
   127214:	eb0000f0 	bl	1275dc <drawCell>
   127218:	e59f3224 	ldr	r3, [pc, #548]	; 127444 <doneCheckEdge+0xc>
-  12721c:	eb0001bf 	bl	127920 <Wait>
+  12721c:	eb0001d3 	bl	127970 <Wait>
   127220:	e3a02003 	mov	r2, #3
   127224:	e1a00006 	mov	r0, r6
   127228:	e2471001 	sub	r1, r7, #1
@@ -201,7 +201,7 @@ Disassembly of section .text:
   12723c:	e4483019 	strb	r3, [r8], #-25
   127240:	e5c85000 	strb	r5, [r8]
   127244:	e59f31fc 	ldr	r3, [pc, #508]	; 127448 <doneCheckEdge+0x10>
-  127248:	eb0001b4 	bl	127920 <Wait>
+  127248:	eb0001c8 	bl	127970 <Wait>
   12724c:	e2844001 	add	r4, r4, #1
   127250:	e3540004 	cmp	r4, #4
   127254:	daffffe8 	ble	1271fc <jumploop>
@@ -274,7 +274,7 @@ Disassembly of section .text:
   127320:	e1a01007 	mov	r1, r7
   127324:	eb0000ac 	bl	1275dc <drawCell>
   127328:	e59f3114 	ldr	r3, [pc, #276]	; 127444 <doneCheckEdge+0xc>
-  12732c:	eb00017b 	bl	127920 <Wait>
+  12732c:	eb00018f 	bl	127970 <Wait>
   127330:	e3a02003 	mov	r2, #3
   127334:	e3580001 	cmp	r8, #1
   127338:	1a000001 	bne	127344 <righJump>
@@ -295,7 +295,7 @@ Disassembly of section .text:
   127364:	e3a02003 	mov	r2, #3
   127368:	eb00009b 	bl	1275dc <drawCell>
   12736c:	e59f30d4 	ldr	r3, [pc, #212]	; 127448 <doneCheckEdge+0x10>
-  127370:	eb00016a 	bl	127920 <Wait>
+  127370:	eb00017e 	bl	127970 <Wait>
   127374:	e2844001 	add	r4, r4, #1
   127378:	e3540004 	cmp	r4, #4
   12737c:	daffffe5 	ble	127318 <rjumploop>
@@ -332,14 +332,14 @@ Disassembly of section .text:
   1273e0:	e1a01007 	mov	r1, r7
   1273e4:	eb00007c 	bl	1275dc <drawCell>
   1273e8:	e59f3058 	ldr	r3, [pc, #88]	; 127448 <doneCheckEdge+0x10>
-  1273ec:	eb00014b 	bl	127920 <Wait>
+  1273ec:	eb00015f 	bl	127970 <Wait>
   1273f0:	e3a02003 	mov	r2, #3
   1273f4:	e1a00006 	mov	r0, r6
   1273f8:	e2871001 	add	r1, r7, #1
   1273fc:	e1a07001 	mov	r7, r1
   127400:	eb000075 	bl	1275dc <drawCell>
   127404:	e59f303c 	ldr	r3, [pc, #60]	; 127448 <doneCheckEdge+0x10>
-  127408:	eb000144 	bl	127920 <Wait>
+  127408:	eb000158 	bl	127970 <Wait>
   12740c:	eaffffdf 	b	127390 <checkUnder>
 
 00127410 <endGravity>:
@@ -354,7 +354,7 @@ Disassembly of section .text:
   127428:	e59f001c 	ldr	r0, [pc, #28]	; 12744c <doneCheckEdge+0x14>
   12742c:	e59f101c 	ldr	r1, [pc, #28]	; 127450 <doneCheckEdge+0x18>
   127430:	eb000053 	bl	127584 <drawMap>
-  127434:	eb0000ff 	bl	127838 <readButtons>
+  127434:	eb000115 	bl	127890 <readButtons>
 
 00127438 <doneCheckEdge>:
   127438:	e8bd47ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
@@ -400,7 +400,7 @@ Disassembly of section .text:
   1274c0:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
   1274c4:	e1a0f00e 	mov	pc, lr
 
-001274c8 <DrawMenuScreen>:
+001274c8 <DrawMainMenuScreen>:
   1274c8:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
   1274cc:	e3a04000 	mov	r4, #0
   1274d0:	e3a05000 	mov	r5, #0
@@ -571,293 +571,316 @@ Disassembly of section .text:
   1276dc:	0000c940 	.word	0x0000c940
   1276e0:	0000d248 	.word	0x0000d248
 
-001276e4 <printMenuStart>:
-  1276e4:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
-  1276e8:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
-  1276ec:	e1a0f00e 	mov	pc, lr
+001276e4 <mainMenu>:
+  1276e4:	e92d4020 	push	{r5, lr}
+  1276e8:	ebffff76 	bl	1274c8 <DrawMainMenuScreen>
+  1276ec:	ebffff88 	bl	127514 <DrawMenuMushroom>
+  1276f0:	e3a05000 	mov	r5, #0
 
-001276f0 <mainMenu>:
-  1276f0:	e92d4010 	push	{r4, lr}
+001276f4 <readMenuLoop>:
+  1276f4:	eb000045 	bl	127810 <readMenuButtons>
+  1276f8:	e3500001 	cmp	r0, #1
+  1276fc:	0a000004 	beq	127714 <upPressed>
+  127700:	e3500002 	cmp	r0, #2
+  127704:	0a000007 	beq	127728 <downPressed>
+  127708:	e3500003 	cmp	r0, #3
+  12770c:	0a00000a 	beq	12773c <aPressed>
+  127710:	eafffff7 	b	1276f4 <readMenuLoop>
 
-001276f4 <main>:
-  1276f4:	e3a0d902 	mov	sp, #32768	; 0x8000
-  1276f8:	ebfffe33 	bl	126fcc <EnableJTAG>
-  1276fc:	ebfffe55 	bl	127058 <InitFrameBuffer>
-  127700:	eb00000e 	bl	127740 <initGPIO>
-  127704:	ebffff52 	bl	127454 <clearScreen>
-  127708:	ebffff6e 	bl	1274c8 <DrawMenuScreen>
-  12770c:	ebffff80 	bl	127514 <DrawMenuMushroom>
+00127714 <upPressed>:
+  127714:	e3550000 	cmp	r5, #0
+  127718:	0afffff5 	beq	1276f4 <readMenuLoop>
+  12771c:	ebffff84 	bl	127534 <DrawMenuMushroom2>
+  127720:	e3a05000 	mov	r5, #0
+  127724:	eafffff2 	b	1276f4 <readMenuLoop>
 
-00127710 <ReadMenu>:
-  127710:	eb000026 	bl	1277b0 <readMenuButtons>
-  127714:	eafffffd 	b	127710 <ReadMenu>
+00127728 <downPressed>:
+  127728:	e3550001 	cmp	r5, #1
+  12772c:	0afffff0 	beq	1276f4 <readMenuLoop>
+  127730:	ebffff77 	bl	127514 <DrawMenuMushroom>
+  127734:	e3a05001 	mov	r5, #1
+  127738:	eaffffed 	b	1276f4 <readMenuLoop>
 
-00127718 <ExitMenu>:
-  127718:	ebffff4d 	bl	127454 <clearScreen>
-  12771c:	e59f0014 	ldr	r0, [pc, #20]	; 127738 <haltLoop$+0x4>
-  127720:	e59f1014 	ldr	r1, [pc, #20]	; 12773c <haltLoop$+0x8>
-  127724:	ebffff96 	bl	127584 <drawMap>
+0012773c <aPressed>:
+  12773c:	e3550000 	cmp	r5, #0
+  127740:	0a00000a 	beq	127770 <ExitMainMenu>
+  127744:	e3550001 	cmp	r5, #1
+  127748:	0a00000e 	beq	127788 <exitGame>
 
-00127728 <read>:
-  127728:	eb000042 	bl	127838 <readButtons>
-  12772c:	ebfffffd 	bl	127728 <read>
+0012774c <endMainMenu>:
+  12774c:	ea00000d 	b	127788 <exitGame>
+  127750:	e8bd4010 	pop	{r4, lr}
+  127754:	e1a0f00e 	mov	pc, lr
 
-00127730 <Restart_Game>:
-  127730:	eafffffc 	b	127728 <read>
+00127758 <main>:
+  127758:	e3a0d902 	mov	sp, #32768	; 0x8000
+  12775c:	ebfffe1a 	bl	126fcc <EnableJTAG>
+  127760:	ebfffe3c 	bl	127058 <InitFrameBuffer>
+  127764:	eb00000d 	bl	1277a0 <initGPIO>
+  127768:	ebffff39 	bl	127454 <clearScreen>
+  12776c:	ebffffdc 	bl	1276e4 <mainMenu>
 
-00127734 <haltLoop$>:
-  127734:	eafffffe 	b	127734 <haltLoop$>
-  127738:	001269f0 	.word	0x001269f0
-  12773c:	00126be4 	.word	0x00126be4
+00127770 <ExitMainMenu>:
+  127770:	ebffff37 	bl	127454 <clearScreen>
+  127774:	e59f001c 	ldr	r0, [pc, #28]	; 127798 <haltLoop$+0x4>
+  127778:	e59f101c 	ldr	r1, [pc, #28]	; 12779c <haltLoop$+0x8>
+  12777c:	ebffff80 	bl	127584 <drawMap>
 
-00127740 <initGPIO>:
-  127740:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-  127744:	e59f02ec 	ldr	r0, [pc, #748]	; 127a38 <haltLoop$+0x4>
-  127748:	e5901000 	ldr	r1, [r0]
-  12774c:	e3a02007 	mov	r2, #7
-  127750:	e1a02d82 	lsl	r2, r2, #27
-  127754:	e1c11002 	bic	r1, r1, r2
-  127758:	e3a03001 	mov	r3, #1
-  12775c:	e1a03d83 	lsl	r3, r3, #27
-  127760:	e1811003 	orr	r1, r1, r3
-  127764:	e5801000 	str	r1, [r0]
-  127768:	e59f02cc 	ldr	r0, [pc, #716]	; 127a3c <haltLoop$+0x8>
-  12776c:	e5901000 	ldr	r1, [r0]
-  127770:	e3a02007 	mov	r2, #7
-  127774:	e1c11002 	bic	r1, r1, r2
-  127778:	e3a03000 	mov	r3, #0
-  12777c:	e1811003 	orr	r1, r1, r3
-  127780:	e5801000 	str	r1, [r0]
-  127784:	e59f02b0 	ldr	r0, [pc, #688]	; 127a3c <haltLoop$+0x8>
-  127788:	e5901000 	ldr	r1, [r0]
-  12778c:	e3a02007 	mov	r2, #7
-  127790:	e1a02182 	lsl	r2, r2, #3
-  127794:	e1c11002 	bic	r1, r1, r2
-  127798:	e3a03001 	mov	r3, #1
-  12779c:	e1a03183 	lsl	r3, r3, #3
-  1277a0:	e1811003 	orr	r1, r1, r3
-  1277a4:	e5801000 	str	r1, [r0]
-  1277a8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-  1277ac:	e1a0f00e 	mov	pc, lr
+00127780 <read>:
+  127780:	eb000042 	bl	127890 <readButtons>
+  127784:	ebfffffd 	bl	127780 <read>
 
-001277b0 <readMenuButtons>:
-  1277b0:	e92d42a0 	push	{r5, r7, r9, lr}
-  1277b4:	e1a09000 	mov	r9, r0
-  1277b8:	e59f1280 	ldr	r1, [pc, #640]	; 127a40 <haltLoop$+0xc>
-  1277bc:	eb000060 	bl	127944 <Read_SNES>
-  1277c0:	e1550009 	cmp	r5, r9
-  1277c4:	0a000019 	beq	127830 <MenuNext>
-  1277c8:	e3a05000 	mov	r5, #0
+00127788 <exitGame>:
+  127788:	ebffff31 	bl	127454 <clearScreen>
+  12778c:	ea000000 	b	127794 <haltLoop$>
 
-001277cc <checkMenuUp>:
-  1277cc:	e1a07009 	mov	r7, r9
-  1277d0:	e1a07227 	lsr	r7, r7, #4
-  1277d4:	e2077001 	and	r7, r7, #1
-  1277d8:	e3570000 	cmp	r7, #0
-  1277dc:	1a000000 	bne	1277e4 <checkMenuDown>
-  1277e0:	eb00000b 	bl	127814 <MenuMoveUp>
+00127790 <Restart_Game>:
+  127790:	eafffffa 	b	127780 <read>
 
-001277e4 <checkMenuDown>:
-  1277e4:	e1a07009 	mov	r7, r9
-  1277e8:	e1a072a7 	lsr	r7, r7, #5
-  1277ec:	e2077001 	and	r7, r7, #1
-  1277f0:	e3570000 	cmp	r7, #0
-  1277f4:	1a000000 	bne	1277fc <checkMenuA>
-  1277f8:	eb000008 	bl	127820 <MenuMoveDown>
+00127794 <haltLoop$>:
+  127794:	eafffffe 	b	127794 <haltLoop$>
+  127798:	001269f0 	.word	0x001269f0
+  12779c:	00126be4 	.word	0x00126be4
 
-001277fc <checkMenuA>:
-  1277fc:	e1a07009 	mov	r7, r9
-  127800:	e1a07427 	lsr	r7, r7, #8
-  127804:	e2077001 	and	r7, r7, #1
-  127808:	e3570000 	cmp	r7, #0
-  12780c:	1a000007 	bne	127830 <MenuNext>
-  127810:	eb000005 	bl	12782c <MenuSelectA>
+001277a0 <initGPIO>:
+  1277a0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  1277a4:	e59f02dc 	ldr	r0, [pc, #732]	; 127a88 <haltLoop$+0x4>
+  1277a8:	e5901000 	ldr	r1, [r0]
+  1277ac:	e3a02007 	mov	r2, #7
+  1277b0:	e1a02d82 	lsl	r2, r2, #27
+  1277b4:	e1c11002 	bic	r1, r1, r2
+  1277b8:	e3a03001 	mov	r3, #1
+  1277bc:	e1a03d83 	lsl	r3, r3, #27
+  1277c0:	e1811003 	orr	r1, r1, r3
+  1277c4:	e5801000 	str	r1, [r0]
+  1277c8:	e59f02bc 	ldr	r0, [pc, #700]	; 127a8c <haltLoop$+0x8>
+  1277cc:	e5901000 	ldr	r1, [r0]
+  1277d0:	e3a02007 	mov	r2, #7
+  1277d4:	e1c11002 	bic	r1, r1, r2
+  1277d8:	e3a03000 	mov	r3, #0
+  1277dc:	e1811003 	orr	r1, r1, r3
+  1277e0:	e5801000 	str	r1, [r0]
+  1277e4:	e59f02a0 	ldr	r0, [pc, #672]	; 127a8c <haltLoop$+0x8>
+  1277e8:	e5901000 	ldr	r1, [r0]
+  1277ec:	e3a02007 	mov	r2, #7
+  1277f0:	e1a02182 	lsl	r2, r2, #3
+  1277f4:	e1c11002 	bic	r1, r1, r2
+  1277f8:	e3a03001 	mov	r3, #1
+  1277fc:	e1a03183 	lsl	r3, r3, #3
+  127800:	e1811003 	orr	r1, r1, r3
+  127804:	e5801000 	str	r1, [r0]
+  127808:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  12780c:	e1a0f00e 	mov	pc, lr
 
-00127814 <MenuMoveUp>:
-  127814:	ebffff2b 	bl	1274c8 <DrawMenuScreen>
-  127818:	ebffff3d 	bl	127514 <DrawMenuMushroom>
-  12781c:	ea000003 	b	127830 <MenuNext>
+00127810 <readMenuButtons>:
+  127810:	e92d42a8 	push	{r3, r5, r7, r9, lr}
+  127814:	e1a09000 	mov	r9, r0
+  127818:	e59f2270 	ldr	r2, [pc, #624]	; 127a90 <haltLoop$+0xc>
+  12781c:	eb000053 	bl	127970 <Wait>
+  127820:	eb00005b 	bl	127994 <Read_SNES>
+  127824:	e1550009 	cmp	r5, r9
+  127828:	0a000015 	beq	127884 <MenuNext>
+  12782c:	e3a05000 	mov	r5, #0
 
-00127820 <MenuMoveDown>:
-  127820:	ebffff28 	bl	1274c8 <DrawMenuScreen>
-  127824:	ebffff42 	bl	127534 <DrawMenuMushroom2>
-  127828:	ea000000 	b	127830 <MenuNext>
+00127830 <checkMenuUp>:
+  127830:	e1a07009 	mov	r7, r9
+  127834:	e1a07227 	lsr	r7, r7, #4
+  127838:	e2077001 	and	r7, r7, #1
+  12783c:	e3570000 	cmp	r7, #0
+  127840:	1a000001 	bne	12784c <checkMenuDown>
+  127844:	e3a00001 	mov	r0, #1
+  127848:	eb00000e 	bl	127888 <returnMenuRead>
 
-0012782c <MenuSelectA>:
-  12782c:	eaffffff 	b	127830 <MenuNext>
+0012784c <checkMenuDown>:
+  12784c:	e1a07009 	mov	r7, r9
+  127850:	e1a072a7 	lsr	r7, r7, #5
+  127854:	e2077001 	and	r7, r7, #1
+  127858:	e3570000 	cmp	r7, #0
+  12785c:	1a000001 	bne	127868 <checkMenuA>
+  127860:	e3a00002 	mov	r0, #2
+  127864:	eb000007 	bl	127888 <returnMenuRead>
 
-00127830 <MenuNext>:
-  127830:	e8bd42a0 	pop	{r5, r7, r9, lr}
-  127834:	ebffffb7 	bl	127718 <ExitMenu>
-
-00127838 <readButtons>:
-  127838:	e92d4280 	push	{r7, r9, lr}
-  12783c:	e1a09000 	mov	r9, r0
-  127840:	e59f11f8 	ldr	r1, [pc, #504]	; 127a40 <haltLoop$+0xc>
-  127844:	eb00003e 	bl	127944 <Read_SNES>
-  127848:	e1550009 	cmp	r5, r9
-  12784c:	0a000030 	beq	127914 <next>
-  127850:	e3a05000 	mov	r5, #0
-
-00127854 <checkSt>:
-  127854:	e1a07009 	mov	r7, r9
-  127858:	e1a071a7 	lsr	r7, r7, #3
-  12785c:	e2077001 	and	r7, r7, #1
-  127860:	e3570000 	cmp	r7, #0
-  127864:	1affffff 	bne	127868 <checkUp>
-
-00127868 <checkUp>:
+00127868 <checkMenuA>:
   127868:	e1a07009 	mov	r7, r9
-  12786c:	e1a07227 	lsr	r7, r7, #4
+  12786c:	e1a07427 	lsr	r7, r7, #8
   127870:	e2077001 	and	r7, r7, #1
-
-00127874 <d>:
   127874:	e3570000 	cmp	r7, #0
-  127878:	1a000000 	bne	127880 <checkL>
-  12787c:	ea000024 	b	127914 <next>
+  127878:	1a000001 	bne	127884 <MenuNext>
+  12787c:	e3a00003 	mov	r0, #3
+  127880:	eb000000 	bl	127888 <returnMenuRead>
 
-00127880 <checkL>:
-  127880:	e1a07009 	mov	r7, r9
-  127884:	e1a07327 	lsr	r7, r7, #6
-  127888:	e2077001 	and	r7, r7, #1
-  12788c:	e3570000 	cmp	r7, #0
-  127890:	1a000006 	bne	1278b0 <checkR>
-  127894:	e59f11a8 	ldr	r1, [pc, #424]	; 127a44 <haltLoop$+0x10>
-  127898:	eb000020 	bl	127920 <Wait>
-  12789c:	ebfffe38 	bl	127184 <moveLeft>
-  1278a0:	e3a05001 	mov	r5, #1
-  1278a4:	e59f1198 	ldr	r1, [pc, #408]	; 127a44 <haltLoop$+0x10>
-  1278a8:	eb00001c 	bl	127920 <Wait>
-  1278ac:	ea000009 	b	1278d8 <checkA>
+00127884 <MenuNext>:
+  127884:	eaffffe1 	b	127810 <readMenuButtons>
 
-001278b0 <checkR>:
-  1278b0:	e1a07009 	mov	r7, r9
-  1278b4:	e1a073a7 	lsr	r7, r7, #7
-  1278b8:	e2077001 	and	r7, r7, #1
-  1278bc:	e3570000 	cmp	r7, #0
-  1278c0:	1a000004 	bne	1278d8 <checkA>
-  1278c4:	e59f317c 	ldr	r3, [pc, #380]	; 127a48 <haltLoop$+0x14>
-  1278c8:	ebfffe16 	bl	127128 <moveRight>
-  1278cc:	e3a05002 	mov	r5, #2
-  1278d0:	e59f3170 	ldr	r3, [pc, #368]	; 127a48 <haltLoop$+0x14>
-  1278d4:	eaffffff 	b	1278d8 <checkA>
+00127888 <returnMenuRead>:
+  127888:	e8bd42a8 	pop	{r3, r5, r7, r9, lr}
+  12788c:	e1a0f00e 	mov	pc, lr
 
-001278d8 <checkA>:
+00127890 <readButtons>:
+  127890:	e92d4280 	push	{r7, r9, lr}
+  127894:	e1a09000 	mov	r9, r0
+  127898:	e59f21f0 	ldr	r2, [pc, #496]	; 127a90 <haltLoop$+0xc>
+  12789c:	eb00003c 	bl	127994 <Read_SNES>
+  1278a0:	e1550009 	cmp	r5, r9
+  1278a4:	0a00002e 	beq	127964 <next>
+  1278a8:	e3a05000 	mov	r5, #0
+
+001278ac <checkSt>:
+  1278ac:	e1a07009 	mov	r7, r9
+  1278b0:	e1a071a7 	lsr	r7, r7, #3
+  1278b4:	e2077001 	and	r7, r7, #1
+  1278b8:	e3570000 	cmp	r7, #0
+  1278bc:	1affffff 	bne	1278c0 <checkUp>
+
+001278c0 <checkUp>:
+  1278c0:	e1a07009 	mov	r7, r9
+  1278c4:	e1a07227 	lsr	r7, r7, #4
+  1278c8:	e2077001 	and	r7, r7, #1
+
+001278cc <d>:
+  1278cc:	e3570000 	cmp	r7, #0
+  1278d0:	1a000000 	bne	1278d8 <checkL>
+  1278d4:	ea000022 	b	127964 <next>
+
+001278d8 <checkL>:
   1278d8:	e1a07009 	mov	r7, r9
-  1278dc:	e1a07427 	lsr	r7, r7, #8
+  1278dc:	e1a07327 	lsr	r7, r7, #6
   1278e0:	e2077001 	and	r7, r7, #1
   1278e4:	e3570000 	cmp	r7, #0
-  1278e8:	1a000009 	bne	127914 <next>
-  1278ec:	e59f1150 	ldr	r1, [pc, #336]	; 127a44 <haltLoop$+0x10>
-  1278f0:	eb00000a 	bl	127920 <Wait>
-  1278f4:	e3550000 	cmp	r5, #0
-  1278f8:	e1a08005 	mov	r8, r5
-  1278fc:	0a000001 	beq	127908 <regJump>
-  127900:	ebfffe73 	bl	1272d4 <runJump>
-  127904:	ea000002 	b	127914 <next>
+  1278e8:	1a000006 	bne	127908 <checkR>
+  1278ec:	e59f21a0 	ldr	r2, [pc, #416]	; 127a94 <haltLoop$+0x10>
+  1278f0:	eb00001e 	bl	127970 <Wait>
+  1278f4:	ebfffe22 	bl	127184 <moveLeft>
+  1278f8:	e3a05001 	mov	r5, #1
+  1278fc:	e59f2190 	ldr	r2, [pc, #400]	; 127a94 <haltLoop$+0x10>
+  127900:	eb00001a 	bl	127970 <Wait>
+  127904:	ea000007 	b	127928 <checkA>
 
-00127908 <regJump>:
-  127908:	ebfffe34 	bl	1271e0 <jump>
-  12790c:	e59f1130 	ldr	r1, [pc, #304]	; 127a44 <haltLoop$+0x10>
-  127910:	eb000002 	bl	127920 <Wait>
+00127908 <checkR>:
+  127908:	e1a07009 	mov	r7, r9
+  12790c:	e1a073a7 	lsr	r7, r7, #7
+  127910:	e2077001 	and	r7, r7, #1
+  127914:	e3570000 	cmp	r7, #0
+  127918:	1a000002 	bne	127928 <checkA>
+  12791c:	ebfffe01 	bl	127128 <moveRight>
+  127920:	e3a05002 	mov	r5, #2
+  127924:	eaffffff 	b	127928 <checkA>
 
-00127914 <next>:
-  127914:	eaffffc7 	b	127838 <readButtons>
+00127928 <checkA>:
+  127928:	e1a07009 	mov	r7, r9
+  12792c:	e1a07427 	lsr	r7, r7, #8
+  127930:	e2077001 	and	r7, r7, #1
+  127934:	e3570000 	cmp	r7, #0
+  127938:	1a000009 	bne	127964 <next>
+  12793c:	e59f1150 	ldr	r1, [pc, #336]	; 127a94 <haltLoop$+0x10>
+  127940:	eb00000a 	bl	127970 <Wait>
+  127944:	e3550000 	cmp	r5, #0
+  127948:	e1a08005 	mov	r8, r5
+  12794c:	0a000001 	beq	127958 <regJump>
+  127950:	ebfffe5f 	bl	1272d4 <runJump>
+  127954:	ea000002 	b	127964 <next>
 
-00127918 <endRead>:
-  127918:	e8bd4280 	pop	{r7, r9, lr}
-  12791c:	e1a0f00e 	mov	pc, lr
+00127958 <regJump>:
+  127958:	ebfffe20 	bl	1271e0 <jump>
+  12795c:	e59f1130 	ldr	r1, [pc, #304]	; 127a94 <haltLoop$+0x10>
+  127960:	eb000002 	bl	127970 <Wait>
 
-00127920 <Wait>:
-  127920:	e92d4006 	push	{r1, r2, lr}
-  127924:	e59f0120 	ldr	r0, [pc, #288]	; 127a4c <haltLoop$+0x18>
-  127928:	e5901000 	ldr	r1, [r0]
-  12792c:	e0811003 	add	r1, r1, r3
+00127964 <next>:
+  127964:	eaffffc9 	b	127890 <readButtons>
 
-00127930 <WaitLoop>:
-  127930:	e5902000 	ldr	r2, [r0]
-  127934:	e1510002 	cmp	r1, r2
-  127938:	8afffffc 	bhi	127930 <WaitLoop>
-  12793c:	e8bd4006 	pop	{r1, r2, lr}
-  127940:	e1a0f00e 	mov	pc, lr
+00127968 <endRead>:
+  127968:	e8bd4280 	pop	{r7, r9, lr}
+  12796c:	e1a0f00e 	mov	pc, lr
 
-00127944 <Read_SNES>:
-  127944:	e92d4310 	push	{r4, r8, r9, lr}
-  127948:	e3a09000 	mov	r9, #0
-  12794c:	e3a01001 	mov	r1, #1
-  127950:	eb000016 	bl	1279b0 <WriteClock>
-  127954:	eb00001f 	bl	1279d8 <WriteLatch>
-  127958:	e3a0100c 	mov	r1, #12
-  12795c:	ebffffef 	bl	127920 <Wait>
-  127960:	e3a01000 	mov	r1, #0
-  127964:	eb00001b 	bl	1279d8 <WriteLatch>
-  127968:	e3a08000 	mov	r8, #0
+00127970 <Wait>:
+  127970:	e92d400b 	push	{r0, r1, r3, lr}
+  127974:	e59f011c 	ldr	r0, [pc, #284]	; 127a98 <haltLoop$+0x14>
+  127978:	e5901000 	ldr	r1, [r0]
+  12797c:	e0811002 	add	r1, r1, r2
 
-0012796c <bitLoop>:
-  12796c:	e3a01006 	mov	r1, #6
-  127970:	ebffffea 	bl	127920 <Wait>
-  127974:	e3a01000 	mov	r1, #0
-  127978:	eb00000c 	bl	1279b0 <WriteClock>
-  12797c:	e3a01006 	mov	r1, #6
-  127980:	ebffffe6 	bl	127920 <Wait>
-  127984:	eb00001d 	bl	127a00 <ReadData>
-  127988:	e1a04814 	lsl	r4, r4, r8
-  12798c:	e1899004 	orr	r9, r9, r4
-  127990:	e3a01001 	mov	r1, #1
-  127994:	eb000005 	bl	1279b0 <WriteClock>
-  127998:	e2888001 	add	r8, r8, #1
-  12799c:	e3580010 	cmp	r8, #16
-  1279a0:	bafffff1 	blt	12796c <bitLoop>
-  1279a4:	e1a00009 	mov	r0, r9
-  1279a8:	e8bd4310 	pop	{r4, r8, r9, lr}
-  1279ac:	e1a0f00e 	mov	pc, lr
+00127980 <WaitLoop>:
+  127980:	e5903000 	ldr	r3, [r0]
+  127984:	e1510003 	cmp	r1, r3
+  127988:	8afffffc 	bhi	127980 <WaitLoop>
+  12798c:	e8bd400b 	pop	{r0, r1, r3, lr}
+  127990:	e1a0f00e 	mov	pc, lr
 
-001279b0 <WriteClock>:
-  1279b0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-  1279b4:	e3a0000b 	mov	r0, #11
-  1279b8:	e59f2078 	ldr	r2, [pc, #120]	; 127a38 <haltLoop$+0x4>
-  1279bc:	e3a03001 	mov	r3, #1
-  1279c0:	e1a03013 	lsl	r3, r3, r0
-  1279c4:	e3310000 	teq	r1, #0
-  1279c8:	05823028 	streq	r3, [r2, #40]	; 0x28
-  1279cc:	1582301c 	strne	r3, [r2, #28]
-  1279d0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-  1279d4:	e1a0f00e 	mov	pc, lr
+00127994 <Read_SNES>:
+  127994:	e92d4312 	push	{r1, r4, r8, r9, lr}
+  127998:	e3a09000 	mov	r9, #0
+  12799c:	e3a01001 	mov	r1, #1
+  1279a0:	eb000016 	bl	127a00 <WriteClock>
+  1279a4:	eb00001f 	bl	127a28 <WriteLatch>
+  1279a8:	e3a0200c 	mov	r2, #12
+  1279ac:	ebffffef 	bl	127970 <Wait>
+  1279b0:	e3a01000 	mov	r1, #0
+  1279b4:	eb00001b 	bl	127a28 <WriteLatch>
+  1279b8:	e3a08000 	mov	r8, #0
 
-001279d8 <WriteLatch>:
-  1279d8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-  1279dc:	e3a00009 	mov	r0, #9
-  1279e0:	e59f2050 	ldr	r2, [pc, #80]	; 127a38 <haltLoop$+0x4>
-  1279e4:	e3a03001 	mov	r3, #1
-  1279e8:	e1a03013 	lsl	r3, r3, r0
-  1279ec:	e3310000 	teq	r1, #0
-  1279f0:	05823028 	streq	r3, [r2, #40]	; 0x28
-  1279f4:	1582301c 	strne	r3, [r2, #28]
-  1279f8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+001279bc <bitLoop>:
+  1279bc:	e3a02006 	mov	r2, #6
+  1279c0:	ebffffea 	bl	127970 <Wait>
+  1279c4:	e3a01000 	mov	r1, #0
+  1279c8:	eb00000c 	bl	127a00 <WriteClock>
+  1279cc:	e3a02006 	mov	r2, #6
+  1279d0:	ebffffe6 	bl	127970 <Wait>
+  1279d4:	eb00001d 	bl	127a50 <ReadData>
+  1279d8:	e1a04814 	lsl	r4, r4, r8
+  1279dc:	e1899004 	orr	r9, r9, r4
+  1279e0:	e3a01001 	mov	r1, #1
+  1279e4:	eb000005 	bl	127a00 <WriteClock>
+  1279e8:	e2888001 	add	r8, r8, #1
+  1279ec:	e3580010 	cmp	r8, #16
+  1279f0:	bafffff1 	blt	1279bc <bitLoop>
+  1279f4:	e1a00009 	mov	r0, r9
+  1279f8:	e8bd4312 	pop	{r1, r4, r8, r9, lr}
   1279fc:	e1a0f00e 	mov	pc, lr
 
-00127a00 <ReadData>:
+00127a00 <WriteClock>:
   127a00:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-  127a04:	e3a0000a 	mov	r0, #10
-  127a08:	e59f2028 	ldr	r2, [pc, #40]	; 127a38 <haltLoop$+0x4>
-  127a0c:	e5921034 	ldr	r1, [r2, #52]	; 0x34
-  127a10:	e3a03001 	mov	r3, #1
-  127a14:	e1a03013 	lsl	r3, r3, r0
-  127a18:	e0011003 	and	r1, r1, r3
-  127a1c:	e3310000 	teq	r1, #0
-  127a20:	03a04000 	moveq	r4, #0
-  127a24:	13a04001 	movne	r4, #1
-  127a28:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-  127a2c:	e1a0f00e 	mov	pc, lr
+  127a04:	e3a0000b 	mov	r0, #11
+  127a08:	e59f2078 	ldr	r2, [pc, #120]	; 127a88 <haltLoop$+0x4>
+  127a0c:	e3a03001 	mov	r3, #1
+  127a10:	e1a03013 	lsl	r3, r3, r0
+  127a14:	e3310000 	teq	r1, #0
+  127a18:	05823028 	streq	r3, [r2, #40]	; 0x28
+  127a1c:	1582301c 	strne	r3, [r2, #28]
+  127a20:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  127a24:	e1a0f00e 	mov	pc, lr
 
-00127a30 <stop>:
-  127a30:	eafffffe 	b	127a30 <stop>
+00127a28 <WriteLatch>:
+  127a28:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  127a2c:	e3a00009 	mov	r0, #9
+  127a30:	e59f2050 	ldr	r2, [pc, #80]	; 127a88 <haltLoop$+0x4>
+  127a34:	e3a03001 	mov	r3, #1
+  127a38:	e1a03013 	lsl	r3, r3, r0
+  127a3c:	e3310000 	teq	r1, #0
+  127a40:	05823028 	streq	r3, [r2, #40]	; 0x28
+  127a44:	1582301c 	strne	r3, [r2, #28]
+  127a48:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  127a4c:	e1a0f00e 	mov	pc, lr
 
-00127a34 <haltLoop$>:
-  127a34:	eafffffe 	b	127a34 <haltLoop$>
-  127a38:	3f200000 	.word	0x3f200000
-  127a3c:	3f200004 	.word	0x3f200004
-  127a40:	000f1240 	.word	0x000f1240
-  127a44:	00001388 	.word	0x00001388
-  127a48:	0000ffff 	.word	0x0000ffff
-  127a4c:	3f003004 	.word	0x3f003004
+00127a50 <ReadData>:
+  127a50:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  127a54:	e3a0000a 	mov	r0, #10
+  127a58:	e59f2028 	ldr	r2, [pc, #40]	; 127a88 <haltLoop$+0x4>
+  127a5c:	e5921034 	ldr	r1, [r2, #52]	; 0x34
+  127a60:	e3a03001 	mov	r3, #1
+  127a64:	e1a03013 	lsl	r3, r3, r0
+  127a68:	e0011003 	and	r1, r1, r3
+  127a6c:	e3310000 	teq	r1, #0
+  127a70:	03a04000 	moveq	r4, #0
+  127a74:	13a04001 	movne	r4, #1
+  127a78:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  127a7c:	e1a0f00e 	mov	pc, lr
+
+00127a80 <stop>:
+  127a80:	eafffffe 	b	127a80 <stop>
+
+00127a84 <haltLoop$>:
+  127a84:	eafffffe 	b	127a84 <haltLoop$>
+  127a88:	3f200000 	.word	0x3f200000
+  127a8c:	3f200004 	.word	0x3f200004
+  127a90:	000f1240 	.word	0x000f1240
+  127a94:	00001388 	.word	0x00001388
+  127a98:	3f003004 	.word	0x3f003004

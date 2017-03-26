@@ -57,8 +57,8 @@ DrawPixel:
 
 
 //************************DRAW MENU TITLE SCREEN ******************************
-.globl DrawMenuScreen
-DrawMenuScreen:
+.globl DrawMainMenuScreen
+DrawMainMenuScreen:
         push {r4,r5,r6,r7,r8,lr}
         mov     r4,     #0
         mov     r5,     #0
@@ -91,10 +91,10 @@ drawMenuLoop:
 DrawMenuMushroom:
         push {r3,r4,r5,r6,r7,r8,lr}
         mov     r3,     #225
-        mov     r4,     #225                    // x        
-        ldr     r5,     =425                          // y 
+        mov     r4,     #225                     // x        
+        ldr     r5,     =425                     // y 
         ldr     r6,     =MenuMushroom
-        mov     r7,     #255         // Selection Menu dimensions, Width
+        mov     r7,     #255                     // Selection Menu dimensions, Width
         ldr     r8,     =455                     // HEIGHT
         b       DrawMenuMushroomLoop
 
@@ -105,10 +105,8 @@ DrawMenuMushroom2:
         mov     r4,     #225
         ldr     r5,     =500
         ldr     r6,     =MenuMushroom
-        mov     r7,     #255         // Selection Menu dimensions, Width
+        mov     r7,     #255                     // Selection Menu dimensions, Width
         ldr     r8,     =530                     // HEIGHT
-
-       
 
 DrawMenuMushroomLoop:
 	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function 
