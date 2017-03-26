@@ -17,7 +17,7 @@ main:
         bl      initGPIO                // Intializes GPIO
       	bl	clearScreen
 
-        bl      mainMenu
+//        bl      mainMenu
 
 
  //       bl      DrawMenuScreen  

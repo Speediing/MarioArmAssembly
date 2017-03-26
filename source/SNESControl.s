@@ -20,6 +20,7 @@ initGPIO:
         orr     r1, r3
         str     r1, [r0]                         // Storing value back to GPFSEL0
 
+
         // Sets GPIO pin 10 (Data) to input
         ldr     r0, =0x3F200004                  // Address of GPFSEL1
         ldr     r1, [r0]
@@ -28,6 +29,7 @@ initGPIO:
         mov     r3 , #0
         orr     r1, r3
         str     r1, [r0]                         // Stores value back to GPFSEL1
+
 
         //Sets GPIO pin 11 (Clock) to output
         ldr     r0, =0x3F200004                  // Address for GPFSEL1
@@ -41,7 +43,7 @@ initGPIO:
         str     r1, [r0]                         // Stores value back to GPFSEL1
 
         pop     {lr}
-        mov	pc, lr
+	      mov	pc, lr
 
 
 
@@ -51,55 +53,58 @@ initGPIO:
 .globl readMenuButtons
 
 readMenuButtons:
-        push    {r3, r5, r7, r9, lr}
+        push    {r5,r7, r9, lr}
         mov     r9, r0
-        ldr     r2, =0xf1240//was r1 before
-        bl      Wait				//wait for a second
+        ldr     r1, =0xf1240
+        //bl      Wait				//wait for a second
         bl      Read_SNES			//run the snes routine
         cmp     r5, r9
         beq     MenuNext
         mov     r5, #0
+
+
 checkMenuUp:
         mov     r7, r9
         lsr     r7, #4
         and     r7, #1
         cmp     r7, #0
         bne     checkMenuDown        
-        mov     r0, #1
-        bl      returnMenuRead
+        bl      MenuMoveUp
 checkMenuDown: 
         mov     r7, r9
         lsr     r7, #5
         and     r7, #1
         cmp     r7, #0
         bne     checkMenuA
-        mov     r0, #2
-        bl      returnMenuRead
+        bl      MenuMoveDown
 checkMenuA:
         mov     r7, r9
         lsr     r7, #8
         and     r7, #1
         cmp     r7, #0
         bne     MenuNext
-        mov     r0, #3
-        bl      returnMenuRead
-/*MenuMoveUp:
-        bl      DrawMenuScreen
+        bl       MenuSelectA
+
+MenuMoveUp:
+//        bl      DrawMenuScreen
         bl      DrawMenuMushroom
         b       MenuNext      
+
 MenuMoveDown: 
-        bl      DrawMenuScreen
+  //      bl      DrawMenuScreen
         bl      DrawMenuMushroom2
         b       MenuNext
-MenuSelectA:
-        b       endMenuRead*/
-MenuNext: 
-        b       readMenuButtons
 
-returnMenuRead:
-        pop     {r3, r5, r7, r9, lr}
-  //      bl      ExitMenu
-        mov     pc, lr
+MenuSelectA:
+        b      endMenuRead
+
+MenuNext: 
+        //b       readMenuButtons
+
+endMenuRead:
+        pop     {r5,r7, r9, lr}
+    //    bl      ExitMenu
+//        mov     pc, lr
 
 // ************ Menus Read Function ****************
 
@@ -110,7 +115,7 @@ returnMenuRead:
 readButtons:
         push    {r7, r9, lr}
         mov     r9, r0
-        ldr     r2, =0xf1240
+        ldr     r1, =0xf1240
         //bl      Wait				//wait for a second
         bl      Read_SNES			//run the snes routine
         cmp     r5, r9
@@ -145,11 +150,11 @@ checkL:
         and     r7, #1
         cmp     r7, #0
         bne     checkR
-        ldr     r2, =0x1388
+        ldr     r1, =0x1388
         bl      Wait				//wait for a second
         bl      moveLeft
         mov  r5, #1
-        ldr     r2, =0x1388
+        ldr     r1, =0x1388
         bl      Wait				//wait for a second
         b       checkA
 checkR:
@@ -158,11 +163,11 @@ checkR:
         and     r7, #1
         cmp     r7, #0
         bne     checkA
-     //   ldr     r2, =0xffff
+        ldr     r3, =0xffff
         //bl      Wait				//wait for a second
         bl      moveRight
         mov  r5, #2
-       // ldr     r2, =0xffff
+        ldr     r3, =0xffff
         //bl      Wait				//wait for a second
 
         b       checkA
@@ -192,22 +197,24 @@ endRead:
         mov     pc, lr
 
 
-	//parameter r2 = time to wait
+	//parameter r3 = time to wait
 	//returns nothing
 	///////////////
   .globl	Wait
   Wait:
-          push    {r0, r1, r3,lr}
+          push    {r1, r2,  lr}
           ldr     r0, =0x3F003004                  // Addess of CLO
           ldr     r1, [r0]
-          add     r1, r2
+          add     r1, r3
 
-  WaitLoop:                             // Waits for a time interval
-          ldr     r3, [r0]
-          cmp     r1, r3		// Stops when CLO = r1
+  WaitLoop:               // Waits for a time interval
+          ldr     r2, [r0]
+          cmp     r1, r2				// Stops when CLO = r1
           bhi     WaitLoop
-          pop     {r0, r1, r3,lr}
-          mov     pc,  lr
+          pop     {r1,r2, lr}
+          mov     pc, lr
+
+
 
 
 //////////////////////
@@ -218,22 +225,22 @@ endRead:
 	/////////////////
 Read_SNES:
 
-        push    {r1, r4, r8, r9,lr}
+        push    {r4, r8, r9,lr}
         mov     r9, #0       		//init r9 for output
         mov     r1, #1
         bl      WriteClock		//write 1 on clock line
         bl      WriteLatch		//write 1 on latch line
-        mov     r2, #12//was r1 before
+        mov     r1, #12
         bl      Wait			//Wait for 12 microseconds
         mov     r1, #0
         bl      WriteLatch		//Bring latch back down to 0
         mov     r8, #0       		//init counter for each of the 16 bits
 bitLoop:
-        mov     r2, #6			//wait for 6 microseconds
+        mov     r1, #6			//wait for 6 microseconds
         bl      Wait
         mov     r1, #0
         bl      WriteClock		//write 0 on clock line
-        mov     r2, #6			//wait for 6 microseconds
+        mov     r1, #6			//wait for 6 microseconds
         bl      Wait
         bl      ReadData		//check the dataline
         lsl     r4, r8			//shift the bit to allign with r8
@@ -244,7 +251,7 @@ bitLoop:
         cmp     r8, #16
         blt     bitLoop			//if r8<16 loop back
         mov     r0, r9
-        pop     {r1, r4, r8, r9,lr}
+        pop     {r4, r8, r9,lr}
         mov     pc, lr
 
 
