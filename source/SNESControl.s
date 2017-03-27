@@ -55,13 +55,16 @@ initGPIO:
 readMenuButtons:
         push    {r2-r9, lr}
         mov     r9, r0
+        
         ldr     r1, =0xfffff
         bl      Wait				//wait for a second
         bl      Read_SNES			//run the snes routine
         cmp     r5, r9
         beq     MenuNext
         mov     r5, #0
-
+        
+        //b       checkMenuDown
+        b       checkMenuA
 
 checkMenuUp:
         mov     r7, r9
@@ -86,12 +89,12 @@ checkMenuA:
         bl       MenuSelectA
 
 MenuMoveUp:
-//        bl      DrawMenuScreen
+        bl      DrawMainMenuScreen
         bl      DrawMenuMushroom
         b       MenuNext
 
 MenuMoveDown:
-  //      bl      DrawMenuScreen
+        bl      DrawMainMenuScreen
         bl      DrawMenuMushroom2
         b       MenuNext
 
@@ -128,6 +131,7 @@ checkSt:
         and     r7, #1
         cmp     r7, #0
         bne     checkUp
+//        bl      StartPressed
 
 checkUp:
         mov     r7, r9

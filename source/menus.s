@@ -100,9 +100,18 @@ endMainMenu:
 
 
 //------------------------------------------------------------------------------------
-.globl pauseMenu
-pauseMenu:
-       // push {lr}
+
+.globl StartPressed
+StartPressed:
+        push    {r5}          
+        mov     r5,     #0      // set r5 to resume mode        
+        bl      DrawPauseMenu1
+
+PauseMenu:
+       
+
+
+        // push {lr}
 PauseGame:
 	//bl	DrawPauseFrame		//Draw the background of the pause menu
 

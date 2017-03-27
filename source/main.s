@@ -17,16 +17,16 @@ main:
         bl      initGPIO                // Intializes GPIO
       	bl	clearScreen
 
-        //bl      mainMenu
+//        bl      mainMenu
 
 
- //       bl      DrawMenuScreen
-  //      bl      DrawMenuMushroom
- //       bl      DrawMenuMushroom2
+//        bl      DrawMenuScreen
+//        bl      DrawMenuMushroom
+//      bl      DrawMenuMushroom2
 
 //ReadMenu:
-   //     bl      readMenuButtons
-     //   b       ReadMenu
+ //       bl      readMenuButtons
+  //      b       ReadMenu
 
 .globl ExitMainMenu
 ExitMainMenu:
