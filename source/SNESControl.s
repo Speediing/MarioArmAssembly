@@ -53,10 +53,10 @@ initGPIO:
 .globl readMenuButtons
 
 readMenuButtons:
-        push    {r5,r7, r9, lr}
+        push    {r2-r9, lr}
         mov     r9, r0
-        ldr     r1, =0xf1240
-        //bl      Wait				//wait for a second
+        ldr     r1, =0xfffff
+        bl      Wait				//wait for a second
         bl      Read_SNES			//run the snes routine
         cmp     r5, r9
         beq     MenuNext
@@ -99,12 +99,12 @@ MenuSelectA:
         b      endMenuRead
 
 MenuNext:
-        //b       readMenuButtons
+      //  b       readMenuButtons
 
 endMenuRead:
-        pop     {r5,r7, r9, lr}
+        pop     {r2-r9, lr}
     //    bl      ExitMenu
-//        mov     pc, lr
+        mov     pc, lr
 
 // ************ Menus Read Function ****************
 

@@ -51,6 +51,9 @@ moveRight:
         beq     endRight
 
          //update the gamestate
+        ldrb    r8,  [r0, #1]                      //load the cell above
+        cmp     r8,  #0
+        bne     endRight
         mov     r3, #0
         mov     r4, #3
         mov     r5, r0                               //address of Mario
@@ -88,6 +91,9 @@ moveLeft:
         beq     endLeft
 
          //update the gamestate
+         ldrb    r8,  [r0, #-1]                      //load the cell above
+         cmp     r8,  #0
+         bne     endLeft
         mov     r3, #0
         mov     r4, #3
         mov     r5, r0                               //address of Mario

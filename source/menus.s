@@ -6,11 +6,11 @@
 //------------------------------------------------------------------------------------
 //printMenuStart:
   //      push {r4-r10,lr}
-							
-//	bl      DrawStartGameSelected
-  //      bl      DrawQuitGame        
 
-		
+//	bl      DrawStartGameSelected
+  //      bl      DrawQuitGame
+
+
 //	pop		{r4-r10,lr}
 //	mov		pc, lr
 //------------------------------------------------------------------------------------
@@ -18,19 +18,19 @@
 //------------------------------------------------------------------------------------
 .globl mainMenu
 mainMenu:
-        push    {r5, lr}
+        push   {r2-r9, lr}
         bl      DrawMainMenuScreen   //print the main menu
         bl      DrawMenuMushroom     //print selection indictor (a mushroom)
-        mov     r5, #0                   //initialize state to 0 (start selected) 
-    //    bl      DrawMenuMushroom2  
+        mov     r5, #0                   //initialize state to 0 (start selected)
+    //    bl      DrawMenuMushroom2
 
-//ReadMenu:        
-        //bl      readMenuButtons 
+//ReadMenu:
+        //bl      readMenuButtons
         //b       ReadMenu
 
 readMenuLoop: //FSM: state 0(start) and 1(quit)
         bl      readMenuButtons
-        
+
         cmp r0 ,#1              //up button pressed
         beq     upPressed
 
@@ -44,8 +44,8 @@ readMenuLoop: //FSM: state 0(start) and 1(quit)
 /*MenuMoveUp:
         bl      DrawMenuScreen
         bl      DrawMenuMushroom
-        b       MenuNext      
-MenuMoveDown: 
+        b       MenuNext
+MenuMoveDown:
         bl      DrawMenuScreen
         bl      DrawMenuMushroom2
         b       MenuNext
@@ -56,8 +56,8 @@ MenuSelectA:
 upPressed:
         cmp     r5, #0          //if is state 0
         beq     readMenuLoop    //keep reading buttons (do nothing)
-   
-        bl      DrawMenuMushroom2 //if is state 1, switch to and draw state 0 
+
+        bl      DrawMenuMushroom2 //if is state 1, switch to and draw state 0
         mov     r5, #0
 
         b       readMenuLoop      //keep reading menu buttons
@@ -76,24 +76,24 @@ aPressed:
         beq     exitGame         //exit game
 
 quitMain:
-        
+
 //	mov		r0, #500
 //	mov		r1, #600
 //	ldr		r2, =0xFFFF
 //	ldr		r3, =Quitting_Game
 //	bl		Draw_String
-	
+
 //	ldr		r0, =0x0000
 //	bl		clearScreen
- //       mov             r0 ,r4                
+ //       mov             r0 ,r4
    //     b               quitEndMenu
-        
+
 endMainMenu:
 
       //  bl clearScreen
         b       exitGame
-//quitEndMenu:         
-        pop    {r4,lr}
+//quitEndMenu:
+        pop    {r2-r9, lr}
         mov     pc,lr
 //------------------------------------------------------------------------------------
 
@@ -138,11 +138,11 @@ PauseQuitOption:
 	beq	ExitPause
 	b	PauseQuitOption		//If none/other, loop back
 ExitPause:
-        bl	DrawGameBounds   
+        bl	DrawGameBounds
 endPauseLoop:
 
         pop {lr}
-        mov     pc,lr   
+        mov     pc,lr
 */
 //------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------
@@ -152,4 +152,3 @@ endPauseLoop:
 
 Quitting_Game:
 	.asciz	"Exiting program..."	*/
-		

@@ -1,8 +1,26 @@
 //
 
+/*
+
+TODO:
+-decrement lives when mario falls through bottom/hits enemy from side
+-reset game function when mario dies(call switchmap with first map)
+-add final castle(game won)
+-game lost screen(lives == 0)
+-Menus(title and pause)
+-value pack interrupts
+-increase score when hits coin/monsters(from top)
+
+*/
+
 .section .text
 
 .section .data
+
+.globl livesNum
+livesNum:
+
+        .byte  3
 .globl currentLevel
 currentLevel:
         .byte  1
@@ -16,6 +34,7 @@ currentLevel:
    6 - cloud
    7 - monster
    8 - coin
+   9 - monster2
 
 */
 GameMap:
@@ -36,7 +55,7 @@ GameMap:
                 .byte 0, 0, 0, 0, 0, 5, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0         // 13
                 .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0         // 14
                 .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0         // 15
-                .byte 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0         // 16: Mario Initial offset: 0+16*25 = 400
+                .byte 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0         // 16: Mario Initial offset: 0+16*25 = 400
                 .byte 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1         // 17
                 .byte 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1         // 18
                 .byte 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1         // 19
@@ -89,7 +108,7 @@ GameMap3:
                 .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0         // 14
                 .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0         // 15
                 .byte 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0         // 16: Mario Initial offset: 0+16*25 = 400
-                .byte 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1         // 17
+                .byte 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1         // 17
                 .byte 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1         // 18
                 .byte 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1         // 19
 
