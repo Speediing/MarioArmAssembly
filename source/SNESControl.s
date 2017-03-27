@@ -49,7 +49,7 @@ initGPIO:
 
 // ************ Menus Read Function ****************
 
-// read up, if  
+// read up, if
 .globl readMenuButtons
 
 readMenuButtons:
@@ -68,9 +68,9 @@ checkMenuUp:
         lsr     r7, #4
         and     r7, #1
         cmp     r7, #0
-        bne     checkMenuDown        
+        bne     checkMenuDown
         bl      MenuMoveUp
-checkMenuDown: 
+checkMenuDown:
         mov     r7, r9
         lsr     r7, #5
         and     r7, #1
@@ -88,9 +88,9 @@ checkMenuA:
 MenuMoveUp:
 //        bl      DrawMenuScreen
         bl      DrawMenuMushroom
-        b       MenuNext      
+        b       MenuNext
 
-MenuMoveDown: 
+MenuMoveDown:
   //      bl      DrawMenuScreen
         bl      DrawMenuMushroom2
         b       MenuNext
@@ -98,7 +98,7 @@ MenuMoveDown:
 MenuSelectA:
         b      endMenuRead
 
-MenuNext: 
+MenuNext:
         //b       readMenuButtons
 
 endMenuRead:
@@ -113,10 +113,10 @@ endMenuRead:
 .globl  readButtons
 
 readButtons:
-        push    {r7, r9, lr}
+        push    {r2-r9, lr}
         mov     r9, r0
-        ldr     r1, =0xf1240
-        //bl      Wait				//wait for a second
+        ldr     r1, =0xfffff
+        bl      Wait				//wait for a second
         bl      Read_SNES			//run the snes routine
         cmp     r5, r9
         beq     next
@@ -151,11 +151,11 @@ checkL:
         cmp     r7, #0
         bne     checkR
         ldr     r1, =0x1388
-        bl      Wait				//wait for a second
+        //bl      Wait				//wait for a second
         bl      moveLeft
-        mov  r5, #1
+        mov     r5, #1
         ldr     r1, =0x1388
-        bl      Wait				//wait for a second
+        //bl      Wait				//wait for a second
         b       checkA
 checkR:
         mov     r7, r9
@@ -193,7 +193,7 @@ next:
        b       readButtons
 
 endRead:
-        pop    {r7, r9, lr}
+        pop    {r2-r9, lr}
         mov     pc, lr
 
 
