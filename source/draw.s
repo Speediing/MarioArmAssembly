@@ -55,28 +55,22 @@ DrawPixel:
 	mov             pc, lr
 //************************DRAW PIXEL FUNCTION ****************************
 
+
 //************************DRAW MENU PAUSE SCREEN ******************************
-/*.globl DrawPauseMenu1
-DrawPauseMenu1:
+
+.globl DrawPauseMenu
+DrawPauseMenu:
+
         push {r4,r5,r6,r7,r8,lr}
-        ldr     r6,     =PauseMenu1     // draws menu with cursor on resume
+        ldr     r6,     =PauseMenu     // draws menu with cursor on resume
         b       NextPause
 
-.globl DrawPauseMenu2
-DrawPauseMenu2:
-        push {r4,r5,r6,r7,r8,lr}
-        ldr     r6,     =PauseMenu2
-        b       NextPause
-.globl DrawPauseMenu3
-DrawPauseMenu3: 
-        push {r4,r5,r6,r7,r8,lr}
-        ldr     r6,     =PauseMenu3
 NextPause:       
-        mov     r4,     #200
-        mov     r5,     #0
+        mov     r4,     #235
+        mov     r5,     #100
        
-        mov     r7,     #500    // Width of MenuTitleScreen
-        mov     r8,     #600    // Height of MenuTitleScreen
+        ldr     r7,     =595    // Width of Pause menu (Asset dimensions are  360 x 432 )
+        ldr     r8,     =532    // Height of MenuTitleScreen
 
 drawPauseMenuLoop:
 	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
@@ -87,7 +81,7 @@ drawPauseMenuLoop:
 	add	r4,	#1			//increment x position
 	cmp	r4,	r7			//compare with image with
 	blt	drawPauseMenuLoop
-	mov	r4,	#200			//reset x
+	mov	r4,	#235			//reset x
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawPauseMenuLoop
@@ -95,27 +89,16 @@ drawPauseMenuLoop:
         pop     {r4,r5,r6,r7,r8,lr}
 	mov	pc,	lr
 
-//************************DRAW MENU PAUSE SCREEN ******************************
-*/
-
-//************************DRAW MENU TITLE SCREEN ******************************
+//************************DRAW MAIN MENU SCREEN ******************************
 .globl DrawMainMenuScreen
 DrawMainMenuScreen:
-       
-DrawTitleMenuStart:
+
         push {r4,r5,r6,r7,r8,lr}
         ldr     r6,     =mainMenuScreen    // draws menu with cursor on resume
-        b       NextMainMenu
 
-//DrawTitleMenuQuit:
-   //     push {r4,r5,r6,r7,r8,lr}
- //       ldr     r6,     =TitleMenuQuit
-
-NextMainMenu: 
-//         push {r4,r5,r6,r7,r8,lr}
         mov     r4,     #0
         mov     r5,     #0
-      //  ldr     r6,     =MenuTitleScreen
+
         mov     r7,     #840    // Width of MenuTitleScreen
         mov     r8,     #680    // Height of MenuTitleScreen
 
@@ -140,17 +123,82 @@ drawMMLoop:
 //************************DRAW MENU TITLE SCREEN ******************************
 
 
+//************************DRAW STAR FOR PAUSE MENU ******************************
+
+.globl DrawMenuStar1
+DrawMenuStar1:
+        push {r0-r8,lr}
+
+        mov	r0,	  #7      // Start X position of your picture
+	mov	r1,	  #5       // Start Y Position
+        mov     r2,       #11
+        bl      drawCell
+
+        mov	r0,	  #7      // Start X position of your picture
+	mov	r1,	  #9       // Start Y Position
+        mov     r2,       #12
+        bl      drawCell
+ 
+
+        mov	r0,	  #7      // Start X position of your picture
+	mov	r1,	  #12       // Start Y Position
+        mov     r2,       #12
+        bl      drawCell
+
+
+        pop     {r0-r8,lr}
+	mov	pc,	lr
+
+.globl  DrawMenuStar2
+DrawMenuStar2:
+        push {r0-r8,lr}
+
+        mov	r0,	  #7    // Start X position of your picture
+	mov	r1,	  #5       // Start Y Position
+        mov     r2,       #12
+        bl      drawCell
+
+        mov	r0,	  #7      // Start X position of your picture
+	mov	r1,	  #9       // Start Y Position
+        mov     r2,       #11
+        bl      drawCell
+
+        mov	r0,	  #7      // Start X position of your picture
+	mov	r1,	  #12       // Start Y Position
+        mov     r2,       #12
+        bl      drawCell
+
+        pop     {r0-r8,lr}
+	mov	pc,	lr
+
+.globl  DrawMenuStar3
+DrawMenuStar3:
+        push {r0-r8,lr}
+
+        mov	r0,	  #7     // Start X position of your picture
+	mov	r1,	  #5       // Start Y Position
+        mov     r2,       #12
+        bl      drawCell
+
+        mov	r0,	  #7      // Start X position of your picture
+	mov	r1,	  #9       // Start Y Position
+        mov     r2,       #12
+        bl      drawCell
+
+        mov	r0,	  #7      // Start X position of your picture
+	mov	r1,	  #12       // Start Y Position
+        mov     r2,       #11
+        bl      drawCell
+
+        pop     {r0-r8,lr}
+	mov	pc,	lr
+//************************DRAW STAR FOR PAUSE MENU ******************************
+
 
 //************************DRAW MENU MUSHROOM*******************************
 .globl DrawMenuMushroom
 DrawMenuMushroom:
-        push {r0-r2,r3,r4,r5,r6,r7,r8,lr}
-  //      mov     r3,     #225
-    //    mov     r4,     #225                     // x
-      //  ldr     r5,     =425                     // y
-  //      ldr     r6,     =coin
-    //    mov     r7,     #255                     // Selection Menu dimensions, Width
-      //  ldr     r8,     =455                     // HEIGHT 
+        push {r0-r8,lr}
 
         mov	r0,	  #6      // Start X position of your picture
 	mov	r1,	  #12       // Start Y Position
@@ -161,22 +209,13 @@ DrawMenuMushroom:
 	mov	r1,	  #14       // Start Y Position
         mov     r2,       #0
         bl      drawCell
-  
-
-        pop     {r0-r2,r3,r4,r5,r6,r7,r8,lr}
+ 
+        pop     {r0-r8,lr}
 	mov	pc,	lr
-//        b       DrawMenuMushroomLoop
 
 .globl  DrawMenuMushroom2
 DrawMenuMushroom2:
-        push {r0-r2, r3,r4,r5,r6,r7,r8,lr}
-  //      mov     r3,     #225
-    //    mov     r4,     #225
-      //  ldr     r5,     =500
-   //     ldr     r6,     =coin
-     //   mov     r7,     #255                     // Selection Menu dimensions, Width
-       // ldr     r8,     =530                     // HEIGHT
-
+        push {r0-r8,lr}
 
         mov	r0,	  #6      // Start X position of your picture
 	mov	r1,	  #12       // Start Y Position
@@ -188,23 +227,7 @@ DrawMenuMushroom2:
         mov     r2,       #10
         bl      drawCell
 
-
-/*
-DrawMenuMushroomLoop:
-	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
-	mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula
-
-	ldrh	r2,	[r6],#2			//setting pixel color by loading it from the data section. We load hald word
-	bl	DrawPixel
-	add	r4,	#1			//increment x position
-	cmp	r4,	r7			//compare with image with
-	blt	DrawMenuMushroomLoop
-	mov	r4,	r3			//reset x
-	add	r5,	#1			//increment Y
-	cmp	r5,	r8			//compare y with image height   
-	blt	DrawMenuMushroomLoop   */
-
-        pop     {r0-r2,r3,r4,r5,r6,r7,r8,lr}
+        pop     {r0-r8,lr}
 	mov	pc,	lr
 //************************DRAW MENU MUSHROOM*******************************
 
@@ -276,6 +299,10 @@ drawCell:
         beq     DrawCoin
         cmp     r2,     #10
         beq     DrawMushroom
+        cmp     r2,     #11
+        beq     DrawStar
+        cmp     r2,     #12
+        beq     DrawOrangeSquare
 	ldr	r6,	=Sky  		        //Address of the picture
         b       drawCellLoop
 
@@ -316,6 +343,12 @@ DrawCoin:
         b       drawCellLoop
 DrawMushroom:
         ldr     r6,     =selectionMushroom
+        b       drawCellLoop
+DrawStar:
+        ldr     r6,     =PauseStar
+        b       drawCellLoop
+DrawOrangeSquare:
+        ldr     r6,     =OrangeSquare
         
 
 drawCellLoop:

@@ -63,16 +63,13 @@ readMainMenuButtons:
         beq     next
         mov     r5, #0
         
-        //b       checkMenuDown
-        //b       checkMenuA
-
 checkMenuUp:
         mov     r7, r9
         lsr     r7, #4
         and     r7, #1
         cmp     r7, #0
         bne     checkMenuDown
-   //     bl      MenuMoveUp
+
         mov     r0, #1
         bl      MainUpPressed
 checkMenuDown:
@@ -82,7 +79,7 @@ checkMenuDown:
         cmp     r7, #0
         bne     checkMenuA
         mov     r0, #2
-//        bl      MenuMoveDown
+
         bl      MainDownPressed
 checkMenuA:
         mov     r7, r9
@@ -91,38 +88,24 @@ checkMenuA:
         cmp     r7, #0
         bne     MenuNext
         mov     r0, #3
-//        bl      MenuSelectA
+
         bl      MainAPressed
-MenuMoveUp:
-        //bl      DrawMainMenuScreen
-        //bl      DrawMenuMushroom
-        b       MenuNext
-
-MenuMoveDown:
-        //bl      DrawMainMenuScreen
-        //bl      DrawMenuMushroom2
-        b       MenuNext
-
-MenuSelectA:
-        b      endMenuRead
 
 MenuNext:
         b       readMainMenuButtons
 
 endMenuRead:
         pop     {r2-r9, lr}
-    //    bl      ExitMenu
         mov     pc, lr
 
 // ************ Menus Read Function ****************
 
 
-/*
+
 // ************************* PAUSE MENU BUTTONS *********************************
 .globl  readPauseButtons
 readPauseButtons:
         push    {r2-r9, lr}
-     //   mov     r9, r0
         ldr     r1, =0xfffff
         bl      Wait				//wait for a second
         bl      Read_SNES			//run the snes routine
@@ -137,7 +120,7 @@ checkPauseUp:
         and     r7, #1
         cmp     r7, #0
         bne     checkPauseDn
-        b       PauseUpPressed
+        bl       PauseUpPressed
 
 checkPauseDn:
         mov     r7, r9
@@ -145,7 +128,7 @@ checkPauseDn:
         and     r7, #1
         cmp     r7, #0
         bne     checkPauseA
-        b       PauseDnPressed
+        bl       PauseDnPressed
 
 checkPauseA:
         mov     r7, r9
@@ -153,7 +136,7 @@ checkPauseA:
         and     r7, #1
         cmp     r7, #0
         bne     checkPauseSt
-        //b       PauseAPressed
+        bl       PauseAPressed
 
 checkPauseSt:
         mov     r7, r9
@@ -161,10 +144,13 @@ checkPauseSt:
         and     r7, #1
         cmp     r7, #0
         bne     PauseNext
-        bl      ExitMainMenu                 // if already paused, press start again to leave
+        bl      endPauseRead                 // if already paused, press start again to leave
 
 
 PauseNext:
+      ldr     r1, =0xfffff
+        bl      Wait				//wait for a second
+  
        b       readPauseButtons
 
 endPauseRead:
@@ -176,7 +162,8 @@ endPauseRead:
 // ************************* PAUSE MENU BUTTONS *********************************
 
 
-*/
+//*/
+
 .globl  readButtons
 
 readButtons:
@@ -196,7 +183,7 @@ checkSt:
         and     r7, #1
         cmp     r7, #0
         bne     checkL
- //       bl      StartPressed
+        bl      pauseMenu
 /*
 checkUp:
         mov     r7, r9

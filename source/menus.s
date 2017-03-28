@@ -1,34 +1,17 @@
-//
+// 
+// Main menu and pause menu 
+
 
 .section .text
 
-
-//------------------------------------------------------------------------------------
-//printMenuStart:
-  //      push {r4-r10,lr}
-
-//	bl      DrawStartGameSelected
-  //      bl      DrawQuitGame
-
-
-//	pop		{r4-r10,lr}
-//	mov		pc, lr
-//------------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------------
 .globl mainMenu
 mainMenu:
         push   {r2-r9, lr}
         bl      DrawMainMenuScreen   //print the main menu
         bl      DrawMenuMushroom     //print selection indictor (a mushroom)
         mov     r8, #0               //initialize state to 0 (start selected)
-    //    bl      DrawMenuMushroom2
 
-//ReadMenu:
-  //      bl      readMainMenuButtons
-      //  b       ReadMenu
-
-readMainMenuLoop: //FSM: state 0(start) and 1(quit)
+readMainMenuLoop:                       //FSM: state 0(start) and 1(quit)
         bl      readMainMenuButtons
 
         cmp     r0 ,#1              //up button pressed
@@ -75,99 +58,58 @@ ExitMainMenu:
 
 
 //------------------------------------------------------------------------------------
-/*
-.globl StartPressed
-StartPressed:
+
+.globl pauseMenu
+pauseMenu:
         push    {r5, lr}          
-        mov     r5,     #1      // set r5 to resume mode        
-        bl      DrawPauseMenu1
-        b      readPauseButtons
+        mov     r5,     #1      // initialize r5 to resume mode        
+        bl      DrawPauseMenu
+        bl      DrawMenuStar1
+
+PauseLabel:       
+        b       readPauseButtons
+
+.globl  PauseStPressed
+PauseStPressed:
+        b       PauseDone
 
 .globl PauseDnPressed
 PauseDnPressed:
         cmp     r5,     #1
-        beq     DrawPause2 
+        moveq   r5,     #2
+        beq     DrawMenuStar2 
+        
         cmp     r5,     #2
-        beq     DrawPause3  
+        moveq   r5,     #3
+        beq     DrawMenuStar3  
+
         b       PauseNext
         
 .globl PauseUpPressed
 PauseUpPressed:
         cmp     r5,     #2
-        beq     DrawPause1 
+        moveq   r5,     #1
+        beq     DrawMenuStar1
+         
         cmp     r5,     #3
-        beq     DrawPause2 
-        b       PauseNext
-DrawPause1:
-        b       DrawPauseMenu1
-        mov     r5, #1
-        b       PauseNext
-DrawPause2:
-        b       DrawPauseMenu2
-        mov     r5, #2
-        b       PauseNext
-DrawPause3:
-        b       DrawPauseMenu3
-        mov     r5, #3
+        moveq   r5,     #2
+        beq     DrawMenuStar2 
         b       PauseNext
 
+.globl PauseAPressed
+PauseAPressed:
+        cmp     r5,     #1      //resume selected -> resume game
+        beq     PauseDone
+        cmp     r5,     #2      //restart selected > restart game
+        beq     StartGame        
+        cmp     r5,     #3      //quit selected -> go to main menu screen
+        beq     mainMenu
+        
 PauseNext:
+        ldr     r1, =0xfffff
+        bl      Wait
+        b       PauseLabel
+PauseDone:
         pop     {r5, lr}
         mov     pc, lr
 
-       
-
-PauseMenu:
-       */
-
-
-        // push {lr}
-PauseGame:
-	//bl	DrawPauseFrame		//Draw the background of the pause menu
-
-PauseRestartOption:
-//	bl	DrawRestartGameSelected	//Default to restart
-//	bl	DrawQuitGame
-//	bl	ReadButtons
-
-//	cmp	r0, #4			//If up, loop back
-//	beq	PauseRestartOption
-//	cmp	r0, #5			//If down, go to quit option
-//	beq	PauseQuitOption
-//	cmp	r0, #8			//If A, start game
-//	beq	newGameLoop
-//	cmp	r0, #3			//If start, resume!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  //      beq	ExitPause
-	//b	PauseRestartOption	//If none/other, loop back
-
-PauseQuitOption:
-//	bl	DrawQuitGameSelected
-/*	bl	DrawRestartGame
-	bl	ReadButtons
-	cmp	r0, #4			//If up, go to restart option
-	beq	PauseRestartOption
-	cmp	r0, #5			//If down, loop back
-	beq	PauseQuitOption
-
-	cmp	r0, #8			//If A, return to main menu
-        moveq   r0, #1
-	beq	mainMainMenu
-
-	cmp	r0, #3			//If start, resume!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	beq	ExitPause
-	b	PauseQuitOption		//If none/other, loop back
-ExitPause:
-        bl	DrawGameBounds
-endPauseLoop:
-
-        pop {lr}
-        mov     pc,lr
-*/
-//------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------
-/*
-.section	.data
-.align 4
-
-Quitting_Game:
-	.asciz	"Exiting program..."	*/
