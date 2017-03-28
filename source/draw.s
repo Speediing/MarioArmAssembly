@@ -38,6 +38,7 @@ Looping:
  */
 
 //************************DRAW PIXEL FUNCTION ************************
+.globl DrawPixel
 DrawPixel:
 	push	{r4-r10, lr}
 
@@ -233,8 +234,6 @@ DrawMenuMushroom2:
 
 
 //******************************* MAP DRAWING ****************************
-
-
 .globl drawMap
 drawMap:
         push    {r7-r10, lr}
@@ -270,6 +269,7 @@ DrawMapLoop:
         b       DrawMapLoop
 
 ExitDraw:
+        bl      Print_Init_Stats
         pop     {r7-r10, lr}
         mov     pc, lr
 

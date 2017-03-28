@@ -7,7 +7,6 @@ TODO:
 -reset game function when mario dies(call switchmap with first map)
 -add final castle(game won)
 -game lost screen(lives == 0)
--Menus(title and pause)
 -value pack interrupts
 -increase score when hits coin/monsters(from top)
 

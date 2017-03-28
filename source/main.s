@@ -17,17 +17,9 @@ main:
         bl      initGPIO                // Intializes GPIO
       	bl	clearScreen
 
-    //
-    bl      mainMenu
+    
+        bl      mainMenu
         
-
-      //  bl      DrawMenuScreen
-       // bl      DrawMenuMushroom
-//      bl      DrawMenuMushroom2
-
-//ReadMenu:
- //       bl      readMenuButtons
-  //      b       ReadMenu
 
 .globl StartGame
 StartGame:
@@ -36,6 +28,7 @@ StartGame:
         ldr     r0,        =GameMap       // load initial map
         ldr     r1,        =EndMap        // load initial map
         bl      drawMap                   // draw initial map
+        bl      Print_Init_Stats 
 
 read:
         bl      readButtons
