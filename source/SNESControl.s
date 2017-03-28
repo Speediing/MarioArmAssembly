@@ -50,21 +50,21 @@ initGPIO:
 // ************ Menus Read Function ****************
 
 // read up, if
-.globl readMenuButtons
+.globl readMainMenuButtons
 
-readMenuButtons:
-        push    {r2-r9, lr}
-        mov     r9, r0
-        
+readMainMenuButtons:
+     push    {r2-r9, lr}
+     //   mov     r9, r0
         ldr     r1, =0xfffff
         bl      Wait				//wait for a second
         bl      Read_SNES			//run the snes routine
         cmp     r5, r9
-        beq     MenuNext
+        mov     r9, r0
+        beq     next
         mov     r5, #0
         
         //b       checkMenuDown
-        b       checkMenuA
+        //b       checkMenuA
 
 checkMenuUp:
         mov     r7, r9
@@ -86,16 +86,16 @@ checkMenuA:
         and     r7, #1
         cmp     r7, #0
         bne     MenuNext
-        bl       MenuSelectA
+        bl      MenuSelectA
 
 MenuMoveUp:
-        bl      DrawMainMenuScreen
-        bl      DrawMenuMushroom
+        //bl      DrawMainMenuScreen
+        //bl      DrawMenuMushroom
         b       MenuNext
 
 MenuMoveDown:
-        bl      DrawMainMenuScreen
-        bl      DrawMenuMushroom2
+        //bl      DrawMainMenuScreen
+        //bl      DrawMenuMushroom2
         b       MenuNext
 
 MenuSelectA:
@@ -113,15 +113,75 @@ endMenuRead:
 
 
 
-.globl  readButtons
-
-readButtons:
+// ************************* PAUSE MENU BUTTONS *********************************
+.globl  readPauseButtons
+readPauseButtons:
         push    {r2-r9, lr}
-        mov     r9, r0
+     //   mov     r9, r0
         ldr     r1, =0xfffff
         bl      Wait				//wait for a second
         bl      Read_SNES			//run the snes routine
         cmp     r5, r9
+        mov     r9, r0
+        beq     next
+        mov     r5, #0
+
+checkPauseUp:
+        mov     r7, r9
+        lsr     r7, #4
+        and     r7, #1
+        cmp     r7, #0
+        bne     checkPauseDn
+        b       PauseUpPressed
+
+checkPauseDn:
+        mov     r7, r9
+        lsr     r7, #5
+        and     r7, #1
+        cmp     r7, #0
+        bne     checkPauseA
+        b       PauseDnPressed
+
+checkPauseA:
+        mov     r7, r9
+        lsr     r7, #8
+        and     r7, #1
+        cmp     r7, #0
+        bne     checkPauseSt
+        //b       PauseAPressed
+
+checkPauseSt:
+        mov     r7, r9
+        lsr     r7, #3
+        and     r7, #1
+        cmp     r7, #0
+        bne     PauseNext
+        bl      ExitMainMenu                 // if already paused, press start again to leave
+
+
+PauseNext:
+       b       readPauseButtons
+
+endPauseRead:
+        pop    {r2-r9, lr}
+        mov     pc, lr
+
+
+
+// ************************* PAUSE MENU BUTTONS *********************************
+
+
+
+.globl  readButtons
+
+readButtons:
+        push    {r2-r9, lr}
+     //   mov     r9, r0
+        ldr     r1, =0xfffff
+        bl      Wait				//wait for a second
+        bl      Read_SNES			//run the snes routine
+        cmp     r5, r9
+        mov     r9, r0
         beq     next
         mov     r5, #0
 
@@ -130,9 +190,9 @@ checkSt:
         lsr     r7, #3
         and     r7, #1
         cmp     r7, #0
-        bne     checkUp
-//        bl      StartPressed
-
+        bne     checkL
+        bl      StartPressed
+/*
 checkUp:
         mov     r7, r9
         lsr     r7, #4
@@ -141,7 +201,7 @@ d:      cmp     r7, #0
         bne     checkL
         b       next
 
-/*checkDn:
+checkDn:
         mov     r7, r9
         lsr     r7, #5
         and     r7, #1

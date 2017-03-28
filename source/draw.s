@@ -62,10 +62,12 @@ DrawPauseMenu1:
         ldr     r6,     =PauseMenu1     // draws menu with cursor on resume
         b       NextPause
 
+.globl DrawPauseMenu2
 DrawPauseMenu2:
         push {r4,r5,r6,r7,r8,lr}
         ldr     r6,     =PauseMenu2
         b       NextPause
+.globl DrawPauseMenu3
 DrawPauseMenu3: 
         push {r4,r5,r6,r7,r8,lr}
         ldr     r6,     =PauseMenu3
@@ -94,16 +96,31 @@ drawPauseMenuLoop:
 	mov	pc,	lr
 
 //************************DRAW MENU PAUSE SCREEN ******************************
+
+
+//************************DRAW MENU TITLE SCREEN ******************************
 .globl DrawMainMenuScreen
 DrawMainMenuScreen:
+       
+DrawTitleMenuStart:
         push {r4,r5,r6,r7,r8,lr}
+        ldr     r6,     =TitleMenuStart    // draws menu with cursor on resume
+        b       NextPause
+
+DrawTitleMenuQuit:
+        push {r4,r5,r6,r7,r8,lr}
+        ldr     r6,     =TitleMenuQuit
+
+NextTitle: 
+//         push {r4,r5,r6,r7,r8,lr}
         mov     r4,     #0
         mov     r5,     #0
-        ldr     r6,     =MenuTitleScreen
+      //  ldr     r6,     =MenuTitleScreen
         mov     r7,     #840    // Width of MenuTitleScreen
         mov     r8,     #680    // Height of MenuTitleScreen
 
-drawMenuLoop:
+
+drawTitleLoop:
 	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
 	mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula
 
@@ -111,17 +128,18 @@ drawMenuLoop:
 	bl	DrawPixel
 	add	r4,	#1			//increment x position
 	cmp	r4,	r7			//compare with image with
-	blt	drawMenuLoop
+	blt	drawTitleLoop
 	mov	r4,	#0			//reset x
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
-	blt	drawMenuLoop
+	blt	drawTitleLoop
 
         pop     {r4,r5,r6,r7,r8,lr}
 	mov	pc,	lr			//return
 
 //************************DRAW MENU TITLE SCREEN ******************************
 
+/*
 
 //************************DRAW MENU MUSHROOM*******************************
 .globl DrawMenuMushroom
@@ -163,7 +181,7 @@ DrawMenuMushroomLoop:
 	mov	pc,	lr
 //************************DRAW MENU MUSHROOM*******************************
 
-
+*/
 
 //******************************* MAP DRAWING ****************************
 

@@ -20,7 +20,7 @@
 mainMenu:
         push   {r2-r9, lr}
         bl      DrawMainMenuScreen   //print the main menu
-        bl      DrawMenuMushroom     //print selection indictor (a mushroom)
+        //bl      DrawMenuMushroom     //print selection indictor (a mushroom)
         mov     r5, #0                   //initialize state to 0 (start selected)
     //    bl      DrawMenuMushroom2
 
@@ -28,8 +28,11 @@ mainMenu:
         //bl      readMenuButtons
         //b       ReadMenu
 
-readMenuLoop: //FSM: state 0(start) and 1(quit)
-        bl      readMenuButtons
+
+/*
+
+readMainMenuLoop: //FSM: state 0(start) and 1(quit)
+        bl      readMainMenuButtons
 
         cmp r0 ,#1              //up button pressed
         beq     upPressed
@@ -39,7 +42,7 @@ readMenuLoop: //FSM: state 0(start) and 1(quit)
 
         cmp r0 ,#3
         beq     aPressed        //A button pressed
-        b       readMenuLoop
+        b       readMainMenuLoop
 
 /*MenuMoveUp:
         bl      DrawMenuScreen
@@ -52,6 +55,8 @@ MenuMoveDown:
 MenuSelectA:
         b       endMenuRead*/
 
+
+/*
 
 upPressed:
         cmp     r5, #0          //if is state 0
@@ -88,6 +93,9 @@ quitMain:
  //       mov             r0 ,r4
    //     b               quitEndMenu
 
+*/
+
+
 endMainMenu:
 
       //  bl clearScreen
@@ -103,9 +111,43 @@ endMainMenu:
 
 .globl StartPressed
 StartPressed:
-        push    {r5}          
-        mov     r5,     #0      // set r5 to resume mode        
+        push    {r5, lr}          
+        mov     r5,     #1      // set r5 to resume mode        
         bl      DrawPauseMenu1
+        b      readPauseButtons
+
+.globl PauseDnPressed
+PauseDnPressed:
+        cmp     r5,     #1
+        beq     DrawPause2 
+        cmp     r5,     #2
+        beq     DrawPause3      
+        
+.globl PauseUpPressed
+PauseUpPressed:
+        cmp     r5,     #2
+        beq     DrawPause1 
+        cmp     r5,     #3
+        beq     DrawPause2 
+
+DrawPause1:
+        b       DrawPauseMenu1
+        mov     r5, #1
+        b       PauseNext
+DrawPause2:
+        b       DrawPauseMenu2
+        mov     r5, #2
+        b       PauseNext
+DrawPause3:
+        b       DrawPauseMenu3
+        mov     r5, #3
+        b       PauseNext
+
+PauseNext:
+        pop     {r5, lr}
+        mov     pc, lr
+
+       
 
 PauseMenu:
        

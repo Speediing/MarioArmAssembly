@@ -20,8 +20,8 @@ main:
 //        bl      mainMenu
 
 
-//        bl      DrawMenuScreen
-//        bl      DrawMenuMushroom
+      //  bl      DrawMenuScreen
+       // bl      DrawMenuMushroom
 //      bl      DrawMenuMushroom2
 
 //ReadMenu:
@@ -31,7 +31,7 @@ main:
 .globl ExitMainMenu
 ExitMainMenu:
         bl      clearScreen
-
+ 
         ldr     r0,        =GameMap       // load initial map
         ldr     r1,        =EndMap        // load initial map
         bl      drawMap                   // draw initial map
