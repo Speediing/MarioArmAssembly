@@ -72,22 +72,27 @@ checkMenuUp:
         and     r7, #1
         cmp     r7, #0
         bne     checkMenuDown
-        bl      MenuMoveUp
+   //     bl      MenuMoveUp
+        mov     r0, #1
+        bl      MainUpPressed
 checkMenuDown:
         mov     r7, r9
         lsr     r7, #5
         and     r7, #1
         cmp     r7, #0
         bne     checkMenuA
-        bl      MenuMoveDown
+        mov     r0, #2
+//        bl      MenuMoveDown
+        bl      MainDownPressed
 checkMenuA:
         mov     r7, r9
         lsr     r7, #8
         and     r7, #1
         cmp     r7, #0
         bne     MenuNext
-        bl      MenuSelectA
-
+        mov     r0, #3
+//        bl      MenuSelectA
+        bl      MainAPressed
 MenuMoveUp:
         //bl      DrawMainMenuScreen
         //bl      DrawMenuMushroom
@@ -102,7 +107,7 @@ MenuSelectA:
         b      endMenuRead
 
 MenuNext:
-      //  b       readMenuButtons
+        b       readMainMenuButtons
 
 endMenuRead:
         pop     {r2-r9, lr}
@@ -112,7 +117,7 @@ endMenuRead:
 // ************ Menus Read Function ****************
 
 
-
+/*
 // ************************* PAUSE MENU BUTTONS *********************************
 .globl  readPauseButtons
 readPauseButtons:
@@ -121,10 +126,10 @@ readPauseButtons:
         ldr     r1, =0xfffff
         bl      Wait				//wait for a second
         bl      Read_SNES			//run the snes routine
-        cmp     r5, r9
+     //   cmp     r5, r9
         mov     r9, r0
-        beq     next
-        mov     r5, #0
+       // beq     next
+       // mov     r5, #0
 
 checkPauseUp:
         mov     r7, r9
@@ -171,7 +176,7 @@ endPauseRead:
 // ************************* PAUSE MENU BUTTONS *********************************
 
 
-
+*/
 .globl  readButtons
 
 readButtons:
@@ -191,7 +196,7 @@ checkSt:
         and     r7, #1
         cmp     r7, #0
         bne     checkL
-        bl      StartPressed
+ //       bl      StartPressed
 /*
 checkUp:
         mov     r7, r9

@@ -20,87 +20,54 @@
 mainMenu:
         push   {r2-r9, lr}
         bl      DrawMainMenuScreen   //print the main menu
-        //bl      DrawMenuMushroom     //print selection indictor (a mushroom)
-        mov     r5, #0                   //initialize state to 0 (start selected)
+        bl      DrawMenuMushroom     //print selection indictor (a mushroom)
+        mov     r8, #0               //initialize state to 0 (start selected)
     //    bl      DrawMenuMushroom2
 
 //ReadMenu:
-        //bl      readMenuButtons
-        //b       ReadMenu
-
-
-/*
+  //      bl      readMainMenuButtons
+      //  b       ReadMenu
 
 readMainMenuLoop: //FSM: state 0(start) and 1(quit)
         bl      readMainMenuButtons
 
-        cmp r0 ,#1              //up button pressed
-        beq     upPressed
+        cmp     r0 ,#1              //up button pressed
+        beq     MainUpPressed
 
-        cmp r0 ,#2              //down button pressed
-        beq     downPressed
+        cmp     r0 ,#2              //down button pressed
+        beq     MainDownPressed
 
-        cmp r0 ,#3
-        beq     aPressed        //A button pressed
+        cmp     r0 ,#3
+        beq     MainAPressed       //A button pressed
         b       readMainMenuLoop
 
-/*MenuMoveUp:
-        bl      DrawMenuScreen
-        bl      DrawMenuMushroom
-        b       MenuNext
-MenuMoveDown:
-        bl      DrawMenuScreen
-        bl      DrawMenuMushroom2
-        b       MenuNext
-MenuSelectA:
-        b       endMenuRead*/
+
+.globl MainUpPressed
+MainUpPressed:
+        cmp     r8, #0          //if is state 0
+        beq     readMainMenuLoop    //keep reading buttons (do nothing)
+
+        bl      DrawMenuMushroom //if is state 1, switch to and draw state 0
+        mov     r8, #0
+
+        b       readMainMenuLoop      //keep reading menu buttons
+.globl MainDownPressed
+MainDownPressed:
+        cmp     r8,#1            //if is state 1
+        beq     readMainMenuLoop     //keep reading buttons (do nothing)
+        mov     r8, #1
+        bl      DrawMenuMushroom2 //if is state 0, switch to and draw state 1
 
 
-/*
-
-upPressed:
-        cmp     r5, #0          //if is state 0
-        beq     readMenuLoop    //keep reading buttons (do nothing)
-
-        bl      DrawMenuMushroom2 //if is state 1, switch to and draw state 0
-        mov     r5, #0
-
-        b       readMenuLoop      //keep reading menu buttons
-downPressed:
-        cmp     r5,#1            //if is state 1
-        beq     readMenuLoop     //keep reading buttons (do nothing)
-
-        bl      DrawMenuMushroom //if is state 0, switch to and draw state 1
-
-        mov     r5, #1
-        b       readMenuLoop
-aPressed:
-        cmp     r5, #0           //if state 0 (start) is selected
-        beq     ExitMainMenu      //start game
-        cmp     r5, #1           //if state 1 (quit) is selected
+        b       readMainMenuLoop
+.globl MainAPressed
+MainAPressed:
+        cmp     r8, #0           //if state 0 (start) is selected
+        beq     StartGame      //start game
+        cmp     r8, #1           //if state 1 (quit) is selected
         beq     exitGame         //exit game
 
-quitMain:
-
-//	mov		r0, #500
-//	mov		r1, #600
-//	ldr		r2, =0xFFFF
-//	ldr		r3, =Quitting_Game
-//	bl		Draw_String
-
-//	ldr		r0, =0x0000
-//	bl		clearScreen
- //       mov             r0 ,r4
-   //     b               quitEndMenu
-
-*/
-
-
-endMainMenu:
-
-      //  bl clearScreen
-        b       exitGame
-//quitEndMenu:
+ExitMainMenu:
         pop    {r2-r9, lr}
         mov     pc,lr
 //------------------------------------------------------------------------------------
@@ -108,7 +75,7 @@ endMainMenu:
 
 
 //------------------------------------------------------------------------------------
-
+/*
 .globl StartPressed
 StartPressed:
         push    {r5, lr}          
@@ -121,7 +88,8 @@ PauseDnPressed:
         cmp     r5,     #1
         beq     DrawPause2 
         cmp     r5,     #2
-        beq     DrawPause3      
+        beq     DrawPause3  
+        b       PauseNext
         
 .globl PauseUpPressed
 PauseUpPressed:
@@ -129,7 +97,7 @@ PauseUpPressed:
         beq     DrawPause1 
         cmp     r5,     #3
         beq     DrawPause2 
-
+        b       PauseNext
 DrawPause1:
         b       DrawPauseMenu1
         mov     r5, #1
@@ -150,7 +118,7 @@ PauseNext:
        
 
 PauseMenu:
-       
+       */
 
 
         // push {lr}

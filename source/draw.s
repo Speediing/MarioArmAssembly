@@ -56,7 +56,7 @@ DrawPixel:
 //************************DRAW PIXEL FUNCTION ****************************
 
 //************************DRAW MENU PAUSE SCREEN ******************************
-.globl DrawPauseMenu1
+/*.globl DrawPauseMenu1
 DrawPauseMenu1:
         push {r4,r5,r6,r7,r8,lr}
         ldr     r6,     =PauseMenu1     // draws menu with cursor on resume
@@ -75,7 +75,7 @@ NextPause:
         mov     r4,     #200
         mov     r5,     #0
        
-        mov     r7,     #700    // Width of MenuTitleScreen
+        mov     r7,     #500    // Width of MenuTitleScreen
         mov     r8,     #600    // Height of MenuTitleScreen
 
 drawPauseMenuLoop:
@@ -96,7 +96,7 @@ drawPauseMenuLoop:
 	mov	pc,	lr
 
 //************************DRAW MENU PAUSE SCREEN ******************************
-
+*/
 
 //************************DRAW MENU TITLE SCREEN ******************************
 .globl DrawMainMenuScreen
@@ -104,14 +104,14 @@ DrawMainMenuScreen:
        
 DrawTitleMenuStart:
         push {r4,r5,r6,r7,r8,lr}
-        ldr     r6,     =TitleMenuStart    // draws menu with cursor on resume
-        b       NextPause
+        ldr     r6,     =mainMenuScreen    // draws menu with cursor on resume
+        b       NextMainMenu
 
-DrawTitleMenuQuit:
-        push {r4,r5,r6,r7,r8,lr}
-        ldr     r6,     =TitleMenuQuit
+//DrawTitleMenuQuit:
+   //     push {r4,r5,r6,r7,r8,lr}
+ //       ldr     r6,     =TitleMenuQuit
 
-NextTitle: 
+NextMainMenu: 
 //         push {r4,r5,r6,r7,r8,lr}
         mov     r4,     #0
         mov     r5,     #0
@@ -120,7 +120,7 @@ NextTitle:
         mov     r8,     #680    // Height of MenuTitleScreen
 
 
-drawTitleLoop:
+drawMMLoop:
 	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
 	mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula
 
@@ -128,41 +128,68 @@ drawTitleLoop:
 	bl	DrawPixel
 	add	r4,	#1			//increment x position
 	cmp	r4,	r7			//compare with image with
-	blt	drawTitleLoop
+	blt	drawMMLoop
 	mov	r4,	#0			//reset x
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
-	blt	drawTitleLoop
+	blt	drawMMLoop
 
         pop     {r4,r5,r6,r7,r8,lr}
 	mov	pc,	lr			//return
 
 //************************DRAW MENU TITLE SCREEN ******************************
 
-/*
+
 
 //************************DRAW MENU MUSHROOM*******************************
 .globl DrawMenuMushroom
 DrawMenuMushroom:
-        push {r3,r4,r5,r6,r7,r8,lr}
-        mov     r3,     #225
-        mov     r4,     #225                     // x
-        ldr     r5,     =425                     // y
-        ldr     r6,     =MenuMushroom
-        mov     r7,     #255                     // Selection Menu dimensions, Width
-        ldr     r8,     =455                     // HEIGHT
-        b       DrawMenuMushroomLoop
+        push {r0-r2,r3,r4,r5,r6,r7,r8,lr}
+  //      mov     r3,     #225
+    //    mov     r4,     #225                     // x
+      //  ldr     r5,     =425                     // y
+  //      ldr     r6,     =coin
+    //    mov     r7,     #255                     // Selection Menu dimensions, Width
+      //  ldr     r8,     =455                     // HEIGHT 
+
+        mov	r0,	  #6      // Start X position of your picture
+	mov	r1,	  #12       // Start Y Position
+        mov     r2,       #10
+        bl      drawCell
+
+        mov	r0,	  #6      // Start X position of your picture
+	mov	r1,	  #14       // Start Y Position
+        mov     r2,       #0
+        bl      drawCell
+  
+
+        pop     {r0-r2,r3,r4,r5,r6,r7,r8,lr}
+	mov	pc,	lr
+//        b       DrawMenuMushroomLoop
 
 .globl  DrawMenuMushroom2
 DrawMenuMushroom2:
-        push {r3,r4,r5,r6,r7,r8,lr}
-        mov     r3,     #225
-        mov     r4,     #225
-        ldr     r5,     =500
-        ldr     r6,     =MenuMushroom
-        mov     r7,     #255                     // Selection Menu dimensions, Width
-        ldr     r8,     =530                     // HEIGHT
+        push {r0-r2, r3,r4,r5,r6,r7,r8,lr}
+  //      mov     r3,     #225
+    //    mov     r4,     #225
+      //  ldr     r5,     =500
+   //     ldr     r6,     =coin
+     //   mov     r7,     #255                     // Selection Menu dimensions, Width
+       // ldr     r8,     =530                     // HEIGHT
 
+
+        mov	r0,	  #6      // Start X position of your picture
+	mov	r1,	  #12       // Start Y Position
+        mov     r2,       #0
+        bl      drawCell
+
+        mov	r0,	  #6      // Start X position of your picture
+	mov	r1,	  #14       // Start Y Position
+        mov     r2,       #10
+        bl      drawCell
+
+
+/*
 DrawMenuMushroomLoop:
 	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
 	mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula
@@ -174,14 +201,13 @@ DrawMenuMushroomLoop:
 	blt	DrawMenuMushroomLoop
 	mov	r4,	r3			//reset x
 	add	r5,	#1			//increment Y
-	cmp	r5,	r8			//compare y with image height
-	blt	DrawMenuMushroomLoop
+	cmp	r5,	r8			//compare y with image height   
+	blt	DrawMenuMushroomLoop   */
 
-        pop     {r3,r4,r5,r6,r7,r8,lr}
+        pop     {r0-r2,r3,r4,r5,r6,r7,r8,lr}
 	mov	pc,	lr
 //************************DRAW MENU MUSHROOM*******************************
 
-*/
 
 //******************************* MAP DRAWING ****************************
 
@@ -243,11 +269,13 @@ drawCell:
         cmp     r2,     #6
         beq     DrawCloud
         cmp     r2,     #7
-        beq     monster1
+       // beq     monster1
         cmp     r2,     #9
-        beq     monster2
+       // beq     monster2
         cmp     r2,     #8
         beq     DrawCoin
+        cmp     r2,     #10
+        beq     DrawMushroom
 	ldr	r6,	=Sky  		        //Address of the picture
         b       drawCellLoop
 
@@ -275,16 +303,20 @@ DrawQBox:
         ldr     r6,     =qBox
         b       drawCellLoop
 
-monster1:
+/*monster1:
         ldr     r6,     =Goomba
         b       drawCellLoop
 monster2:
         ldr     r6,     =Turle
         b       drawCellLoop
-
+*/
 
 DrawCoin:
         ldr     r6,     =coin
+        b       drawCellLoop
+DrawMushroom:
+        ldr     r6,     =selectionMushroom
+        
 
 drawCellLoop:
         mov     r10,    #34                     //restate width
