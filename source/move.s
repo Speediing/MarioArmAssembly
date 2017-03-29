@@ -74,7 +74,7 @@ moveRight:
         mov     r1, r7                               //YPos
 
         bl      drawCell
-        bl      checkEdge
+        bl      checkRightEdge
 
 endRight:
         bl      gravity
@@ -115,6 +115,7 @@ moveLeft:
         mov     r1, r7                               //YPos
 
         bl      drawCell
+        bl      checkLeftEdge
 endLeft:
         bl       gravity
         pop     {r0-r10,lr}
@@ -303,6 +304,11 @@ gravity:
 
 checkUnder:
                 bl      readMario                       //r1- x r2- y
+                cmp     r2, #19
+                bleq    fall2
+                bl      readMario                       //r1- x r2- y
+                cmp     r2, #19
+                beq     endGravity
                 ldr     r4, =GameMap
                 mov     r5, #25
                 mul     r2, r5
@@ -346,14 +352,44 @@ endGravity:
                 pop     {r2-r9, lr}
                 mov     pc, lr
 
+.globl fall2
+fall2:
+                push   {r2-r9, lr}
+                ldr  r2, =livesNum
+                ldrb r3, [r2]
+                sub   r3, r3, #1   // decrement lives
+                streq r3, [r2]
+                cmp   r3, #0
 
-checkEdge:      push    {r0-r10, lr}
+                bleq   DrawLoseMessage
+                ldr  r2, =livesNum
+                ldrb r3, [r2]
+                cmp   r3, #0
+                moveq r5, #3      // reset number of lives
+                streq r5, [r2]
+                beq   main
+                ldreq  r5, =currentLevel
+                mov  r6, #1
+                strb   r6,  [r5]
+                ldr  r0, =GameMap1
+                ldr  r1, =GameMap
+                ldr  r2, =EndMap1
+                bl   switchMap
+                ldr  r0, =GameMap
+                ldr  r1, =EndMap
+                bl   drawMap
+                pop {r2-r9, lr}
+                mov pc, lr
+
+checkRightEdge:      push    {r0-r10, lr}
                 //right edge of the map
                 bl      readMario            //r0-adr, r1-x, r2-y
                 cmp     r1,   #24
                 bne     doneCheckEdge
                 ldr  r7, =currentLevel
                 ldrb  r5, [r7]
+                cmp  r5, #3
+                beq   doneCheckEdge
                 cmp  r5, #2
                 beq   mapThree
                 ldr     r0,  =GameMap2
@@ -365,7 +401,7 @@ checkEdge:      push    {r0-r10, lr}
 mapThree:
 
                 ldr     r0,  =GameMap3
-                ldr  r1,     =GameMap2
+                ldr  r1,     =GameMap
                 ldr  r2, =EndMap3
                 mov  r6, #3
                 strb  r6, [r7]
@@ -376,8 +412,8 @@ switch:
 
 
 
-                ldr     r0,  =GameMap2
-                ldr     r1,  =EndMap2
+                ldr     r0,  =GameMap
+                ldr     r1,  =EndMap
                 bl      drawMap
                 bl      readButtons
 
@@ -386,7 +422,50 @@ doneCheckEdge:  pop     {r0-r10,lr}
                 mov     pc, lr
 
 
-//r0:new map, r1: old map, r2: end new Map
+
+
+
+checkLeftEdge:      push    {r0-r10, lr}
+                                //right edge of the map
+                                bl      readMario            //r0-adr, r1-x, r2-y
+                                cmp     r1,   #0
+                                bne     doneCheckEdge2
+                                ldr  r7, =currentLevel
+                                ldrb  r5, [r7]
+                                cmp  r5, #1
+                                beq  doneCheckEdge2
+                                cmp  r5, #2
+                                beq   mapOne
+                                ldr     r0,  =GameMapLeft2
+                                ldr  r1,     =GameMap
+                                ldr  r2, =EndMapLeft2
+                                mov  r6, #2
+                                strb  r6, [r7]
+                                b   switch2
+                mapOne:
+
+                                ldr  r0,  =GameMapLeft1
+                                ldr  r1,     =GameMap
+                                ldr  r2, =EndMapLeft1
+                                mov  r6, #1
+                                strb  r6, [r7]
+
+
+                switch2:
+                                bl      switchMap  //future function: detect map?
+
+
+
+                                ldr     r0,  =GameMap
+                                ldr     r1,  =EndMap
+                                bl      drawMap
+                                bl      readButtons
+
+
+                doneCheckEdge2:  pop     {r0-r10,lr}
+                                mov     pc, lr
+.globl switchMap
+//r0:new map, r1: gamemap, r2: end new Map
 switchMap:
 
           push  {r4-r10, lr}

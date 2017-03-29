@@ -56,6 +56,69 @@ DrawPixel:
 	mov             pc, lr
 //************************DRAW PIXEL FUNCTION ****************************
 
+//  ********************** DRAW WIN MESSAGE *******************
+.globl DrawWinMessage
+DrawWinMessage:
+
+        push {r4,r5,r6,r7,r8,lr}
+        ldr     r6,     =YouWin     // draws menu with cursor on resume
+        mov     r4,     #235
+        mov     r5,     #100
+
+        ldr     r7,     =555    // Width of Pause menu (Asset dimensions are  360 x 432 )
+        ldr     r8,     =164    // Height of MenuTitleScreen
+
+drawWinMessageLoop:
+	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
+	mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula
+
+	ldrh	r2,	[r6],#2			//setting pixel color by loading it from the data section. We load hald word
+	bl	DrawPixel
+	add	r4,	#1			//increment x position
+	cmp	r4,	r7			//compare with image with
+	blt	drawWinMessageLoop
+	mov	r4,	#235			//reset x
+	add	r5,	#1			//increment Y
+	cmp	r5,	r8			//compare y with image height
+	blt	drawWinMessageLoop
+
+        pop     {r4,r5,r6,r7,r8,lr}
+	mov	pc,	lr
+  //  ********************** DRAW WIN MESSAGE *******************
+
+
+  //  ********************** DRAW LOSE MESSAGE *******************
+  .globl DrawLoseMessage
+  DrawLoseMessage:
+
+          push {r4,r5,r6,r7,r8,lr}
+          ldr     r6,     =YouLose     // draws menu with cursor on resume
+          mov     r4,     #235
+          mov     r5,     #100
+          ldr     r7,     =713    // Width of Pause menu (Asset dimensions are  360 x 432 )
+          ldr     r8,     =165    // Height of MenuTitleScreen
+
+  drawLoseMessageLoop:
+  	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
+  	mov	r1,	r5			//passing y for r1 which is used by the Draw pixel formula
+
+  	ldrh	r2,	[r6],#2			//setting pixel color by loading it from the data section. We load hald word
+  	bl	DrawPixel
+  	add	r4,	#1			//increment x position
+  	cmp	r4,	r7			//compare with image with
+  	blt	drawLoseMessageLoop
+  	mov	r4,	#235			//reset x
+  	add	r5,	#1			//increment Y
+  	cmp	r5,	r8			//compare y with image height
+  	blt	drawLoseMessageLoop
+    //ldr  r5, =currentLevel
+    //mov  r6, #1
+    //strb   r6,  [r5]
+    ldr     r1, =0xffffffff
+    bl      Wait				//wait for a second
+    pop     {r4,r5,r6,r7,r8,lr}
+  	mov	pc,	lr
+    //  ********************** DRAW LOSE MESSAGE ************************
 
 //************************DRAW MENU PAUSE SCREEN ******************************
 
@@ -66,10 +129,10 @@ DrawPauseMenu:
         ldr     r6,     =PauseMenu     // draws menu with cursor on resume
         b       NextPause
 
-NextPause:       
+NextPause:
         mov     r4,     #235
         mov     r5,     #100
-       
+
         ldr     r7,     =595    // Width of Pause menu (Asset dimensions are  360 x 432 )
         ldr     r8,     =532    // Height of MenuTitleScreen
 
@@ -139,7 +202,7 @@ DrawMenuStar1:
 	mov	r1,	  #9       // Start Y Position
         mov     r2,       #12
         bl      drawCell
- 
+
 
         mov	r0,	  #7      // Start X position of your picture
 	mov	r1,	  #12       // Start Y Position
@@ -210,7 +273,7 @@ DrawMenuMushroom:
 	mov	r1,	  #14       // Start Y Position
         mov     r2,       #0
         bl      drawCell
- 
+
         pop     {r0-r8,lr}
 	mov	pc,	lr
 
@@ -292,9 +355,9 @@ drawCell:
         cmp     r2,     #6
         beq     DrawCloud
         cmp     r2,     #7
-       // beq     monster1
+        beq     monster1
         cmp     r2,     #9
-       // beq     monster2
+        beq     monster2
         cmp     r2,     #8
         beq     DrawCoin
         cmp     r2,     #10
@@ -330,13 +393,13 @@ DrawQBox:
         ldr     r6,     =qBox
         b       drawCellLoop
 
-/*monster1:
+monster1:
         ldr     r6,     =Goomba
         b       drawCellLoop
 monster2:
         ldr     r6,     =Turle
         b       drawCellLoop
-*/
+
 
 DrawCoin:
         ldr     r6,     =coin
@@ -349,7 +412,7 @@ DrawStar:
         b       drawCellLoop
 DrawOrangeSquare:
         ldr     r6,     =OrangeSquare
-        
+
 
 drawCellLoop:
         mov     r10,    #34                     //restate width
