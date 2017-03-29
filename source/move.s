@@ -137,7 +137,6 @@ endLeft:
 jump:                                               //loop that makes mario jump three squares
         push    {r2-r8, lr}
 
-
         bl      readMario
 
         //update the gamestate
@@ -382,7 +381,9 @@ killMonster:
                 ldrb     r6, [r5]
                 add     r6, r6, #1
                 strb     r6, [r5]
+                bl      Draw_Stats
                 mov     r4, #0
+
                 pop     {r0-r3,r5-r9, lr}
                 mov     pc, lr
 hitCoin:
@@ -395,7 +396,9 @@ hitCoin:
         ldrb     r6, [r5]
         add     r6, r6, #1
         strb     r6, [r5]
+        bl      Draw_Stats
         mov     r8, #0
+
         pop   {r2-r7, lr}
         mov pc, lr
 
@@ -406,6 +409,8 @@ fall2:
                 ldrb r3, [r2]
                 sub   r3, r3, #1   // decrement lives
                 streq r3, [r2]
+                bl      Draw_Stats
+
                 cmp   r3, #0
 
                 bleq   DrawLoseMessage

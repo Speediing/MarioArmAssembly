@@ -3,10 +3,6 @@
 /*
 
 TODO:
--decrement lives when mario falls through bottom/hits enemy from side
--reset game function when mario dies(call switchmap with first map)
--add final castle(game won)
--game lost screen(lives == 0)
 -value pack interrupts
 -increase score when hits coin/monsters(from top)
 

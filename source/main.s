@@ -23,7 +23,6 @@ main:
 
         bl      mainMenu
 
-
 .globl StartGame
 StartGame:
         bl      clearScreen
@@ -35,32 +34,17 @@ StartGame:
 
 read:
         bl      readButtons
-
-/*
-	ldr		r0, =0x0000
-	bl		FillScreen
-	bl		Print_Menu_Start
-	bl		Menu_Controller
-  */
-//	cmp		r1, #0
-	bl    read
-
-
-
+	bl      read
 
 .globl exitGame
 exitGame:
         bl      clearScreen
         b       haltLoop$
 
-
-
 .globl Restart_Game
 Restart_Game:
 
 	b read
-
-
 
 .globl haltLoop$
 haltLoop$:
