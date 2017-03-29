@@ -81,8 +81,17 @@ drawWinMessageLoop:
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawWinMessageLoop
+  ldr     r1, =0xffff
+  bl      Wait				//wait for a second
+  ldr  r2, =livesNum
+  mov r5, #3      // reset number of lives
+  str r5, [r2]
+  ldr  r5, =currentLevel
+  mov  r6, #1
+  strb   r6,  [r5]
+  b    main
 
-        pop     {r4,r5,r6,r7,r8,lr}
+  pop     {r4,r5,r6,r7,r8,lr}
 	mov	pc,	lr
   //  ********************** DRAW WIN MESSAGE *******************
 
@@ -111,10 +120,7 @@ drawWinMessageLoop:
   	add	r5,	#1			//increment Y
   	cmp	r5,	r8			//compare y with image height
   	blt	drawLoseMessageLoop
-    //ldr  r5, =currentLevel
-    //mov  r6, #1
-    //strb   r6,  [r5]
-    ldr     r1, =0xffffffff
+    ldr     r1, =0xffff
     bl      Wait				//wait for a second
     pop     {r4,r5,r6,r7,r8,lr}
   	mov	pc,	lr
@@ -366,6 +372,8 @@ drawCell:
         beq     DrawStar
         cmp     r2,     #12
         beq     DrawOrangeSquare
+        cmp     r2,     #15
+        beq     DrawCastle
 	ldr	r6,	=Sky  		        //Address of the picture
         b       drawCellLoop
 
@@ -399,6 +407,10 @@ monster1:
 monster2:
         ldr     r6,     =Turle
         b       drawCellLoop
+DrawCastle:
+        ldr     r6,     =castle
+        b       drawCellLoop
+
 
 
 DrawCoin:
