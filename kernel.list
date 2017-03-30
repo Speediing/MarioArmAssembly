@@ -5,7 +5,7 @@ build/output.elf:     file format elf32-littlearm
 Disassembly of section .init:
 
 00008000 <_start>:
-    8000:	ea05e637 	b	1818e4 <main>
+    8000:	ea05e645 	b	18191c <main>
 
 Disassembly of section .text:
 
@@ -94,7 +94,7 @@ Disassembly of section .text:
   180d1c:	e92d40f0 	push	{r4, r5, r6, r7, lr}
   180d20:	e3a06000 	mov	r6, #0
   180d24:	e3a07007 	mov	r7, #7
-  180d28:	e59f45ac 	ldr	r4, [pc, #1452]	; 1812dc <swapLoop+0x18>
+  180d28:	e59f45c0 	ldr	r4, [pc, #1472]	; 1812f0 <swapLoop+0x18>
   180d2c:	e28440af 	add	r4, r4, #175	; 0xaf
 
 00180d30 <continueReadMario>:
@@ -123,9 +123,9 @@ Disassembly of section .text:
   180d78:	0a000018 	beq	180de0 <endRight>
   180d7c:	e5d08001 	ldrb	r8, [r0, #1]
   180d80:	e3580007 	cmp	r8, #7
-  180d84:	0b0000f3 	bleq	181158 <fall2>
+  180d84:	0b0000f4 	bleq	18115c <fall2>
   180d88:	e3580009 	cmp	r8, #9
-  180d8c:	0b0000f1 	bleq	181158 <fall2>
+  180d8c:	0b0000f2 	bleq	18115c <fall2>
   180d90:	e3580008 	cmp	r8, #8
   180d94:	0b0000e2 	bleq	181124 <hitCoin>
   180d98:	e3580000 	cmp	r8, #0
@@ -140,12 +140,12 @@ Disassembly of section .text:
   180dbc:	e1a00006 	mov	r0, r6
   180dc0:	e1a01007 	mov	r1, r7
   180dc4:	e3a02000 	mov	r2, #0
-  180dc8:	eb000224 	bl	181660 <drawCell>
+  180dc8:	eb000232 	bl	181698 <drawCell>
   180dcc:	e3a02003 	mov	r2, #3
   180dd0:	e2860001 	add	r0, r6, #1
   180dd4:	e1a01007 	mov	r1, r7
-  180dd8:	eb000220 	bl	181660 <drawCell>
-  180ddc:	eb0000f7 	bl	1811c0 <checkRightEdge>
+  180dd8:	eb00022e 	bl	181698 <drawCell>
+  180ddc:	eb0000fa 	bl	1811cc <checkRightEdge>
 
 00180de0 <endRight>:
   180de0:	eb00009a 	bl	181050 <gravity>
@@ -159,9 +159,9 @@ Disassembly of section .text:
   180df8:	0a000019 	beq	180e64 <endLeft>
   180dfc:	e5508001 	ldrb	r8, [r0, #-1]
   180e00:	e3580007 	cmp	r8, #7
-  180e04:	0b0000d3 	bleq	181158 <fall2>
+  180e04:	0b0000d4 	bleq	18115c <fall2>
   180e08:	e3580009 	cmp	r8, #9
-  180e0c:	0b0000d1 	bleq	181158 <fall2>
+  180e0c:	0b0000d2 	bleq	18115c <fall2>
   180e10:	e3580008 	cmp	r8, #8
   180e14:	0b0000c2 	bleq	181124 <hitCoin>
   180e18:	e3580000 	cmp	r8, #0
@@ -176,13 +176,13 @@ Disassembly of section .text:
   180e3c:	e1a00006 	mov	r0, r6
   180e40:	e1a01007 	mov	r1, r7
   180e44:	e3a02000 	mov	r2, #0
-  180e48:	eb000204 	bl	181660 <drawCell>
+  180e48:	eb000212 	bl	181698 <drawCell>
   180e4c:	e3a02003 	mov	r2, #3
   180e50:	e2466001 	sub	r6, r6, #1
   180e54:	e1a00006 	mov	r0, r6
   180e58:	e1a01007 	mov	r1, r7
-  180e5c:	eb0001ff 	bl	181660 <drawCell>
-  180e60:	eb0000f6 	bl	181240 <checkLeftEdge>
+  180e5c:	eb00020d 	bl	181698 <drawCell>
+  180e60:	eb0000fa 	bl	181250 <checkLeftEdge>
 
 00180e64 <endLeft>:
   180e64:	eb000079 	bl	181050 <gravity>
@@ -207,20 +207,20 @@ Disassembly of section .text:
   180ea0:	e3a02000 	mov	r2, #0
   180ea4:	e1a00006 	mov	r0, r6
   180ea8:	e1a01007 	mov	r1, r7
-  180eac:	eb0001eb 	bl	181660 <drawCell>
-  180eb0:	e59f3428 	ldr	r3, [pc, #1064]	; 1812e0 <swapLoop+0x1c>
-  180eb4:	eb000398 	bl	181d1c <Wait>
+  180eac:	eb0001f9 	bl	181698 <drawCell>
+  180eb0:	e59f343c 	ldr	r3, [pc, #1084]	; 1812f4 <swapLoop+0x1c>
+  180eb4:	eb0003b6 	bl	181d94 <Wait>
   180eb8:	e3a02003 	mov	r2, #3
   180ebc:	e1a00006 	mov	r0, r6
   180ec0:	e2471001 	sub	r1, r7, #1
   180ec4:	e1a07001 	mov	r7, r1
-  180ec8:	eb0001e4 	bl	181660 <drawCell>
+  180ec8:	eb0001f2 	bl	181698 <drawCell>
   180ecc:	e3a03000 	mov	r3, #0
   180ed0:	e3a05003 	mov	r5, #3
   180ed4:	e4483019 	strb	r3, [r8], #-25
   180ed8:	e5c85000 	strb	r5, [r8]
-  180edc:	e59f3400 	ldr	r3, [pc, #1024]	; 1812e4 <swapLoop+0x20>
-  180ee0:	eb00038d 	bl	181d1c <Wait>
+  180edc:	e59f3414 	ldr	r3, [pc, #1044]	; 1812f8 <swapLoop+0x20>
+  180ee0:	eb0003ab 	bl	181d94 <Wait>
   180ee4:	e2844001 	add	r4, r4, #1
   180ee8:	e3540004 	cmp	r4, #4
   180eec:	daffffe6 	ble	180e8c <jumploop>
@@ -246,7 +246,7 @@ Disassembly of section .text:
   180f24:	e2477001 	sub	r7, r7, #1
   180f28:	e1a00006 	mov	r0, r6
   180f2c:	e1a01007 	mov	r1, r7
-  180f30:	eb0001ca 	bl	181660 <drawCell>
+  180f30:	eb0001d8 	bl	181698 <drawCell>
   180f34:	e8bd4020 	pop	{r5, lr}
   180f38:	e1a0f00e 	mov	pc, lr
 
@@ -260,7 +260,7 @@ Disassembly of section .text:
   180f54:	e2477002 	sub	r7, r7, #2
   180f58:	e1a00006 	mov	r0, r6
   180f5c:	e1a01007 	mov	r1, r7
-  180f60:	eb0001be 	bl	181660 <drawCell>
+  180f60:	eb0001cc 	bl	181698 <drawCell>
   180f64:	e8bd4020 	pop	{r5, lr}
   180f68:	e1a0f00e 	mov	pc, lr
 
@@ -285,9 +285,9 @@ Disassembly of section .text:
   180fa8:	e3a02000 	mov	r2, #0
   180fac:	e1a00006 	mov	r0, r6
   180fb0:	e1a01007 	mov	r1, r7
-  180fb4:	eb0001a9 	bl	181660 <drawCell>
-  180fb8:	e59f3320 	ldr	r3, [pc, #800]	; 1812e0 <swapLoop+0x1c>
-  180fbc:	eb000356 	bl	181d1c <Wait>
+  180fb4:	eb0001b7 	bl	181698 <drawCell>
+  180fb8:	e59f3334 	ldr	r3, [pc, #820]	; 1812f4 <swapLoop+0x1c>
+  180fbc:	eb000374 	bl	181d94 <Wait>
   180fc0:	e3a02003 	mov	r2, #3
   180fc4:	e3580001 	cmp	r8, #1
   180fc8:	1a000008 	bne	180ff0 <righJump>
@@ -319,9 +319,9 @@ Disassembly of section .text:
   181020:	e1a01007 	mov	r1, r7
   181024:	e1a07001 	mov	r7, r1
   181028:	e3a02003 	mov	r2, #3
-  18102c:	eb00018b 	bl	181660 <drawCell>
-  181030:	e59f32ac 	ldr	r3, [pc, #684]	; 1812e4 <swapLoop+0x20>
-  181034:	eb000338 	bl	181d1c <Wait>
+  18102c:	eb000199 	bl	181698 <drawCell>
+  181030:	e59f32c0 	ldr	r3, [pc, #704]	; 1812f8 <swapLoop+0x20>
+  181034:	eb000356 	bl	181d94 <Wait>
   181038:	e2844001 	add	r4, r4, #1
   18103c:	e3540004 	cmp	r4, #4
   181040:	daffffd6 	ble	180fa0 <rjumploop>
@@ -337,11 +337,11 @@ Disassembly of section .text:
 00181054 <checkUnder>:
   181054:	ebffff30 	bl	180d1c <readMario>
   181058:	e3520013 	cmp	r2, #19
-  18105c:	0b00003d 	bleq	181158 <fall2>
+  18105c:	0b00003e 	bleq	18115c <fall2>
   181060:	ebffff2d 	bl	180d1c <readMario>
   181064:	e3520013 	cmp	r2, #19
   181068:	0a000022 	beq	1810f8 <endGravity>
-  18106c:	e59f4268 	ldr	r4, [pc, #616]	; 1812dc <swapLoop+0x18>
+  18106c:	e59f427c 	ldr	r4, [pc, #636]	; 1812f0 <swapLoop+0x18>
   181070:	e3a05019 	mov	r5, #25
   181074:	e0020295 	mul	r2, r5, r2
   181078:	e0811002 	add	r1, r1, r2
@@ -367,16 +367,16 @@ Disassembly of section .text:
   1810c0:	e3a02000 	mov	r2, #0
   1810c4:	e1a00006 	mov	r0, r6
   1810c8:	e1a01007 	mov	r1, r7
-  1810cc:	eb000163 	bl	181660 <drawCell>
-  1810d0:	e59f320c 	ldr	r3, [pc, #524]	; 1812e4 <swapLoop+0x20>
-  1810d4:	eb000310 	bl	181d1c <Wait>
+  1810cc:	eb000171 	bl	181698 <drawCell>
+  1810d0:	e59f3220 	ldr	r3, [pc, #544]	; 1812f8 <swapLoop+0x20>
+  1810d4:	eb00032e 	bl	181d94 <Wait>
   1810d8:	e3a02003 	mov	r2, #3
   1810dc:	e1a00006 	mov	r0, r6
   1810e0:	e2871001 	add	r1, r7, #1
   1810e4:	e1a07001 	mov	r7, r1
-  1810e8:	eb00015c 	bl	181660 <drawCell>
-  1810ec:	e59f31f0 	ldr	r3, [pc, #496]	; 1812e4 <swapLoop+0x20>
-  1810f0:	eb000309 	bl	181d1c <Wait>
+  1810e8:	eb00016a 	bl	181698 <drawCell>
+  1810ec:	e59f3204 	ldr	r3, [pc, #516]	; 1812f8 <swapLoop+0x20>
+  1810f0:	eb000327 	bl	181d94 <Wait>
   1810f4:	eaffffd6 	b	181054 <checkUnder>
 
 001810f8 <endGravity>:
@@ -385,1075 +385,1107 @@ Disassembly of section .text:
 
 00181100 <killMonster>:
   181100:	e92d43ef 	push	{r0, r1, r2, r3, r5, r6, r7, r8, r9, lr}
-  181104:	e59f51dc 	ldr	r5, [pc, #476]	; 1812e8 <swapLoop+0x24>
+  181104:	e59f51f0 	ldr	r5, [pc, #496]	; 1812fc <swapLoop+0x24>
   181108:	e5d56000 	ldrb	r6, [r5]
   18110c:	e2866001 	add	r6, r6, #1
   181110:	e5c56000 	strb	r6, [r5]
-  181114:	eb000226 	bl	1819b4 <Draw_Stats>
+  181114:	eb000235 	bl	1819f0 <Draw_Stats>
   181118:	e3a04000 	mov	r4, #0
   18111c:	e8bd43ef 	pop	{r0, r1, r2, r3, r5, r6, r7, r8, r9, lr}
   181120:	e1a0f00e 	mov	pc, lr
 
 00181124 <hitCoin>:
   181124:	e92d40fc 	push	{r2, r3, r4, r5, r6, r7, lr}
-  181128:	e59f51b8 	ldr	r5, [pc, #440]	; 1812e8 <swapLoop+0x24>
+  181128:	e59f51cc 	ldr	r5, [pc, #460]	; 1812fc <swapLoop+0x24>
   18112c:	e5d56000 	ldrb	r6, [r5]
   181130:	e2866001 	add	r6, r6, #1
   181134:	e5c56000 	strb	r6, [r5]
-  181138:	e59f51ac 	ldr	r5, [pc, #428]	; 1812ec <swapLoop+0x28>
-  18113c:	e5d56000 	ldrb	r6, [r5]
-  181140:	e2866001 	add	r6, r6, #1
-  181144:	e5c56000 	strb	r6, [r5]
-  181148:	eb000219 	bl	1819b4 <Draw_Stats>
-  18114c:	e3a08000 	mov	r8, #0
-  181150:	e8bd40fc 	pop	{r2, r3, r4, r5, r6, r7, lr}
-  181154:	e1a0f00e 	mov	pc, lr
+  181138:	eb00022c 	bl	1819f0 <Draw_Stats>
+  18113c:	e59f51bc 	ldr	r5, [pc, #444]	; 181300 <swapLoop+0x28>
+  181140:	e5d56000 	ldrb	r6, [r5]
+  181144:	e2866001 	add	r6, r6, #1
+  181148:	e5c56000 	strb	r6, [r5]
+  18114c:	eb000227 	bl	1819f0 <Draw_Stats>
+  181150:	e3a08000 	mov	r8, #0
+  181154:	e8bd40fc 	pop	{r2, r3, r4, r5, r6, r7, lr}
+  181158:	e1a0f00e 	mov	pc, lr
 
-00181158 <fall2>:
-  181158:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  18115c:	e59f218c 	ldr	r2, [pc, #396]	; 1812f0 <swapLoop+0x2c>
-  181160:	e5d23000 	ldrb	r3, [r2]
-  181164:	e2433001 	sub	r3, r3, #1
-  181168:	05823000 	streq	r3, [r2]
-  18116c:	eb000210 	bl	1819b4 <Draw_Stats>
-  181170:	e3530000 	cmp	r3, #0
-  181174:	0b0000a3 	bleq	181408 <DrawLoseMessage>
-  181178:	e59f2170 	ldr	r2, [pc, #368]	; 1812f0 <swapLoop+0x2c>
-  18117c:	e5d23000 	ldrb	r3, [r2]
-  181180:	e3530000 	cmp	r3, #0
-  181184:	03a05003 	moveq	r5, #3
-  181188:	05825000 	streq	r5, [r2]
-  18118c:	0a0001d4 	beq	1818e4 <main>
-  181190:	059f515c 	ldreq	r5, [pc, #348]	; 1812f4 <swapLoop+0x30>
-  181194:	e3a06001 	mov	r6, #1
-  181198:	e5c56000 	strb	r6, [r5]
-  18119c:	e59f0154 	ldr	r0, [pc, #340]	; 1812f8 <swapLoop+0x34>
-  1811a0:	e59f1134 	ldr	r1, [pc, #308]	; 1812dc <swapLoop+0x18>
-  1811a4:	e59f2150 	ldr	r2, [pc, #336]	; 1812fc <swapLoop+0x38>
-  1811a8:	eb000040 	bl	1812b0 <switchMap>
-  1811ac:	e59f0128 	ldr	r0, [pc, #296]	; 1812dc <swapLoop+0x18>
-  1811b0:	e59f1148 	ldr	r1, [pc, #328]	; 181300 <swapLoop+0x3c>
-  1811b4:	eb000112 	bl	181604 <drawMap>
-  1811b8:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  1811bc:	e1a0f00e 	mov	pc, lr
+0018115c <fall2>:
+  18115c:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  181160:	e59f219c 	ldr	r2, [pc, #412]	; 181304 <swapLoop+0x2c>
+  181164:	e5d23000 	ldrb	r3, [r2]
+  181168:	e2433001 	sub	r3, r3, #1
+  18116c:	05823000 	streq	r3, [r2]
+  181170:	eb00021e 	bl	1819f0 <Draw_Stats>
+  181174:	e3530000 	cmp	r3, #0
+  181178:	0b0000b0 	bleq	181440 <DrawLoseMessage>
+  18117c:	e59f2180 	ldr	r2, [pc, #384]	; 181304 <swapLoop+0x2c>
+  181180:	e5d23000 	ldrb	r3, [r2]
+  181184:	e3530000 	cmp	r3, #0
+  181188:	03a05003 	moveq	r5, #3
+  18118c:	05825000 	streq	r5, [r2]
+  181190:	eb000216 	bl	1819f0 <Draw_Stats>
+  181194:	0a0001e0 	beq	18191c <main>
+  181198:	059f5168 	ldreq	r5, [pc, #360]	; 181308 <swapLoop+0x30>
+  18119c:	e3a06001 	mov	r6, #1
+  1811a0:	e5c56000 	strb	r6, [r5]
+  1811a4:	e59f0160 	ldr	r0, [pc, #352]	; 18130c <swapLoop+0x34>
+  1811a8:	e59f1140 	ldr	r1, [pc, #320]	; 1812f0 <swapLoop+0x18>
+  1811ac:	e59f215c 	ldr	r2, [pc, #348]	; 181310 <swapLoop+0x38>
+  1811b0:	eb000043 	bl	1812c4 <switchMap>
+  1811b4:	e59f0134 	ldr	r0, [pc, #308]	; 1812f0 <swapLoop+0x18>
+  1811b8:	e59f1154 	ldr	r1, [pc, #340]	; 181314 <swapLoop+0x3c>
+  1811bc:	eb00011e 	bl	18163c <drawMap>
+  1811c0:	eb00020a 	bl	1819f0 <Draw_Stats>
+  1811c4:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  1811c8:	e1a0f00e 	mov	pc, lr
 
-001811c0 <checkRightEdge>:
-  1811c0:	e92d47ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
-  1811c4:	ebfffed4 	bl	180d1c <readMario>
-  1811c8:	e3510017 	cmp	r1, #23
-  1811cc:	1a000003 	bne	1811e0 <nextCheck>
-  1811d0:	e59f711c 	ldr	r7, [pc, #284]	; 1812f4 <swapLoop+0x30>
-  1811d4:	e5d75000 	ldrb	r5, [r7]
-  1811d8:	e3550003 	cmp	r5, #3
-  1811dc:	0a00006d 	beq	181398 <DrawWinMessage>
+001811cc <checkRightEdge>:
+  1811cc:	e92d47ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+  1811d0:	ebfffed1 	bl	180d1c <readMario>
+  1811d4:	e3510017 	cmp	r1, #23
+  1811d8:	1a000003 	bne	1811ec <nextCheck>
+  1811dc:	e59f7124 	ldr	r7, [pc, #292]	; 181308 <swapLoop+0x30>
+  1811e0:	e5d75000 	ldrb	r5, [r7]
+  1811e4:	e3550003 	cmp	r5, #3
+  1811e8:	0a00006f 	beq	1813ac <DrawWinMessage>
 
-001811e0 <nextCheck>:
-  1811e0:	e3510018 	cmp	r1, #24
-  1811e4:	1a000013 	bne	181238 <doneCheckEdge>
-  1811e8:	e59f7104 	ldr	r7, [pc, #260]	; 1812f4 <swapLoop+0x30>
-  1811ec:	e5d75000 	ldrb	r5, [r7]
-  1811f0:	e3550002 	cmp	r5, #2
-  1811f4:	0a000005 	beq	181210 <mapThree>
-  1811f8:	e59f0104 	ldr	r0, [pc, #260]	; 181304 <swapLoop+0x40>
-  1811fc:	e59f10d8 	ldr	r1, [pc, #216]	; 1812dc <swapLoop+0x18>
-  181200:	e59f2100 	ldr	r2, [pc, #256]	; 181308 <swapLoop+0x44>
-  181204:	e3a06002 	mov	r6, #2
-  181208:	e5c76000 	strb	r6, [r7]
-  18120c:	ea000004 	b	181224 <switch>
+001811ec <nextCheck>:
+  1811ec:	e3510018 	cmp	r1, #24
+  1811f0:	1a000014 	bne	181248 <doneCheckEdge>
+  1811f4:	e59f710c 	ldr	r7, [pc, #268]	; 181308 <swapLoop+0x30>
+  1811f8:	e5d75000 	ldrb	r5, [r7]
+  1811fc:	e3550002 	cmp	r5, #2
+  181200:	0a000005 	beq	18121c <mapThree>
+  181204:	e59f010c 	ldr	r0, [pc, #268]	; 181318 <swapLoop+0x40>
+  181208:	e59f10e0 	ldr	r1, [pc, #224]	; 1812f0 <swapLoop+0x18>
+  18120c:	e59f2108 	ldr	r2, [pc, #264]	; 18131c <swapLoop+0x44>
+  181210:	e3a06002 	mov	r6, #2
+  181214:	e5c76000 	strb	r6, [r7]
+  181218:	ea000004 	b	181230 <switch>
 
-00181210 <mapThree>:
-  181210:	e59f00f4 	ldr	r0, [pc, #244]	; 18130c <swapLoop+0x48>
-  181214:	e59f10c0 	ldr	r1, [pc, #192]	; 1812dc <swapLoop+0x18>
-  181218:	e59f20f0 	ldr	r2, [pc, #240]	; 181310 <swapLoop+0x4c>
-  18121c:	e3a06003 	mov	r6, #3
-  181220:	e5c76000 	strb	r6, [r7]
+0018121c <mapThree>:
+  18121c:	e59f00fc 	ldr	r0, [pc, #252]	; 181320 <swapLoop+0x48>
+  181220:	e59f10c8 	ldr	r1, [pc, #200]	; 1812f0 <swapLoop+0x18>
+  181224:	e59f20f8 	ldr	r2, [pc, #248]	; 181324 <swapLoop+0x4c>
+  181228:	e3a06003 	mov	r6, #3
+  18122c:	e5c76000 	strb	r6, [r7]
 
-00181224 <switch>:
-  181224:	eb000021 	bl	1812b0 <switchMap>
-  181228:	e59f00ac 	ldr	r0, [pc, #172]	; 1812dc <swapLoop+0x18>
-  18122c:	e59f10cc 	ldr	r1, [pc, #204]	; 181300 <swapLoop+0x3c>
-  181230:	eb0000f3 	bl	181604 <drawMap>
-  181234:	eb000284 	bl	181c4c <readButtons>
+00181230 <switch>:
+  181230:	eb000023 	bl	1812c4 <switchMap>
+  181234:	e59f00b4 	ldr	r0, [pc, #180]	; 1812f0 <swapLoop+0x18>
+  181238:	e59f10d4 	ldr	r1, [pc, #212]	; 181314 <swapLoop+0x3c>
+  18123c:	eb0000fe 	bl	18163c <drawMap>
+  181240:	eb0001ea 	bl	1819f0 <Draw_Stats>
+  181244:	eb00029e 	bl	181cc4 <readButtons>
 
-00181238 <doneCheckEdge>:
-  181238:	e8bd47ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
-  18123c:	e1a0f00e 	mov	pc, lr
+00181248 <doneCheckEdge>:
+  181248:	e8bd47ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+  18124c:	e1a0f00e 	mov	pc, lr
 
-00181240 <checkLeftEdge>:
-  181240:	e92d47ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
-  181244:	ebfffeb4 	bl	180d1c <readMario>
-  181248:	e3510000 	cmp	r1, #0
-  18124c:	1a000015 	bne	1812a8 <doneCheckEdge2>
-  181250:	e59f709c 	ldr	r7, [pc, #156]	; 1812f4 <swapLoop+0x30>
-  181254:	e5d75000 	ldrb	r5, [r7]
-  181258:	e3550001 	cmp	r5, #1
-  18125c:	0a000011 	beq	1812a8 <doneCheckEdge2>
-  181260:	e3550002 	cmp	r5, #2
-  181264:	0a000005 	beq	181280 <mapOne>
-  181268:	e59f00a4 	ldr	r0, [pc, #164]	; 181314 <swapLoop+0x50>
-  18126c:	e59f1068 	ldr	r1, [pc, #104]	; 1812dc <swapLoop+0x18>
-  181270:	e59f20a0 	ldr	r2, [pc, #160]	; 181318 <swapLoop+0x54>
-  181274:	e3a06002 	mov	r6, #2
-  181278:	e5c76000 	strb	r6, [r7]
-  18127c:	ea000004 	b	181294 <switch2>
+00181250 <checkLeftEdge>:
+  181250:	e92d47ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+  181254:	ebfffeb0 	bl	180d1c <readMario>
+  181258:	e3510000 	cmp	r1, #0
+  18125c:	1a000016 	bne	1812bc <doneCheckEdge2>
+  181260:	e59f70a0 	ldr	r7, [pc, #160]	; 181308 <swapLoop+0x30>
+  181264:	e5d75000 	ldrb	r5, [r7]
+  181268:	e3550001 	cmp	r5, #1
+  18126c:	0a000012 	beq	1812bc <doneCheckEdge2>
+  181270:	e3550002 	cmp	r5, #2
+  181274:	0a000005 	beq	181290 <mapOne>
+  181278:	e59f00a8 	ldr	r0, [pc, #168]	; 181328 <swapLoop+0x50>
+  18127c:	e59f106c 	ldr	r1, [pc, #108]	; 1812f0 <swapLoop+0x18>
+  181280:	e59f20a4 	ldr	r2, [pc, #164]	; 18132c <swapLoop+0x54>
+  181284:	e3a06002 	mov	r6, #2
+  181288:	e5c76000 	strb	r6, [r7]
+  18128c:	ea000004 	b	1812a4 <switch2>
 
-00181280 <mapOne>:
-  181280:	e59f0094 	ldr	r0, [pc, #148]	; 18131c <swapLoop+0x58>
-  181284:	e59f1050 	ldr	r1, [pc, #80]	; 1812dc <swapLoop+0x18>
-  181288:	e59f2090 	ldr	r2, [pc, #144]	; 181320 <swapLoop+0x5c>
-  18128c:	e3a06001 	mov	r6, #1
-  181290:	e5c76000 	strb	r6, [r7]
+00181290 <mapOne>:
+  181290:	e59f0098 	ldr	r0, [pc, #152]	; 181330 <swapLoop+0x58>
+  181294:	e59f1054 	ldr	r1, [pc, #84]	; 1812f0 <swapLoop+0x18>
+  181298:	e59f2094 	ldr	r2, [pc, #148]	; 181334 <swapLoop+0x5c>
+  18129c:	e3a06001 	mov	r6, #1
+  1812a0:	e5c76000 	strb	r6, [r7]
 
-00181294 <switch2>:
-  181294:	eb000005 	bl	1812b0 <switchMap>
-  181298:	e59f003c 	ldr	r0, [pc, #60]	; 1812dc <swapLoop+0x18>
-  18129c:	e59f105c 	ldr	r1, [pc, #92]	; 181300 <swapLoop+0x3c>
-  1812a0:	eb0000d7 	bl	181604 <drawMap>
-  1812a4:	eb000268 	bl	181c4c <readButtons>
+001812a4 <switch2>:
+  1812a4:	eb000006 	bl	1812c4 <switchMap>
+  1812a8:	e59f0040 	ldr	r0, [pc, #64]	; 1812f0 <swapLoop+0x18>
+  1812ac:	e59f1060 	ldr	r1, [pc, #96]	; 181314 <swapLoop+0x3c>
+  1812b0:	eb0000e1 	bl	18163c <drawMap>
+  1812b4:	eb0001cd 	bl	1819f0 <Draw_Stats>
+  1812b8:	eb000281 	bl	181cc4 <readButtons>
 
-001812a8 <doneCheckEdge2>:
-  1812a8:	e8bd47ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
-  1812ac:	e1a0f00e 	mov	pc, lr
+001812bc <doneCheckEdge2>:
+  1812bc:	e8bd47ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+  1812c0:	e1a0f00e 	mov	pc, lr
 
-001812b0 <switchMap>:
-  1812b0:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
-  1812b4:	e3a04000 	mov	r4, #0
-  1812b8:	e1a05000 	mov	r5, r0
-  1812bc:	e1a06001 	mov	r6, r1
-  1812c0:	e1a07002 	mov	r7, r2
+001812c4 <switchMap>:
+  1812c4:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+  1812c8:	e3a04000 	mov	r4, #0
+  1812cc:	e1a05000 	mov	r5, r0
+  1812d0:	e1a06001 	mov	r6, r1
+  1812d4:	e1a07002 	mov	r7, r2
 
-001812c4 <swapLoop>:
-  1812c4:	e4d50001 	ldrb	r0, [r5], #1
-  1812c8:	e4c60001 	strb	r0, [r6], #1
-  1812cc:	e1550007 	cmp	r5, r7
-  1812d0:	1afffffb 	bne	1812c4 <swapLoop>
-  1812d4:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
-  1812d8:	e1a0f00e 	mov	pc, lr
-  1812dc:	00180056 	.word	0x00180056
-  1812e0:	00001388 	.word	0x00001388
-  1812e4:	0000ffff 	.word	0x0000ffff
-  1812e8:	00180053 	.word	0x00180053
-  1812ec:	00180052 	.word	0x00180052
-  1812f0:	00180050 	.word	0x00180050
-  1812f4:	00180051 	.word	0x00180051
-  1812f8:	0018024a 	.word	0x0018024a
-  1812fc:	0018043e 	.word	0x0018043e
-  181300:	0018024a 	.word	0x0018024a
-  181304:	0018043e 	.word	0x0018043e
-  181308:	00180632 	.word	0x00180632
-  18130c:	00180632 	.word	0x00180632
-  181310:	00180826 	.word	0x00180826
-  181314:	00180a1a 	.word	0x00180a1a
-  181318:	00180c0e 	.word	0x00180c0e
-  18131c:	00180826 	.word	0x00180826
-  181320:	00180a1a 	.word	0x00180a1a
+001812d8 <swapLoop>:
+  1812d8:	e4d50001 	ldrb	r0, [r5], #1
+  1812dc:	e4c60001 	strb	r0, [r6], #1
+  1812e0:	e1550007 	cmp	r5, r7
+  1812e4:	1afffffb 	bne	1812d8 <swapLoop>
+  1812e8:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+  1812ec:	e1a0f00e 	mov	pc, lr
+  1812f0:	00180056 	.word	0x00180056
+  1812f4:	00001388 	.word	0x00001388
+  1812f8:	0000ffff 	.word	0x0000ffff
+  1812fc:	00180053 	.word	0x00180053
+  181300:	00180052 	.word	0x00180052
+  181304:	00180050 	.word	0x00180050
+  181308:	00180051 	.word	0x00180051
+  18130c:	0018024a 	.word	0x0018024a
+  181310:	0018043e 	.word	0x0018043e
+  181314:	0018024a 	.word	0x0018024a
+  181318:	0018043e 	.word	0x0018043e
+  18131c:	00180632 	.word	0x00180632
+  181320:	00180632 	.word	0x00180632
+  181324:	00180826 	.word	0x00180826
+  181328:	00180a1a 	.word	0x00180a1a
+  18132c:	00180c0e 	.word	0x00180c0e
+  181330:	00180826 	.word	0x00180826
+  181334:	00180a1a 	.word	0x00180a1a
 
-00181324 <clearScreen>:
-  181324:	e92d5fff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
-  181328:	e3a04000 	mov	r4, #0
-  18132c:	e3a05000 	mov	r5, #0
-  181330:	e3a06000 	mov	r6, #0
-  181334:	e59f744c 	ldr	r7, [pc, #1100]	; 181788 <next+0x34>
-  181338:	e59f844c 	ldr	r8, [pc, #1100]	; 18178c <next+0x38>
+00181338 <clearScreen>:
+  181338:	e92d5fff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
+  18133c:	e3a04000 	mov	r4, #0
+  181340:	e3a05000 	mov	r5, #0
+  181344:	e3a06000 	mov	r6, #0
+  181348:	e59f7470 	ldr	r7, [pc, #1136]	; 1817c0 <next+0x34>
+  18134c:	e59f8470 	ldr	r8, [pc, #1136]	; 1817c4 <next+0x38>
 
-0018133c <Looping>:
-  18133c:	e1a00004 	mov	r0, r4
-  181340:	e1a01005 	mov	r1, r5
-  181344:	e1a02006 	mov	r2, r6
-  181348:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-  18134c:	eb000009 	bl	181378 <DrawPixel>
-  181350:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-  181354:	e2844001 	add	r4, r4, #1
-  181358:	e1540007 	cmp	r4, r7
-  18135c:	bafffff6 	blt	18133c <Looping>
-  181360:	e3a04000 	mov	r4, #0
-  181364:	e2855001 	add	r5, r5, #1
-  181368:	e1550008 	cmp	r5, r8
-  18136c:	bafffff2 	blt	18133c <Looping>
-  181370:	e8bd5fff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
-  181374:	e1a0f00e 	mov	pc, lr
+00181350 <Looping>:
+  181350:	e1a00004 	mov	r0, r4
+  181354:	e1a01005 	mov	r1, r5
+  181358:	e1a02006 	mov	r2, r6
+  18135c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  181360:	eb000009 	bl	18138c <DrawPixel>
+  181364:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  181368:	e2844001 	add	r4, r4, #1
+  18136c:	e1540007 	cmp	r4, r7
+  181370:	bafffff6 	blt	181350 <Looping>
+  181374:	e3a04000 	mov	r4, #0
+  181378:	e2855001 	add	r5, r5, #1
+  18137c:	e1550008 	cmp	r5, r8
+  181380:	bafffff2 	blt	181350 <Looping>
+  181384:	e8bd5fff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
+  181388:	e1a0f00e 	mov	pc, lr
 
-00181378 <DrawPixel>:
-  181378:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
-  18137c:	e0804501 	add	r4, r0, r1, lsl #10
-  181380:	e1a04084 	lsl	r4, r4, #1
-  181384:	e59f0404 	ldr	r0, [pc, #1028]	; 181790 <next+0x3c>
-  181388:	e5900000 	ldr	r0, [r0]
-  18138c:	e18020b4 	strh	r2, [r0, r4]
-  181390:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
-  181394:	e1a0f00e 	mov	pc, lr
+0018138c <DrawPixel>:
+  18138c:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+  181390:	e0804501 	add	r4, r0, r1, lsl #10
+  181394:	e1a04084 	lsl	r4, r4, #1
+  181398:	e59f0428 	ldr	r0, [pc, #1064]	; 1817c8 <next+0x3c>
+  18139c:	e5900000 	ldr	r0, [r0]
+  1813a0:	e18020b4 	strh	r2, [r0, r4]
+  1813a4:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+  1813a8:	e1a0f00e 	mov	pc, lr
 
-00181398 <DrawWinMessage>:
-  181398:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
-  18139c:	e59f63f0 	ldr	r6, [pc, #1008]	; 181794 <next+0x40>
-  1813a0:	e3a040eb 	mov	r4, #235	; 0xeb
-  1813a4:	e3a05064 	mov	r5, #100	; 0x64
-  1813a8:	e59f73e8 	ldr	r7, [pc, #1000]	; 181798 <next+0x44>
-  1813ac:	e3a080a4 	mov	r8, #164	; 0xa4
+001813ac <DrawWinMessage>:
+  1813ac:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
+  1813b0:	e59f6414 	ldr	r6, [pc, #1044]	; 1817cc <next+0x40>
+  1813b4:	e3a040eb 	mov	r4, #235	; 0xeb
+  1813b8:	e3a05064 	mov	r5, #100	; 0x64
+  1813bc:	e59f740c 	ldr	r7, [pc, #1036]	; 1817d0 <next+0x44>
+  1813c0:	e3a080a4 	mov	r8, #164	; 0xa4
 
-001813b0 <drawWinMessageLoop>:
-  1813b0:	e1a00004 	mov	r0, r4
-  1813b4:	e1a01005 	mov	r1, r5
-  1813b8:	e0d620b2 	ldrh	r2, [r6], #2
-  1813bc:	ebffffed 	bl	181378 <DrawPixel>
-  1813c0:	e2844001 	add	r4, r4, #1
-  1813c4:	e1540007 	cmp	r4, r7
-  1813c8:	bafffff8 	blt	1813b0 <drawWinMessageLoop>
-  1813cc:	e3a040eb 	mov	r4, #235	; 0xeb
-  1813d0:	e2855001 	add	r5, r5, #1
-  1813d4:	e1550008 	cmp	r5, r8
-  1813d8:	bafffff4 	blt	1813b0 <drawWinMessageLoop>
-  1813dc:	e59f13b8 	ldr	r1, [pc, #952]	; 18179c <next+0x48>
-  1813e0:	eb00024d 	bl	181d1c <Wait>
-  1813e4:	e59f23b4 	ldr	r2, [pc, #948]	; 1817a0 <next+0x4c>
-  1813e8:	e3a05003 	mov	r5, #3
-  1813ec:	e5825000 	str	r5, [r2]
-  1813f0:	e59f53ac 	ldr	r5, [pc, #940]	; 1817a4 <next+0x50>
-  1813f4:	e3a06001 	mov	r6, #1
-  1813f8:	e5c56000 	strb	r6, [r5]
-  1813fc:	ea000138 	b	1818e4 <main>
-  181400:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
-  181404:	e1a0f00e 	mov	pc, lr
+001813c4 <drawWinMessageLoop>:
+  1813c4:	e1a00004 	mov	r0, r4
+  1813c8:	e1a01005 	mov	r1, r5
+  1813cc:	e0d620b2 	ldrh	r2, [r6], #2
+  1813d0:	ebffffed 	bl	18138c <DrawPixel>
+  1813d4:	e2844001 	add	r4, r4, #1
+  1813d8:	e1540007 	cmp	r4, r7
+  1813dc:	bafffff8 	blt	1813c4 <drawWinMessageLoop>
+  1813e0:	e3a040eb 	mov	r4, #235	; 0xeb
+  1813e4:	e2855001 	add	r5, r5, #1
+  1813e8:	e1550008 	cmp	r5, r8
+  1813ec:	bafffff4 	blt	1813c4 <drawWinMessageLoop>
+  1813f0:	e59f13dc 	ldr	r1, [pc, #988]	; 1817d4 <next+0x48>
+  1813f4:	eb000266 	bl	181d94 <Wait>
+  1813f8:	e59f23d8 	ldr	r2, [pc, #984]	; 1817d8 <next+0x4c>
+  1813fc:	e3a05003 	mov	r5, #3
+  181400:	e5825000 	str	r5, [r2]
+  181404:	e59f53d0 	ldr	r5, [pc, #976]	; 1817dc <next+0x50>
+  181408:	e3a06001 	mov	r6, #1
+  18140c:	e5c56000 	strb	r6, [r5]
 
-00181408 <DrawLoseMessage>:
-  181408:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
-  18140c:	e59f6394 	ldr	r6, [pc, #916]	; 1817a8 <next+0x54>
-  181410:	e3a040eb 	mov	r4, #235	; 0xeb
-  181414:	e3a05064 	mov	r5, #100	; 0x64
-  181418:	e59f738c 	ldr	r7, [pc, #908]	; 1817ac <next+0x58>
-  18141c:	e3a080a5 	mov	r8, #165	; 0xa5
+00181410 <temp>:
+  181410:	eb0001e9 	bl	181bbc <readMainMenuButtons>
+  181414:	e3500000 	cmp	r0, #0
+  181418:	0a000005 	beq	181434 <gotoMainMenu>
+  18141c:	e3500001 	cmp	r0, #1
+  181420:	0a000003 	beq	181434 <gotoMainMenu>
+  181424:	e3500002 	cmp	r0, #2
+  181428:	0a000001 	beq	181434 <gotoMainMenu>
+  18142c:	e3500003 	cmp	r0, #3
+  181430:	0affffff 	beq	181434 <gotoMainMenu>
 
-00181420 <drawLoseMessageLoop>:
-  181420:	e1a00004 	mov	r0, r4
-  181424:	e1a01005 	mov	r1, r5
-  181428:	e0d620b2 	ldrh	r2, [r6], #2
-  18142c:	ebffffd1 	bl	181378 <DrawPixel>
-  181430:	e2844001 	add	r4, r4, #1
-  181434:	e1540007 	cmp	r4, r7
-  181438:	bafffff8 	blt	181420 <drawLoseMessageLoop>
-  18143c:	e3a040eb 	mov	r4, #235	; 0xeb
-  181440:	e2855001 	add	r5, r5, #1
-  181444:	e1550008 	cmp	r5, r8
-  181448:	bafffff4 	blt	181420 <drawLoseMessageLoop>
-  18144c:	e59f1348 	ldr	r1, [pc, #840]	; 18179c <next+0x48>
-  181450:	eb000231 	bl	181d1c <Wait>
-  181454:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
-  181458:	e1a0f00e 	mov	pc, lr
+00181434 <gotoMainMenu>:
+  181434:	eb0000fc 	bl	18182c <mainMenu>
+  181438:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
+  18143c:	e1a0f00e 	mov	pc, lr
 
-0018145c <DrawPauseMenu>:
-  18145c:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
-  181460:	e59f6348 	ldr	r6, [pc, #840]	; 1817b0 <next+0x5c>
-  181464:	eaffffff 	b	181468 <NextPause>
+00181440 <DrawLoseMessage>:
+  181440:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
+  181444:	e59f6394 	ldr	r6, [pc, #916]	; 1817e0 <next+0x54>
+  181448:	e3a040eb 	mov	r4, #235	; 0xeb
+  18144c:	e3a05064 	mov	r5, #100	; 0x64
+  181450:	e59f738c 	ldr	r7, [pc, #908]	; 1817e4 <next+0x58>
+  181454:	e3a080a5 	mov	r8, #165	; 0xa5
 
-00181468 <NextPause>:
-  181468:	e3a040eb 	mov	r4, #235	; 0xeb
-  18146c:	e3a05064 	mov	r5, #100	; 0x64
-  181470:	e59f733c 	ldr	r7, [pc, #828]	; 1817b4 <next+0x60>
-  181474:	e3a08f85 	mov	r8, #532	; 0x214
+00181458 <drawLoseMessageLoop>:
+  181458:	e1a00004 	mov	r0, r4
+  18145c:	e1a01005 	mov	r1, r5
+  181460:	e0d620b2 	ldrh	r2, [r6], #2
+  181464:	ebffffc8 	bl	18138c <DrawPixel>
+  181468:	e2844001 	add	r4, r4, #1
+  18146c:	e1540007 	cmp	r4, r7
+  181470:	bafffff8 	blt	181458 <drawLoseMessageLoop>
+  181474:	e3a040eb 	mov	r4, #235	; 0xeb
+  181478:	e2855001 	add	r5, r5, #1
+  18147c:	e1550008 	cmp	r5, r8
+  181480:	bafffff4 	blt	181458 <drawLoseMessageLoop>
+  181484:	e59f1348 	ldr	r1, [pc, #840]	; 1817d4 <next+0x48>
+  181488:	eb000241 	bl	181d94 <Wait>
+  18148c:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
+  181490:	e1a0f00e 	mov	pc, lr
 
-00181478 <drawPauseMenuLoop>:
-  181478:	e1a00004 	mov	r0, r4
-  18147c:	e1a01005 	mov	r1, r5
-  181480:	e0d620b2 	ldrh	r2, [r6], #2
-  181484:	ebffffbb 	bl	181378 <DrawPixel>
-  181488:	e2844001 	add	r4, r4, #1
-  18148c:	e1540007 	cmp	r4, r7
-  181490:	bafffff8 	blt	181478 <drawPauseMenuLoop>
-  181494:	e3a040eb 	mov	r4, #235	; 0xeb
-  181498:	e2855001 	add	r5, r5, #1
-  18149c:	e1550008 	cmp	r5, r8
-  1814a0:	bafffff4 	blt	181478 <drawPauseMenuLoop>
-  1814a4:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
-  1814a8:	e1a0f00e 	mov	pc, lr
+00181494 <DrawPauseMenu>:
+  181494:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
+  181498:	e59f6348 	ldr	r6, [pc, #840]	; 1817e8 <next+0x5c>
+  18149c:	eaffffff 	b	1814a0 <NextPause>
 
-001814ac <DrawMainMenuScreen>:
-  1814ac:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
-  1814b0:	e59f6300 	ldr	r6, [pc, #768]	; 1817b8 <next+0x64>
-  1814b4:	e3a04000 	mov	r4, #0
-  1814b8:	e3a05000 	mov	r5, #0
-  1814bc:	e3a07fd2 	mov	r7, #840	; 0x348
-  1814c0:	e3a08faa 	mov	r8, #680	; 0x2a8
+001814a0 <NextPause>:
+  1814a0:	e3a040eb 	mov	r4, #235	; 0xeb
+  1814a4:	e3a05064 	mov	r5, #100	; 0x64
+  1814a8:	e59f733c 	ldr	r7, [pc, #828]	; 1817ec <next+0x60>
+  1814ac:	e3a08f85 	mov	r8, #532	; 0x214
 
-001814c4 <drawMMLoop>:
-  1814c4:	e1a00004 	mov	r0, r4
-  1814c8:	e1a01005 	mov	r1, r5
-  1814cc:	e0d620b2 	ldrh	r2, [r6], #2
-  1814d0:	ebffffa8 	bl	181378 <DrawPixel>
-  1814d4:	e2844001 	add	r4, r4, #1
-  1814d8:	e1540007 	cmp	r4, r7
-  1814dc:	bafffff8 	blt	1814c4 <drawMMLoop>
-  1814e0:	e3a04000 	mov	r4, #0
-  1814e4:	e2855001 	add	r5, r5, #1
-  1814e8:	e1550008 	cmp	r5, r8
-  1814ec:	bafffff4 	blt	1814c4 <drawMMLoop>
-  1814f0:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
-  1814f4:	e1a0f00e 	mov	pc, lr
+001814b0 <drawPauseMenuLoop>:
+  1814b0:	e1a00004 	mov	r0, r4
+  1814b4:	e1a01005 	mov	r1, r5
+  1814b8:	e0d620b2 	ldrh	r2, [r6], #2
+  1814bc:	ebffffb2 	bl	18138c <DrawPixel>
+  1814c0:	e2844001 	add	r4, r4, #1
+  1814c4:	e1540007 	cmp	r4, r7
+  1814c8:	bafffff8 	blt	1814b0 <drawPauseMenuLoop>
+  1814cc:	e3a040eb 	mov	r4, #235	; 0xeb
+  1814d0:	e2855001 	add	r5, r5, #1
+  1814d4:	e1550008 	cmp	r5, r8
+  1814d8:	bafffff4 	blt	1814b0 <drawPauseMenuLoop>
+  1814dc:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
+  1814e0:	e1a0f00e 	mov	pc, lr
 
-001814f8 <DrawMenuStar1>:
-  1814f8:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  1814fc:	e3a00007 	mov	r0, #7
-  181500:	e3a01005 	mov	r1, #5
-  181504:	e3a0200b 	mov	r2, #11
-  181508:	eb000054 	bl	181660 <drawCell>
-  18150c:	e3a00007 	mov	r0, #7
-  181510:	e3a01009 	mov	r1, #9
-  181514:	e3a0200c 	mov	r2, #12
-  181518:	eb000050 	bl	181660 <drawCell>
-  18151c:	e3a00007 	mov	r0, #7
-  181520:	e3a0100c 	mov	r1, #12
-  181524:	e3a0200c 	mov	r2, #12
-  181528:	eb00004c 	bl	181660 <drawCell>
-  18152c:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  181530:	e1a0f00e 	mov	pc, lr
+001814e4 <DrawMainMenuScreen>:
+  1814e4:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
+  1814e8:	e59f6300 	ldr	r6, [pc, #768]	; 1817f0 <next+0x64>
+  1814ec:	e3a04000 	mov	r4, #0
+  1814f0:	e3a05000 	mov	r5, #0
+  1814f4:	e3a07fd2 	mov	r7, #840	; 0x348
+  1814f8:	e3a08faa 	mov	r8, #680	; 0x2a8
 
-00181534 <DrawMenuStar2>:
-  181534:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  181538:	e3a00007 	mov	r0, #7
-  18153c:	e3a01005 	mov	r1, #5
-  181540:	e3a0200c 	mov	r2, #12
-  181544:	eb000045 	bl	181660 <drawCell>
-  181548:	e3a00007 	mov	r0, #7
-  18154c:	e3a01009 	mov	r1, #9
-  181550:	e3a0200b 	mov	r2, #11
-  181554:	eb000041 	bl	181660 <drawCell>
-  181558:	e3a00007 	mov	r0, #7
-  18155c:	e3a0100c 	mov	r1, #12
-  181560:	e3a0200c 	mov	r2, #12
-  181564:	eb00003d 	bl	181660 <drawCell>
-  181568:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  18156c:	e1a0f00e 	mov	pc, lr
+001814fc <drawMMLoop>:
+  1814fc:	e1a00004 	mov	r0, r4
+  181500:	e1a01005 	mov	r1, r5
+  181504:	e0d620b2 	ldrh	r2, [r6], #2
+  181508:	ebffff9f 	bl	18138c <DrawPixel>
+  18150c:	e2844001 	add	r4, r4, #1
+  181510:	e1540007 	cmp	r4, r7
+  181514:	bafffff8 	blt	1814fc <drawMMLoop>
+  181518:	e3a04000 	mov	r4, #0
+  18151c:	e2855001 	add	r5, r5, #1
+  181520:	e1550008 	cmp	r5, r8
+  181524:	bafffff4 	blt	1814fc <drawMMLoop>
+  181528:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
+  18152c:	e1a0f00e 	mov	pc, lr
 
-00181570 <DrawMenuStar3>:
-  181570:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  181574:	e3a00007 	mov	r0, #7
-  181578:	e3a01005 	mov	r1, #5
-  18157c:	e3a0200c 	mov	r2, #12
-  181580:	eb000036 	bl	181660 <drawCell>
-  181584:	e3a00007 	mov	r0, #7
-  181588:	e3a01009 	mov	r1, #9
-  18158c:	e3a0200c 	mov	r2, #12
-  181590:	eb000032 	bl	181660 <drawCell>
-  181594:	e3a00007 	mov	r0, #7
-  181598:	e3a0100c 	mov	r1, #12
-  18159c:	e3a0200b 	mov	r2, #11
-  1815a0:	eb00002e 	bl	181660 <drawCell>
-  1815a4:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  1815a8:	e1a0f00e 	mov	pc, lr
+00181530 <DrawMenuStar1>:
+  181530:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  181534:	e3a00007 	mov	r0, #7
+  181538:	e3a01005 	mov	r1, #5
+  18153c:	e3a0200b 	mov	r2, #11
+  181540:	eb000054 	bl	181698 <drawCell>
+  181544:	e3a00007 	mov	r0, #7
+  181548:	e3a01009 	mov	r1, #9
+  18154c:	e3a0200c 	mov	r2, #12
+  181550:	eb000050 	bl	181698 <drawCell>
+  181554:	e3a00007 	mov	r0, #7
+  181558:	e3a0100c 	mov	r1, #12
+  18155c:	e3a0200c 	mov	r2, #12
+  181560:	eb00004c 	bl	181698 <drawCell>
+  181564:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  181568:	e1a0f00e 	mov	pc, lr
 
-001815ac <DrawMenuMushroom>:
-  1815ac:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  1815b0:	e3a00006 	mov	r0, #6
-  1815b4:	e3a0100c 	mov	r1, #12
-  1815b8:	e3a0200a 	mov	r2, #10
-  1815bc:	eb000027 	bl	181660 <drawCell>
-  1815c0:	e3a00006 	mov	r0, #6
-  1815c4:	e3a0100e 	mov	r1, #14
-  1815c8:	e3a02000 	mov	r2, #0
-  1815cc:	eb000023 	bl	181660 <drawCell>
-  1815d0:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  1815d4:	e1a0f00e 	mov	pc, lr
+0018156c <DrawMenuStar2>:
+  18156c:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  181570:	e3a00007 	mov	r0, #7
+  181574:	e3a01005 	mov	r1, #5
+  181578:	e3a0200c 	mov	r2, #12
+  18157c:	eb000045 	bl	181698 <drawCell>
+  181580:	e3a00007 	mov	r0, #7
+  181584:	e3a01009 	mov	r1, #9
+  181588:	e3a0200b 	mov	r2, #11
+  18158c:	eb000041 	bl	181698 <drawCell>
+  181590:	e3a00007 	mov	r0, #7
+  181594:	e3a0100c 	mov	r1, #12
+  181598:	e3a0200c 	mov	r2, #12
+  18159c:	eb00003d 	bl	181698 <drawCell>
+  1815a0:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  1815a4:	e1a0f00e 	mov	pc, lr
 
-001815d8 <DrawMenuMushroom2>:
-  1815d8:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  1815dc:	e3a00006 	mov	r0, #6
-  1815e0:	e3a0100c 	mov	r1, #12
-  1815e4:	e3a02000 	mov	r2, #0
-  1815e8:	eb00001c 	bl	181660 <drawCell>
-  1815ec:	e3a00006 	mov	r0, #6
-  1815f0:	e3a0100e 	mov	r1, #14
-  1815f4:	e3a0200a 	mov	r2, #10
-  1815f8:	eb000018 	bl	181660 <drawCell>
-  1815fc:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
-  181600:	e1a0f00e 	mov	pc, lr
+001815a8 <DrawMenuStar3>:
+  1815a8:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  1815ac:	e3a00007 	mov	r0, #7
+  1815b0:	e3a01005 	mov	r1, #5
+  1815b4:	e3a0200c 	mov	r2, #12
+  1815b8:	eb000036 	bl	181698 <drawCell>
+  1815bc:	e3a00007 	mov	r0, #7
+  1815c0:	e3a01009 	mov	r1, #9
+  1815c4:	e3a0200c 	mov	r2, #12
+  1815c8:	eb000032 	bl	181698 <drawCell>
+  1815cc:	e3a00007 	mov	r0, #7
+  1815d0:	e3a0100c 	mov	r1, #12
+  1815d4:	e3a0200b 	mov	r2, #11
+  1815d8:	eb00002e 	bl	181698 <drawCell>
+  1815dc:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  1815e0:	e1a0f00e 	mov	pc, lr
 
-00181604 <drawMap>:
-  181604:	e92d4780 	push	{r7, r8, r9, sl, lr}
-  181608:	e3a09000 	mov	r9, #0
-  18160c:	e3a0b000 	mov	fp, #0
-  181610:	e3a0a022 	mov	sl, #34	; 0x22
-  181614:	e3a0c022 	mov	ip, #34	; 0x22
-  181618:	e1a07000 	mov	r7, r0
-  18161c:	e1a08001 	mov	r8, r1
-  181620:	ebffffff 	bl	181624 <DrawMapLoop>
+001815e4 <DrawMenuMushroom>:
+  1815e4:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  1815e8:	e3a00006 	mov	r0, #6
+  1815ec:	e3a0100c 	mov	r1, #12
+  1815f0:	e3a0200a 	mov	r2, #10
+  1815f4:	eb000027 	bl	181698 <drawCell>
+  1815f8:	e3a00006 	mov	r0, #6
+  1815fc:	e3a0100e 	mov	r1, #14
+  181600:	e3a02000 	mov	r2, #0
+  181604:	eb000023 	bl	181698 <drawCell>
+  181608:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  18160c:	e1a0f00e 	mov	pc, lr
 
-00181624 <DrawMapLoop>:
-  181624:	e4d72001 	ldrb	r2, [r7], #1
-  181628:	e1a00009 	mov	r0, r9
-  18162c:	e1a0100b 	mov	r1, fp
-  181630:	eb00000a 	bl	181660 <drawCell>
-  181634:	e1580007 	cmp	r8, r7
-  181638:	0a000005 	beq	181654 <ExitDraw>
-  18163c:	e2899001 	add	r9, r9, #1
-  181640:	e3590018 	cmp	r9, #24
-  181644:	dafffff6 	ble	181624 <DrawMapLoop>
-  181648:	e3a09000 	mov	r9, #0
-  18164c:	e28bb001 	add	fp, fp, #1
-  181650:	eafffff3 	b	181624 <DrawMapLoop>
+00181610 <DrawMenuMushroom2>:
+  181610:	e92d41ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  181614:	e3a00006 	mov	r0, #6
+  181618:	e3a0100c 	mov	r1, #12
+  18161c:	e3a02000 	mov	r2, #0
+  181620:	eb00001c 	bl	181698 <drawCell>
+  181624:	e3a00006 	mov	r0, #6
+  181628:	e3a0100e 	mov	r1, #14
+  18162c:	e3a0200a 	mov	r2, #10
+  181630:	eb000018 	bl	181698 <drawCell>
+  181634:	e8bd41ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  181638:	e1a0f00e 	mov	pc, lr
 
-00181654 <ExitDraw>:
-  181654:	eb0000bb 	bl	181948 <Print_Init_Stats>
-  181658:	e8bd4780 	pop	{r7, r8, r9, sl, lr}
-  18165c:	e1a0f00e 	mov	pc, lr
+0018163c <drawMap>:
+  18163c:	e92d4780 	push	{r7, r8, r9, sl, lr}
+  181640:	e3a09000 	mov	r9, #0
+  181644:	e3a0b000 	mov	fp, #0
+  181648:	e3a0a022 	mov	sl, #34	; 0x22
+  18164c:	e3a0c022 	mov	ip, #34	; 0x22
+  181650:	e1a07000 	mov	r7, r0
+  181654:	e1a08001 	mov	r8, r1
+  181658:	ebffffff 	bl	18165c <DrawMapLoop>
 
-00181660 <drawCell>:
-  181660:	e92d41f8 	push	{r3, r4, r5, r6, r7, r8, lr}
-  181664:	e3520001 	cmp	r2, #1
-  181668:	0a00001b 	beq	1816dc <DrawGround>
-  18166c:	e3520002 	cmp	r2, #2
-  181670:	0a00001b 	beq	1816e4 <DrawPipe>
-  181674:	e3520003 	cmp	r2, #3
-  181678:	0a00001b 	beq	1816ec <DrawMario>
-  18167c:	e3520004 	cmp	r2, #4
-  181680:	0a00001b 	beq	1816f4 <DrawBrick>
-  181684:	e3520005 	cmp	r2, #5
-  181688:	0a00001b 	beq	1816fc <DrawQBox>
-  18168c:	e3520006 	cmp	r2, #6
-  181690:	0a00000f 	beq	1816d4 <DrawCloud>
-  181694:	e3520007 	cmp	r2, #7
-  181698:	0a000019 	beq	181704 <monster1>
-  18169c:	e3520009 	cmp	r2, #9
-  1816a0:	0a000019 	beq	18170c <monster2>
-  1816a4:	e3520008 	cmp	r2, #8
-  1816a8:	0a00001b 	beq	18171c <DrawCoin>
-  1816ac:	e352000a 	cmp	r2, #10
-  1816b0:	0a00001b 	beq	181724 <DrawMushroom>
-  1816b4:	e352000b 	cmp	r2, #11
-  1816b8:	0a00001b 	beq	18172c <DrawStar>
-  1816bc:	e352000c 	cmp	r2, #12
-  1816c0:	0a00001b 	beq	181734 <DrawOrangeSquare>
-  1816c4:	e352000f 	cmp	r2, #15
-  1816c8:	0a000011 	beq	181714 <DrawCastle>
-  1816cc:	e59f60e8 	ldr	r6, [pc, #232]	; 1817bc <next+0x68>
-  1816d0:	ea000018 	b	181738 <drawCellLoop>
+0018165c <DrawMapLoop>:
+  18165c:	e4d72001 	ldrb	r2, [r7], #1
+  181660:	e1a00009 	mov	r0, r9
+  181664:	e1a0100b 	mov	r1, fp
+  181668:	eb00000a 	bl	181698 <drawCell>
+  18166c:	e1580007 	cmp	r8, r7
+  181670:	0a000005 	beq	18168c <ExitDraw>
+  181674:	e2899001 	add	r9, r9, #1
+  181678:	e3590018 	cmp	r9, #24
+  18167c:	dafffff6 	ble	18165c <DrawMapLoop>
+  181680:	e3a09000 	mov	r9, #0
+  181684:	e28bb001 	add	fp, fp, #1
+  181688:	eafffff3 	b	18165c <DrawMapLoop>
 
-001816d4 <DrawCloud>:
-  1816d4:	e59f60e4 	ldr	r6, [pc, #228]	; 1817c0 <next+0x6c>
-  1816d8:	ea000016 	b	181738 <drawCellLoop>
+0018168c <ExitDraw>:
+  18168c:	eb0000bc 	bl	181984 <Print_Init_Stats>
+  181690:	e8bd4780 	pop	{r7, r8, r9, sl, lr}
+  181694:	e1a0f00e 	mov	pc, lr
 
-001816dc <DrawGround>:
-  1816dc:	e59f60e0 	ldr	r6, [pc, #224]	; 1817c4 <next+0x70>
-  1816e0:	ea000014 	b	181738 <drawCellLoop>
+00181698 <drawCell>:
+  181698:	e92d41f8 	push	{r3, r4, r5, r6, r7, r8, lr}
+  18169c:	e3520001 	cmp	r2, #1
+  1816a0:	0a00001b 	beq	181714 <DrawGround>
+  1816a4:	e3520002 	cmp	r2, #2
+  1816a8:	0a00001b 	beq	18171c <DrawPipe>
+  1816ac:	e3520003 	cmp	r2, #3
+  1816b0:	0a00001b 	beq	181724 <DrawMario>
+  1816b4:	e3520004 	cmp	r2, #4
+  1816b8:	0a00001b 	beq	18172c <DrawBrick>
+  1816bc:	e3520005 	cmp	r2, #5
+  1816c0:	0a00001b 	beq	181734 <DrawQBox>
+  1816c4:	e3520006 	cmp	r2, #6
+  1816c8:	0a00000f 	beq	18170c <DrawCloud>
+  1816cc:	e3520007 	cmp	r2, #7
+  1816d0:	0a000019 	beq	18173c <monster1>
+  1816d4:	e3520009 	cmp	r2, #9
+  1816d8:	0a000019 	beq	181744 <monster2>
+  1816dc:	e3520008 	cmp	r2, #8
+  1816e0:	0a00001b 	beq	181754 <DrawCoin>
+  1816e4:	e352000a 	cmp	r2, #10
+  1816e8:	0a00001b 	beq	18175c <DrawMushroom>
+  1816ec:	e352000b 	cmp	r2, #11
+  1816f0:	0a00001b 	beq	181764 <DrawStar>
+  1816f4:	e352000c 	cmp	r2, #12
+  1816f8:	0a00001b 	beq	18176c <DrawOrangeSquare>
+  1816fc:	e352000f 	cmp	r2, #15
+  181700:	0a000011 	beq	18174c <DrawCastle>
+  181704:	e59f60e8 	ldr	r6, [pc, #232]	; 1817f4 <next+0x68>
+  181708:	ea000018 	b	181770 <drawCellLoop>
 
-001816e4 <DrawPipe>:
-  1816e4:	e59f60dc 	ldr	r6, [pc, #220]	; 1817c8 <next+0x74>
-  1816e8:	ea000012 	b	181738 <drawCellLoop>
+0018170c <DrawCloud>:
+  18170c:	e59f60e4 	ldr	r6, [pc, #228]	; 1817f8 <next+0x6c>
+  181710:	ea000016 	b	181770 <drawCellLoop>
 
-001816ec <DrawMario>:
-  1816ec:	e59f60d8 	ldr	r6, [pc, #216]	; 1817cc <next+0x78>
-  1816f0:	ea000010 	b	181738 <drawCellLoop>
+00181714 <DrawGround>:
+  181714:	e59f60e0 	ldr	r6, [pc, #224]	; 1817fc <next+0x70>
+  181718:	ea000014 	b	181770 <drawCellLoop>
 
-001816f4 <DrawBrick>:
-  1816f4:	e59f60d4 	ldr	r6, [pc, #212]	; 1817d0 <next+0x7c>
-  1816f8:	ea00000e 	b	181738 <drawCellLoop>
+0018171c <DrawPipe>:
+  18171c:	e59f60dc 	ldr	r6, [pc, #220]	; 181800 <next+0x74>
+  181720:	ea000012 	b	181770 <drawCellLoop>
 
-001816fc <DrawQBox>:
-  1816fc:	e59f60d0 	ldr	r6, [pc, #208]	; 1817d4 <next+0x80>
-  181700:	ea00000c 	b	181738 <drawCellLoop>
+00181724 <DrawMario>:
+  181724:	e59f60d8 	ldr	r6, [pc, #216]	; 181804 <next+0x78>
+  181728:	ea000010 	b	181770 <drawCellLoop>
 
-00181704 <monster1>:
-  181704:	e59f60cc 	ldr	r6, [pc, #204]	; 1817d8 <next+0x84>
-  181708:	ea00000a 	b	181738 <drawCellLoop>
+0018172c <DrawBrick>:
+  18172c:	e59f60d4 	ldr	r6, [pc, #212]	; 181808 <next+0x7c>
+  181730:	ea00000e 	b	181770 <drawCellLoop>
 
-0018170c <monster2>:
-  18170c:	e59f60c8 	ldr	r6, [pc, #200]	; 1817dc <next+0x88>
-  181710:	ea000008 	b	181738 <drawCellLoop>
+00181734 <DrawQBox>:
+  181734:	e59f60d0 	ldr	r6, [pc, #208]	; 18180c <next+0x80>
+  181738:	ea00000c 	b	181770 <drawCellLoop>
 
-00181714 <DrawCastle>:
-  181714:	e59f60c4 	ldr	r6, [pc, #196]	; 1817e0 <next+0x8c>
-  181718:	ea000006 	b	181738 <drawCellLoop>
+0018173c <monster1>:
+  18173c:	e59f60cc 	ldr	r6, [pc, #204]	; 181810 <next+0x84>
+  181740:	ea00000a 	b	181770 <drawCellLoop>
 
-0018171c <DrawCoin>:
-  18171c:	e59f60c0 	ldr	r6, [pc, #192]	; 1817e4 <next+0x90>
-  181720:	ea000004 	b	181738 <drawCellLoop>
+00181744 <monster2>:
+  181744:	e59f60c8 	ldr	r6, [pc, #200]	; 181814 <next+0x88>
+  181748:	ea000008 	b	181770 <drawCellLoop>
 
-00181724 <DrawMushroom>:
-  181724:	e59f60bc 	ldr	r6, [pc, #188]	; 1817e8 <next+0x94>
-  181728:	ea000002 	b	181738 <drawCellLoop>
+0018174c <DrawCastle>:
+  18174c:	e59f60c4 	ldr	r6, [pc, #196]	; 181818 <next+0x8c>
+  181750:	ea000006 	b	181770 <drawCellLoop>
 
-0018172c <DrawStar>:
-  18172c:	e59f60b8 	ldr	r6, [pc, #184]	; 1817ec <next+0x98>
-  181730:	ea000000 	b	181738 <drawCellLoop>
+00181754 <DrawCoin>:
+  181754:	e59f60c0 	ldr	r6, [pc, #192]	; 18181c <next+0x90>
+  181758:	ea000004 	b	181770 <drawCellLoop>
 
-00181734 <DrawOrangeSquare>:
-  181734:	e59f60b4 	ldr	r6, [pc, #180]	; 1817f0 <next+0x9c>
+0018175c <DrawMushroom>:
+  18175c:	e59f60bc 	ldr	r6, [pc, #188]	; 181820 <next+0x94>
+  181760:	ea000002 	b	181770 <drawCellLoop>
 
-00181738 <drawCellLoop>:
-  181738:	e3a0a022 	mov	sl, #34	; 0x22
-  18173c:	e3a0c022 	mov	ip, #34	; 0x22
-  181740:	e0040a90 	mul	r4, r0, sl
-  181744:	e1a03004 	mov	r3, r4
-  181748:	e0050c91 	mul	r5, r1, ip
-  18174c:	e084700a 	add	r7, r4, sl
-  181750:	e085800c 	add	r8, r5, ip
+00181764 <DrawStar>:
+  181764:	e59f60b8 	ldr	r6, [pc, #184]	; 181824 <next+0x98>
+  181768:	ea000000 	b	181770 <drawCellLoop>
 
-00181754 <next>:
-  181754:	e1a00004 	mov	r0, r4
-  181758:	e1a01005 	mov	r1, r5
-  18175c:	e0d620b2 	ldrh	r2, [r6], #2
-  181760:	ebffff04 	bl	181378 <DrawPixel>
-  181764:	e2844001 	add	r4, r4, #1
-  181768:	e1540007 	cmp	r4, r7
-  18176c:	bafffff8 	blt	181754 <next>
-  181770:	e1a04003 	mov	r4, r3
-  181774:	e2855001 	add	r5, r5, #1
-  181778:	e1550008 	cmp	r5, r8
-  18177c:	bafffff4 	blt	181754 <next>
-  181780:	e8bd41f8 	pop	{r3, r4, r5, r6, r7, r8, lr}
-  181784:	e1a0f00e 	mov	pc, lr
-  181788:	000003ff 	.word	0x000003ff
-  18178c:	000002ff 	.word	0x000002ff
-  181790:	000090e0 	.word	0x000090e0
-  181794:	00175808 	.word	0x00175808
-  181798:	0000022b 	.word	0x0000022b
-  18179c:	0000ffff 	.word	0x0000ffff
-  1817a0:	00180050 	.word	0x00180050
-  1817a4:	00180051 	.word	0x00180051
-  1817a8:	0017f808 	.word	0x0017f808
-  1817ac:	000002c9 	.word	0x000002c9
-  1817b0:	001286f8 	.word	0x001286f8
-  1817b4:	00000253 	.word	0x00000253
-  1817b8:	00011878 	.word	0x00011878
-  1817bc:	0000ac08 	.word	0x0000ac08
-  1817c0:	0000d248 	.word	0x0000d248
-  1817c4:	0000b510 	.word	0x0000b510
-  1817c8:	0000bd90 	.word	0x0000bd90
-  1817cc:	0000c698 	.word	0x0000c698
-  1817d0:	0000db50 	.word	0x0000db50
-  1817d4:	0000e458 	.word	0x0000e458
-  1817d8:	000099f8 	.word	0x000099f8
-  1817dc:	0000a300 	.word	0x0000a300
-  1817e0:	000090f0 	.word	0x000090f0
-  1817e4:	0000ed60 	.word	0x0000ed60
-  1817e8:	00010f70 	.word	0x00010f70
-  1817ec:	00174f00 	.word	0x00174f00
-  1817f0:	001745f8 	.word	0x001745f8
+0018176c <DrawOrangeSquare>:
+  18176c:	e59f60b4 	ldr	r6, [pc, #180]	; 181828 <next+0x9c>
 
-001817f4 <mainMenu>:
-  1817f4:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  1817f8:	ebffff2b 	bl	1814ac <DrawMainMenuScreen>
-  1817fc:	ebffff6a 	bl	1815ac <DrawMenuMushroom>
-  181800:	e3a08000 	mov	r8, #0
+00181770 <drawCellLoop>:
+  181770:	e3a0a022 	mov	sl, #34	; 0x22
+  181774:	e3a0c022 	mov	ip, #34	; 0x22
+  181778:	e0040a90 	mul	r4, r0, sl
+  18177c:	e1a03004 	mov	r3, r4
+  181780:	e0050c91 	mul	r5, r1, ip
+  181784:	e084700a 	add	r7, r4, sl
+  181788:	e085800c 	add	r8, r5, ip
 
-00181804 <readMainMenuLoop>:
-  181804:	eb0000ce 	bl	181b44 <readMainMenuButtons>
-  181808:	e3500001 	cmp	r0, #1
-  18180c:	0a000004 	beq	181824 <MainUpPressed>
-  181810:	e3500002 	cmp	r0, #2
-  181814:	0a000007 	beq	181838 <MainDownPressed>
-  181818:	e3500003 	cmp	r0, #3
-  18181c:	0a00000a 	beq	18184c <MainAPressed>
-  181820:	eafffff7 	b	181804 <readMainMenuLoop>
+0018178c <next>:
+  18178c:	e1a00004 	mov	r0, r4
+  181790:	e1a01005 	mov	r1, r5
+  181794:	e0d620b2 	ldrh	r2, [r6], #2
+  181798:	ebfffefb 	bl	18138c <DrawPixel>
+  18179c:	e2844001 	add	r4, r4, #1
+  1817a0:	e1540007 	cmp	r4, r7
+  1817a4:	bafffff8 	blt	18178c <next>
+  1817a8:	e1a04003 	mov	r4, r3
+  1817ac:	e2855001 	add	r5, r5, #1
+  1817b0:	e1550008 	cmp	r5, r8
+  1817b4:	bafffff4 	blt	18178c <next>
+  1817b8:	e8bd41f8 	pop	{r3, r4, r5, r6, r7, r8, lr}
+  1817bc:	e1a0f00e 	mov	pc, lr
+  1817c0:	000003ff 	.word	0x000003ff
+  1817c4:	000002ff 	.word	0x000002ff
+  1817c8:	000090e0 	.word	0x000090e0
+  1817cc:	00175808 	.word	0x00175808
+  1817d0:	0000022b 	.word	0x0000022b
+  1817d4:	0000ffff 	.word	0x0000ffff
+  1817d8:	00180050 	.word	0x00180050
+  1817dc:	00180051 	.word	0x00180051
+  1817e0:	0017f808 	.word	0x0017f808
+  1817e4:	000002c9 	.word	0x000002c9
+  1817e8:	001286f8 	.word	0x001286f8
+  1817ec:	00000253 	.word	0x00000253
+  1817f0:	00011878 	.word	0x00011878
+  1817f4:	0000ac08 	.word	0x0000ac08
+  1817f8:	0000d248 	.word	0x0000d248
+  1817fc:	0000b510 	.word	0x0000b510
+  181800:	0000bd90 	.word	0x0000bd90
+  181804:	0000c698 	.word	0x0000c698
+  181808:	0000db50 	.word	0x0000db50
+  18180c:	0000e458 	.word	0x0000e458
+  181810:	000099f8 	.word	0x000099f8
+  181814:	0000a300 	.word	0x0000a300
+  181818:	000090f0 	.word	0x000090f0
+  18181c:	0000ed60 	.word	0x0000ed60
+  181820:	00010f70 	.word	0x00010f70
+  181824:	00174f00 	.word	0x00174f00
+  181828:	001745f8 	.word	0x001745f8
 
-00181824 <MainUpPressed>:
-  181824:	e3580000 	cmp	r8, #0
-  181828:	0afffff5 	beq	181804 <readMainMenuLoop>
-  18182c:	ebffff5e 	bl	1815ac <DrawMenuMushroom>
-  181830:	e3a08000 	mov	r8, #0
-  181834:	eafffff2 	b	181804 <readMainMenuLoop>
+0018182c <mainMenu>:
+  18182c:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  181830:	ebffff2b 	bl	1814e4 <DrawMainMenuScreen>
+  181834:	ebffff6a 	bl	1815e4 <DrawMenuMushroom>
+  181838:	e3a08000 	mov	r8, #0
 
-00181838 <MainDownPressed>:
-  181838:	e3580001 	cmp	r8, #1
-  18183c:	0afffff0 	beq	181804 <readMainMenuLoop>
-  181840:	e3a08001 	mov	r8, #1
-  181844:	ebffff63 	bl	1815d8 <DrawMenuMushroom2>
-  181848:	eaffffed 	b	181804 <readMainMenuLoop>
+0018183c <readMainMenuLoop>:
+  18183c:	eb0000de 	bl	181bbc <readMainMenuButtons>
+  181840:	e3500001 	cmp	r0, #1
+  181844:	0a000004 	beq	18185c <MainUpPressed>
+  181848:	e3500002 	cmp	r0, #2
+  18184c:	0a000007 	beq	181870 <MainDownPressed>
+  181850:	e3500003 	cmp	r0, #3
+  181854:	0a00000a 	beq	181884 <MainAPressed>
+  181858:	eafffff7 	b	18183c <readMainMenuLoop>
 
-0018184c <MainAPressed>:
-  18184c:	e3580000 	cmp	r8, #0
-  181850:	0a00002d 	beq	18190c <StartGame>
-  181854:	e3580001 	cmp	r8, #1
-  181858:	0a000032 	beq	181928 <exitGame>
+0018185c <MainUpPressed>:
+  18185c:	e3580000 	cmp	r8, #0
+  181860:	0afffff5 	beq	18183c <readMainMenuLoop>
+  181864:	ebffff5e 	bl	1815e4 <DrawMenuMushroom>
+  181868:	e3a08000 	mov	r8, #0
+  18186c:	eafffff2 	b	18183c <readMainMenuLoop>
 
-0018185c <ExitMainMenu>:
-  18185c:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  181860:	e1a0f00e 	mov	pc, lr
+00181870 <MainDownPressed>:
+  181870:	e3580001 	cmp	r8, #1
+  181874:	0afffff0 	beq	18183c <readMainMenuLoop>
+  181878:	e3a08001 	mov	r8, #1
+  18187c:	ebffff63 	bl	181610 <DrawMenuMushroom2>
+  181880:	eaffffed 	b	18183c <readMainMenuLoop>
 
-00181864 <pauseMenu>:
-  181864:	e92d4020 	push	{r5, lr}
-  181868:	e3a05001 	mov	r5, #1
-  18186c:	ebfffefa 	bl	18145c <DrawPauseMenu>
-  181870:	ebffff20 	bl	1814f8 <DrawMenuStar1>
+00181884 <MainAPressed>:
+  181884:	e3580000 	cmp	r8, #0
+  181888:	0a00002d 	beq	181944 <StartGame>
+  18188c:	e3580001 	cmp	r8, #1
+  181890:	0a000033 	beq	181964 <exitGame>
 
-00181874 <PauseLabel>:
-  181874:	ea0000d2 	b	181bc4 <readPauseButtons>
+00181894 <ExitMainMenu>:
+  181894:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  181898:	e1a0f00e 	mov	pc, lr
 
-00181878 <PauseStPressed>:
-  181878:	ea000016 	b	1818d8 <PauseDone>
+0018189c <pauseMenu>:
+  18189c:	e92d4020 	push	{r5, lr}
+  1818a0:	e3a05001 	mov	r5, #1
+  1818a4:	ebfffefa 	bl	181494 <DrawPauseMenu>
+  1818a8:	ebffff20 	bl	181530 <DrawMenuStar1>
 
-0018187c <PauseDnPressed>:
-  18187c:	e3550001 	cmp	r5, #1
-  181880:	03a05002 	moveq	r5, #2
-  181884:	0affff2a 	beq	181534 <DrawMenuStar2>
-  181888:	e3550002 	cmp	r5, #2
-  18188c:	03a05003 	moveq	r5, #3
-  181890:	0affff36 	beq	181570 <DrawMenuStar3>
-  181894:	ea00000c 	b	1818cc <PauseNext>
+001818ac <PauseLabel>:
+  1818ac:	ea0000e2 	b	181c3c <readPauseButtons>
 
-00181898 <PauseUpPressed>:
-  181898:	e3550002 	cmp	r5, #2
-  18189c:	03a05001 	moveq	r5, #1
-  1818a0:	0affff14 	beq	1814f8 <DrawMenuStar1>
-  1818a4:	e3550003 	cmp	r5, #3
-  1818a8:	03a05002 	moveq	r5, #2
-  1818ac:	0affff20 	beq	181534 <DrawMenuStar2>
-  1818b0:	ea000005 	b	1818cc <PauseNext>
+001818b0 <PauseStPressed>:
+  1818b0:	0a000023 	beq	181944 <StartGame>
 
-001818b4 <PauseAPressed>:
+001818b4 <PauseDnPressed>:
   1818b4:	e3550001 	cmp	r5, #1
-  1818b8:	0a000013 	beq	18190c <StartGame>
-  1818bc:	e3550002 	cmp	r5, #2
-  1818c0:	0a000007 	beq	1818e4 <main>
-  1818c4:	e3550003 	cmp	r5, #3
-  1818c8:	0a000016 	beq	181928 <exitGame>
+  1818b8:	03a05002 	moveq	r5, #2
+  1818bc:	0affff2a 	beq	18156c <DrawMenuStar2>
+  1818c0:	e3550002 	cmp	r5, #2
+  1818c4:	03a05003 	moveq	r5, #3
+  1818c8:	0affff36 	beq	1815a8 <DrawMenuStar3>
+  1818cc:	ea00000c 	b	181904 <PauseNext>
 
-001818cc <PauseNext>:
-  1818cc:	e59f100c 	ldr	r1, [pc, #12]	; 1818e0 <PauseDone+0x8>
-  1818d0:	eb000111 	bl	181d1c <Wait>
-  1818d4:	eaffffe6 	b	181874 <PauseLabel>
+001818d0 <PauseUpPressed>:
+  1818d0:	e3550002 	cmp	r5, #2
+  1818d4:	03a05001 	moveq	r5, #1
+  1818d8:	0affff14 	beq	181530 <DrawMenuStar1>
+  1818dc:	e3550003 	cmp	r5, #3
+  1818e0:	03a05002 	moveq	r5, #2
+  1818e4:	0affff20 	beq	18156c <DrawMenuStar2>
+  1818e8:	ea000005 	b	181904 <PauseNext>
 
-001818d8 <PauseDone>:
-  1818d8:	e8bd4020 	pop	{r5, lr}
-  1818dc:	e1a0f00e 	mov	pc, lr
-  1818e0:	000fffff 	.word	0x000fffff
+001818ec <PauseAPressed>:
+  1818ec:	e3550001 	cmp	r5, #1
+  1818f0:	0a000013 	beq	181944 <StartGame>
+  1818f4:	e3550002 	cmp	r5, #2
+  1818f8:	0a000007 	beq	18191c <main>
+  1818fc:	e3550003 	cmp	r5, #3
+  181900:	0a000017 	beq	181964 <exitGame>
 
-001818e4 <main>:
-  1818e4:	e3a0d902 	mov	sp, #32768	; 0x8000
-  1818e8:	ebfffcc8 	bl	180c10 <EnableJTAG>
-  1818ec:	ebfffcea 	bl	180c9c <InitFrameBuffer>
-  1818f0:	eb000077 	bl	181ad4 <initGPIO>
-  1818f4:	ebfffe8a 	bl	181324 <clearScreen>
-  1818f8:	e59f0038 	ldr	r0, [pc, #56]	; 181938 <haltLoop$+0x4>
-  1818fc:	e59f1038 	ldr	r1, [pc, #56]	; 18193c <haltLoop$+0x8>
-  181900:	e59f2038 	ldr	r2, [pc, #56]	; 181940 <haltLoop$+0xc>
-  181904:	ebfffe69 	bl	1812b0 <switchMap>
-  181908:	ebffffb9 	bl	1817f4 <mainMenu>
+00181904 <PauseNext>:
+  181904:	e59f100c 	ldr	r1, [pc, #12]	; 181918 <PauseDone+0x8>
+  181908:	eb000121 	bl	181d94 <Wait>
+  18190c:	eaffffe6 	b	1818ac <PauseLabel>
 
-0018190c <StartGame>:
-  18190c:	ebfffe84 	bl	181324 <clearScreen>
-  181910:	e59f0024 	ldr	r0, [pc, #36]	; 18193c <haltLoop$+0x8>
-  181914:	e59f1028 	ldr	r1, [pc, #40]	; 181944 <haltLoop$+0x10>
-  181918:	ebffff39 	bl	181604 <drawMap>
-  18191c:	eb000009 	bl	181948 <Print_Init_Stats>
+00181910 <PauseDone>:
+  181910:	e8bd4020 	pop	{r5, lr}
+  181914:	e1a0f00e 	mov	pc, lr
+  181918:	000fffff 	.word	0x000fffff
 
-00181920 <read>:
-  181920:	eb0000c9 	bl	181c4c <readButtons>
-  181924:	ebfffffd 	bl	181920 <read>
+0018191c <main>:
+  18191c:	e3a0d902 	mov	sp, #32768	; 0x8000
+  181920:	ebfffcba 	bl	180c10 <EnableJTAG>
+  181924:	ebfffcdc 	bl	180c9c <InitFrameBuffer>
+  181928:	eb000087 	bl	181b4c <initGPIO>
+  18192c:	ebfffe81 	bl	181338 <clearScreen>
+  181930:	e59f003c 	ldr	r0, [pc, #60]	; 181974 <haltLoop$+0x4>
+  181934:	e59f103c 	ldr	r1, [pc, #60]	; 181978 <haltLoop$+0x8>
+  181938:	e59f203c 	ldr	r2, [pc, #60]	; 18197c <haltLoop$+0xc>
+  18193c:	ebfffe60 	bl	1812c4 <switchMap>
+  181940:	ebffffb9 	bl	18182c <mainMenu>
 
-00181928 <exitGame>:
-  181928:	ebfffe7d 	bl	181324 <clearScreen>
-  18192c:	ea000000 	b	181934 <haltLoop$>
+00181944 <StartGame>:
+  181944:	ebfffe7b 	bl	181338 <clearScreen>
+  181948:	e59f0028 	ldr	r0, [pc, #40]	; 181978 <haltLoop$+0x8>
+  18194c:	e59f102c 	ldr	r1, [pc, #44]	; 181980 <haltLoop$+0x10>
+  181950:	ebffff39 	bl	18163c <drawMap>
+  181954:	eb00000a 	bl	181984 <Print_Init_Stats>
+  181958:	eb000024 	bl	1819f0 <Draw_Stats>
 
-00181930 <Restart_Game>:
-  181930:	eafffffa 	b	181920 <read>
+0018195c <read>:
+  18195c:	eb0000d8 	bl	181cc4 <readButtons>
+  181960:	ebfffffd 	bl	18195c <read>
 
-00181934 <haltLoop$>:
-  181934:	eafffffe 	b	181934 <haltLoop$>
-  181938:	0018024a 	.word	0x0018024a
-  18193c:	00180056 	.word	0x00180056
-  181940:	0018043e 	.word	0x0018043e
-  181944:	0018024a 	.word	0x0018024a
+00181964 <exitGame>:
+  181964:	ebfffe73 	bl	181338 <clearScreen>
+  181968:	ea000000 	b	181970 <haltLoop$>
 
-00181948 <Print_Init_Stats>:
-  181948:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
-  18194c:	e3a00010 	mov	r0, #16
-  181950:	e3a01010 	mov	r1, #16
-  181954:	e59f214c 	ldr	r2, [pc, #332]	; 181aa8 <noPixel$+0x24>
-  181958:	eb00002a 	bl	181a08 <DrawString>
-  18195c:	e3a00090 	mov	r0, #144	; 0x90
-  181960:	e3a01010 	mov	r1, #16
-  181964:	e59f2140 	ldr	r2, [pc, #320]	; 181aac <noPixel$+0x28>
-  181968:	eb000026 	bl	181a08 <DrawString>
-  18196c:	e3a00e15 	mov	r0, #336	; 0x150
-  181970:	e3a01010 	mov	r1, #16
-  181974:	e59f2134 	ldr	r2, [pc, #308]	; 181ab0 <noPixel$+0x2c>
-  181978:	eb000022 	bl	181a08 <DrawString>
-  18197c:	e3a00c02 	mov	r0, #512	; 0x200
-  181980:	e3a01010 	mov	r1, #16
-  181984:	e59f2120 	ldr	r2, [pc, #288]	; 181aac <noPixel$+0x28>
-  181988:	eb00001e 	bl	181a08 <DrawString>
-  18198c:	e3a00e29 	mov	r0, #656	; 0x290
-  181990:	e3a01010 	mov	r1, #16
-  181994:	e59f2118 	ldr	r2, [pc, #280]	; 181ab4 <noPixel$+0x30>
-  181998:	eb00001a 	bl	181a08 <DrawString>
-  18199c:	e3a00e32 	mov	r0, #800	; 0x320
-  1819a0:	e3a01010 	mov	r1, #16
-  1819a4:	e59f2100 	ldr	r2, [pc, #256]	; 181aac <noPixel$+0x28>
-  1819a8:	eb000016 	bl	181a08 <DrawString>
-  1819ac:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
-  1819b0:	e1a0f00e 	mov	pc, lr
+0018196c <Restart_Game>:
+  18196c:	eafffffa 	b	18195c <read>
 
-001819b4 <Draw_Stats>:
-  1819b4:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
-  1819b8:	e3a04000 	mov	r4, #0
-  1819bc:	e3a05000 	mov	r5, #0
-  1819c0:	e3a06000 	mov	r6, #0
-  1819c4:	e2844030 	add	r4, r4, #48	; 0x30
-  1819c8:	e2855030 	add	r5, r5, #48	; 0x30
-  1819cc:	e2866030 	add	r6, r6, #48	; 0x30
-  1819d0:	e3a00085 	mov	r0, #133	; 0x85
-  1819d4:	e3a01010 	mov	r1, #16
-  1819d8:	e59f20d8 	ldr	r2, [pc, #216]	; 181ab8 <noPixel$+0x34>
+00181970 <haltLoop$>:
+  181970:	eafffffe 	b	181970 <haltLoop$>
+  181974:	0018024a 	.word	0x0018024a
+  181978:	00180056 	.word	0x00180056
+  18197c:	0018043e 	.word	0x0018043e
+  181980:	0018024a 	.word	0x0018024a
 
-001819dc <test1>:
-  1819dc:	eb000009 	bl	181a08 <DrawString>
-  1819e0:	e59f00d4 	ldr	r0, [pc, #212]	; 181abc <noPixel$+0x38>
-  1819e4:	e3a01010 	mov	r1, #16
-  1819e8:	e59f20d0 	ldr	r2, [pc, #208]	; 181ac0 <noPixel$+0x3c>
+00181984 <Print_Init_Stats>:
+  181984:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+  181988:	e3a00010 	mov	r0, #16
+  18198c:	e3a01010 	mov	r1, #16
+  181990:	e59f2188 	ldr	r2, [pc, #392]	; 181b20 <noPixel$+0x24>
+  181994:	eb000039 	bl	181a80 <DrawString>
+  181998:	e3a00087 	mov	r0, #135	; 0x87
+  18199c:	e3a01010 	mov	r1, #16
+  1819a0:	e59f217c 	ldr	r2, [pc, #380]	; 181b24 <noPixel$+0x28>
+  1819a4:	eb000035 	bl	181a80 <DrawString>
+  1819a8:	e3a00e15 	mov	r0, #336	; 0x150
+  1819ac:	e3a01010 	mov	r1, #16
+  1819b0:	e59f2170 	ldr	r2, [pc, #368]	; 181b28 <noPixel$+0x2c>
+  1819b4:	eb000031 	bl	181a80 <DrawString>
+  1819b8:	e59f016c 	ldr	r0, [pc, #364]	; 181b2c <noPixel$+0x30>
+  1819bc:	e3a01010 	mov	r1, #16
+  1819c0:	e59f215c 	ldr	r2, [pc, #348]	; 181b24 <noPixel$+0x28>
+  1819c4:	eb00002d 	bl	181a80 <DrawString>
+  1819c8:	e3a00e29 	mov	r0, #656	; 0x290
+  1819cc:	e3a01010 	mov	r1, #16
+  1819d0:	e59f2158 	ldr	r2, [pc, #344]	; 181b30 <noPixel$+0x34>
+  1819d4:	eb000029 	bl	181a80 <DrawString>
+  1819d8:	e3a00e31 	mov	r0, #784	; 0x310
+  1819dc:	e3a01010 	mov	r1, #16
+  1819e0:	e59f213c 	ldr	r2, [pc, #316]	; 181b24 <noPixel$+0x28>
+  1819e4:	eb000025 	bl	181a80 <DrawString>
+  1819e8:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+  1819ec:	e1a0f00e 	mov	pc, lr
 
-001819ec <test2>:
-  1819ec:	eb000005 	bl	181a08 <DrawString>
-  1819f0:	e59f00cc 	ldr	r0, [pc, #204]	; 181ac4 <noPixel$+0x40>
-  1819f4:	e3a01010 	mov	r1, #16
-  1819f8:	e59f20c8 	ldr	r2, [pc, #200]	; 181ac8 <noPixel$+0x44>
+001819f0 <Draw_Stats>:
+  1819f0:	e92d47ff 	push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+  1819f4:	e59f7138 	ldr	r7, [pc, #312]	; 181b34 <noPixel$+0x38>
+  1819f8:	e59f8138 	ldr	r8, [pc, #312]	; 181b38 <noPixel$+0x3c>
+  1819fc:	e59f9138 	ldr	r9, [pc, #312]	; 181b3c <noPixel$+0x40>
+  181a00:	e5d74000 	ldrb	r4, [r7]
+  181a04:	e5d85000 	ldrb	r5, [r8]
+  181a08:	e5d96000 	ldrb	r6, [r9]
+  181a0c:	e2844030 	add	r4, r4, #48	; 0x30
+  181a10:	e2855030 	add	r5, r5, #48	; 0x30
+  181a14:	e2866030 	add	r6, r6, #48	; 0x30
+  181a18:	e3a00003 	mov	r0, #3
+  181a1c:	e3a01000 	mov	r1, #0
+  181a20:	e3a02000 	mov	r2, #0
+  181a24:	ebffff1b 	bl	181698 <drawCell>
+  181a28:	e3a0007d 	mov	r0, #125	; 0x7d
+  181a2c:	e3a01010 	mov	r1, #16
+  181a30:	e1a02004 	mov	r2, r4
+  181a34:	eb000022 	bl	181ac4 <Draw_Char>
+  181a38:	e3a0000f 	mov	r0, #15
+  181a3c:	e3a01000 	mov	r1, #0
+  181a40:	e3a02000 	mov	r2, #0
+  181a44:	ebffff13 	bl	181698 <drawCell>
+  181a48:	e59f00f0 	ldr	r0, [pc, #240]	; 181b40 <noPixel$+0x44>
+  181a4c:	e3a01010 	mov	r1, #16
+  181a50:	e1a02005 	mov	r2, r5
 
-001819fc <test3>:
-  1819fc:	eb000001 	bl	181a08 <DrawString>
-  181a00:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
-  181a04:	e1a0f00e 	mov	pc, lr
+00181a54 <test2>:
+  181a54:	eb00001a 	bl	181ac4 <Draw_Char>
+  181a58:	e3a00018 	mov	r0, #24
+  181a5c:	e3a01000 	mov	r1, #0
+  181a60:	e3a02000 	mov	r2, #0
+  181a64:	ebffff0b 	bl	181698 <drawCell>
+  181a68:	e3a00fc9 	mov	r0, #804	; 0x324
+  181a6c:	e3a01010 	mov	r1, #16
 
-00181a08 <DrawString>:
-  181a08:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
-  181a0c:	e1a05000 	mov	r5, r0
-  181a10:	e1a06001 	mov	r6, r1
-  181a14:	e1a04002 	mov	r4, r2
-  181a18:	e3a08000 	mov	r8, #0
-  181a1c:	e5d49000 	ldrb	r9, [r4]
+00181a70 <test3>:
+  181a70:	e1a02006 	mov	r2, r6
+  181a74:	eb000012 	bl	181ac4 <Draw_Char>
+  181a78:	e8bd47ff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+  181a7c:	e1a0f00e 	mov	pc, lr
 
-00181a20 <DrawStringLoop>:
-  181a20:	e1a00005 	mov	r0, r5
-  181a24:	e1a01006 	mov	r1, r6
-  181a28:	e1a02009 	mov	r2, r9
-  181a2c:	eb000006 	bl	181a4c <Draw_Char>
-  181a30:	e2888001 	add	r8, r8, #1
-  181a34:	e285500a 	add	r5, r5, #10
-  181a38:	e7d49008 	ldrb	r9, [r4, r8]
-  181a3c:	e3590000 	cmp	r9, #0
-  181a40:	1afffff6 	bne	181a20 <DrawStringLoop>
-  181a44:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
-  181a48:	e1a0f00e 	mov	pc, lr
+00181a80 <DrawString>:
+  181a80:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+  181a84:	e1a05000 	mov	r5, r0
+  181a88:	e1a06001 	mov	r6, r1
+  181a8c:	e1a04002 	mov	r4, r2
+  181a90:	e3a08000 	mov	r8, #0
+  181a94:	e5d49000 	ldrb	r9, [r4]
 
-00181a4c <Draw_Char>:
-  181a4c:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
-  181a50:	e59f4074 	ldr	r4, [pc, #116]	; 181acc <noPixel$+0x48>
-  181a54:	e0844202 	add	r4, r4, r2, lsl #4
-  181a58:	e1a06001 	mov	r6, r1
-  181a5c:	e1a09000 	mov	r9, r0
+00181a98 <DrawStringLoop>:
+  181a98:	e1a00005 	mov	r0, r5
+  181a9c:	e1a01006 	mov	r1, r6
+  181aa0:	e1a02009 	mov	r2, r9
+  181aa4:	eb000006 	bl	181ac4 <Draw_Char>
+  181aa8:	e2888001 	add	r8, r8, #1
+  181aac:	e285500a 	add	r5, r5, #10
+  181ab0:	e7d49008 	ldrb	r9, [r4, r8]
+  181ab4:	e3590000 	cmp	r9, #0
+  181ab8:	1afffff6 	bne	181a98 <DrawStringLoop>
+  181abc:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+  181ac0:	e1a0f00e 	mov	pc, lr
 
-00181a60 <charLoop$>:
-  181a60:	e1a05009 	mov	r5, r9
-  181a64:	e3a08001 	mov	r8, #1
-  181a68:	e4d47001 	ldrb	r7, [r4], #1
+00181ac4 <Draw_Char>:
+  181ac4:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+  181ac8:	e59f4074 	ldr	r4, [pc, #116]	; 181b44 <noPixel$+0x48>
+  181acc:	e0844202 	add	r4, r4, r2, lsl #4
+  181ad0:	e1a06001 	mov	r6, r1
+  181ad4:	e1a09000 	mov	r9, r0
 
-00181a6c <rowLoop$>:
-  181a6c:	e1170008 	tst	r7, r8
-  181a70:	0a000003 	beq	181a84 <noPixel$>
-  181a74:	e1a00005 	mov	r0, r5
-  181a78:	e1a01006 	mov	r1, r6
-  181a7c:	e59f204c 	ldr	r2, [pc, #76]	; 181ad0 <noPixel$+0x4c>
-  181a80:	ebfffe3c 	bl	181378 <DrawPixel>
+00181ad8 <charLoop$>:
+  181ad8:	e1a05009 	mov	r5, r9
+  181adc:	e3a08001 	mov	r8, #1
+  181ae0:	e4d47001 	ldrb	r7, [r4], #1
 
-00181a84 <noPixel$>:
-  181a84:	e2855001 	add	r5, r5, #1
-  181a88:	e1a08088 	lsl	r8, r8, #1
-  181a8c:	e3180c01 	tst	r8, #256	; 0x100
-  181a90:	0afffff5 	beq	181a6c <rowLoop$>
-  181a94:	e2866001 	add	r6, r6, #1
-  181a98:	e314000f 	tst	r4, #15
-  181a9c:	1affffef 	bne	181a60 <charLoop$>
-  181aa0:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
-  181aa4:	e1a0f00e 	mov	pc, lr
-  181aa8:	0017f810 	.word	0x0017f810
-  181aac:	0017f840 	.word	0x0017f840
-  181ab0:	0017f823 	.word	0x0017f823
-  181ab4:	0017f81a 	.word	0x0017f81a
-  181ab8:	0017f82c 	.word	0x0017f82c
-  181abc:	00000215 	.word	0x00000215
-  181ac0:	0017f83e 	.word	0x0017f83e
-  181ac4:	00000335 	.word	0x00000335
-  181ac8:	0017f830 	.word	0x0017f830
-  181acc:	0017f843 	.word	0x0017f843
-  181ad0:	0000ffff 	.word	0x0000ffff
+00181ae4 <rowLoop$>:
+  181ae4:	e1170008 	tst	r7, r8
+  181ae8:	0a000003 	beq	181afc <noPixel$>
+  181aec:	e1a00005 	mov	r0, r5
+  181af0:	e1a01006 	mov	r1, r6
+  181af4:	e59f204c 	ldr	r2, [pc, #76]	; 181b48 <noPixel$+0x4c>
+  181af8:	ebfffe23 	bl	18138c <DrawPixel>
 
-00181ad4 <initGPIO>:
-  181ad4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-  181ad8:	e59f0354 	ldr	r0, [pc, #852]	; 181e34 <haltLoop$+0x4>
-  181adc:	e5901000 	ldr	r1, [r0]
-  181ae0:	e3a02007 	mov	r2, #7
-  181ae4:	e1a02d82 	lsl	r2, r2, #27
-  181ae8:	e1c11002 	bic	r1, r1, r2
-  181aec:	e3a03001 	mov	r3, #1
-  181af0:	e1a03d83 	lsl	r3, r3, #27
-  181af4:	e1811003 	orr	r1, r1, r3
-  181af8:	e5801000 	str	r1, [r0]
-  181afc:	e59f0334 	ldr	r0, [pc, #820]	; 181e38 <haltLoop$+0x8>
-  181b00:	e5901000 	ldr	r1, [r0]
-  181b04:	e3a02007 	mov	r2, #7
-  181b08:	e1c11002 	bic	r1, r1, r2
-  181b0c:	e3a03000 	mov	r3, #0
-  181b10:	e1811003 	orr	r1, r1, r3
-  181b14:	e5801000 	str	r1, [r0]
-  181b18:	e59f0318 	ldr	r0, [pc, #792]	; 181e38 <haltLoop$+0x8>
-  181b1c:	e5901000 	ldr	r1, [r0]
-  181b20:	e3a02007 	mov	r2, #7
-  181b24:	e1a02182 	lsl	r2, r2, #3
-  181b28:	e1c11002 	bic	r1, r1, r2
-  181b2c:	e3a03001 	mov	r3, #1
-  181b30:	e1a03183 	lsl	r3, r3, #3
-  181b34:	e1811003 	orr	r1, r1, r3
-  181b38:	e5801000 	str	r1, [r0]
-  181b3c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-  181b40:	e1a0f00e 	mov	pc, lr
+00181afc <noPixel$>:
+  181afc:	e2855001 	add	r5, r5, #1
+  181b00:	e1a08088 	lsl	r8, r8, #1
+  181b04:	e3180c01 	tst	r8, #256	; 0x100
+  181b08:	0afffff5 	beq	181ae4 <rowLoop$>
+  181b0c:	e2866001 	add	r6, r6, #1
+  181b10:	e314000f 	tst	r4, #15
+  181b14:	1affffef 	bne	181ad8 <charLoop$>
+  181b18:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+  181b1c:	e1a0f00e 	mov	pc, lr
+  181b20:	0017f810 	.word	0x0017f810
+  181b24:	0017f840 	.word	0x0017f840
+  181b28:	0017f823 	.word	0x0017f823
+  181b2c:	000001e9 	.word	0x000001e9
+  181b30:	0017f81a 	.word	0x0017f81a
+  181b34:	00180053 	.word	0x00180053
+  181b38:	00180052 	.word	0x00180052
+  181b3c:	00180050 	.word	0x00180050
+  181b40:	000001fd 	.word	0x000001fd
+  181b44:	0017f843 	.word	0x0017f843
+  181b48:	0000ffff 	.word	0x0000ffff
 
-00181b44 <readMainMenuButtons>:
-  181b44:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  181b48:	e59f12ec 	ldr	r1, [pc, #748]	; 181e3c <haltLoop$+0xc>
-  181b4c:	eb000072 	bl	181d1c <Wait>
-  181b50:	eb00007a 	bl	181d40 <Read_SNES>
-  181b54:	e1550009 	cmp	r5, r9
-  181b58:	e1a09000 	mov	r9, r0
-  181b5c:	0a00006b 	beq	181d10 <next>
-  181b60:	e3a05000 	mov	r5, #0
+00181b4c <initGPIO>:
+  181b4c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  181b50:	e59f0354 	ldr	r0, [pc, #852]	; 181eac <haltLoop$+0x4>
+  181b54:	e5901000 	ldr	r1, [r0]
+  181b58:	e3a02007 	mov	r2, #7
+  181b5c:	e1a02d82 	lsl	r2, r2, #27
+  181b60:	e1c11002 	bic	r1, r1, r2
+  181b64:	e3a03001 	mov	r3, #1
+  181b68:	e1a03d83 	lsl	r3, r3, #27
+  181b6c:	e1811003 	orr	r1, r1, r3
+  181b70:	e5801000 	str	r1, [r0]
+  181b74:	e59f0334 	ldr	r0, [pc, #820]	; 181eb0 <haltLoop$+0x8>
+  181b78:	e5901000 	ldr	r1, [r0]
+  181b7c:	e3a02007 	mov	r2, #7
+  181b80:	e1c11002 	bic	r1, r1, r2
+  181b84:	e3a03000 	mov	r3, #0
+  181b88:	e1811003 	orr	r1, r1, r3
+  181b8c:	e5801000 	str	r1, [r0]
+  181b90:	e59f0318 	ldr	r0, [pc, #792]	; 181eb0 <haltLoop$+0x8>
+  181b94:	e5901000 	ldr	r1, [r0]
+  181b98:	e3a02007 	mov	r2, #7
+  181b9c:	e1a02182 	lsl	r2, r2, #3
+  181ba0:	e1c11002 	bic	r1, r1, r2
+  181ba4:	e3a03001 	mov	r3, #1
+  181ba8:	e1a03183 	lsl	r3, r3, #3
+  181bac:	e1811003 	orr	r1, r1, r3
+  181bb0:	e5801000 	str	r1, [r0]
+  181bb4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  181bb8:	e1a0f00e 	mov	pc, lr
 
-00181b64 <checkMenuUp>:
-  181b64:	e1a07009 	mov	r7, r9
-  181b68:	e1a07227 	lsr	r7, r7, #4
-  181b6c:	e2077001 	and	r7, r7, #1
-  181b70:	e3570000 	cmp	r7, #0
-  181b74:	1a000001 	bne	181b80 <checkMenuDown>
-  181b78:	e3a00001 	mov	r0, #1
-  181b7c:	ebffff28 	bl	181824 <MainUpPressed>
+00181bbc <readMainMenuButtons>:
+  181bbc:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  181bc0:	e59f12ec 	ldr	r1, [pc, #748]	; 181eb4 <haltLoop$+0xc>
+  181bc4:	eb000072 	bl	181d94 <Wait>
+  181bc8:	eb00007a 	bl	181db8 <Read_SNES>
+  181bcc:	e1550009 	cmp	r5, r9
+  181bd0:	e1a09000 	mov	r9, r0
+  181bd4:	0a00006b 	beq	181d88 <next>
+  181bd8:	e3a05000 	mov	r5, #0
 
-00181b80 <checkMenuDown>:
-  181b80:	e1a07009 	mov	r7, r9
-  181b84:	e1a072a7 	lsr	r7, r7, #5
-  181b88:	e2077001 	and	r7, r7, #1
-  181b8c:	e3570000 	cmp	r7, #0
-  181b90:	1a000001 	bne	181b9c <checkMenuA>
-  181b94:	e3a00002 	mov	r0, #2
-  181b98:	ebffff26 	bl	181838 <MainDownPressed>
+00181bdc <checkMenuUp>:
+  181bdc:	e1a07009 	mov	r7, r9
+  181be0:	e1a07227 	lsr	r7, r7, #4
+  181be4:	e2077001 	and	r7, r7, #1
+  181be8:	e3570000 	cmp	r7, #0
+  181bec:	1a000001 	bne	181bf8 <checkMenuDown>
+  181bf0:	e3a00001 	mov	r0, #1
+  181bf4:	ebffff18 	bl	18185c <MainUpPressed>
 
-00181b9c <checkMenuA>:
-  181b9c:	e1a07009 	mov	r7, r9
-  181ba0:	e1a07427 	lsr	r7, r7, #8
-  181ba4:	e2077001 	and	r7, r7, #1
-  181ba8:	e3570000 	cmp	r7, #0
-  181bac:	1a000001 	bne	181bb8 <MenuNext>
-  181bb0:	e3a00003 	mov	r0, #3
-  181bb4:	ebffff24 	bl	18184c <MainAPressed>
+00181bf8 <checkMenuDown>:
+  181bf8:	e1a07009 	mov	r7, r9
+  181bfc:	e1a072a7 	lsr	r7, r7, #5
+  181c00:	e2077001 	and	r7, r7, #1
+  181c04:	e3570000 	cmp	r7, #0
+  181c08:	1a000001 	bne	181c14 <checkMenuA>
+  181c0c:	e3a00002 	mov	r0, #2
+  181c10:	ebffff16 	bl	181870 <MainDownPressed>
 
-00181bb8 <MenuNext>:
-  181bb8:	eaffffe1 	b	181b44 <readMainMenuButtons>
+00181c14 <checkMenuA>:
+  181c14:	e1a07009 	mov	r7, r9
+  181c18:	e1a07427 	lsr	r7, r7, #8
+  181c1c:	e2077001 	and	r7, r7, #1
+  181c20:	e3570000 	cmp	r7, #0
+  181c24:	1a000001 	bne	181c30 <MenuNext>
+  181c28:	e3a00003 	mov	r0, #3
+  181c2c:	ebffff14 	bl	181884 <MainAPressed>
 
-00181bbc <endMenuRead>:
-  181bbc:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  181bc0:	e1a0f00e 	mov	pc, lr
+00181c30 <MenuNext>:
+  181c30:	eaffffe1 	b	181bbc <readMainMenuButtons>
 
-00181bc4 <readPauseButtons>:
-  181bc4:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  181bc8:	e59f126c 	ldr	r1, [pc, #620]	; 181e3c <haltLoop$+0xc>
-  181bcc:	eb000052 	bl	181d1c <Wait>
-  181bd0:	eb00005a 	bl	181d40 <Read_SNES>
-  181bd4:	e1a09000 	mov	r9, r0
+00181c34 <endMenuRead>:
+  181c34:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  181c38:	e1a0f00e 	mov	pc, lr
 
-00181bd8 <checkPauseUp>:
-  181bd8:	e1a07009 	mov	r7, r9
-  181bdc:	e1a07227 	lsr	r7, r7, #4
-  181be0:	e2077001 	and	r7, r7, #1
-  181be4:	e3570000 	cmp	r7, #0
-  181be8:	1a000000 	bne	181bf0 <checkPauseDn>
-  181bec:	ebffff29 	bl	181898 <PauseUpPressed>
+00181c3c <readPauseButtons>:
+  181c3c:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  181c40:	e59f126c 	ldr	r1, [pc, #620]	; 181eb4 <haltLoop$+0xc>
+  181c44:	eb000052 	bl	181d94 <Wait>
+  181c48:	eb00005a 	bl	181db8 <Read_SNES>
+  181c4c:	e1a09000 	mov	r9, r0
 
-00181bf0 <checkPauseDn>:
-  181bf0:	e1a07009 	mov	r7, r9
-  181bf4:	e1a072a7 	lsr	r7, r7, #5
-  181bf8:	e2077001 	and	r7, r7, #1
-  181bfc:	e3570000 	cmp	r7, #0
-  181c00:	1a000000 	bne	181c08 <checkPauseA>
-  181c04:	ebffff1c 	bl	18187c <PauseDnPressed>
+00181c50 <checkPauseUp>:
+  181c50:	e1a07009 	mov	r7, r9
+  181c54:	e1a07227 	lsr	r7, r7, #4
+  181c58:	e2077001 	and	r7, r7, #1
+  181c5c:	e3570000 	cmp	r7, #0
+  181c60:	1a000000 	bne	181c68 <checkPauseDn>
+  181c64:	ebffff19 	bl	1818d0 <PauseUpPressed>
 
-00181c08 <checkPauseA>:
-  181c08:	e1a07009 	mov	r7, r9
-  181c0c:	e1a07427 	lsr	r7, r7, #8
-  181c10:	e2077001 	and	r7, r7, #1
-  181c14:	e3570000 	cmp	r7, #0
-  181c18:	1a000000 	bne	181c20 <checkPauseSt>
-  181c1c:	ebffff24 	bl	1818b4 <PauseAPressed>
+00181c68 <checkPauseDn>:
+  181c68:	e1a07009 	mov	r7, r9
+  181c6c:	e1a072a7 	lsr	r7, r7, #5
+  181c70:	e2077001 	and	r7, r7, #1
+  181c74:	e3570000 	cmp	r7, #0
+  181c78:	1a000000 	bne	181c80 <checkPauseA>
+  181c7c:	ebffff0c 	bl	1818b4 <PauseDnPressed>
 
-00181c20 <checkPauseSt>:
-  181c20:	e1a07009 	mov	r7, r9
-  181c24:	e1a071a7 	lsr	r7, r7, #3
-  181c28:	e2077001 	and	r7, r7, #1
-  181c2c:	e3570000 	cmp	r7, #0
-  181c30:	1a000000 	bne	181c38 <PauseNext>
-  181c34:	eb000002 	bl	181c44 <endPauseRead>
+00181c80 <checkPauseA>:
+  181c80:	e1a07009 	mov	r7, r9
+  181c84:	e1a07427 	lsr	r7, r7, #8
+  181c88:	e2077001 	and	r7, r7, #1
+  181c8c:	e3570000 	cmp	r7, #0
+  181c90:	1a000000 	bne	181c98 <checkPauseSt>
+  181c94:	ebffff14 	bl	1818ec <PauseAPressed>
 
-00181c38 <PauseNext>:
-  181c38:	e59f11fc 	ldr	r1, [pc, #508]	; 181e3c <haltLoop$+0xc>
-  181c3c:	eb000036 	bl	181d1c <Wait>
-  181c40:	eaffffdf 	b	181bc4 <readPauseButtons>
+00181c98 <checkPauseSt>:
+  181c98:	e1a07009 	mov	r7, r9
+  181c9c:	e1a071a7 	lsr	r7, r7, #3
+  181ca0:	e2077001 	and	r7, r7, #1
+  181ca4:	e3570000 	cmp	r7, #0
+  181ca8:	1a000000 	bne	181cb0 <PauseNext>
+  181cac:	ebfffeff 	bl	1818b0 <PauseStPressed>
 
-00181c44 <endPauseRead>:
-  181c44:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  181c48:	e1a0f00e 	mov	pc, lr
+00181cb0 <PauseNext>:
+  181cb0:	e59f11fc 	ldr	r1, [pc, #508]	; 181eb4 <haltLoop$+0xc>
+  181cb4:	eb000036 	bl	181d94 <Wait>
+  181cb8:	eaffffdf 	b	181c3c <readPauseButtons>
 
-00181c4c <readButtons>:
-  181c4c:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  181c50:	e59f11e4 	ldr	r1, [pc, #484]	; 181e3c <haltLoop$+0xc>
-  181c54:	eb000030 	bl	181d1c <Wait>
-  181c58:	eb000038 	bl	181d40 <Read_SNES>
-  181c5c:	e1550009 	cmp	r5, r9
-  181c60:	e1a09000 	mov	r9, r0
-  181c64:	0a000029 	beq	181d10 <next>
-  181c68:	e3a05000 	mov	r5, #0
+00181cbc <endPauseRead>:
+  181cbc:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  181cc0:	e1a0f00e 	mov	pc, lr
 
-00181c6c <checkSt>:
-  181c6c:	e1a07009 	mov	r7, r9
-  181c70:	e1a071a7 	lsr	r7, r7, #3
-  181c74:	e2077001 	and	r7, r7, #1
-  181c78:	e3570000 	cmp	r7, #0
-  181c7c:	1a000000 	bne	181c84 <checkL>
-  181c80:	ebfffef7 	bl	181864 <pauseMenu>
+00181cc4 <readButtons>:
+  181cc4:	e92d43fc 	push	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  181cc8:	e59f11e4 	ldr	r1, [pc, #484]	; 181eb4 <haltLoop$+0xc>
+  181ccc:	eb000030 	bl	181d94 <Wait>
+  181cd0:	eb000038 	bl	181db8 <Read_SNES>
+  181cd4:	e1550009 	cmp	r5, r9
+  181cd8:	e1a09000 	mov	r9, r0
+  181cdc:	0a000029 	beq	181d88 <next>
+  181ce0:	e3a05000 	mov	r5, #0
 
-00181c84 <checkL>:
-  181c84:	e1a07009 	mov	r7, r9
-  181c88:	e1a07327 	lsr	r7, r7, #6
-  181c8c:	e2077001 	and	r7, r7, #1
-  181c90:	e3570000 	cmp	r7, #0
-  181c94:	1a000004 	bne	181cac <checkR>
-  181c98:	e59f11a0 	ldr	r1, [pc, #416]	; 181e40 <haltLoop$+0x10>
-  181c9c:	ebfffc52 	bl	180dec <moveLeft>
-  181ca0:	e3a05001 	mov	r5, #1
-  181ca4:	e59f1194 	ldr	r1, [pc, #404]	; 181e40 <haltLoop$+0x10>
-  181ca8:	ea000009 	b	181cd4 <checkA>
+00181ce4 <checkSt>:
+  181ce4:	e1a07009 	mov	r7, r9
+  181ce8:	e1a071a7 	lsr	r7, r7, #3
+  181cec:	e2077001 	and	r7, r7, #1
+  181cf0:	e3570000 	cmp	r7, #0
+  181cf4:	1a000000 	bne	181cfc <checkL>
+  181cf8:	ebfffee7 	bl	18189c <pauseMenu>
 
-00181cac <checkR>:
-  181cac:	e1a07009 	mov	r7, r9
-  181cb0:	e1a073a7 	lsr	r7, r7, #7
-  181cb4:	e2077001 	and	r7, r7, #1
-  181cb8:	e3570000 	cmp	r7, #0
-  181cbc:	1a000004 	bne	181cd4 <checkA>
-  181cc0:	e59f317c 	ldr	r3, [pc, #380]	; 181e44 <haltLoop$+0x14>
-  181cc4:	ebfffc28 	bl	180d6c <moveRight>
-  181cc8:	e3a05002 	mov	r5, #2
-  181ccc:	e59f3170 	ldr	r3, [pc, #368]	; 181e44 <haltLoop$+0x14>
-  181cd0:	eaffffff 	b	181cd4 <checkA>
+00181cfc <checkL>:
+  181cfc:	e1a07009 	mov	r7, r9
+  181d00:	e1a07327 	lsr	r7, r7, #6
+  181d04:	e2077001 	and	r7, r7, #1
+  181d08:	e3570000 	cmp	r7, #0
+  181d0c:	1a000004 	bne	181d24 <checkR>
+  181d10:	e59f11a0 	ldr	r1, [pc, #416]	; 181eb8 <haltLoop$+0x10>
+  181d14:	ebfffc34 	bl	180dec <moveLeft>
+  181d18:	e3a05001 	mov	r5, #1
+  181d1c:	e59f1194 	ldr	r1, [pc, #404]	; 181eb8 <haltLoop$+0x10>
+  181d20:	ea000009 	b	181d4c <checkA>
 
-00181cd4 <checkA>:
-  181cd4:	e1a07009 	mov	r7, r9
-  181cd8:	e1a07427 	lsr	r7, r7, #8
-  181cdc:	e2077001 	and	r7, r7, #1
-  181ce0:	e3570000 	cmp	r7, #0
-  181ce4:	1a000009 	bne	181d10 <next>
-  181ce8:	e59f1150 	ldr	r1, [pc, #336]	; 181e40 <haltLoop$+0x10>
-  181cec:	eb00000a 	bl	181d1c <Wait>
-  181cf0:	e3550000 	cmp	r5, #0
-  181cf4:	e1a08005 	mov	r8, r5
-  181cf8:	0a000001 	beq	181d04 <regJump>
-  181cfc:	ebfffc9a 	bl	180f6c <runJump>
-  181d00:	ea000002 	b	181d10 <next>
+00181d24 <checkR>:
+  181d24:	e1a07009 	mov	r7, r9
+  181d28:	e1a073a7 	lsr	r7, r7, #7
+  181d2c:	e2077001 	and	r7, r7, #1
+  181d30:	e3570000 	cmp	r7, #0
+  181d34:	1a000004 	bne	181d4c <checkA>
+  181d38:	e59f317c 	ldr	r3, [pc, #380]	; 181ebc <haltLoop$+0x14>
+  181d3c:	ebfffc0a 	bl	180d6c <moveRight>
+  181d40:	e3a05002 	mov	r5, #2
+  181d44:	e59f3170 	ldr	r3, [pc, #368]	; 181ebc <haltLoop$+0x14>
+  181d48:	eaffffff 	b	181d4c <checkA>
 
-00181d04 <regJump>:
-  181d04:	ebfffc59 	bl	180e70 <jump>
-  181d08:	e59f1130 	ldr	r1, [pc, #304]	; 181e40 <haltLoop$+0x10>
-  181d0c:	eb000002 	bl	181d1c <Wait>
+00181d4c <checkA>:
+  181d4c:	e1a07009 	mov	r7, r9
+  181d50:	e1a07427 	lsr	r7, r7, #8
+  181d54:	e2077001 	and	r7, r7, #1
+  181d58:	e3570000 	cmp	r7, #0
+  181d5c:	1a000009 	bne	181d88 <next>
+  181d60:	e59f1150 	ldr	r1, [pc, #336]	; 181eb8 <haltLoop$+0x10>
+  181d64:	eb00000a 	bl	181d94 <Wait>
+  181d68:	e3550000 	cmp	r5, #0
+  181d6c:	e1a08005 	mov	r8, r5
+  181d70:	0a000001 	beq	181d7c <regJump>
+  181d74:	ebfffc7c 	bl	180f6c <runJump>
+  181d78:	ea000002 	b	181d88 <next>
 
-00181d10 <next>:
-  181d10:	eaffffcd 	b	181c4c <readButtons>
+00181d7c <regJump>:
+  181d7c:	ebfffc3b 	bl	180e70 <jump>
+  181d80:	e59f1130 	ldr	r1, [pc, #304]	; 181eb8 <haltLoop$+0x10>
+  181d84:	eb000002 	bl	181d94 <Wait>
 
-00181d14 <endRead>:
-  181d14:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
-  181d18:	e1a0f00e 	mov	pc, lr
+00181d88 <next>:
+  181d88:	eaffffcd 	b	181cc4 <readButtons>
 
-00181d1c <Wait>:
-  181d1c:	e92d4006 	push	{r1, r2, lr}
-  181d20:	e59f0120 	ldr	r0, [pc, #288]	; 181e48 <haltLoop$+0x18>
-  181d24:	e5901000 	ldr	r1, [r0]
-  181d28:	e0811003 	add	r1, r1, r3
+00181d8c <endRead>:
+  181d8c:	e8bd43fc 	pop	{r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  181d90:	e1a0f00e 	mov	pc, lr
 
-00181d2c <WaitLoop>:
-  181d2c:	e5902000 	ldr	r2, [r0]
-  181d30:	e1510002 	cmp	r1, r2
-  181d34:	8afffffc 	bhi	181d2c <WaitLoop>
-  181d38:	e8bd4006 	pop	{r1, r2, lr}
-  181d3c:	e1a0f00e 	mov	pc, lr
+00181d94 <Wait>:
+  181d94:	e92d4006 	push	{r1, r2, lr}
+  181d98:	e59f0120 	ldr	r0, [pc, #288]	; 181ec0 <haltLoop$+0x18>
+  181d9c:	e5901000 	ldr	r1, [r0]
+  181da0:	e0811003 	add	r1, r1, r3
 
-00181d40 <Read_SNES>:
-  181d40:	e92d4310 	push	{r4, r8, r9, lr}
-  181d44:	e3a09000 	mov	r9, #0
-  181d48:	e3a01001 	mov	r1, #1
-  181d4c:	eb000016 	bl	181dac <WriteClock>
-  181d50:	eb00001f 	bl	181dd4 <WriteLatch>
-  181d54:	e3a0100c 	mov	r1, #12
-  181d58:	ebffffef 	bl	181d1c <Wait>
-  181d5c:	e3a01000 	mov	r1, #0
-  181d60:	eb00001b 	bl	181dd4 <WriteLatch>
-  181d64:	e3a08000 	mov	r8, #0
+00181da4 <WaitLoop>:
+  181da4:	e5902000 	ldr	r2, [r0]
+  181da8:	e1510002 	cmp	r1, r2
+  181dac:	8afffffc 	bhi	181da4 <WaitLoop>
+  181db0:	e8bd4006 	pop	{r1, r2, lr}
+  181db4:	e1a0f00e 	mov	pc, lr
 
-00181d68 <bitLoop>:
-  181d68:	e3a01006 	mov	r1, #6
-  181d6c:	ebffffea 	bl	181d1c <Wait>
-  181d70:	e3a01000 	mov	r1, #0
-  181d74:	eb00000c 	bl	181dac <WriteClock>
-  181d78:	e3a01006 	mov	r1, #6
-  181d7c:	ebffffe6 	bl	181d1c <Wait>
-  181d80:	eb00001d 	bl	181dfc <ReadData>
-  181d84:	e1a04814 	lsl	r4, r4, r8
-  181d88:	e1899004 	orr	r9, r9, r4
-  181d8c:	e3a01001 	mov	r1, #1
-  181d90:	eb000005 	bl	181dac <WriteClock>
-  181d94:	e2888001 	add	r8, r8, #1
-  181d98:	e3580010 	cmp	r8, #16
-  181d9c:	bafffff1 	blt	181d68 <bitLoop>
-  181da0:	e1a00009 	mov	r0, r9
-  181da4:	e8bd4310 	pop	{r4, r8, r9, lr}
-  181da8:	e1a0f00e 	mov	pc, lr
+00181db8 <Read_SNES>:
+  181db8:	e92d4310 	push	{r4, r8, r9, lr}
+  181dbc:	e3a09000 	mov	r9, #0
+  181dc0:	e3a01001 	mov	r1, #1
+  181dc4:	eb000016 	bl	181e24 <WriteClock>
+  181dc8:	eb00001f 	bl	181e4c <WriteLatch>
+  181dcc:	e3a0100c 	mov	r1, #12
+  181dd0:	ebffffef 	bl	181d94 <Wait>
+  181dd4:	e3a01000 	mov	r1, #0
+  181dd8:	eb00001b 	bl	181e4c <WriteLatch>
+  181ddc:	e3a08000 	mov	r8, #0
 
-00181dac <WriteClock>:
-  181dac:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-  181db0:	e3a0000b 	mov	r0, #11
-  181db4:	e59f2078 	ldr	r2, [pc, #120]	; 181e34 <haltLoop$+0x4>
-  181db8:	e3a03001 	mov	r3, #1
-  181dbc:	e1a03013 	lsl	r3, r3, r0
-  181dc0:	e3310000 	teq	r1, #0
-  181dc4:	05823028 	streq	r3, [r2, #40]	; 0x28
-  181dc8:	1582301c 	strne	r3, [r2, #28]
-  181dcc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-  181dd0:	e1a0f00e 	mov	pc, lr
+00181de0 <bitLoop>:
+  181de0:	e3a01006 	mov	r1, #6
+  181de4:	ebffffea 	bl	181d94 <Wait>
+  181de8:	e3a01000 	mov	r1, #0
+  181dec:	eb00000c 	bl	181e24 <WriteClock>
+  181df0:	e3a01006 	mov	r1, #6
+  181df4:	ebffffe6 	bl	181d94 <Wait>
+  181df8:	eb00001d 	bl	181e74 <ReadData>
+  181dfc:	e1a04814 	lsl	r4, r4, r8
+  181e00:	e1899004 	orr	r9, r9, r4
+  181e04:	e3a01001 	mov	r1, #1
+  181e08:	eb000005 	bl	181e24 <WriteClock>
+  181e0c:	e2888001 	add	r8, r8, #1
+  181e10:	e3580010 	cmp	r8, #16
+  181e14:	bafffff1 	blt	181de0 <bitLoop>
+  181e18:	e1a00009 	mov	r0, r9
+  181e1c:	e8bd4310 	pop	{r4, r8, r9, lr}
+  181e20:	e1a0f00e 	mov	pc, lr
 
-00181dd4 <WriteLatch>:
-  181dd4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-  181dd8:	e3a00009 	mov	r0, #9
-  181ddc:	e59f2050 	ldr	r2, [pc, #80]	; 181e34 <haltLoop$+0x4>
-  181de0:	e3a03001 	mov	r3, #1
-  181de4:	e1a03013 	lsl	r3, r3, r0
-  181de8:	e3310000 	teq	r1, #0
-  181dec:	05823028 	streq	r3, [r2, #40]	; 0x28
-  181df0:	1582301c 	strne	r3, [r2, #28]
-  181df4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-  181df8:	e1a0f00e 	mov	pc, lr
+00181e24 <WriteClock>:
+  181e24:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  181e28:	e3a0000b 	mov	r0, #11
+  181e2c:	e59f2078 	ldr	r2, [pc, #120]	; 181eac <haltLoop$+0x4>
+  181e30:	e3a03001 	mov	r3, #1
+  181e34:	e1a03013 	lsl	r3, r3, r0
+  181e38:	e3310000 	teq	r1, #0
+  181e3c:	05823028 	streq	r3, [r2, #40]	; 0x28
+  181e40:	1582301c 	strne	r3, [r2, #28]
+  181e44:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  181e48:	e1a0f00e 	mov	pc, lr
 
-00181dfc <ReadData>:
-  181dfc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-  181e00:	e3a0000a 	mov	r0, #10
-  181e04:	e59f2028 	ldr	r2, [pc, #40]	; 181e34 <haltLoop$+0x4>
-  181e08:	e5921034 	ldr	r1, [r2, #52]	; 0x34
-  181e0c:	e3a03001 	mov	r3, #1
-  181e10:	e1a03013 	lsl	r3, r3, r0
-  181e14:	e0011003 	and	r1, r1, r3
-  181e18:	e3310000 	teq	r1, #0
-  181e1c:	03a04000 	moveq	r4, #0
-  181e20:	13a04001 	movne	r4, #1
-  181e24:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-  181e28:	e1a0f00e 	mov	pc, lr
+00181e4c <WriteLatch>:
+  181e4c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  181e50:	e3a00009 	mov	r0, #9
+  181e54:	e59f2050 	ldr	r2, [pc, #80]	; 181eac <haltLoop$+0x4>
+  181e58:	e3a03001 	mov	r3, #1
+  181e5c:	e1a03013 	lsl	r3, r3, r0
+  181e60:	e3310000 	teq	r1, #0
+  181e64:	05823028 	streq	r3, [r2, #40]	; 0x28
+  181e68:	1582301c 	strne	r3, [r2, #28]
+  181e6c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  181e70:	e1a0f00e 	mov	pc, lr
 
-00181e2c <stop>:
-  181e2c:	eafffffe 	b	181e2c <stop>
+00181e74 <ReadData>:
+  181e74:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  181e78:	e3a0000a 	mov	r0, #10
+  181e7c:	e59f2028 	ldr	r2, [pc, #40]	; 181eac <haltLoop$+0x4>
+  181e80:	e5921034 	ldr	r1, [r2, #52]	; 0x34
+  181e84:	e3a03001 	mov	r3, #1
+  181e88:	e1a03013 	lsl	r3, r3, r0
+  181e8c:	e0011003 	and	r1, r1, r3
+  181e90:	e3310000 	teq	r1, #0
+  181e94:	03a04000 	moveq	r4, #0
+  181e98:	13a04001 	movne	r4, #1
+  181e9c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  181ea0:	e1a0f00e 	mov	pc, lr
 
-00181e30 <haltLoop$>:
-  181e30:	eafffffe 	b	181e30 <haltLoop$>
-  181e34:	3f200000 	.word	0x3f200000
-  181e38:	3f200004 	.word	0x3f200004
-  181e3c:	000fffff 	.word	0x000fffff
-  181e40:	00001388 	.word	0x00001388
-  181e44:	0000ffff 	.word	0x0000ffff
-  181e48:	3f003004 	.word	0x3f003004
+00181ea4 <stop>:
+  181ea4:	eafffffe 	b	181ea4 <stop>
+
+00181ea8 <haltLoop$>:
+  181ea8:	eafffffe 	b	181ea8 <haltLoop$>
+  181eac:	3f200000 	.word	0x3f200000
+  181eb0:	3f200004 	.word	0x3f200004
+  181eb4:	000fffff 	.word	0x000fffff
+  181eb8:	00001388 	.word	0x00001388
+  181ebc:	0000ffff 	.word	0x0000ffff
+  181ec0:	3f003004 	.word	0x3f003004

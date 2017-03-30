@@ -31,6 +31,7 @@ StartGame:
         ldr     r1,        =EndMap        // load initial map
         bl      drawMap                   // draw initial map
         bl      Print_Init_Stats
+                        bl      Draw_Stats
 
 read:
         bl      readButtons

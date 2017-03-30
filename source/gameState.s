@@ -3,9 +3,9 @@
 /*
 
 TODO:
+-make win/lose messages bigger (cover most of the screen), the hit any button to return to main menu
 -value pack interrupts
--increase score when hits coin/monsters(from top)
-
+-increase score when hits coin(from top)
 */
 
 .section .text
@@ -50,7 +50,6 @@ LoseFlag:
    9 - monster2
    15 - castle
    14 - hit coin box
-
 */
 GameMap:
 // 25 x 20 game map

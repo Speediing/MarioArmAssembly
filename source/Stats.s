@@ -4,7 +4,7 @@
 /************************************************************************************/
 
 /*
-Global variables used (and initial value):
+Global variables used (and initial value): These are stored in gameState.s, data section
 
 livesNum:
         .byte  3
@@ -36,30 +36,30 @@ currentScore:
 Print_Init_Stats:
 	push	        {r4-r10, lr}
 
-	ldr		r0, =0x10			// starting x coordinate
-	ldr		r1, =0x10			// starting y coordinate
+	ldr		r0, =16			// starting x coordinate
+	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Scores                     // address of string
 	bl		DrawString                     // draw string
-	ldr		r0, =0x90			// starting x coordinate
-	ldr		r1, =0x10			// starting y coordinate
+	ldr		r0, =135			// starting x coordinate
+	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Zeros                     // address of string
 	bl		DrawString                     // draw zeros        
 
-	ldr		r0, =0x150			// starting x coordinate
-	ldr		r1, =0x10			// starting y coordinate
+	ldr		r0, =336			// starting x coordinate
+	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Coins                      // address of string
 	bl		DrawString                     // draw string
-	ldr		r0, =0x200			// starting x coordinate
-	ldr		r1, =0x10			// starting y coordinate
+	ldr		r0, =489			// starting x coordinate
+	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Zeros                     // address of string
 	bl		DrawString                     // draw zeros
 	
-        ldr		r0, =0x290			// starting x coordinate
-	ldr		r1, =0x10			// starting y coordinate
+        ldr		r0, =656			// starting x coordinate
+	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Lives                      // address of string
 	bl		DrawString                     // draw string
-	ldr		r0, =0X320			// starting x coordinate
-	ldr		r1, =0x10			// starting y coordinate
+	ldr		r0, =784			// starting x coordinate
+	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Zeros                     // address of string
 	bl		DrawString                     // draw zeros
 
@@ -75,35 +75,51 @@ Print_Init_Stats:
 /************************************************************************************/
 .globl  Draw_Stats
 Draw_Stats:
-	push	        {r4-r10, lr}
-
-        mov             r4, #0
-        mov             r5, #0
-        mov             r6, #0
+	push	        {r0-r10, lr}
         
-   //     ldrb            r4, =currentScore
-     //   ldrb            r5, =currentCoins
-//test:        ldrb            r6, =livesNum
+        ldr            r7, =currentScore
+        ldr            r8, =currentCoins
+        ldr            r9, =livesNum
+
+        ldrb            r4, [r7]
+        ldrb            r5, [r8]
+        ldrb            r6, [r9]
+
         add             r4, #48
         add             r5, #48
-        add             r6, #48
+        add             r6, #48                          //convert decimal to ascii
+     
+        mov             r0, #3
+        mov             r1, #0
+        mov             r2, #0
+        bl              drawCell                        //erase previous score by redrawing background
+
+	ldr		r0, =125      			// starting x coordinate
+	ldr		r1, =16 			// starting y coordinate
+	mov             r2, r4                         // ascii value of score
+	bl		Draw_Char                     // draw updated score
         
-	ldr		r0, =0x85			// starting x coordinate
-	ldr		r1, =0x10			// starting y coordinate
-	ldr		r2, =one                         // ascii value of score
-test1:	bl		DrawString                     // draw updated score
+        mov             r0, #15
+        mov             r1, #0
+        mov             r2, #0
+        bl              drawCell                        //erase previous coin by redrawing background
 
-	ldr		r0, =0x215			// starting x coordinate
-	ldr		r1, =0x10			// starting y coordinate
-	ldr		r2, =zero                         // ascii updated score
-test2:	bl		DrawString                     // draw updated coins
+	ldr		r0, =509			// starting x coordinate
+	ldr		r1, =16		         	// starting y coordinatere
+	mov             r2, r5                        // ascii updated score
+test2:	bl		Draw_Char                     // draw updated coins
 
-	ldr		r0, =0x335			// starting x coordinate
-	ldr		r1, =0x10			// starting y coordinate
-	ldr		r2, =three                          // ascii updated lives
-test3:	bl		DrawString                     // draw updated lives
+        mov             r0, #24
+        mov             r1, #0
+        mov             r2, #0
+        bl              drawCell                        //erase previous lives by redrawing background
 
-	pop		{r4-r10, lr}
+	ldr		r0, =804			// starting x coordinate
+	ldr		r1, =16			// starting y coordinate
+test3:  mov             r2, r6                         // ascii updated lives
+	bl		Draw_Char                     // draw updated lives
+
+	pop		{r0-r10, lr}
 	mov		pc, lr
 
 

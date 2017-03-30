@@ -75,23 +75,35 @@ drawWinMessageLoop:
 	ldrh	r2,	[r6],#2			//setting pixel color by loading it from the data section. We load hald word
 	bl	DrawPixel
 	add	r4,	#1			//increment x position
-	cmp	r4,	r7			//compare with image with
+	cmp	r4,	r7			//compare with image width
 	blt	drawWinMessageLoop
 	mov	r4,	#235			//reset x
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawWinMessageLoop
-  ldr     r1, =0xffff
-  bl      Wait				//wait for a second
-  ldr  r2, =livesNum
-  mov r5, #3      // reset number of lives
-  str r5, [r2]
-  ldr  r5, =currentLevel
-  mov  r6, #1
-  strb   r6,  [r5]
-  b    main
+        ldr     r1, =0xffff
+        bl      Wait				//wait for a second
+        ldr     r2, =livesNum
+        mov     r5, #3      // reset number of lives
+        str     r5, [r2]
+        ldr     r5, =currentLevel
+        mov     r6, #1
+        strb    r6,  [r5]
+   //this is to test if any buttons is pressed, if yes, go to main menu and reset game -- needs fixing    
+ temp:       bl      readMainMenuButtons
+        cmp     r0, #0
+        beq     gotoMainMenu
+        cmp     r0, #1
+        beq     gotoMainMenu       
+        cmp     r0, #2
+        beq     gotoMainMenu
+        cmp     r0, #3
+        beq     gotoMainMenu   
+    
+  gotoMainMenu:
+      bl    mainMenu
 
-  pop     {r4,r5,r6,r7,r8,lr}
+        pop     {r4,r5,r6,r7,r8,lr}
 	mov	pc,	lr
   //  ********************** DRAW WIN MESSAGE *******************
 

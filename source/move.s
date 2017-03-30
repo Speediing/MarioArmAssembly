@@ -392,6 +392,7 @@ hitCoin:
         ldrb     r6, [r5]
         add     r6, r6, #1
         strb     r6, [r5]
+        bl      Draw_Stats
         ldr     r5, =currentCoins
         ldrb     r6, [r5]
         add     r6, r6, #1
@@ -409,6 +410,7 @@ fall2:
                 ldrb r3, [r2]
                 sub   r3, r3, #1   // decrement lives
                 streq r3, [r2]
+
                 bl      Draw_Stats
 
                 cmp   r3, #0
@@ -419,6 +421,8 @@ fall2:
                 cmp   r3, #0
                 moveq r5, #3      // reset number of lives
                 streq r5, [r2]
+                
+                bl      Draw_Stats
                 beq   main
                 ldreq  r5, =currentLevel
                 mov  r6, #1
@@ -430,6 +434,7 @@ fall2:
                 ldr  r0, =GameMap
                 ldr  r1, =EndMap
                 bl   drawMap
+                bl      Draw_Stats
                 pop {r2-r9, lr}
                 mov pc, lr
 
@@ -474,6 +479,7 @@ switch:
                 ldr     r0,  =GameMap
                 ldr     r1,  =EndMap
                 bl      drawMap
+                                bl      Draw_Stats
                 bl      readButtons
 
 
@@ -513,11 +519,10 @@ checkLeftEdge:      push    {r0-r10, lr}
                 switch2:
                                 bl      switchMap  //future function: detect map?
 
-
-
                                 ldr     r0,  =GameMap
                                 ldr     r1,  =EndMap
                                 bl      drawMap
+                                bl      Draw_Stats
                                 bl      readButtons
 
 

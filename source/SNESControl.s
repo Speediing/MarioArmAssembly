@@ -144,7 +144,7 @@ checkPauseSt:
         and     r7, #1
         cmp     r7, #0
         bne     PauseNext
-        bl      endPauseRead                 // if already paused, press start again to leave
+        bl      PauseStPressed                 // if already paused, press start again to leave
 
 
 PauseNext:

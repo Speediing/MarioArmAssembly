@@ -71,7 +71,7 @@ PauseLabel:
 
 .globl  PauseStPressed
 PauseStPressed:
-        b       PauseDone
+        beq       StartGame
 
 .globl PauseDnPressed
 PauseDnPressed:
