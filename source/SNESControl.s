@@ -60,9 +60,9 @@ readMainMenuButtons:
         bl      Read_SNES			//run the snes routine
         cmp     r5, r9
         mov     r9, r0
-        beq     next
+        beq     MenuNext
         mov     r5, #0
-        
+
 checkMenuUp:
         mov     r7, r9
         lsr     r7, #4
@@ -95,6 +95,40 @@ MenuNext:
         b       readMainMenuButtons
 
 endMenuRead:
+        pop     {r2-r9, lr}
+        mov     pc, lr
+
+// ************ Menus Read Function ****************
+
+.globl readEndButtons
+
+readEndButtons:
+     push    {r2-r9, lr}
+     //   mov     r9, r0
+        ldr     r1, =0xfffff
+        bl      Wait				//wait for a second
+        bl      Read_SNES			//run the snes routine
+        cmp     r5, r9
+        mov     r9, r0
+        beq     endNow
+        mov     r5, #0
+
+
+checkEndA:
+        mov     r7, r9
+        lsr     r7, #8
+        and     r7, #1
+        cmp     r7, #0
+        bne     endNext
+        b       main
+        mov     r0, #3
+
+
+
+endNext:
+        b       readEndButtons
+
+endNow:
         pop     {r2-r9, lr}
         mov     pc, lr
 
@@ -150,7 +184,7 @@ checkPauseSt:
 PauseNext:
       ldr     r1, =0xfffff
         bl      Wait				//wait for a second
-  
+
        b       readPauseButtons
 
 endPauseRead:

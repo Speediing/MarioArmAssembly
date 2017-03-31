@@ -61,12 +61,13 @@ DrawPixel:
 DrawWinMessage:
 
         push {r4,r5,r6,r7,r8,lr}
-        ldr     r6,     =YouWin     // draws menu with cursor on resume
-        mov     r4,     #235
-        mov     r5,     #100
+	bl  	clearScreen
+	ldr     r6,     =YouWin     // draws menu with cursor on resume
+        mov     r4,     #0
+        mov     r5,     #0
 
-        ldr     r7,     =555    // Width of Pause menu (Asset dimensions are  360 x 432 )
-        ldr     r8,     =164    // Height of MenuTitleScreen
+        ldr     r7,     =609    // Width of Pause menu (Asset dimensions are  360 x 432 )
+        ldr     r8,     =225    // Height of MenuTitleScreen
 
 drawWinMessageLoop:
 	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
@@ -77,7 +78,7 @@ drawWinMessageLoop:
 	add	r4,	#1			//increment x position
 	cmp	r4,	r7			//compare with image width
 	blt	drawWinMessageLoop
-	mov	r4,	#235			//reset x
+	mov	r4,	#0			//reset x
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawWinMessageLoop
@@ -89,17 +90,18 @@ drawWinMessageLoop:
         ldr     r5, =currentLevel
         mov     r6, #1
         strb    r6,  [r5]
-   //this is to test if any buttons is pressed, if yes, go to main menu and reset game -- needs fixing    
- temp:       bl      readMainMenuButtons
+        b       readEndButtons
+   //this is to test if any buttons is pressed, if yes, go to main menu and reset game -- needs fixing
+ /*temp:       bl      readMainMenuButtons
         cmp     r0, #0
         beq     gotoMainMenu
         cmp     r0, #1
-        beq     gotoMainMenu       
+        beq     gotoMainMenu
         cmp     r0, #2
         beq     gotoMainMenu
         cmp     r0, #3
-        beq     gotoMainMenu   
-    
+
+        beq     gotoMainMenu*/
   gotoMainMenu:
       bl    mainMenu
 
@@ -113,11 +115,12 @@ drawWinMessageLoop:
   DrawLoseMessage:
 
           push {r4,r5,r6,r7,r8,lr}
-          ldr     r6,     =YouLose     // draws menu with cursor on resume
-          mov     r4,     #235
-          mov     r5,     #100
-          ldr     r7,     =713    // Width of Pause menu (Asset dimensions are  360 x 432 )
-          ldr     r8,     =165    // Height of MenuTitleScreen
+	  bl  	clearScreen
+	  ldr     r6,     =YouLose     // draws menu with cursor on resume
+          mov     r4,     #200
+          mov     r5,     #300
+          ldr     r7,     =786    // Width of Pause menu (Asset dimensions are  360 x 432 )
+          ldr     r8,     =549  // Height of MenuTitleScreen
 
   drawLoseMessageLoop:
   	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
@@ -128,12 +131,13 @@ drawWinMessageLoop:
   	add	r4,	#1			//increment x position
   	cmp	r4,	r7			//compare with image with
   	blt	drawLoseMessageLoop
-  	mov	r4,	#235			//reset x
+  	mov	r4,	#200			//reset x
   	add	r5,	#1			//increment Y
   	cmp	r5,	r8			//compare y with image height
   	blt	drawLoseMessageLoop
     ldr     r1, =0xffff
     bl      Wait				//wait for a second
+    b       readEndButtons
     pop     {r4,r5,r6,r7,r8,lr}
   	mov	pc,	lr
     //  ********************** DRAW LOSE MESSAGE ************************
@@ -148,7 +152,8 @@ DrawPauseMenu:
         b       NextPause
 
 NextPause:
-        mov     r4,     #235
+        //mov     r4,     #235
+        mov  r4, #0
         mov     r5,     #100
 
         ldr     r7,     =595    // Width of Pause menu (Asset dimensions are  360 x 432 )
@@ -163,7 +168,7 @@ drawPauseMenuLoop:
 	add	r4,	#1			//increment x position
 	cmp	r4,	r7			//compare with image with
 	blt	drawPauseMenuLoop
-	mov	r4,	#235			//reset x
+	mov	r4,	#0			//reset x
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawPauseMenuLoop

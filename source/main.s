@@ -16,15 +16,24 @@ main:
 	bl	InitFrameBuffer	        // Initialize the frame buffer for drawing
         bl      initGPIO                // Intializes GPIO
       	bl	clearScreen
-        ldr  r0, =GameMap1
-        ldr  r1, =GameMap
-        ldr  r2, =EndMap1
-        bl   switchMap
+        ldr  r2, =livesNum
+        mov  r3, #3
+        streq r3, [r2]
+        ldr  r0, =currentLevel
+        mov  r1, #1
+        strb  r1, [r0]
+
 
         bl      mainMenu
+      
+
 
 .globl StartGame
 StartGame:
+         ldr  r0, =GameMap1
+         ldr  r1, =GameMap
+         ldr  r2, =EndMap1
+         bl   switchMap
         bl      clearScreen
 
         ldr     r0,        =GameMap       // load initial map

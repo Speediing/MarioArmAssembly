@@ -255,7 +255,9 @@ runJump:                                               //loop that makes mario j
 
 
 
-rjumploop:      cmp  r6, #24
+rjumploop:       cmp  r6, #0
+                beq   end
+                cmp  r6, #24
                 beq   end
 
                 mov     r2, #0                               //restore background sky
@@ -412,18 +414,20 @@ fall2:
                 streq r3, [r2]
 
                 bl      Draw_Stats
-
+                ldr  r2, =livesNum
+                ldrb r3, [r2]
                 cmp   r3, #0
 
                 bleq   DrawLoseMessage
+                
                 ldr  r2, =livesNum
                 ldrb r3, [r2]
                 cmp   r3, #0
                 moveq r5, #3      // reset number of lives
                 streq r5, [r2]
-                
+
                 bl      Draw_Stats
-                beq   main
+
                 ldreq  r5, =currentLevel
                 mov  r6, #1
                 strb   r6,  [r5]
@@ -434,7 +438,8 @@ fall2:
                 ldr  r0, =GameMap
                 ldr  r1, =EndMap
                 bl   drawMap
-                bl      Draw_Stats
+                bl   Draw_Stats
+                b    Restart_Game
                 pop {r2-r9, lr}
                 mov pc, lr
 
