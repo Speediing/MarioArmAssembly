@@ -114,16 +114,115 @@ readEndButtons:
         mov     r5, #0
 
 
+
+        checkEndB:
+                mov     r7, r9
+                lsr     r7, #0
+                and     r7, #1
+                cmp     r7, #0
+                bne     checkEndY
+                b       main
+                mov     r0, #3
+
+       checkEndY:
+                mov     r7, r9
+                lsr     r7, #1
+                and     r7, #1
+                cmp     r7, #0
+                bne     checkEndSl
+                b       main
+                mov     r0, #3
+
+                checkEndSl:
+                                mov     r7, r9
+                                lsr     r7, #2
+                                and     r7, #1
+                                cmp     r7, #0
+                                bne     checkEndSt
+                                b       main
+                                mov     r0, #3
+
+                                checkEndSt:
+                                        mov     r7, r9
+                                        lsr     r7, #3
+                                        and     r7, #1
+                                        cmp     r7, #0
+                                        bne     checkEndL
+                                        b       main
+                                        mov     r0, #3
+
+        checkEndL:
+                mov     r7, r9
+                lsr     r7, #6
+                and     r7, #1
+                cmp     r7, #0
+                bne     checkEndR
+                b       main
+                mov     r0, #3
+
+        checkEndR:
+                mov     r7, r9
+                lsr     r7, #7
+                and     r7, #1
+                cmp     r7, #0
+                bne     checkEndUp
+                b       main
+                mov     r0, #3
+
+        checkEndUp:
+                mov     r7, r9
+                lsr     r7, #4
+                and     r7, #1
+                cmp     r7, #0
+                bne     checkEndDown
+                b       main
+                mov     r0, #3
+
+        checkEndDown:
+                mov     r7, r9
+                lsr     r7, #5
+                and     r7, #1
+                cmp     r7, #0
+                bne     checkEndA
+                b       main
+                mov     r0, #3
+//**********************************
 checkEndA:
         mov     r7, r9
         lsr     r7, #8
         and     r7, #1
         cmp     r7, #0
-        bne     endNext
+        bne     checkEndX
         b       main
         mov     r0, #3
+//***********************************
+        checkEndX:
+                mov     r7, r9
+                lsr     r7, #9
+                and     r7, #1
+                cmp     r7, #0
+                bne     checkEndLeft
+                b       main
+                mov     r0, #3
 
 
+                checkEndLeft:
+                        mov     r7, r9
+                        lsr     r7, #10
+                        and     r7, #1
+                        cmp     r7, #0
+                        bne     checkEndRight
+                        b       main
+                        mov     r0, #3
+
+                        checkEndRight:
+                                mov     r7, r9
+                                lsr     r7, #11
+                                and     r7, #1
+                                cmp     r7, #0
+                                bne     endNext
+                                b       main
+                                mov     r0, #3
 
 endNext:
         b       readEndButtons

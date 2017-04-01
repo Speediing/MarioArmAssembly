@@ -64,9 +64,9 @@ DrawWinMessage:
 	bl  	clearScreen
 	ldr     r6,     =YouWin     // draws menu with cursor on resume
         mov     r4,     #0
-        mov     r5,     #0
+        mov     r5,     #300
 
-        ldr     r7,     =609    // Width of Pause menu (Asset dimensions are  360 x 432 )
+        ldr     r7,     =609
         ldr     r8,     =225    // Height of MenuTitleScreen
 
 drawWinMessageLoop:
@@ -78,7 +78,7 @@ drawWinMessageLoop:
 	add	r4,	#1			//increment x position
 	cmp	r4,	r7			//compare with image width
 	blt	drawWinMessageLoop
-	mov	r4,	#0			//reset x
+	mov	r4,	#100			//reset x
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawWinMessageLoop
@@ -153,10 +153,10 @@ DrawPauseMenu:
 
 NextPause:
         //mov     r4,     #235
-        mov  r4, #0
+        mov  r4, #235
         mov     r5,     #100
 
-        ldr     r7,     =595    // Width of Pause menu (Asset dimensions are  360 x 432 )
+        ldr     r7,     =595    // add  235   // Width of Pause menu (Asset dimensions are  360 x 432 )
         ldr     r8,     =532    // Height of MenuTitleScreen
 
 drawPauseMenuLoop:
@@ -168,7 +168,7 @@ drawPauseMenuLoop:
 	add	r4,	#1			//increment x position
 	cmp	r4,	r7			//compare with image with
 	blt	drawPauseMenuLoop
-	mov	r4,	#0			//reset x
+	mov	r4,	#235			//reset x
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawPauseMenuLoop

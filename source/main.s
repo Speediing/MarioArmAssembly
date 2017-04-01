@@ -11,11 +11,20 @@ _start:
 .section .text
 .globl main
 main:
-	mov	sp, #0x8000
+  bl              Interrupt_Install_Table
+
+	//mov	sp, #0x8000
 	bl	EnableJTAG
+
+  //b       IRQ
 	bl	InitFrameBuffer	        // Initialize the frame buffer for drawing
         bl      initGPIO                // Intializes GPIO
-      	bl	clearScreen
+
+        bl Interrupt
+        bl	clearScreen
+
+
+
         ldr  r2, =livesNum
         mov  r3, #3
         streq r3, [r2]
@@ -25,11 +34,12 @@ main:
 
 
         bl      mainMenu
-      
+
 
 
 .globl StartGame
 StartGame:
+
          ldr  r0, =GameMap1
          ldr  r1, =GameMap
          ldr  r2, =EndMap1
