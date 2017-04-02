@@ -152,24 +152,37 @@ IRQ:
 	ldr		r0, =0x3F00B204
 	ldr		r1, [r0]
 	tst		r1, #0x02		// bit 1
-    //    cmp             r1, #0
+    //  cmp             r1, #0
         beq		Next
 
+
         // b. Check if the game was paused
-        // check if game was paused
-        // if paused then branch to Next
+        ldr     r7, =PauseFlag          
+        ldrb    r8, [r7]
+        cmp     r8, #1                 
+        beq     Next                 // if paused then branch to Next
+
+                                        
 d:
         // c. draw value pack
         push   {lr}
         mov     r0, #1
         mov     r1, #1
-        mov     r2, #1
-        bl              drawCell
+        mov     r2, #13 // life muchroom
+        bl      drawCell
+
+        bl      RandomNumberGenerator  // r0 is random number returned
+        ldr     r5, =PauseFlag
+        ldrb    r6, [r5]
+        
+Wbreak:
+
         pop   {lr}
+
 Next:
         // d. Enable CS timer Control
         ldr             r0, =0x3F003000 //i. Load the value stored in 0x3F003000
-    //    bic             r0, #0x1       //ii. Put 1 in bit 1 and the rest are zeros
+    //  bic             r0, #0x1       //ii. Put 1 in bit 1 and the rest are zeros
         ldr r4, =0x02
         str r4, [r0]
 
@@ -182,10 +195,10 @@ irqEnd:
 hang:
 	b		hang
 
-/*
+
 .globl	RandomNumberGenerator
 RandomNumberGenerator:
-	push	{r1-r9}
+	push	{r1-r9, lr}
 
 	ldr	r1, 	=w  		//5
 	ldr	r2, 	=x  		//6
@@ -198,17 +211,18 @@ RandomNumberGenerator:
 	ldrb    r8,	[r4]        	//z
 
 
-	mov	r9,	r6				// mov x to t
+	mov	r9,	r6			// mov x to t
 	eor	r9,	r9,r9,lsl #11		// xor t shift by 11
-	eor	r9,	r9,r9,lsl #8			// xor t shift by 8
-	mov	r6,	r7				// mov y to x
-	mov	r7,	r8				// mov z to y
-	mov     r8,	r5         			// mov w to z
+	eor	r9,	r9,r9,lsl #8	        // xor t shift by 8
+	mov	r6,	r7			// mov y to x
+	mov	r7,	r8			// mov z to y
+	mov     r8,	r5         		// mov w to z
 	eor 	r5,	r5,r5,lsl #19		// xor w shift by 19
-	eor 	r5,	r9				// xor w with t
+	eor 	r5,	r9			// xor w with t
 
 
 	mov     r0, r5
+
 	strb    r5, [r1]
 	strb    r6, [r2]
 	strb    r7, [r3]
@@ -216,7 +230,7 @@ RandomNumberGenerator:
 
 	and     r0, #7
 
-	pop     {r1-r9}
+	pop     {r1-r9, lr}
 	bx lr
 
 
@@ -224,14 +238,14 @@ RandomNumberGenerator:
 .section .data
 
 w:
-	.byte	191
+	.byte	45      
 x:
-	.byte   34
+	.byte   101
 y:
-	.byte   55
+	.byte  95
 z:
-	.byte   78
-*/
+	.byte  78
+
 
 .section .data
 

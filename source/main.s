@@ -40,11 +40,15 @@ main:
 .globl StartGame
 StartGame:
 
+        bl      clearScreen
+.globl ReStartGame
+ReStartGame:
          ldr  r0, =GameMap1
          ldr  r1, =GameMap
          ldr  r2, =EndMap1
          bl   switchMap
-        bl      clearScreen
+        
+        
 
         ldr     r0,        =GameMap       // load initial map
         ldr     r1,        =EndMap        // load initial map

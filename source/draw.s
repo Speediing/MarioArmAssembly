@@ -387,12 +387,24 @@ drawCell:
         beq     DrawMushroom
         cmp     r2,     #11
         beq     DrawStar
+      
+//////////////////////////////////////  
+        cmp     r2,     #13
+        beq     DrawLifeMushroom
+//////////////////////////////////////
+
         cmp     r2,     #12
         beq     DrawOrangeSquare
         cmp     r2,     #15
         beq     DrawCastle
 	ldr	r6,	=Sky  		        //Address of the picture
         b       drawCellLoop
+
+//////////////////////////////////////
+DrawLifeMushroom:
+        ldr     r6,     =LifeMushroom
+        b       drawCellLoop
+//////////////////////////////////////
 
 DrawCloud:
         ldr     r6,     =cloud

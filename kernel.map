@@ -23,7 +23,7 @@ LOAD build/SNESControl.o
  .init          0x00008000        0x4 build/main.o
                 0x00008000                _start
 
-.data           0x00009080   0x1f7e3e
+.data           0x00009080   0x1f84bf
  *(.data)
  .data          0x00009080       0x70 build/framebuffer.o
                 0x000090e0                FrameBufferPointer
@@ -31,151 +31,157 @@ LOAD build/SNESControl.o
  .data          0x000090f0        0x0 build/move.o
  .data          0x000090f0        0x0 build/draw.o
  .data          0x000090f0        0x0 build/menus.o
- .data          0x000090f0       0x40 build/interrupt.o
- .data          0x00009130        0x0 build/main.o
- .data          0x00009130   0x1f6990 build/asset.o
-                0x00009130                castle
-                0x00009a38                Goomba
-                0x0000a340                Turle
-                0x0000ac48                Sky
-                0x0000b550                Ground
-                0x0000bdd0                pipe
-                0x0000c6d8                Mario
-                0x0000d288                cloud
-                0x0000db90                brick
-                0x0000e498                qBox
-                0x0000eda0                coin
-                0x0000f6a8                letterA
-                0x0000ffb0                blackOut
-                0x000107b0                font
-                0x00010fb0                selectionMushroom
-                0x000118b8                mainMenuScreen
-                0x00128738                PauseMenu
-                0x00174638                OrangeSquare
-                0x00174f40                PauseStar
-                0x00175848                YouWin
-                0x001b86ca                YouLose
- .data          0x001ffac0      0x840 build/Stats.o
- .data          0x00200300      0xbbe build/gameState.o
-                0x00200300                livesNum
-                0x00200301                currentLevel
-                0x00200302                currentCoins
-                0x00200303                currentScore
-                0x00200304                WinFlag
-                0x00200305                LoseFlag
-                0x00200306                GameMap
-                0x002004fa                GameMap1
-                0x002004fa                EndMap
-                0x002006ee                GameMap2
-                0x002006ee                EndMap1
-                0x002008e2                GameMap3
-                0x002008e2                EndMap2
-                0x00200ad6                EndMap3
-                0x00200ad6                GameMapLeft1
-                0x00200cca                GameMapLeft2
-                0x00200cca                EndMapLeft1
-                0x00200ebe                EndMapLeft2
- .data          0x00200ebe        0x0 build/SNESControl.o
+ .data          0x000090f0       0x44 build/interrupt.o
+ .data          0x00009134        0x0 build/main.o
+ *fill*         0x00009134        0xc 3f3f3f3f
+ .data          0x00009140   0x1f7000 build/asset.o
+                0x00009140                castle
+                0x00009a48                Goomba
+                0x0000a350                Turle
+                0x0000ac58                Sky
+                0x0000b560                Ground
+                0x0000bde0                pipe
+                0x0000c6e8                Mario
+                0x0000cff0                cloud
+                0x0000d8f8                brick
+                0x0000e200                qBox
+                0x0000eb08                coin
+                0x0000f410                letterA
+                0x0000fd18                blackOut
+                0x00010518                font
+                0x00010d20                selectionMushroom
+                0x00011628                mainMenuScreen
+                0x001284a8                PauseMenu
+                0x001743a8                OrangeSquare
+                0x00174cb0                PauseStar
+                0x001755b8                YouWin
+                0x001b843a                YouLose
+                0x001ff82e                LifeMushroom
+ .data          0x00200140      0x840 build/Stats.o
+ .data          0x00200980      0xbbf build/gameState.o
+                0x00200980                livesNum
+                0x00200981                currentLevel
+                0x00200982                currentCoins
+                0x00200983                currentScore
+                0x00200984                WinFlag
+                0x00200985                LoseFlag
+                0x00200986                PauseFlag
+                0x00200987                GameMap
+                0x00200b7b                GameMap1
+                0x00200b7b                EndMap
+                0x00200d6f                GameMap2
+                0x00200d6f                EndMap1
+                0x00200f63                GameMap3
+                0x00200f63                EndMap2
+                0x00201157                EndMap3
+                0x00201157                GameMapLeft1
+                0x0020134b                GameMapLeft2
+                0x0020134b                EndMapLeft1
+                0x0020153f                EndMapLeft2
+ .data          0x0020153f        0x0 build/SNESControl.o
  *.c.o(*)
 
-.igot.plt       0x00200ec0        0x0
+.igot.plt       0x00201540        0x0
  .igot.plt      0x00000000        0x0 build/framebuffer.o
 
-.text           0x00200ec0     0x152c
+.text           0x00201540     0x1604
  *.c.o(.text)
  *(.text)
- .text          0x00200ec0       0x80 build/framebuffer.o
-                0x00200ec0                InitFrameBuffer
- .text          0x00200f40       0x8c build/jtag.o
-                0x00200f40                EnableJTAG
- .text          0x00200fcc      0x62c build/move.o
-                0x00200fcc                readMario
-                0x0020101c                moveRight
-                0x0020109c                moveLeft
-                0x00201120                jump
-                0x0020121c                runJump
-                0x00201414                fall2
-                0x00201584                switchMap
- .text          0x002015f8      0x4e4 build/draw.o
-                0x002015f8                clearScreen
-                0x0020164c                DrawPixel
-                0x0020166c                DrawWinMessage
-                0x002016e4                DrawLoseMessage
-                0x00201740                DrawPauseMenu
-                0x00201790                DrawMainMenuScreen
-                0x002017dc                DrawMenuStar1
-                0x00201818                DrawMenuStar2
-                0x00201854                DrawMenuStar3
-                0x00201890                DrawMenuMushroom
-                0x002018bc                DrawMenuMushroom2
-                0x002018e8                drawMap
-                0x00201944                drawCell
- .text          0x00201adc       0xf0 build/menus.o
-                0x00201adc                mainMenu
-                0x00201b0c                MainUpPressed
-                0x00201b20                MainDownPressed
-                0x00201b34                MainAPressed
-                0x00201b4c                pauseMenu
-                0x00201b60                PauseStPressed
-                0x00201b64                PauseDnPressed
-                0x00201b80                PauseUpPressed
-                0x00201b9c                PauseAPressed
- .text          0x00201bcc       0xd8 build/interrupt.o
-                0x00201bcc                Interrupt_Install_Table
-                0x00201c04                Interrupt
-                0x00201c40                IRQ
- .text          0x00201ca4       0x8c build/main.o
-                0x00201ca4                main
-                0x00201cd8                StartGame
-                0x00201d08                exitGame
-                0x00201d10                Restart_Game
-                0x00201d14                haltLoop$
- .text          0x00201d30        0x0 build/asset.o
- .text          0x00201d30      0x1c8 build/Stats.o
-                0x00201d30                Print_Init_Stats
-                0x00201d9c                Draw_Stats
-                0x00201e2c                DrawString
-                0x00201e70                Draw_Char
- .text          0x00201ef8        0x0 build/gameState.o
- .text          0x00201ef8      0x4f4 build/SNESControl.o
-                0x00201ef8                initGPIO
-                0x00201f68                readMainMenuButtons
-                0x00201fe8                readEndButtons
-                0x00202164                readPauseButtons
-                0x002021ec                readButtons
-                0x002022bc                Wait
+ .text          0x00201540       0x80 build/framebuffer.o
+                0x00201540                InitFrameBuffer
+ .text          0x002015c0       0x8c build/jtag.o
+                0x002015c0                EnableJTAG
+ .text          0x0020164c      0x62c build/move.o
+                0x0020164c                readMario
+                0x0020169c                moveRight
+                0x0020171c                moveLeft
+                0x002017a0                jump
+                0x0020189c                runJump
+                0x00201a94                fall2
+                0x00201c04                switchMap
+ .text          0x00201c78      0x4f8 build/draw.o
+                0x00201c78                clearScreen
+                0x00201ccc                DrawPixel
+                0x00201cec                DrawWinMessage
+                0x00201d64                DrawLoseMessage
+                0x00201dc0                DrawPauseMenu
+                0x00201e10                DrawMainMenuScreen
+                0x00201e5c                DrawMenuStar1
+                0x00201e98                DrawMenuStar2
+                0x00201ed4                DrawMenuStar3
+                0x00201f10                DrawMenuMushroom
+                0x00201f3c                DrawMenuMushroom2
+                0x00201f68                drawMap
+                0x00201fc4                drawCell
+ .text          0x00202170      0x120 build/menus.o
+                0x00202170                mainMenu
+                0x002021a0                MainUpPressed
+                0x002021b4                MainDownPressed
+                0x002021c8                MainAPressed
+                0x002021e0                TurnPauseFlagOff
+                0x002021f8                pauseMenu
+                0x00202218                PauseStPressed
+                0x00202220                PauseDnPressed
+                0x0020223c                PauseUpPressed
+                0x00202258                PauseAPressed
+ .text          0x00202290      0x16c build/interrupt.o
+                0x00202290                Interrupt_Install_Table
+                0x002022c8                Interrupt
+                0x00202304                IRQ
+                0x00202368                RandomNumberGenerator
+ .text          0x002023fc       0x8c build/main.o
+                0x002023fc                main
+                0x00202430                StartGame
+                0x00202434                ReStartGame
+                0x00202460                exitGame
+                0x00202468                Restart_Game
+                0x0020246c                haltLoop$
+ .text          0x00202488        0x0 build/asset.o
+ .text          0x00202488      0x1c8 build/Stats.o
+                0x00202488                Print_Init_Stats
+                0x002024f4                Draw_Stats
+                0x00202584                DrawString
+                0x002025c8                Draw_Char
+ .text          0x00202650        0x0 build/gameState.o
+ .text          0x00202650      0x4f4 build/SNESControl.o
+                0x00202650                initGPIO
+                0x002026c0                readMainMenuButtons
+                0x00202740                readEndButtons
+                0x002028bc                readPauseButtons
+                0x00202944                readButtons
+                0x00202a14                Wait
 OUTPUT(build/output.elf elf32-littlearm)
 
-.glue_7         0x002023ec        0x0
+.glue_7         0x00202b44        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x002023ec        0x0
+.glue_7t        0x00202b44        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x002023ec        0x0
+.vfp11_veneer   0x00202b44        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x002023ec        0x0
+.v4_bx          0x00202b44        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x002023ec        0x0
+.iplt           0x00202b44        0x0
  .iplt          0x00000000        0x0 build/framebuffer.o
 
-.rel.dyn        0x002023ec        0x0
+.rel.dyn        0x00202b44        0x0
  .rel.iplt      0x00000000        0x0 build/framebuffer.o
 
-.bss            0x002023ec        0x0
- .bss           0x002023ec        0x0 build/framebuffer.o
- .bss           0x002023ec        0x0 build/jtag.o
- .bss           0x002023ec        0x0 build/move.o
- .bss           0x002023ec        0x0 build/draw.o
- .bss           0x002023ec        0x0 build/menus.o
- .bss           0x002023ec        0x0 build/interrupt.o
- .bss           0x002023ec        0x0 build/main.o
- .bss           0x002023ec        0x0 build/asset.o
- .bss           0x002023ec        0x0 build/Stats.o
- .bss           0x002023ec        0x0 build/gameState.o
- .bss           0x002023ec        0x0 build/SNESControl.o
+.bss            0x00202b44        0x0
+ .bss           0x00202b44        0x0 build/framebuffer.o
+ .bss           0x00202b44        0x0 build/jtag.o
+ .bss           0x00202b44        0x0 build/move.o
+ .bss           0x00202b44        0x0 build/draw.o
+ .bss           0x00202b44        0x0 build/menus.o
+ .bss           0x00202b44        0x0 build/interrupt.o
+ .bss           0x00202b44        0x0 build/main.o
+ .bss           0x00202b44        0x0 build/asset.o
+ .bss           0x00202b44        0x0 build/Stats.o
+ .bss           0x00202b44        0x0 build/gameState.o
+ .bss           0x00202b44        0x0 build/SNESControl.o
 
 .ARM.attributes
                 0x00000000       0x29
@@ -202,16 +208,16 @@ OUTPUT(build/output.elf elf32-littlearm)
  .ARM.attributes
                 0x0000019a       0x29 build/SNESControl.o
 
-.debug_line     0x00000000      0x817
+.debug_line     0x00000000      0x853
  .debug_line    0x00000000       0x67 build/framebuffer.o
  .debug_line    0x00000067       0x61 build/jtag.o
  .debug_line    0x000000c8      0x1e0 build/move.o
- .debug_line    0x000002a8      0x18b build/draw.o
- .debug_line    0x00000433       0x79 build/menus.o
- .debug_line    0x000004ac       0x98 build/interrupt.o
- .debug_line    0x00000544       0x70 build/main.o
- .debug_line    0x000005b4       0xc3 build/Stats.o
- .debug_line    0x00000677      0x1a0 build/SNESControl.o
+ .debug_line    0x000002a8      0x190 build/draw.o
+ .debug_line    0x00000438       0x89 build/menus.o
+ .debug_line    0x000004c1       0xbf build/interrupt.o
+ .debug_line    0x00000580       0x70 build/main.o
+ .debug_line    0x000005f0       0xc3 build/Stats.o
+ .debug_line    0x000006b3      0x1a0 build/SNESControl.o
 
 .debug_info     0x00000000      0x3a5
  .debug_info    0x00000000       0x6e build/framebuffer.o

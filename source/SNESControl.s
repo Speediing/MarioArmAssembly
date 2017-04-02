@@ -133,14 +133,14 @@ readEndButtons:
                 b       main
                 mov     r0, #3
 
-                checkEndSl:
-                                mov     r7, r9
-                                lsr     r7, #2
-                                and     r7, #1
-                                cmp     r7, #0
-                                bne     checkEndSt
-                                b       main
-                                mov     r0, #3
+        checkEndSl:
+                mov     r7, r9
+                lsr     r7, #2
+                and     r7, #1
+                cmp     r7, #0
+                bne     checkEndSt
+                b       main
+                mov     r0, #3
 
                                 checkEndSt:
                                         mov     r7, r9
@@ -246,6 +246,13 @@ readPauseButtons:
         mov     r9, r0
        // beq     next
        // mov     r5, #0
+
+/*
+        
+
+
+*/
+
 
 checkPauseUp:
         mov     r7, r9
