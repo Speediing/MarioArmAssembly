@@ -63,11 +63,11 @@ DrawWinMessage:
         push {r4,r5,r6,r7,r8,lr}
 	bl  	clearScreen
 	ldr     r6,     =YouWin     // draws menu with cursor on resume
-        mov     r4,     #0
+        mov     r4,     #200
         mov     r5,     #300
 
-        ldr     r7,     =609
-        ldr     r8,     =225    // Height of MenuTitleScreen
+        ldr     r7,     =809
+        ldr     r8,     =525    // Height of MenuTitleScreen
 
 drawWinMessageLoop:
 	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
@@ -78,7 +78,7 @@ drawWinMessageLoop:
 	add	r4,	#1			//increment x position
 	cmp	r4,	r7			//compare with image width
 	blt	drawWinMessageLoop
-	mov	r4,	#100			//reset x
+	mov	r4,	#200			//reset x
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawWinMessageLoop
@@ -387,8 +387,8 @@ drawCell:
         beq     DrawMushroom
         cmp     r2,     #11
         beq     DrawStar
-      
-//////////////////////////////////////  
+
+//////////////////////////////////////
         cmp     r2,     #13
         beq     DrawLifeMushroom
 //////////////////////////////////////

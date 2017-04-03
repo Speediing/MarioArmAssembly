@@ -419,7 +419,7 @@ fall2:
                 cmp   r3, #0
 
                 bleq   DrawLoseMessage
-                
+
                 ldr  r2, =livesNum
                 ldrb r3, [r2]
                 cmp   r3, #0
@@ -428,7 +428,7 @@ fall2:
 
                 bl      Draw_Stats
 
-                ldreq  r5, =currentLevel
+                ldreq  r5, =currentLevels
                 mov  r6, #1
                 strb   r6,  [r5]
                 ldr  r0, =GameMap1

@@ -9,9 +9,9 @@ mainMenu:
         push   {r2-r9, lr}
         bl      DrawMainMenuScreen   //print the main menu
         bl      DrawMenuMushroom     //print selection indictor (a mushroom)
-        
-       
-        
+
+
+
         mov     r8, #0               //initialize state to 0 (start selected)
 
 readMainMenuLoop:                       //FSM: state 0(start) and 1(quit)
@@ -62,12 +62,12 @@ ExitMainMenu:
 .globl TurnPauseFlagOff
 TurnPauseFlagOff:
 
-        push {r1,r2,lr}        
-        
+        push {r1,r2,lr}
+
         ldr     r2, =PauseFlag
         mov     r1, #0
         strb    r1, [r2]             // set pause menu flag to 0
-                
+
         pop     {r1,r2,lr}
         mov     pc, lr
 
@@ -78,11 +78,11 @@ TurnPauseFlagOff:
 pauseMenu:
         push    {r1, r2, r5, lr}
         mov     r5,     #1      // initialize r5 to resume mode
-        
+
         ldr     r2, =PauseFlag
         mov     r1, #1
         strb    r1, [r2]        // set pause menu flag to 1
-        
+
 PauseBreak:
 
         bl      DrawPauseMenu
@@ -124,8 +124,8 @@ PauseAPressed:
         cmp     r5,     #1      //resume selected -> resume game
 
         bleq     TurnPauseFlagOff
-                
-        beq     ReStartGame
+
+        beq     resumeGame
         cmp     r5,     #2      //restart selected > restart game
         beq     main
         cmp     r5,     #3      //quit selected -> end Game

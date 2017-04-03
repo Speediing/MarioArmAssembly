@@ -47,8 +47,20 @@ ReStartGame:
          ldr  r1, =GameMap
          ldr  r2, =EndMap1
          bl   switchMap
-        
-        
+
+
+
+        ldr     r0,        =GameMap       // load initial map
+        ldr     r1,        =EndMap        // load initial map
+        bl      drawMap                   // draw initial map
+        bl      Print_Init_Stats
+                        bl      Draw_Stats
+
+read2:
+        bl      readButtons
+	bl      read
+.globl   resumeGame
+resumeGame:
 
         ldr     r0,        =GameMap       // load initial map
         ldr     r1,        =EndMap        // load initial map
@@ -58,8 +70,7 @@ ReStartGame:
 
 read:
         bl      readButtons
-	bl      read
-
+  bl      read
 .globl exitGame
 exitGame:
         bl      clearScreen

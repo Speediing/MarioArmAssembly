@@ -1,6 +1,6 @@
 /************************************************************************************/
 //Stats.s
-//This file displays the game stats at any point in the game. 
+//This file displays the game stats at any point in the game.
 /************************************************************************************/
 
 /*
@@ -43,7 +43,7 @@ Print_Init_Stats:
 	ldr		r0, =135			// starting x coordinate
 	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Zeros                     // address of string
-	bl		DrawString                     // draw zeros        
+	bl		DrawString                     // draw zeros
 
 	ldr		r0, =336			// starting x coordinate
 	ldr		r1, =16			// starting y coordinate
@@ -53,7 +53,7 @@ Print_Init_Stats:
 	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Zeros                     // address of string
 	bl		DrawString                     // draw zeros
-	
+
         ldr		r0, =656			// starting x coordinate
 	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Lives                      // address of string
@@ -69,14 +69,14 @@ Print_Init_Stats:
 
 /************************************************************************************/
 /*Draw_Stats
-/*Args: 
-/*Return: 
+/*Args:
+/*Return:
 /*This function displays the game stats (scores, coins, lives) on the screen
 /************************************************************************************/
 .globl  Draw_Stats
 Draw_Stats:
 	push	        {r0-r10, lr}
-        
+
         ldr            r7, =currentScore
         ldr            r8, =currentCoins
         ldr            r9, =livesNum
@@ -88,7 +88,7 @@ Draw_Stats:
         add             r4, #48
         add             r5, #48
         add             r6, #48                          //convert decimal to ascii
-     
+
         mov             r0, #3
         mov             r1, #0
         mov             r2, #0
@@ -98,7 +98,7 @@ Draw_Stats:
 	ldr		r1, =16 			// starting y coordinate
 	mov             r2, r4                         // ascii value of score
 	bl		Draw_Char                     // draw updated score
-        
+
         mov             r0, #15
         mov             r1, #0
         mov             r2, #0
@@ -133,7 +133,7 @@ test3:  mov             r2, r6                         // ascii updated lives
 
 .globl DrawString
 DrawString:
-	push 	{r4-r10, lr}	
+	push 	{r4-r10, lr}
 
 	strAdr	        .req	r4
 	px	        .req	r5
@@ -143,7 +143,7 @@ DrawString:
 	mov	        py, r1
 	mov	        strAdr, r2
 
-	mov     	r8, #0	      
+	mov     	r8, #0
 	ldrb	        r9, [strAdr]
 
 DrawStringLoop:
@@ -153,14 +153,14 @@ DrawStringLoop:
 	bl	        Draw_Char               //draw character
 
 	add	        r8, #1			//increment the index by 1
-	add	        px, #10			//spacing between each characters 
-        
+	add	        px, #10			//spacing between each characters
+
 	ldrb	        r9, [strAdr, r8]	//load next character and increment address after
-	        
+
 	cmp	        r9, #0			//check if reached the end of string
-	
+
 	bne	        DrawStringLoop
-	        
+
 	.unreq	        strAdr
 	.unreq	        px
 	.unreq	        py
@@ -172,7 +172,7 @@ DrawStringLoop:
 /*Draw_Char
 /*Args: r0 = xPos, r1 = yPos, r2 = character to draw
 /*Return: null
-/*This function is derived from the tutorial example and made into a way such that 
+/*This function is derived from the tutorial example and made into a way such that
 /*user can draw a specified character at coordinates (x,y)
 /************************************************************************************/
 
@@ -190,13 +190,13 @@ Draw_Char:
 	add		chAdr, 	r2, lsl #4	// char address = font base + (char * 16)
 
 	mov		py, 	r1		// starting y coordinate
-	mov		r9,	r0              // starting x coordinate 
+	mov		r9,	r0              // starting x coordinate
 
 charLoop$:
 	mov             px, r9  		// init the X coordinate
 
 	mov	        mask, #0x01		//set the bitmask to 1 in the LSB
-	
+
 	ldrb	        row, [chAdr], #1	// load the row byte, post increment chAdr
 
 rowLoop$:
@@ -227,12 +227,21 @@ noPixel$:
 	.unreq	        row
 	.unreq	        mask
 
+ /*temp:       bl      readMainMenuButtons
+        cmp     r0, #0
+        beq     gotoMainMenu
+        cmp     r0, #1
+        beq     gotoMainMenu
+        cmp     r0, #2
+        beq     gotoMainMenu
+        cmp     r0, #3
 
+        beq     gotoMainMenu*/
 	pop		{r4-r10, lr}
         mov             pc,     lr
 
 /************************************************************************************/
-// The data section stores all the characters/strings that the game stats will need 
+// The data section stores all the characters/strings that the game stats will need
 /************************************************************************************/
 
 .section .data
@@ -241,7 +250,7 @@ noPixel$:
 Scores:
         .asciz "SCORES X "
 
-Lives: 
+Lives:
         .asciz "LIVES X "
 
 Coins:
@@ -277,9 +286,8 @@ nine:
 zero:
         .asciz "0"
 
-Zeros: 
+Zeros:
         .asciz "00"
 
 font:
 	.incbin "font.bin"
-
