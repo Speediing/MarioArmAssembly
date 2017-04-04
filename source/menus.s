@@ -1,4 +1,4 @@
-// Main menu and pause menu
+// Interaction with the main menu and pause menu (FSM)
 
 .section .text
 
