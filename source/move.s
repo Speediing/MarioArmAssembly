@@ -3,10 +3,7 @@
 .section .text
 
 /*
-This subroutine moves Mario's position in the game map
-
-Parameters:
-        r0 - which button is pressed (which direction to move)
+This file moves Mario's position in the game map
 
 */
 
@@ -41,6 +38,15 @@ returnMario:
 
 //-------------------------------------------------------------------------------------
 
+/*
+This subroutine moves Mario's position right in the game map
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 
 .globl moveRight
 moveRight:
@@ -89,7 +95,17 @@ endRight:
 
         pop     {r0-r10,lr}
         mov     pc, lr
+//-------------------------------------------------------------------------------------
 
+/*
+This subroutine moves Mario's position left in the game map
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 .globl moveLeft
 moveLeft:
         push    {r0-r10, lr}
@@ -136,7 +152,17 @@ endLeft:
         bl       gravity
         pop     {r0-r10,lr}
         mov     pc, lr
+//-------------------------------------------------------------------------------------
 
+/*
+This subroutine moves Mario's position up in the game map
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 .globl jump
 jump:                                               //loop that makes mario jump three squares
         push    {r2-r8, lr}
@@ -225,7 +251,17 @@ hitQBox:
 
                 mov     pc, lr
 
+//-------------------------------------------------------------------------------------
 
+/*
+This subroutine moves Mario's position diagonally in the game map
+
+Parameters:
+        
+Returns: 
+        none
+
+*/
 
 .globl runJump
 runJump:                                               //loop that makes mario jump three squares
@@ -238,12 +274,6 @@ runJump:                                               //loop that makes mario j
                 mov     r4, #3                          //Mario
                 mov     r5, r0                          //address of Mario
 
-//                cmp     r8, #1
-//                bne     rjum
-//                strb    r3, [r0], #-130
-//                b       con
-//rjum:           strb    r3, [r0], #-120
-//con:            strb    r4, [r0]
 
                 mov     r6, r1
                 mov     r7, r2
@@ -325,7 +355,17 @@ end:            bl      gravity
                 pop     {r3-r9,lr}
                 mov     pc, lr
 
+//-------------------------------------------------------------------------------------
 
+/*
+This subroutine moves Mario's position down in the game map until he hits a block
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 gravity:
                 push    {r2-r9, lr}
 
@@ -384,7 +424,17 @@ fall:
 endGravity:
                 pop     {r2-r9, lr}
                 mov     pc, lr
+//-------------------------------------------------------------------------------------
 
+/*
+This subroutine runs when mario hits a monster from above
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 killMonster:
                 push   {r0-r3,r5-r9, lr}
                 ldr     r5, =currentScore
@@ -396,6 +446,17 @@ killMonster:
 
                 pop     {r0-r3,r5-r9, lr}
                 mov     pc, lr
+//-------------------------------------------------------------------------------------
+
+/*
+This subroutine runs when Mario hits a coin
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 hitCoin:
         push   {r2-r7, lr}
         ldr     r5, =currentScore
@@ -414,7 +475,17 @@ hitCoin:
         mov pc, lr
 
 
-        /// ****************************************************
+//-------------------------------------------------------------------------------------
+
+/*
+This subroutine moves Mario hits a mushroom from the side
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 
                 hitMush:
                         push   {r2-r7, lr}
@@ -432,7 +503,17 @@ hitCoin:
 
                         pop   {r2-r7, lr}
                         mov   pc, lr
+//-------------------------------------------------------------------------------------
 
+/*
+This subroutine moves Mario jumps under a mushroom
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
                hitMush2:
                         push   {r3-r7, lr}
                         ldr     r5, =currentScore
@@ -449,6 +530,18 @@ hitCoin:
 
                         pop   {r3-r7, lr}
                         mov pc, lr
+                        
+//-------------------------------------------------------------------------------------
+
+/*
+This subroutine runs when mario hits a mushroom from above
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
               topMush:
                         push   {r2, r3,r5-r7, lr}
                         ldr     r5, =currentScore
@@ -468,7 +561,16 @@ hitCoin:
 
 
 
+//-------------------------------------------------------------------------------------
 
+/*
+This subroutine runs when mario gets hit by a monster or hist the bottom
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 
 
 .globl fall2
@@ -508,6 +610,18 @@ fall2:
                 b    Restart_Game
                 pop {r2-r9, lr}
                 mov pc, lr
+                
+//-------------------------------------------------------------------------------------
+
+/*
+This subroutine checks if mario hit the right edge of the screen
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 
 checkRightEdge:      push    {r0-r10, lr}
                 //right edge of the map
@@ -559,7 +673,17 @@ doneCheckEdge:  pop     {r0-r10,lr}
 
 
 
+//-------------------------------------------------------------------------------------
 
+/*
+This subroutine checks if mario hit the left edge of the screen
+
+Parameters:
+        none
+Returns: 
+        none
+
+*/
 
 checkLeftEdge:      push    {r0-r10, lr}
                                 //right edge of the map
@@ -599,8 +723,20 @@ checkLeftEdge:      push    {r0-r10, lr}
 
                 doneCheckEdge2:  pop     {r0-r10,lr}
                                 mov     pc, lr
+                                
+                                
+ //-------------------------------------------------------------------------------------
+
+/*
+This subroutine loads the map data into the dummy map
+
+Parameters:
+        r0:new map, r1: gamemap, r2: end new Map
+Returns: 
+        none
+
+*/
 .globl switchMap
-//r0:new map, r1: gamemap, r2: end new Map
 switchMap:
 
           push  {r4-r10, lr}
