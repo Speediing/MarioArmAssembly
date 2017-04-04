@@ -19,7 +19,7 @@ main:
       	bl	InitFrameBuffer	        // Initialize the frame buffer for drawing
         bl      initGPIO                // Intializes GPIO
 
-        bl Interrupt
+      //  bl Interrupt
         bl	clearScreen
 
         ldr  r2, =livesNum
@@ -34,10 +34,14 @@ main:
 .globl StartGame
 StartGame:
 
+        bl Interrupt
+
         bl      clearScreen
 
 .globl ReStartGame
 ReStartGame:
+          //bl Interrupt
+
          ldr  r0, =GameMap1
          ldr  r1, =GameMap
          ldr  r2, =EndMap1

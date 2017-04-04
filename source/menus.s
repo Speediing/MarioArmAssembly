@@ -90,7 +90,7 @@ PauseLabel:
 .globl  PauseStPressed
 PauseStPressed:
         bleq    TurnPauseFlagOff
-        beq     ReStartGame
+        beq     resumeGame
 
 .globl PauseDnPressed
 PauseDnPressed:
@@ -106,6 +106,7 @@ PauseDnPressed:
 
 .globl PauseUpPressed
 PauseUpPressed:
+        cmp  r5, #2
         moveq   r5,     #1
         beq     DrawMenuStar1
 
@@ -118,13 +119,13 @@ PauseUpPressed:
 PauseAPressed:
         cmp     r5,     #1      //resume selected -> resume game
 
-        bleq     TurnPauseFlagOff
+        bleq     TurnPauseFlagOff // turn pause flag off
 
         beq     resumeGame
         cmp     r5,     #2      //restart selected > restart game
         beq     main
         cmp     r5,     #3      //quit selected -> end Game
-        beq     exitGame
+        beq     mainMenu
 
 PauseNext:
         ldr     r1, =0xfffff

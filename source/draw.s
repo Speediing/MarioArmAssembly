@@ -38,6 +38,9 @@ Looping:
  */
 
 //************************DRAW PIXEL FUNCTION ************************
+// Args: r0, r1,
+
+
 .globl DrawPixel
 DrawPixel:
 	push	{r4-r10, lr}
@@ -57,17 +60,19 @@ DrawPixel:
 //************************DRAW PIXEL FUNCTION ****************************
 
 //  ********************** DRAW WIN MESSAGE *******************
+// Args: null
+// Return: null
+// Function draws in Win message when game won
 .globl DrawWinMessage
 DrawWinMessage:
 
         push {r4,r5,r6,r7,r8,lr}
 	bl  	clearScreen
 	ldr     r6,     =YouWin     // draws menu with cursor on resume
-        mov     r4,     #200
-        mov     r5,     #300
-
-        ldr     r7,     =809
-        ldr     r8,     =525    // Height of MenuTitleScreen
+        mov     r4,     #200  // x coordinate
+        mov     r5,     #300  // y coordinate
+        ldr     r7,     =809  // width of YouWin
+        ldr     r8,     =525    // Height of YouWin
 
 drawWinMessageLoop:
 	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
@@ -82,26 +87,19 @@ drawWinMessageLoop:
 	add	r5,	#1			//increment Y
 	cmp	r5,	r8			//compare y with image height
 	blt	drawWinMessageLoop
-        ldr     r1, =0xffff
+        ldr     r1, =0xffff //
         bl      Wait				//wait for a second
         ldr     r2, =livesNum
         mov     r5, #3      // reset number of lives
         str     r5, [r2]
-        ldr     r5, =currentLevel
-        mov     r6, #1
-        strb    r6,  [r5]
+
+//        ldr     r5, =currentLevel
+//        mov     r6, #1
+//        strb    r6,  [r5]
+
         b       readEndButtons
    //this is to test if any buttons is pressed, if yes, go to main menu and reset game -- needs fixing
- /*temp:       bl      readMainMenuButtons
-        cmp     r0, #0
-        beq     gotoMainMenu
-        cmp     r0, #1
-        beq     gotoMainMenu
-        cmp     r0, #2
-        beq     gotoMainMenu
-        cmp     r0, #3
 
-        beq     gotoMainMenu*/
   gotoMainMenu:
       bl    mainMenu
 
@@ -111,16 +109,19 @@ drawWinMessageLoop:
 
 
   //  ********************** DRAW LOSE MESSAGE *******************
+// Args: null
+// Return: null
+// Prints you lose message when game is lost
   .globl DrawLoseMessage
   DrawLoseMessage:
 
           push {r4,r5,r6,r7,r8,lr}
 	  bl  	clearScreen
 	  ldr     r6,     =YouLose     // draws menu with cursor on resume
-          mov     r4,     #200
-          mov     r5,     #300
-          ldr     r7,     =786    // Width of Pause menu (Asset dimensions are  360 x 432 )
-          ldr     r8,     =549  // Height of MenuTitleScreen
+          mov     r4,     #200  // x coordinate
+          mov     r5,     #300  // y coordinate
+          ldr     r7,     =786    // Width of YouLose message
+          ldr     r8,     =549  // Height of YouLose message
 
   drawLoseMessageLoop:
   	mov	r0,	r4			//passing x for ro which is used by the Draw pixel function
@@ -137,7 +138,7 @@ drawWinMessageLoop:
   	blt	drawLoseMessageLoop
     ldr     r1, =0xffff
     bl      Wait				//wait for a second
-    b       readEndButtons
+    b       readEndButtons  // wait for user to press any button to return to main menu
     pop     {r4,r5,r6,r7,r8,lr}
   	mov	pc,	lr
     //  ********************** DRAW LOSE MESSAGE ************************

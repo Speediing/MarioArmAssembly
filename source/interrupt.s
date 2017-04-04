@@ -1,93 +1,5 @@
-/* 1. At the start of you program you should call the InstallTable function. This function is responsible
-to install you interrupt table
-a. Use the following command: bl Interrupt_Install_Table
-b. This function should be the same as the one in the exercise. Make sure you push all your
-registers to the stack.
-2. After that you need to enable IRQ line in CPSR register and IRQ table
-a. Update timer value. This will be current time + delay
-b. For IRQ
-i. Load the value in 0x3F00B210 and put it in r0
-ii. Move 10 to r1 //10 since we are enabling IRQ line 1 and 3 you can also enable
-only 1
-iii. Store the value of r1 in r0
-c. Disable all other interrupts
-i. Load the value in 0x3F00B214 and put it in r0
-ii. Move 0 to r1
-iii. Store the value of r1 in r0
-d. For cpsr_c register
-i. mrs r0,cpscr
-ii. bic r0, #0x80
-iii. msr cpsr_c, r0
-3. For the IRQ function that should be executed when the interrupt is executed, you should do the
-following:
-a. Test if timer1 did the interrupt
-i. Load the values stored in 0x3F00B204 to r1
-ii. Tst bit 2
-iii. If result is zero go to e
-b. Check if the game was paused
-i. You should have a label in memory where you store in it if the game is paused
-or not
-ii. If paused you go to e
-c. If a,b,c are all valid you draw your value pack.
-d. Enable CS timer Control
-i. Load the value stored in 0x3F003000
-ii. Put 1 in bit 1 and the rest are zeroes
-e. Update time in C1
-f. Repeat (2)
-g. Then subs pc, lr, #4
-*/
-
-
-
-
 
 .section .text
-
-/*
-
-.globl UpdateTimer
-UpdateTimer:
-        push            {r1-r12}
-        pop             {r1-r12}
-
-
-
-.globl initInterrupt
-initInterrupt:
-        push    {r0-r12}                        // push all registers to stack
-        ,
-        //bl              Interrupt_Install_Table         // install interrupt table, *** CALL THIS IN MAIN ***
-
-
-/*
-        // *** ?? HOW DO YOU: "a. Update timer value. This will be current time + delay" ?? ***
-
-
-       	//b. enable GPIO IRQ lines on Interrupt Controller
-	ldr		r0, =0x3F00B210			// Enable IRQs 2
-	//mov		r1, #0x001E0000			// bits 17 to 20 set (IRQs 49 to 52)
-        mov             r1, #10
-        str		r1, [r0]
-
-        // c. Disable all other interrupts
-        ldr		r0, =0x3F00B214			// Enable IRQs 2
-	//mov		r1, #0x001E0000			// bits 17 to 20 set (IRQs 49 to 52)
-        mov             r1, #0
-        str		r1, [r0]
-
-	// d. For cpsr_c register
-        mrs             r0, cpscr
-        bic             r0, #0x80
-        msr             cpsr_c, r0
-
-        pop    {r0-r12}
-        mov     pc, lr
-
-
-
-
-
-*/
 
 .globl Interrupt_Install_Table
 Interrupt_Install_Table:
@@ -118,15 +30,13 @@ Interrupt_Install_Table:
 	bx		lr
         //mov             pc, lr
 
-
-
 .globl Interrupt
 Interrupt:
         push {r0-r12, lr}
         ldr     r4, =0x3F003004         // Load address  C0 (system clock)
         ldr     r5, [r4]                // Load actual time of system clock
 b:
-        ldr     r6, =0x1312D00          // 20 seconds in hex
+        ldr     r6, =0x1C9C380 //=0x1312D00          // 20 seconds in hex
         add     r5, r6                  // Add actual time into timer
 
         ldr     r7, =0x3F003010         // Load address C1 (timer)
@@ -174,13 +84,13 @@ IRQ:
                 mov     r8, r0                             //r8 == x
 
                 mov     r7, #25
-                mov  r5, r8
-                  mov  r6, r9
+                mov     r5, r8
+                mov     r6, r9
                 mul     r9 ,  r9 , r7
                 add     r9, r8, r9
                 ldr     r7, =GameMap
                 ldrb    r2,  [r7, r9]
-        dogs:        cmp     r2, #0
+   dogs:        cmp     r2, #0
                 bne     d
                 mov     r2, #13
                 strb    r2,  [r7, r9]

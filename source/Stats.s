@@ -58,7 +58,7 @@ Print_Init_Stats:
 	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Lives                      // address of string
 	bl		DrawString                     // draw string
-	ldr		r0, =794			// starting x coordinate
+	ldr		r0, =796			// starting x coordinate
 	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Zeros                     // address of string
 	bl		DrawString                     // draw zeros
@@ -114,7 +114,7 @@ Draw_Stats:
         mov             r2, #0
         bl              drawCell                        //erase previous lives by redrawing background
 
-				ldr							r0, =814			// starting x coordinate
+				ldr							r0, =816			// starting x coordinate
 				ldr							r1, =16			// starting y coordinate
 			  mov             r2, r6                         // ascii updated lives
 				bl							Draw_Char                     // draw updated lives
@@ -247,7 +247,7 @@ Lives:
 Coins:
         .asciz "COINS X "
 
-one:
+/*one:
         .asciz "1"
 
 two:
@@ -272,7 +272,7 @@ eight:
         .asciz "8"
 
 nine:
-        .asciz "9"
+        .asciz "9"*/
 
 zero:
         .asciz "0"
