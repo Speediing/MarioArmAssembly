@@ -58,7 +58,7 @@ Print_Init_Stats:
 	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Lives                      // address of string
 	bl		DrawString                     // draw string
-	ldr		r0, =784			// starting x coordinate
+	ldr		r0, =794			// starting x coordinate
 	ldr		r1, =16			// starting y coordinate
 	ldr		r2, =Zeros                     // address of string
 	bl		DrawString                     // draw zeros
@@ -114,7 +114,7 @@ Draw_Stats:
         mov             r2, #0
         bl              drawCell                        //erase previous lives by redrawing background
 
-				ldr							r0, =804			// starting x coordinate
+				ldr							r0, =814			// starting x coordinate
 				ldr							r1, =16			// starting y coordinate
 			  mov             r2, r6                         // ascii updated lives
 				bl							Draw_Char                     // draw updated lives
