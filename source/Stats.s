@@ -246,34 +246,7 @@ Lives:
 
 Coins:
         .asciz "COINS X "
-
-/*one:
-        .asciz "1"
-
-two:
-        .asciz "2"
-
-three:
-        .asciz "3"
-
-four:
-        .asciz "4"
-
-five:
-        .asciz "5"
-
-six:
-        .asciz "6"
-
-seven:
-        .asciz "7"
-
-eight:
-        .asciz "8"
-
-nine:
-        .asciz "9"*/
-
+	
 zero:
         .asciz "0"
 
