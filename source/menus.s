@@ -10,8 +10,6 @@ mainMenu:
         bl      DrawMainMenuScreen   //print the main menu
         bl      DrawMenuMushroom     //print selection indictor (a mushroom)
 
-
-
         mov     r8, #0               //initialize state to 0 (start selected)
 
 readMainMenuLoop:                       //FSM: state 0(start) and 1(quit)
@@ -58,7 +56,6 @@ ExitMainMenu:
         mov     pc,lr
 //------------------------------------------------------------------------------------
 
-
 .globl TurnPauseFlagOff
 TurnPauseFlagOff:
 
@@ -70,7 +67,6 @@ TurnPauseFlagOff:
 
         pop     {r1,r2,lr}
         mov     pc, lr
-
 
 //------------------------------------------------------------------------------------
 
@@ -110,7 +106,6 @@ PauseDnPressed:
 
 .globl PauseUpPressed
 PauseUpPressed:
-        cmp     r5,     #2
         moveq   r5,     #1
         beq     DrawMenuStar1
 

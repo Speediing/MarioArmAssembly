@@ -75,7 +75,7 @@ Print_Init_Stats:
 /************************************************************************************/
 .globl  Draw_Stats
 Draw_Stats:
-	push	        {r0-r10, lr}
+				push	        {r0-r10, lr}
 
         ldr            r7, =currentScore
         ldr            r8, =currentCoins
@@ -94,33 +94,33 @@ Draw_Stats:
         mov             r2, #0
         bl              drawCell                        //erase previous score by redrawing background
 
-	ldr		r0, =125      			// starting x coordinate
-	ldr		r1, =16 			// starting y coordinate
-	mov             r2, r4                         // ascii value of score
-	bl		Draw_Char                     // draw updated score
+				ldr							r0, =125      			// starting x coordinate
+				ldr							r1, =16 			// starting y coordinate
+				mov             r2, r4                         // ascii value of score
+				bl							Draw_Char                     // draw updated score
 
         mov             r0, #15
         mov             r1, #0
         mov             r2, #0
         bl              drawCell                        //erase previous coin by redrawing background
 
-	ldr		r0, =509			// starting x coordinate
-	ldr		r1, =16		         	// starting y coordinatere
-	mov             r2, r5                        // ascii updated score
-test2:	bl		Draw_Char                     // draw updated coins
+				ldr							r0, =509			// starting x coordinate
+				ldr							r1, =16		         	// starting y coordinatere
+				mov             r2, r5                        // ascii updated score
+				bl							Draw_Char                     // draw updated coins
 
         mov             r0, #24
         mov             r1, #0
         mov             r2, #0
         bl              drawCell                        //erase previous lives by redrawing background
 
-	ldr		r0, =804			// starting x coordinate
-	ldr		r1, =16			// starting y coordinate
-test3:  mov             r2, r6                         // ascii updated lives
-	bl		Draw_Char                     // draw updated lives
+				ldr							r0, =804			// starting x coordinate
+				ldr							r1, =16			// starting y coordinate
+			  mov             r2, r6                         // ascii updated lives
+				bl							Draw_Char                     // draw updated lives
 
-	pop		{r0-r10, lr}
-	mov		pc, lr
+				pop							{r0-r10, lr}
+				mov							pc, lr
 
 
 /************************************************************************************/
@@ -227,16 +227,7 @@ noPixel$:
 	.unreq	        row
 	.unreq	        mask
 
- /*temp:       bl      readMainMenuButtons
-        cmp     r0, #0
-        beq     gotoMainMenu
-        cmp     r0, #1
-        beq     gotoMainMenu
-        cmp     r0, #2
-        beq     gotoMainMenu
-        cmp     r0, #3
 
-        beq     gotoMainMenu*/
 	pop		{r4-r10, lr}
         mov             pc,     lr
 

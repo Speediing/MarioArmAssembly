@@ -58,6 +58,8 @@ moveRight:
         bleq    fall2
           cmp  r8, #8
           bleq  hitCoin
+          cmp  r8, #13
+          bleq  hitMush
         cmp     r8,  #0
         bne     endRight
         mov     r3, #0
@@ -104,6 +106,8 @@ moveLeft:
          bleq    fall2
         cmp  r8, #8
         bleq   hitCoin
+        cmp  r8, #13
+        bleq  hitMush
         cmp     r8,  #0
         bne     endLeft
         mov     r3, #0
@@ -149,6 +153,8 @@ jumploop:
         ldrb    r2,  [r8, #-25]                      //load the cell above
         cmp  r2, #8
         bleq     hitCoin
+        cmp  r2, #13
+        bleq     hitMush2
         cmp     r2,  #0                              //check if the cell above is a sky cell
         bne     endJump                              //if not sky(question box or brick), Mario comes down
 
@@ -341,6 +347,8 @@ checkUnder:
                 bleq    killMonster
                 cmp     r4, #9
                 bleq    killMonster
+                cmp     r4, #13
+                bleq    hitMush
                 cmp     r4, #0
                 bne     endGravity
                 bl      readMario
@@ -405,6 +413,64 @@ hitCoin:
         pop   {r2-r7, lr}
         mov pc, lr
 
+
+        /// ****************************************************
+
+                hitMush:
+                        push   {r2-r7, lr}
+                        ldr     r5, =currentScore
+                        ldrb    r6, [r5]
+                        add     r6, r6, #1
+                        strb    r6, [r5]
+                        bl      Draw_Stats
+                        ldr     r5, =livesNum
+                        ldrb     r6, [r5]
+                        add     r6, r6, #1
+                        strb     r6, [r5]
+                        bl      Draw_Stats
+                        mov     r8, #0
+
+                        pop   {r2-r7, lr}
+                        mov   pc, lr
+
+               hitMush2:
+                        push   {r3-r7, lr}
+                        ldr     r5, =currentScore
+                        ldrb    r6, [r5]
+                        add     r6, r6, #1
+                        strb     r6, [r5]
+                        bl      Draw_Stats
+                        ldr     r5, =livesNum
+                        ldrb     r6, [r5]
+                        add     r6, r6, #1
+                        strb     r6, [r5]
+                        bl      Draw_Stats
+                        mov     r2, #0
+
+                        pop   {r3-r7, lr}
+                        mov pc, lr
+              topMush:
+                        push   {r2, r3,r5-r7, lr}
+                        ldr     r5, =currentScore
+                        ldrb     r6, [r5]
+                        add     r6, r6, #1
+                        strb     r6, [r5]
+                        bl      Draw_Stats
+                        ldr     r5, =livesNum
+                        ldrb     r6, [r5]
+                        add     r6, r6, #1
+                        strb     r6, [r5]
+                        bl      Draw_Stats
+                        mov     r4, #0
+
+                        pop   {r2, r3,r5-r7, lr}
+                        mov pc, lr
+
+
+
+
+
+
 .globl fall2
 fall2:
                 push   {r2-r9, lr}
@@ -428,7 +494,7 @@ fall2:
 
                 bl      Draw_Stats
 
-                ldreq  r5, =currentLevels
+                ldreq  r5, =currentLevel
                 mov  r6, #1
                 strb   r6,  [r5]
                 ldr  r0, =GameMap1

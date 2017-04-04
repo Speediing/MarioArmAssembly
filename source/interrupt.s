@@ -163,41 +163,51 @@ IRQ:
         beq     Next                 // if paused then branch to Next
 
 
-d:
-        // c. draw value pack
-        //push   {lr}
-        bl      RandomNumberGenerator
-        mov     r9, r0                             //r9 == y
-        mov     r8,  #20
-        sub     r9, r8, r9
-        bl      RandomNumberGenerator
-        mov     r8, r0                             //r8 == x
+        d:
+                // c. draw value pack
+                //push   {lr}
+                bl      RandomNumberGenerator
+                mov     r9, r0                             //r9 == y
+                mov     r8,  #20
+                sub     r9, r8, r9
+                bl      RandomNumberGenerator
+                mov     r8, r0                             //r8 == x
 
-        mov     r7, #25
-        mov  r5, r8
-          mov  r6, r9
-        mul     r9 ,  r9 , r7
-        add     r9, r8, r9
-        ldr     r7, =GameMap
-        ldrb    r2,  [r7, r9]
-dogs:        cmp     r2, #0
-        bne     d
-        mov     r2, #13
-        strb    r2,  [r7, r9]
-        mov     r0, r5
-        mov     r1, r6
+                mov     r7, #25
+                mov  r5, r8
+                  mov  r6, r9
+                mul     r9 ,  r9 , r7
+                add     r9, r8, r9
+                ldr     r7, =GameMap
+                ldrb    r2,  [r7, r9]
+        dogs:        cmp     r2, #0
+                bne     d
+                mov     r2, #13
+                strb    r2,  [r7, r9]
+                mov     r0, r5
+                mov     r1, r6
+                mov     r2, #13 // life muchroom
+                bl      drawCell
+
+
+/*d:
+        // c. draw value pack
+        push   {lr}
+        mov     r0, #4
+        mov     r1, #16
         mov     r2, #13 // life muchroom
         bl      drawCell
 
-notSky:
 
-        //ldr     r5, =PauseFlag
-        //ldrb    r6, [r5]
+
+        bl      RandomNumberGenerator  // r0 is random number returned
+        ldr     r5, =PauseFlag
+        ldrb    r6, [r5]
 
 Wbreak:
 
-        //pop   {lr}
-
+        pop   {lr}
+*/
 Next:
         // d. Enable CS timer Control
         ldr             r0, =0x3F003000 //i. Load the value stored in 0x3F003000

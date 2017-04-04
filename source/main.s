@@ -11,19 +11,16 @@ _start:
 .section .text
 .globl main
 main:
-  bl              Interrupt_Install_Table
+        bl Interrupt_Install_Table
 
-	//mov	sp, #0x8000
-	bl	EnableJTAG
+      	//mov	sp, #0x8000
+      	bl	EnableJTAG
 
-  //b       IRQ
-	bl	InitFrameBuffer	        // Initialize the frame buffer for drawing
+      	bl	InitFrameBuffer	        // Initialize the frame buffer for drawing
         bl      initGPIO                // Intializes GPIO
 
         bl Interrupt
         bl	clearScreen
-
-
 
         ldr  r2, =livesNum
         mov  r3, #3
@@ -32,15 +29,13 @@ main:
         mov  r1, #1
         strb  r1, [r0]
 
-
         bl      mainMenu
-
-
 
 .globl StartGame
 StartGame:
 
         bl      clearScreen
+
 .globl ReStartGame
 ReStartGame:
          ldr  r0, =GameMap1
@@ -48,17 +43,16 @@ ReStartGame:
          ldr  r2, =EndMap1
          bl   switchMap
 
-
-
         ldr     r0,        =GameMap       // load initial map
         ldr     r1,        =EndMap        // load initial map
         bl      drawMap                   // draw initial map
         bl      Print_Init_Stats
-                        bl      Draw_Stats
+        bl      Draw_Stats
 
 read2:
         bl      readButtons
-	bl      read
+      	bl      read
+
 .globl   resumeGame
 resumeGame:
 
@@ -66,11 +60,12 @@ resumeGame:
         ldr     r1,        =EndMap        // load initial map
         bl      drawMap                   // draw initial map
         bl      Print_Init_Stats
-                        bl      Draw_Stats
+        bl      Draw_Stats
 
 read:
         bl      readButtons
-  bl      read
+        bl      read
+
 .globl exitGame
 exitGame:
         bl      clearScreen
