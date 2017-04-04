@@ -1,5 +1,7 @@
 /*
-MarioMarioMarioMario
+Author: Jason Wiker, Justin Chow, Shimin(Kim) Xie
+CPSC 359 Assignment 4
+Super Mario Bros Original 
 */
 
 .section    .init
