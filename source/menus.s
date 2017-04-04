@@ -1,6 +1,4 @@
-//
 // Main menu and pause menu
-
 
 .section .text
 
@@ -24,7 +22,6 @@ readMainMenuLoop:                       //FSM: state 0(start) and 1(quit)
         cmp     r0 ,#3
         beq     MainAPressed       //A button pressed
         b       readMainMenuLoop
-
 
 .globl MainUpPressed
 MainUpPressed:
@@ -55,7 +52,7 @@ ExitMainMenu:
         pop    {r2-r9, lr}
         mov     pc,lr
 //------------------------------------------------------------------------------------
-
+/* This function turns off the pause flag. */
 .globl TurnPauseFlagOff
 TurnPauseFlagOff:
 
@@ -69,7 +66,7 @@ TurnPauseFlagOff:
         mov     pc, lr
 
 //------------------------------------------------------------------------------------
-
+/* This function deals with the interaction with the pause menu. */
 .globl pauseMenu
 pauseMenu:
         push    {r1, r2, r5, lr}
@@ -80,38 +77,37 @@ pauseMenu:
         strb    r1, [r2]        // set pause menu flag to 1
 
 PauseBreak:
-
-        bl      DrawPauseMenu
-        bl      DrawMenuStar1
+        bl      DrawPauseMenu   // draw the pause menu
+        bl      DrawMenuStar1   // draw the selector (star) at the first option
 
 PauseLabel:
-        b       readPauseButtons
+        b       readPauseButtons        // read buttons pressed by the player
 
 .globl  PauseStPressed
 PauseStPressed:
-        bleq    TurnPauseFlagOff
-        beq     resumeGame
+        bleq    TurnPauseFlagOff        // if start button was pressed, turn off pause flag
+        beq     resumeGame              // continue the game 
 
 .globl PauseDnPressed
-PauseDnPressed:
-        cmp     r5,     #1
-        moveq   r5,     #2
-        beq     DrawMenuStar2
+PauseDnPressed:                         // if down button wass pressed
+        cmp     r5,     #1              // if in state 1 (option 1), move down to state 2 (option 2)
+        moveq   r5,     #2      
+        beq     DrawMenuStar2           
 
-        cmp     r5,     #2
+        cmp     r5,     #2              // if in state 2, move down to state 3
         moveq   r5,     #3
         beq     DrawMenuStar3
 
-        b       PauseNext
+        b       PauseNext               // continue
 
 .globl PauseUpPressed
-PauseUpPressed:
-        cmp  r5, #2
-        moveq   r5,     #1
+PauseUpPressed:                         // if up button was pressed
+        cmp  r5, #2                     // if in state two
+        moveq   r5,     #1              //  move up to state 1
         beq     DrawMenuStar1
 
-        cmp     r5,     #3
-        moveq   r5,     #2
+        cmp     r5,     #3              // if in state 3
+        moveq   r5,     #2              // move up to state 2
         beq     DrawMenuStar2
         b       PauseNext
 
@@ -128,7 +124,7 @@ PauseAPressed:
         beq     mainMenu
 
 PauseNext:
-        ldr     r1, =0xfffff
+        ldr     r1, =0xfffff     // wait a second
         bl      Wait
         b       PauseLabel
 PauseDone:
