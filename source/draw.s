@@ -144,6 +144,7 @@ drawWinMessageLoop:
     //  ********************** DRAW LOSE MESSAGE ************************
 
 //************************DRAW MENU PAUSE SCREEN ******************************
+//Draw pause menu
 
 .globl DrawPauseMenu
 DrawPauseMenu:
@@ -154,8 +155,8 @@ DrawPauseMenu:
 
 NextPause:
         //mov     r4,     #235
-        mov  r4, #235
-        mov     r5,     #100
+        mov  r4, #235           // x coordinate
+        mov     r5,    #100     // y coordinate
 
         ldr     r7,     =595    // add  235   // Width of Pause menu (Asset dimensions are  360 x 432 )
         ldr     r8,     =532    // Height of MenuTitleScreen
@@ -174,7 +175,7 @@ drawPauseMenuLoop:
 	cmp	r5,	r8			//compare y with image height
 	blt	drawPauseMenuLoop
 
-        pop     {r4,r5,r6,r7,r8,lr}
+  pop     {r4,r5,r6,r7,r8,lr}
 	mov	pc,	lr
 
 //************************DRAW MAIN MENU SCREEN ******************************
@@ -184,11 +185,11 @@ DrawMainMenuScreen:
         push {r4,r5,r6,r7,r8,lr}
         ldr     r6,     =mainMenuScreen    // draws menu with cursor on resume
 
-        mov     r4,     #0
-        mov     r5,     #0
+        mov     r4,     #0      // x coordinate
+        mov     r5,     #0      // y coordinate
 
-        mov     r7,     #840    // Width of MenuTitleScreen
-        mov     r8,     #680    // Height of MenuTitleScreen
+        mov     r7,     #840    // Width of mainMenu
+        mov     r8,     #680    // Height of main menu
 
 
 drawMMLoop:
@@ -212,37 +213,37 @@ drawMMLoop:
 
 
 //************************DRAW STAR FOR PAUSE MENU ******************************
-
+// Draws the pause menu cursor star
+// Arg: null
+// Return: null
 .globl DrawMenuStar1
 DrawMenuStar1:
         push {r0-r8,lr}
-
         mov	r0,	  #7      // Start X position of your picture
-	mov	r1,	  #5       // Start Y Position
-        mov     r2,       #11
+	      mov	r1,	  #5       // Start Y Position
+        mov     r2,       #11 // draw star space
         bl      drawCell
 
         mov	r0,	  #7      // Start X position of your picture
-	mov	r1,	  #9       // Start Y Position
-        mov     r2,       #12
+	      mov	r1,	  #9       // Start Y Position
+        mov     r2,       #12 // draw empty space
         bl      drawCell
 
 
         mov	r0,	  #7      // Start X position of your picture
-	mov	r1,	  #12       // Start Y Position
-        mov     r2,       #12
+        mov	r1,	  #12       // Start Y Position
+        mov     r2,      #12  // draw empty sapce
         bl      drawCell
-
 
         pop     {r0-r8,lr}
-	mov	pc,	lr
+	      mov	pc,	lr
 
 .globl  DrawMenuStar2
 DrawMenuStar2:
         push {r0-r8,lr}
 
         mov	r0,	  #7    // Start X position of your picture
-	mov	r1,	  #5       // Start Y Position
+	      mov	r1,	  #5       // Start Y Position
         mov     r2,       #12
         bl      drawCell
 

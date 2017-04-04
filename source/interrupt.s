@@ -3,9 +3,9 @@
 
 .globl Interrupt_Install_Table
 Interrupt_Install_Table:
-        push            {r0-r12}
+  push            {r0-r12}
 
-        ldr		r0, =IntTable
+  ldr		r0, =IntTable
 	mov		r1, #0x00000000
 
 	// load the first 8 words and store at the 0 address
@@ -36,7 +36,7 @@ Interrupt:
         ldr     r4, =0x3F003004         // Load address  C0 (system clock)
         ldr     r5, [r4]                // Load actual time of system clock
 b:
-        ldr     r6, =0x1C9C380 //=0x1312D00          // 20 seconds in hex
+        ldr     r6, =0x1C9C380          // 30 seconds in hex
         add     r5, r6                  // Add actual time into timer
 
         ldr     r7, =0x3F003010         // Load address C1 (timer)
@@ -48,9 +48,9 @@ c:
         str     r5, [r4]
 
          // 2. Enable IRQ
-	mrs	r0, cpsr
-	bic	r0, #0x80
-	msr	cpsr_c, r0
+      	mrs	r0, cpsr
+      	bic	r0, #0x80
+      	msr	cpsr_c, r0
         pop     {r0-r12, lr}
         bx lr
 
@@ -99,25 +99,6 @@ IRQ:
                 mov     r2, #13 // life muchroom
                 bl      drawCell
 
-
-/*d:
-        // c. draw value pack
-        push   {lr}
-        mov     r0, #4
-        mov     r1, #16
-        mov     r2, #13 // life muchroom
-        bl      drawCell
-
-
-
-        bl      RandomNumberGenerator  // r0 is random number returned
-        ldr     r5, =PauseFlag
-        ldrb    r6, [r5]
-
-Wbreak:
-
-        pop   {lr}
-*/
 Next:
         // d. Enable CS timer Control
         ldr             r0, =0x3F003000 //i. Load the value stored in 0x3F003000

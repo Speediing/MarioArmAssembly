@@ -209,16 +209,16 @@ OUTPUT(build/output.elf elf32-littlearm)
  .ARM.attributes
                 0x0000019a       0x29 build/SNESControl.o
 
-.debug_line     0x00000000      0x89c
+.debug_line     0x00000000      0x89e
  .debug_line    0x00000000       0x67 build/framebuffer.o
  .debug_line    0x00000067       0x61 build/jtag.o
  .debug_line    0x000000c8      0x215 build/move.o
- .debug_line    0x000002dd      0x18f build/draw.o
- .debug_line    0x0000046c       0x89 build/menus.o
- .debug_line    0x000004f5       0xcd build/interrupt.o
- .debug_line    0x000005c2       0x77 build/main.o
- .debug_line    0x00000639       0xc3 build/Stats.o
- .debug_line    0x000006fc      0x1a0 build/SNESControl.o
+ .debug_line    0x000002dd      0x191 build/draw.o
+ .debug_line    0x0000046e       0x89 build/menus.o
+ .debug_line    0x000004f7       0xcb build/interrupt.o
+ .debug_line    0x000005c2       0x79 build/main.o
+ .debug_line    0x0000063b       0xc3 build/Stats.o
+ .debug_line    0x000006fe      0x1a0 build/SNESControl.o
 
 .debug_info     0x00000000      0x39d
  .debug_info    0x00000000       0x6b build/framebuffer.o
